@@ -60,6 +60,7 @@ web_modules
 # Output directory
 dist
 .output
+.vercel
 
 # Serverless Webpack directories
 .webpack/
