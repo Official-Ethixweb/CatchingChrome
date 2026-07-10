@@ -44,6 +44,7 @@ export function CustomMerchSection() {
   return (
     <section
       ref={sectionRef}
+      id="merch"
       className="relative overflow-hidden bg-night py-28 md:py-36"
     >
       {/* Scroll-driven background watermark */}

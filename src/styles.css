@@ -103,6 +103,68 @@
   animation: heroFadeUp 0.9s ease-out both;
 }
 
+/* Directional slide-ins for the seasonal catalogue panels */
+@keyframes seasonInRight {
+  from {
+    opacity: 0;
+    transform: translateX(56px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes seasonInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-56px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.season-in-right {
+  animation: seasonInRight 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.season-in-left {
+  animation: seasonInLeft 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Abundance meter fill for the seasonal catalogue */
+@keyframes seasonBarGrow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.season-bar {
+  transform-origin: left center;
+  animation: seasonBarGrow 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Staggered rise-in for the diagonal fish panels */
+@keyframes seasonPanelIn {
+  from {
+    opacity: 0;
+    transform: translateY(56px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.season-panel-in {
+  animation: seasonPanelIn 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 /* Respect users who prefer reduced motion: neutralize transitions,
    animations, and any JS-driven smooth scrolling. */
 @media (prefers-reduced-motion: reduce) {

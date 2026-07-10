@@ -129,7 +129,7 @@ export function FleetSection() {
  <div className="mx-auto max-w-6xl px-6 md:px-10">
  {/* Eyebrow */}
  <div className="flex items-center gap-4">
- <span className="text-sm font-semibold text-accent">05</span>
+ <span className="text-sm font-semibold text-accent">06</span>
  <span className="h-px w-10 bg-ink/30" />
  <span className="text-[12px] font-medium tracking-[0.3em] text-ink/70">
  THE FLEET

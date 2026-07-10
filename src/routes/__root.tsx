@@ -43,6 +43,15 @@ export const Route = createRootRoute({
       },
     ],
     links: [
+      {
+        rel: 'icon',
+        type: 'image/png',
+        href: '/Catching-Chrome-logo_color-1536x1533.png',
+      },
+      {
+        rel: 'apple-touch-icon',
+        href: '/Catching-Chrome-logo_color-1536x1533.png',
+      },
       { rel: 'stylesheet', href: appCss },
       { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
       {

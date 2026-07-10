@@ -1,7 +1,7 @@
 import { createRootRoute, Outlet, HeadContent, Scripts, createFileRoute, lazyRouteComponent, createRouter } from "@tanstack/react-router";
 import { jsx, jsxs } from "react/jsx-runtime";
-const appCss = "/assets/styles-CnE0RBVC.css";
-const Route$1 = createRootRoute({
+const appCss = "/assets/styles-CVNxgz82.css";
+const Route$4 = createRootRoute({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -34,6 +34,15 @@ const Route$1 = createRootRoute({
       }
     ],
     links: [
+      {
+        rel: "icon",
+        type: "image/png",
+        href: "/Catching-Chrome-logo_color-1536x1533.png"
+      },
+      {
+        rel: "apple-touch-icon",
+        href: "/Catching-Chrome-logo_color-1536x1533.png"
+      },
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       {
@@ -61,19 +70,49 @@ function RootDocument({ children }) {
     ] })
   ] });
 }
-const $$splitComponentImporter = () => import("./index-B-CIvrNi.js");
+const $$splitComponentImporter$3 = () => import("./pricing-BlMbeTRu.js");
+const Route$3 = createFileRoute("/pricing")({
+  component: lazyRouteComponent($$splitComponentImporter$3, "component")
+});
+const $$splitComponentImporter$2 = () => import("./excursions-yiKE8Fio.js");
+const Route$2 = createFileRoute("/excursions")({
+  component: lazyRouteComponent($$splitComponentImporter$2, "component")
+});
+const $$splitComponentImporter$1 = () => import("./contact-CdIBaZ6T.js");
+const Route$1 = createFileRoute("/contact")({
+  component: lazyRouteComponent($$splitComponentImporter$1, "component")
+});
+const $$splitComponentImporter = () => import("./index-BFKY5yv3.js");
 const Route = createFileRoute("/")({
   component: lazyRouteComponent($$splitComponentImporter, "component")
+});
+const PricingRoute = Route$3.update({
+  id: "/pricing",
+  path: "/pricing",
+  getParentRoute: () => Route$4
+});
+const ExcursionsRoute = Route$2.update({
+  id: "/excursions",
+  path: "/excursions",
+  getParentRoute: () => Route$4
+});
+const ContactRoute = Route$1.update({
+  id: "/contact",
+  path: "/contact",
+  getParentRoute: () => Route$4
 });
 const IndexRoute = Route.update({
   id: "/",
   path: "/",
-  getParentRoute: () => Route$1
+  getParentRoute: () => Route$4
 });
 const rootRouteChildren = {
-  IndexRoute
+  IndexRoute,
+  ContactRoute,
+  ExcursionsRoute,
+  PricingRoute
 };
-const routeTree = Route$1._addFileChildren(rootRouteChildren)._addFileTypes();
+const routeTree = Route$4._addFileChildren(rootRouteChildren)._addFileTypes();
 function getRouter() {
   const router = createRouter({
     routeTree,

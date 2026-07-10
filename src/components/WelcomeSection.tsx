@@ -8,7 +8,7 @@ const STATS = [
 
 export function WelcomeSection() {
   return (
-    <section className="bg-paper py-20 md:py-28">
+    <section id="about" className="bg-paper py-20 md:py-28">
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-center gap-12 px-6 md:px-10 lg:grid-cols-2 lg:gap-20">
         {/* Left photo + stats */}
         <div>

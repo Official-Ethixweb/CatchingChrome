@@ -32,9 +32,9 @@ const DESTINATIONS = [
   { link: '#', text: 'Coastal Tributaries', image: '/nature-forest.jpg' },
 ]
 
-export function SignatureTripsSection() {
+export function SignatureTripsSection({ className = "bg-paper" }: { className?: string } = {}) {
   return (
-    <section className="bg-paper py-24 md:py-28">
+    <section id="excursions" className={`${className} py-24 md:py-28`}>
       <div className="mx-auto max-w-[1440px] px-6 md:px-10">
         {/* Eyebrow */}
         <div className="flex items-center gap-4">

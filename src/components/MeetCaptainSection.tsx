@@ -18,7 +18,7 @@ export function MeetCaptainSection() {
         {/* Left bio */}
         <div>
           <div className="flex items-center gap-4">
-            <span className="text-sm font-semibold text-accent">04</span>
+            <span className="text-sm font-semibold text-accent">05</span>
             <span className="h-px w-10 bg-cream/25" />
             <span className="text-[12px] font-medium tracking-[0.3em] text-cream/50">
               YOUR GUIDE

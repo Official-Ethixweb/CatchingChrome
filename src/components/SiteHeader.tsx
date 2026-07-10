@@ -1,12 +1,12 @@
+import { Link } from '@tanstack/react-router'
 import { FacebookIcon, InstagramIcon, PhoneIcon, TikTokIcon } from './icons'
 
 const NAV_ITEMS = [
-  'About Us',
-  'Excursions',
-  'Pricing',
-  'Gallery',
-  'Order Merch',
-  'Contact',
+  { label: 'About Us', to: '/', hash: 'about' },
+  { label: 'Excursions', to: '/excursions' },
+  { label: 'Pricing', to: '/pricing' },
+  { label: 'Order Merch', to: '/', hash: 'merch' },
+  { label: 'Contact', to: '/contact' },
 ]
 
 const LOGO = '/Catching-Chrome-logo_color-1536x1533.png'
@@ -27,13 +27,14 @@ export function SiteHeader() {
         {/* Primary nav */}
         <nav className="hidden items-center gap-8 text-[13px] font-medium tracking-[0.16em] text-white/90 lg:flex">
           {NAV_ITEMS.map((item) => (
-            <a
-              key={item}
-              href="#"
+            <Link
+              key={item.label}
+              to={item.to}
+              hash={item.hash}
               className="uppercase drop-shadow transition-colors duration-200 hover:text-white"
             >
-              {item}
-            </a>
+              {item.label}
+            </Link>
           ))}
         </nav>
 

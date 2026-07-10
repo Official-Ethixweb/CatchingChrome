@@ -25,13 +25,22 @@ const GREY_RIVER =
 
 export function BoatRampsSection() {
  const [selected, setSelected] = useState('bonneville')
+ // The Google Maps iframe swallows the mouse wheel, which blocks page
+ // scrolling when the cursor is over the map. Keep it inert until the user
+ // clicks to interact, and re-lock it whenever they pick a different ramp.
+ const [mapActive, setMapActive] = useState(false)
+
+ const selectRamp = (id: string) => {
+  setSelected(id)
+  setMapActive(false)
+ }
 
  return (
  <section className="bg-night py-24 md:py-28">
  <div className="mx-auto max-w-[1440px] px-6 md:px-10">
  {/* Eyebrow */}
  <div className="flex items-center gap-4">
- <span className="text-sm font-semibold text-accent">06</span>
+ <span className="text-sm font-semibold text-accent">07</span>
  <span className="text-[12px] font-medium tracking-[0.3em] text-cream/45">
  LAUNCH POINTS
  </span>
@@ -55,7 +64,7 @@ export function BoatRampsSection() {
  <li key={p.id}>
  <button
  type="button"
- onClick={() => setSelected(p.id)}
+ onClick={() => selectRamp(p.id)}
  className="group flex w-full items-center justify-between py-5 text-left"
  >
  <div>
@@ -95,7 +104,7 @@ export function BoatRampsSection() {
          }`}
          style={{
            filter: 'invert(100%) hue-rotate(180deg) sepia(20%) saturate(120%) brightness(70%) contrast(110%) hue-rotate(-10deg)',
-           pointerEvents: active ? 'auto' : 'none'
+           pointerEvents: active && mapActive ? 'auto' : 'none'
          }}
          src={`https://maps.google.com/maps?q=${p.x},${p.y}&t=&z=12&ie=UTF8&iwloc=&output=embed`}
          allowFullScreen
@@ -105,6 +114,21 @@ export function BoatRampsSection() {
        />
      )
    })}
+
+   {/* Click-to-activate overlay: lets the wheel scroll the page until the
+       user opts into the map, so the page never gets "stuck" over the map. */}
+   {!mapActive && (
+     <button
+       type="button"
+       onClick={() => setMapActive(true)}
+       aria-label="Activate map to zoom and pan"
+       className="group absolute inset-0 z-20 flex items-end justify-center bg-transparent pb-6"
+     >
+       <span className="rounded-full bg-night/75 px-4 py-2 text-[11px] font-medium tracking-[0.18em] text-cream/85 uppercase backdrop-blur-sm transition-colors duration-200 group-hover:bg-night/90">
+         Click to interact
+       </span>
+     </button>
+   )}
  </div>
  </div>
  </div>
