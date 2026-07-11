@@ -50,7 +50,7 @@ function PricingRow({ item, index }: { item: PricingItem; index: number }) {
 
   // Rod tip coordinates
   const rodX = 28
-  const rodY = isHovered ? 14 : 8 // Bends down slightly on hover
+  const rodY = isHovered ? 22 : 16 // Bends down slightly on hover (adjusted 8px to align with rod tip SVG absolute offset)
 
   // Hook loop coordinates
   const hookX = width - 12
@@ -115,7 +115,7 @@ function PricingRow({ item, index }: { item: PricingItem; index: number }) {
             stroke={isHovered ? "#F5A623" : "#B9C4CC"}
             strokeWidth={isHovered ? "1.8" : "1"}
             fill="none"
-            className={`transition-all duration-300 ${isHovered ? "animate-line-shudder" : ""}`}
+            className="transition-all duration-300"
             strokeDasharray={isHovered ? "none" : "2 2"}
           />
         </svg>
@@ -131,9 +131,7 @@ function PricingRow({ item, index }: { item: PricingItem; index: number }) {
             left: `${width - 20}px`,
             top: `${hookY - 3}px`,
           }}
-          className={`pointer-events-none transition-all duration-300 text-cream/70 group-hover:text-accent ${
-            isHovered ? "animate-hook-bob" : ""
-          }`}
+          className="pointer-events-none transition-all duration-300 text-cream/70 group-hover:text-accent"
         >
           {/* Eyelet */}
           <circle cx="8" cy="3" r="2.5" stroke="currentColor" strokeWidth="1.5" />
@@ -173,25 +171,6 @@ function PricingRow({ item, index }: { item: PricingItem; index: number }) {
 export function PricingSection() {
   return (
     <section id="pricing" className="relative overflow-hidden bg-ink py-24 md:py-28">
-      {/* Dynamic animations injection */}
-      <style>{`
-        @keyframes lineShudder {
-          0%, 100% { transform: translateY(0) scaleY(1); }
-          25% { transform: translateY(-0.8px) skewX(0.2deg); }
-          50% { transform: translateY(1.2px) scaleY(0.99); }
-          75% { transform: translateY(-0.4px) skewX(-0.1deg); }
-        }
-        @keyframes hookBob {
-          0%, 100% { transform: translateY(0) rotate(0deg); }
-          50% { transform: translateY(4px) rotate(-4deg); }
-        }
-        .animate-line-shudder {
-          animation: lineShudder 0.14s linear infinite;
-        }
-        .animate-hook-bob {
-          animation: hookBob 0.5s ease-in-out infinite;
-        }
-      `}</style>
 
       {/* Decorative background grid/lines */}
       <div className="hero-lines absolute inset-0 pointer-events-none opacity-40" />

@@ -12,7 +12,7 @@ export function WelcomeSection() {
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-center gap-12 px-6 md:px-10 lg:grid-cols-2 lg:gap-20">
         {/* Left photo + stats */}
         <div>
-          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-sm">
+          <div className="relative aspect-[4/5] w-[85%] overflow-hidden rounded-sm">
             <img
               src="/20240831_124653-1488x1536.jpg"
               alt="Guests aboard with a limit of Columbia River salmon"

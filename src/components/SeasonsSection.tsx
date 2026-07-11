@@ -1,12 +1,72 @@
 import { useState } from 'react'
 import { ArrowUpRight } from './icons'
 
-type Fish = {
+type Level = 'PEAK RUN' | 'STRONG' | 'FAIR'
+
+type FishInfo = {
   name: string
-  months: string
-  level: 'PEAK RUN' | 'STRONG' | 'FAIR'
-  pct: number
+  /** Preferred species photo — drop the real file at this path in public/fish/. */
   image: string
+  /** Shown until the species photo above is added (existing asset). */
+  fallback: string
+}
+
+// One entry per species. Add the real photos at the `image` paths (see
+// public/fish/README.md) and they upgrade automatically; until then the
+// `fallback` keeps the cards looking intact.
+const FISH = {
+  springChinook: {
+    name: 'Spring Chinook',
+    image: '/fish/spring-chinook.jpg',
+    fallback: '/summerchinook.png',
+  },
+  sturgeon: {
+    name: 'Sturgeon',
+    image: '/fish/sturgeon.jpg',
+    fallback: '/nature-river.jpg',
+  },
+  winterSteelhead: {
+    name: 'Winter Steelhead',
+    image: '/fish/winter-steelhead.jpg',
+    fallback: '/wintersteelhead.png',
+  },
+  americanShad: {
+    name: 'American Shad',
+    image: '/fish/american-shad.jpg',
+    fallback: '/20240831_124653-1488x1536.jpg',
+  },
+  summerSteelhead: {
+    name: 'Summer Steelhead',
+    image: '/fish/summer-steelhead.jpg',
+    fallback: '/wintersteelhead.png',
+  },
+  sockeyeSalmon: {
+    name: 'Sockeye Salmon',
+    image: '/fish/sockeye-salmon.jpg',
+    fallback: '/nature-mountain.jpg',
+  },
+  fallChinook: {
+    name: 'Fall Chinook',
+    image: '/fish/fall-chinook.jpg',
+    fallback: '/fallchinook.png',
+  },
+  cohoSalmon: {
+    name: 'Coho Salmon',
+    image: '/fish/coho-salmon.jpg',
+    fallback: '/rsw_1280h_1118.webp',
+  },
+  cutthroatTrout: {
+    name: 'Cutthroat Trout',
+    image: '/fish/cutthroat-trout.jpg',
+    fallback: '/nature-forest.jpg',
+  },
+} satisfies Record<string, FishInfo>
+
+type Catch = {
+  fish: FishInfo
+  months: string
+  level: Level
+  pct: number
 }
 
 type Season = {
@@ -15,7 +75,7 @@ type Season = {
   months: string
   headline: string
   description: string
-  fish: Fish[]
+  catches: Catch[]
 }
 
 const SEASONS: Season[] = [
@@ -26,28 +86,10 @@ const SEASONS: Season[] = [
     headline: 'The river wakes up',
     description:
       'Spring chinook pour into the Columbia, prized worldwide for their rich, high-fat meat. Sturgeon fishing stays hot in the deep holes, and the tail end of the winter steelhead run still rewards early risers.',
-    fish: [
-      {
-        name: 'Spring Chinook',
-        months: 'MAR – JUN',
-        level: 'PEAK RUN',
-        pct: 95,
-        image: '/summerchinook.png',
-      },
-      {
-        name: 'Sturgeon',
-        months: 'ALL SEASON',
-        level: 'STRONG',
-        pct: 75,
-        image: '/nature-river.jpg',
-      },
-      {
-        name: 'Winter Steelhead',
-        months: 'MAR – APR',
-        level: 'FAIR',
-        pct: 45,
-        image: '/wintersteelhead.png',
-      },
+    catches: [
+      { fish: FISH.springChinook, months: 'MAR – JUN', level: 'PEAK RUN', pct: 95 },
+      { fish: FISH.sturgeon, months: 'ALL SEASON', level: 'STRONG', pct: 75 },
+      { fish: FISH.winterSteelhead, months: 'MAR – APR', level: 'FAIR', pct: 45 },
     ],
   },
   {
@@ -57,28 +99,10 @@ const SEASONS: Season[] = [
     headline: 'Non-stop light-gear action',
     description:
       'Millions of shad flood the river for the fastest fishing of the year, perfect for kids and first-timers. Summer steelhead and sockeye run strong through the warm months, with walleye filling in the slow tides.',
-    fish: [
-      {
-        name: 'American Shad',
-        months: 'JUN – JUL',
-        level: 'PEAK RUN',
-        pct: 95,
-        image: '/20240831_124653-1488x1536.jpg',
-      },
-      {
-        name: 'Summer Steelhead',
-        months: 'JUN – SEP',
-        level: 'STRONG',
-        pct: 80,
-        image: '/wintersteelhead.png',
-      },
-      {
-        name: 'Sockeye Salmon',
-        months: 'JUN – JUL',
-        level: 'STRONG',
-        pct: 70,
-        image: '/nature-mountain.jpg',
-      },
+    catches: [
+      { fish: FISH.americanShad, months: 'JUN – JUL', level: 'PEAK RUN', pct: 95 },
+      { fish: FISH.summerSteelhead, months: 'JUN – SEP', level: 'STRONG', pct: 80 },
+      { fish: FISH.sockeyeSalmon, months: 'JUN – JUL', level: 'STRONG', pct: 70 },
     ],
   },
   {
@@ -88,28 +112,10 @@ const SEASONS: Season[] = [
     headline: 'The kings of the year',
     description:
       'Our best pure king fishery. Fall chinook arrive chrome-bright and full of fight, joined by aggressive coho on the tides. This is the season anglers travel across the country for, and dates go fast.',
-    fish: [
-      {
-        name: 'Fall Chinook',
-        months: 'AUG – OCT',
-        level: 'PEAK RUN',
-        pct: 100,
-        image: '/fallchinook.png',
-      },
-      {
-        name: 'Coho Salmon',
-        months: 'SEP – NOV',
-        level: 'STRONG',
-        pct: 85,
-        image: '/rsw_1280h_1118.webp',
-      },
-      {
-        name: 'Sturgeon',
-        months: 'ALL SEASON',
-        level: 'FAIR',
-        pct: 50,
-        image: '/nature-river.jpg',
-      },
+    catches: [
+      { fish: FISH.fallChinook, months: 'AUG – OCT', level: 'PEAK RUN', pct: 100 },
+      { fish: FISH.cohoSalmon, months: 'SEP – NOV', level: 'STRONG', pct: 85 },
+      { fish: FISH.sturgeon, months: 'ALL SEASON', level: 'FAIR', pct: 50 },
     ],
   },
   {
@@ -119,36 +125,55 @@ const SEASONS: Season[] = [
     headline: 'Chrome in the cold',
     description:
       'Winter steelhead are the hardest-earned and most rewarding fish of the year, sea-bright and strong in the coastal tributaries. Sturgeon keep the big-fish action going on the mainstem between storms.',
-    fish: [
-      {
-        name: 'Winter Steelhead',
-        months: 'DEC – MAR',
-        level: 'PEAK RUN',
-        pct: 90,
-        image: '/wintersteelhead.png',
-      },
-      {
-        name: 'Sturgeon',
-        months: 'ALL SEASON',
-        level: 'STRONG',
-        pct: 70,
-        image: '/nature-river.jpg',
-      },
-      {
-        name: 'Cutthroat Trout',
-        months: 'DEC – FEB',
-        level: 'FAIR',
-        pct: 40,
-        image: '/nature-forest.jpg',
-      },
+    catches: [
+      { fish: FISH.winterSteelhead, months: 'DEC – MAR', level: 'PEAK RUN', pct: 90 },
+      { fish: FISH.sturgeon, months: 'ALL SEASON', level: 'STRONG', pct: 70 },
+      { fish: FISH.cutthroatTrout, months: 'DEC – FEB', level: 'FAIR', pct: 40 },
     ],
   },
 ]
 
-const LEVEL_COLOR: Record<Fish['level'], string> = {
+const LEVEL_COLOR: Record<Level, string> = {
   'PEAK RUN': 'text-accent',
   STRONG: 'text-primary',
   FAIR: 'text-cream/70',
+}
+
+// (per-species image map with SSR-safe fallback lives in FishImage below)
+
+// Falls back to an existing asset when the species photo hasn't been added
+// yet. Because this is SSR, the image can 404 before React hydrates (so the
+// error event is missed) — the ref catches that already-failed case, and
+// onError covers failures after hydration.
+function FishImage({
+  src,
+  fallback,
+  alt,
+  className,
+}: {
+  src: string
+  fallback: string
+  alt: string
+  className: string
+}) {
+  const swap = (img: HTMLImageElement | null) => {
+    if (!img) return
+    if (img.complete && img.naturalWidth === 0 && !img.src.endsWith(fallback)) {
+      img.src = fallback
+    }
+  }
+  return (
+    <img
+      ref={swap}
+      src={src}
+      alt={alt}
+      className={className}
+      onError={(e) => {
+        const img = e.currentTarget
+        if (!img.src.endsWith(fallback)) img.src = fallback
+      }}
+    />
+  )
 }
 
 export function SeasonsSection() {
@@ -264,36 +289,42 @@ export function SeasonsSection() {
               key={season.id}
               className="flex flex-col gap-4 md:-mx-10 md:h-[34rem] md:flex-row md:gap-3 lg:mx-0 lg:-mr-16 lg:pl-6"
             >
-              {season.fish.map((f, i) => (
+              {season.catches.map((c, i) => (
                 <div
-                  key={f.name}
+                  key={c.fish.name}
                   className="season-panel-in relative h-52 md:h-auto md:flex-1"
                   style={{ animationDelay: `${0.1 + i * 0.13}s` }}
                 >
                   {/* Skewed frame */}
                   <div className="absolute inset-0 -skew-x-12 overflow-hidden rounded-sm border border-cream/10 bg-night">
+                    <FishImage
+                      src={c.fish.image}
+                      fallback={c.fish.fallback}
+                      alt={c.fish.name}
+                      className="absolute inset-0 h-full w-full skew-x-12 scale-[1.45] object-cover opacity-80 transition-all duration-700 hover:scale-[1.55] hover:opacity-100"
+                    />
                     {/* Bottom gradient for the caption */}
                     <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-ink via-ink/70 to-transparent" />
 
                     {/* Caption — counter-skewed back upright */}
                     <div className="absolute inset-x-0 bottom-0 skew-x-12 px-10 pb-6 md:px-12">
                       <div
-                        className={`text-[10px] font-bold tracking-[0.22em] ${LEVEL_COLOR[f.level]}`}
+                        className={`text-[10px] font-bold tracking-[0.22em] ${LEVEL_COLOR[c.level]}`}
                       >
-                        {f.level}
+                        {c.level}
                       </div>
                       <div className="mt-1.5 font-display text-lg uppercase leading-tight text-cream md:text-xl">
-                        {f.name}
+                        {c.fish.name}
                       </div>
                       <div className="mt-1 text-[10px] tracking-[0.22em] text-cream/50">
-                        {f.months}
+                        {c.months}
                       </div>
                       {/* Run-strength meter */}
                       <div className="mt-3 h-1 w-full max-w-[9rem] overflow-hidden rounded-full bg-cream/15">
                         <div
                           className="season-bar h-full rounded-full bg-gradient-to-r from-primary to-accent"
                           style={{
-                            width: `${f.pct}%`,
+                            width: `${c.pct}%`,
                             animationDelay: `${0.35 + i * 0.13}s`,
                           }}
                         />

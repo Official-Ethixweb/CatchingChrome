@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Hero } from '~/components/Hero'
+import { PartnersSection } from '~/components/PartnersSection'
 import { WelcomeSection } from '~/components/WelcomeSection'
 import { CustomMerchSection } from '~/components/CustomMerchSection'
 import { SignatureTripsSection } from '~/components/SignatureTripsSection'
@@ -20,6 +21,7 @@ function Home() {
     <>
       <main>
         <Hero />
+        <PartnersSection />
         <WelcomeSection />
         <CustomMerchSection />
         <SignatureTripsSection />

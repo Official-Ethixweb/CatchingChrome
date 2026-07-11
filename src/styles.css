@@ -165,6 +165,27 @@
   animation: seasonPanelIn 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* Infinite logo marquee for the partners strip. The track holds two copies
+   of the logo set, so shifting it exactly -50% loops seamlessly. */
+@keyframes partnerScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.partner-track {
+  display: flex;
+  width: max-content;
+  animation: partnerScroll 24s linear infinite;
+}
+
+.partner-track:hover {
+  animation-play-state: paused;
+}
+
 /* Respect users who prefer reduced motion: neutralize transitions,
    animations, and any JS-driven smooth scrolling. */
 @media (prefers-reduced-motion: reduce) {
