@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react'
 import type { ComponentType, SVGProps } from 'react'
 import { ArrowUpRight, CartIcon } from './icons'
 import { Eyebrow } from './Eyebrow'
@@ -206,65 +205,12 @@ function ProductCard({ product }: { product: Product }) {
 }
 
 export function CustomMerchSection() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const markRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const section = sectionRef.current
-    const mark = markRef.current
-    if (!section || !mark) return
-
-    // Respect reduced-motion: leave the watermark static.
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-
-    const AMPLITUDE = 420 // px the watermark travels across a full pass
-    let raf = 0
-
-    const update = () => {
-      raf = 0
-      const rect = section.getBoundingClientRect()
-      const winH = window.innerHeight || 1
-      // -1 (section well below) .. +1 (section well above the viewport)
-      const progress = (rect.top + rect.height / 2 - winH / 2) / winH
-      const x = -progress * AMPLITUDE
-      mark.style.transform = `translate3d(${x.toFixed(2)}px, 0, 0)`
-    }
-
-    const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(update)
-    }
-
-    update()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onScroll)
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onScroll)
-      if (raf) cancelAnimationFrame(raf)
-    }
-  }, [])
-
   return (
     <section
-      ref={sectionRef}
       id="merch"
       data-chapter="dark"
       className="theme-invert relative overflow-hidden bg-ink py-28 md:py-36"
     >
-      {/* Scroll-driven background watermark */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden"
-      >
-        <div
-          ref={markRef}
-          className="whitespace-nowrap font-display uppercase leading-none text-cream/[0.04] will-change-transform"
-          style={{ fontSize: '18vw', transition: 'transform 0.1s linear' }}
-        >
-          CUSTOM · CUSTOM · CUSTOM · CUSTOM
-        </div>
-      </div>
-
       <div className="relative z-10 mx-auto max-w-[1440px] px-6 md:px-10">
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-10">
           {/* Left rail: section text */}
@@ -287,7 +233,7 @@ export function CustomMerchSection() {
               href={STORE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="group mt-8 inline-flex items-center gap-2 self-start rounded-full bg-primary px-7 py-3.5 text-[13px] font-semibold uppercase tracking-[0.14em] text-cream transition-all duration-200 hover:brightness-110"
+              className="btn-primary group mt-8 inline-flex items-center gap-2 self-start px-7 py-3.5 text-[13px] font-semibold uppercase tracking-[0.14em]"
             >
               Shop the Collection
               <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

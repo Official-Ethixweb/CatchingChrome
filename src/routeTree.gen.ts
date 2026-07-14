@@ -10,14 +10,21 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as ExcursionsRouteImport } from './routes/excursions'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CommercialRouteImport } from './routes/commercial'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
 const PricingRoute = PricingRouteImport.update({
   id: '/pricing',
   path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExcursionsRoute = ExcursionsRouteImport.update({
@@ -28,6 +35,11 @@ const ExcursionsRoute = ExcursionsRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommercialRoute = CommercialRouteImport.update({
+  id: '/commercial',
+  path: '/commercial',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -44,38 +56,68 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/commercial': typeof CommercialRoute
   '/contact': typeof ContactRoute
   '/excursions': typeof ExcursionsRoute
+  '/gallery': typeof GalleryRoute
   '/pricing': typeof PricingRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/commercial': typeof CommercialRoute
   '/contact': typeof ContactRoute
   '/excursions': typeof ExcursionsRoute
+  '/gallery': typeof GalleryRoute
   '/pricing': typeof PricingRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/commercial': typeof CommercialRoute
   '/contact': typeof ContactRoute
   '/excursions': typeof ExcursionsRoute
+  '/gallery': typeof GalleryRoute
   '/pricing': typeof PricingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/contact' | '/excursions' | '/pricing'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/commercial'
+    | '/contact'
+    | '/excursions'
+    | '/gallery'
+    | '/pricing'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/excursions' | '/pricing'
-  id: '__root__' | '/' | '/about' | '/contact' | '/excursions' | '/pricing'
+  to:
+    | '/'
+    | '/about'
+    | '/commercial'
+    | '/contact'
+    | '/excursions'
+    | '/gallery'
+    | '/pricing'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/commercial'
+    | '/contact'
+    | '/excursions'
+    | '/gallery'
+    | '/pricing'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  CommercialRoute: typeof CommercialRoute
   ContactRoute: typeof ContactRoute
   ExcursionsRoute: typeof ExcursionsRoute
+  GalleryRoute: typeof GalleryRoute
   PricingRoute: typeof PricingRoute
 }
 
@@ -86,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/pricing'
       fullPath: '/pricing'
       preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/excursions': {
@@ -100,6 +149,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/commercial': {
+      id: '/commercial'
+      path: '/commercial'
+      fullPath: '/commercial'
+      preLoaderRoute: typeof CommercialRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -122,8 +178,10 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  CommercialRoute: CommercialRoute,
   ContactRoute: ContactRoute,
   ExcursionsRoute: ExcursionsRoute,
+  GalleryRoute: GalleryRoute,
   PricingRoute: PricingRoute,
 }
 export const routeTree = rootRouteImport

@@ -35,8 +35,8 @@ export function MeetCaptainSection() {
             <p>
               With over 40 years of fishing experience across Oregon&apos;s
               waterways, Captain Ryan brings unparalleled expertise to every
-              trip. A certified U.S. Coast Guard captain — first aid and CPR
-              trained — safety is always first.
+              trip. A certified U.S. Coast Guard captain, first aid and CPR
+              trained, safety is always first.
             </p>
             <p>
               His passion is matched only by his commitment to client
@@ -58,8 +58,8 @@ export function MeetCaptainSection() {
           </div>
 
           <a
-            href="#"
-            className="group mt-10 inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3.5 text-[13px] font-semibold uppercase tracking-[0.14em] text-ink transition-all duration-200 hover:brightness-110"
+            href="/contact"
+            className="btn-primary group mt-10 inline-flex items-center gap-2 px-8 py-3.5 text-[13px] font-semibold uppercase tracking-[0.14em]"
           >
             Book Now
             <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

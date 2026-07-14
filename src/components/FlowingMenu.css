@@ -12,16 +12,26 @@
   padding: 0;
 }
 
+/* Each option carries its destination photo as its own background. */
 .menu__item {
   flex: 1;
   position: relative;
   overflow: hidden;
   text-align: center;
   border-top: 1px solid;
+  background-size: cover;
+  background-position: 50% 50%;
 }
 
 .menu__item:first-child {
   border-top: none;
+}
+
+/* Tint over the photo so the resting label stays readable. */
+.menu__item-veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
 .menu__item-link {
@@ -38,14 +48,13 @@
   font-size: 4vh;
 }
 
-.menu__item-link:hover {
-  color: inherit;
-}
-
+.menu__item-link:hover,
 .menu__item-link:focus:not(:focus-visible) {
   color: inherit;
 }
 
+/* The band parks just off the item and flips in over the photo from
+   whichever edge the cursor entered. */
 .marquee {
   position: absolute;
   top: 0;
@@ -81,18 +90,17 @@
 .marquee span {
   white-space: nowrap;
   text-transform: uppercase;
-  font-weight: 400;
+  font-weight: 600;
   font-size: 4vh;
   line-height: 1;
-  padding: 0 1vw;
+  padding: 0 1.5vw;
 }
 
-.marquee__img {
-  width: 200px;
-  height: 7vh;
-  margin: 2em 2vw;
-  padding: 1em 0;
-  border-radius: 50px;
-  background-size: cover;
-  background-position: 50% 50%;
+.marquee__dot {
+  width: 0.9vh;
+  height: 0.9vh;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background-color: currentColor;
+  opacity: 0.75;
 }

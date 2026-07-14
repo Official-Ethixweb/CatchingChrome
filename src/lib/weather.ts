@@ -118,7 +118,7 @@ export function biteOutlook(
       score,
       tier,
       label: TIER_LABEL[tier],
-      reason: `Seasonal outlook — ${RATING_META[rating].label.toLowerCase()} salmon window right now.`,
+      reason: `Seasonal outlook: ${RATING_META[rating].label.toLowerCase()} salmon window right now.`,
     }
   }
 
@@ -186,7 +186,7 @@ export function biteOutlook(
   } else if (positives.length) {
     reason = `${cap(positives[0])} has the fish moving today.`
   } else {
-    reason = `Steady conditions over a ${RATING_META[rating].label.toLowerCase()} salmon window.`
+    reason = `Steady conditions over ${article(RATING_META[rating].label.toLowerCase())} salmon window.`
   }
 
   return { score, tier, label: TIER_LABEL[tier], reason }
@@ -202,4 +202,9 @@ function tierFor(score: number): OutlookTier {
 
 function cap(s: string) {
   return s.charAt(0).toUpperCase() + s.slice(1)
+}
+
+/** "excellent" -> "an excellent". Ratings are a closed set, so a vowel test is enough. */
+function article(s: string) {
+  return `${/^[aeiou]/.test(s) ? 'an' : 'a'} ${s}`
 }

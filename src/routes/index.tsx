@@ -23,13 +23,13 @@ function Home() {
         <Hero />
         <PartnersSection />
         <WelcomeSection />
-        <CustomMerchSection />
+        <MeetCaptainSection />
+        <TestimonialsSection />
         <SignatureTripsSection />
         <SeasonsSection />
-        <MeetCaptainSection />
         <FleetSection />
         <BoatRampsSection />
-        <TestimonialsSection />
+        <CustomMerchSection />
         <FaqSection />
       </main>
       <SiteFooter />

@@ -12,7 +12,80 @@
   --color-paper: #DCEEF3; /* Frost Tint (Section backgrounds) */
   --color-muted: #B9C4CC; /* Chrome Silver (Borders, muted fills) */
   --color-primary: #167A8E; /* River Teal (Primary brand, links) */
-  --color-accent: #F5A623; /* Salmon Gold (Primary CTA buttons) */
+  --color-accent: #F5A623; /* Salmon Gold (Section accents, headline words) */
+  --color-cta: #00CCCC; /* Chrome Cyan (Buttons + CTAs only) */
+}
+
+/* ===================================================================
+   Buttons / CTAs
+   Every button on the site is a bordered pill drawn from exactly two
+   colours: Chrome Cyan (--color-cta) and Deep Steel Navy (--color-ink).
+   Salmon Gold stays on section accents and headline words, never on a
+   button. No underline-style links are used as buttons.
+     .btn-primary — cyan fill, navy label. The default CTA.
+     .btn-outline — navy outline on light sections.
+     .btn-outline-cta — cyan outline, for use on dark (navy) sections.
+   Hover always swaps fill and label between the same two colours, so
+   contrast holds on both light and dark backgrounds.
+   =================================================================== */
+.btn-primary,
+.btn-outline,
+.btn-outline-cta {
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 9999px;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--color-cta);
+  border-color: var(--color-cta);
+  color: var(--color-ink);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-ink);
+  border-color: var(--color-cta);
+  color: var(--color-cta);
+}
+
+.btn-outline {
+  background-color: transparent;
+  border-color: var(--color-ink);
+  color: var(--color-ink);
+}
+
+.btn-outline:hover {
+  background-color: var(--color-ink);
+  border-color: var(--color-ink);
+  color: var(--color-cta);
+}
+
+.btn-outline-cta {
+  background-color: transparent;
+  border-color: var(--color-cta);
+  color: var(--color-cta);
+}
+
+.btn-outline-cta:hover {
+  background-color: var(--color-cta);
+  border-color: var(--color-cta);
+  color: var(--color-ink);
+}
+
+/* On dark chapters the navy outline would vanish into the background,
+   so it borrows the cyan treatment. */
+[data-theme='dark'] .theme-transition .btn-outline {
+  border-color: var(--color-cta);
+  color: var(--color-cta);
+}
+
+[data-theme='dark'] .theme-transition .btn-outline:hover {
+  background-color: var(--color-cta);
+  color: var(--color-ink);
 }
 
 @layer base {
@@ -381,6 +454,228 @@
     0 0 34px -6px rgba(245, 166, 35, 0.4);
 }
 
+/* Auto-cycling fishing calendar: the detail panel eases in on each switch. */
+@keyframes panelSwapIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.panel-swap {
+  animation: panelSwapIn 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ===================================================================
+   Sticky header bar.
+   It floats over whatever chapter is behind it, so it borrows the
+   scroll-driven theme: bone-white over light sections, steel navy over
+   dark ones. The long cross-fade is what keeps the swap subtle rather
+   than a hard flip as you scroll between chapters.
+   =================================================================== */
+.sticky-bar {
+  background-color: rgba(247, 246, 242, 0.9);
+  border-color: rgba(14, 42, 59, 0.1);
+  color: #0e2a3b;
+  transition:
+    background-color 0.7s ease,
+    border-color 0.7s ease,
+    color 0.7s ease,
+    transform 0.35s ease-out;
+}
+
+[data-theme='dark'] .sticky-bar {
+  background-color: rgba(14, 42, 59, 0.9);
+  border-color: rgba(247, 246, 242, 0.12);
+  color: #f7f6f2;
+}
+
+/* Cyan on bone white is unreadable, so the bar's outline button rides navy
+   while the light chapter is behind it and only goes cyan over dark. */
+.sticky-bar .btn-outline-cta {
+  border-color: var(--color-ink);
+  color: var(--color-ink);
+}
+
+.sticky-bar .btn-outline-cta:hover {
+  background-color: var(--color-ink);
+  color: var(--color-cta);
+}
+
+[data-theme='dark'] .sticky-bar .btn-outline-cta {
+  border-color: var(--color-cta);
+  color: var(--color-cta);
+}
+
+[data-theme='dark'] .sticky-bar .btn-outline-cta:hover {
+  background-color: var(--color-cta);
+  color: var(--color-ink);
+}
+
+/* ===================================================================
+   Nav links — a cyan pill that eases out from the label on hover.
+   ::before carries the pill so the link itself never changes size and
+   the row can't reflow (which is what made items collide before).
+   =================================================================== */
+.nav-link {
+  position: relative;
+  white-space: nowrap;
+  border-radius: 9999px;
+  transition: color 0.3s ease;
+  z-index: 0;
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 2px solid var(--color-cta);
+  transform: scale(0.82);
+  opacity: 0;
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.28s ease;
+  z-index: -1;
+}
+
+.nav-link:hover::before,
+.nav-link:focus-visible::before {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: var(--color-cta);
+}
+
+/* ===================================================================
+   Glowing cyan border — draws the eye to the calendar's disclosure toggle.
+   The glow breathes slowly so it reads as inviting rather than an alert,
+   and lifts on hover. Reduced-motion users get the static mid-state.
+   =================================================================== */
+.glow-border {
+  position: relative;
+  border-color: rgba(0, 204, 204, 0.5);
+  transition: border-color 0.3s ease;
+}
+
+/* The glow lives on a pseudo-element and only its opacity animates. Animating
+   box-shadow directly would repaint this element every frame for the life of
+   the page; opacity stays on the compositor and costs nothing. */
+.glow-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow:
+    0 0 22px -2px rgba(0, 204, 204, 0.55),
+    inset 0 0 16px -7px rgba(0, 204, 204, 0.55);
+  opacity: 0.4;
+  animation: glowBreathe 3.2s ease-in-out infinite;
+  transition: opacity 0.3s ease;
+}
+
+@keyframes glowBreathe {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.glow-border:hover {
+  border-color: var(--color-cta);
+}
+
+.glow-border:hover::after {
+  opacity: 1;
+  animation-play-state: paused;
+}
+
+/* ===================================================================
+   Collapsible reveal (the fishing calendar's "View full season calendar").
+   Animating grid-template-rows 0fr -> 1fr lets the panel ease open to its
+   natural height with no JS measurement, so it stays smooth at any size.
+   The inner content drifts up and fades in slightly behind the height, which
+   is what keeps the open from feeling like a snap.
+   =================================================================== */
+/* The theme cross-fade above sets `transition` on every descendant of a themed
+   section at (0,1,3), which would otherwise clobber these and make the panel
+   snap open. The ancestor-scoped selectors match that weight so the height and
+   fade survive inside .theme-invert / .theme-transition. */
+.collapse-grid,
+.theme-invert .collapse-grid,
+.theme-transition .collapse-grid {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.collapse-grid[data-open='true'] {
+  grid-template-rows: 1fr;
+}
+
+.collapse-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.collapse-content,
+.theme-invert .collapse-content,
+.theme-transition .collapse-content {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.collapse-grid[data-open='true'] .collapse-content {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.08s;
+}
+
+/* ===================================================================
+   Client Log cards.
+   Same trap as .collapse-grid: the theme cross-fade sets `transition` on
+   every descendant of a themed section at (0,1,3), which silently outranks
+   a utility class and leaves the deck snapping between positions instead of
+   sliding. The ancestor-scoped selectors match that weight.
+   =================================================================== */
+.review-card,
+.theme-transition .review-card,
+.theme-invert .review-card {
+  transition:
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.6s ease,
+    filter 0.6s ease;
+}
+
+/* Ring sweep on the active testimonial dot, tracking time to auto-advance. */
+@keyframes dotSweep {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.dot-sweep {
+  transform-origin: left center;
+  animation: dotSweep linear forwards;
+}
+
 /* Respect users who prefer reduced motion: neutralize transitions,
    animations, and any JS-driven smooth scrolling. */
 @media (prefers-reduced-motion: reduce) {
@@ -401,5 +696,225 @@
   .reveal {
     opacity: 1 !important;
     transform: none !important;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Gallery
+
+   Every rule here is ancestor-scoped (`.theme-transition .gal-*`) on purpose.
+   The chapter theming rules set `transition` on *every* descendant at a
+   higher specificity than a utility class, so an un-scoped `.gal-card` would
+   silently lose its transform transition the moment it lands inside a
+   themed section.
+   ───────────────────────────────────────────────────────────────────────── */
+
+.theme-transition .gal-card,
+.theme-invert .gal-card {
+  transition:
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.theme-transition .gal-media,
+.theme-invert .gal-media {
+  transition:
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.55s ease;
+}
+
+.theme-transition .gal-veil,
+.theme-invert .gal-veil,
+.theme-transition .gal-rule,
+.theme-invert .gal-rule {
+  transition: opacity 0.45s ease;
+}
+
+.theme-transition .gal-cap,
+.theme-invert .gal-cap {
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.4s ease;
+}
+
+.theme-transition .gal-chip,
+.theme-invert .gal-chip {
+  transition:
+    color 0.3s ease,
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.gal-card:hover .gal-media,
+.gal-card:focus-visible .gal-media {
+  transform: scale(1.06);
+}
+
+.gal-card:hover .gal-veil,
+.gal-card:focus-visible .gal-veil,
+.gal-card:hover .gal-cap,
+.gal-card:focus-visible .gal-cap,
+.gal-card:hover .gal-rule,
+.gal-card:focus-visible .gal-rule {
+  opacity: 1;
+}
+
+.gal-card:hover .gal-cap,
+.gal-card:focus-visible .gal-cap {
+  transform: translateY(0);
+}
+
+.gal-chip:not([data-on='true']):hover {
+  transform: translateY(-1px);
+}
+
+/* ===================================================================
+   Fleet photo glare — a specular streak that sweeps across the boat, but
+   only while the pointer is on the card.
+
+   It lives on a pseudo-element for two reasons: the chapter theming's
+   descendant `transition` rule matches elements, not pseudo-elements, so it
+   can't strip this; and the transition is declared only in the :hover state,
+   so the streak snaps back off-screen on mouse-out instead of sweeping
+   backwards — which also re-arms it for the next hover.
+   =================================================================== */
+.fleet-glare::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 60%
+  );
+  transform: translateX(-100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.group:hover .fleet-glare::after,
+.group:focus-within .fleet-glare::after {
+  transform: translateX(100%);
+  transition: transform 0.9s cubic-bezier(0.32, 0, 0.24, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .group:hover .fleet-glare::after,
+  .group:focus-within .fleet-glare::after {
+    transition: none;
+  }
+}
+
+/* The `.pop` scroll animation above targets every <figure> and finishes on
+   `transform: none`. An animation's filled value beats an inline style, so it
+   silently erased the `translate(-50%, -50%)` that centres these cards and
+   left the deck sitting off to one side. The deck animates itself, so opt it
+   out. Same specificity as the `.pop :is(...)` rule, won on source order. */
+.pop .clip-card {
+  animation: none;
+}
+
+/* Clip deck. Ancestor-scoped for the same reason as everything above: the
+   chapter theming sets `transition` on every descendant at a higher
+   specificity, which would silently strip the card slide. */
+.theme-transition .clip-card,
+.theme-invert .clip-card {
+  transition:
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.6s ease,
+    filter 0.6s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-transition .clip-card,
+  .theme-invert .clip-card {
+    transition: none;
+  }
+}
+
+/* Mosaic. Columns, not a grid: every tile renders at its photo's own aspect
+   ratio so nothing is ever cropped — the angler and the fish are both in frame
+   without opening the tile. A fixed-height grid cell can't do that. Its row
+   height is a fixed px value while the column width is fluid, so the two only
+   agree at one exact viewport per breakpoint and the crop creeps back in
+   between. Columns track any width for free. */
+.gal-mosaic {
+  column-gap: 6px;
+}
+@media (min-width: 640px) {
+  .gal-mosaic {
+    column-count: 2;
+    column-gap: 8px;
+  }
+}
+@media (min-width: 1024px) {
+  .gal-mosaic {
+    column-count: 3;
+  }
+}
+@media (min-width: 1400px) {
+  .gal-mosaic {
+    column-count: 4;
+  }
+}
+.gal-mosaic > * {
+  break-inside: avoid;
+  margin-bottom: 6px;
+}
+@media (min-width: 640px) {
+  .gal-mosaic > * {
+    margin-bottom: 8px;
+  }
+}
+
+@keyframes galIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.gal-in {
+  animation: galIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes galFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes galRise {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.gal-lightbox {
+  animation: galFade 0.25s ease both;
+}
+
+.gal-lightbox-panel {
+  animation: galRise 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gal-card:hover .gal-media,
+  .gal-card:focus-visible .gal-media {
+    transform: none;
   }
 }

@@ -55,7 +55,7 @@ export function WelcomeSection() {
             <p>
               Premium fishing experiences throughout Oregon&apos;s legendary
               waterways. With over forty years of local knowledge, Captain Ryan
-              delivers exceptional adventures for all skill levels — from the
+              delivers exceptional adventures for all skill levels, from the
               Columbia River Gorge to coastal tributaries.
             </p>
             <p>Safe, comfortable, memorable trips. Every time.</p>
@@ -63,7 +63,7 @@ export function WelcomeSection() {
 
           <a
             href="#"
-            className="group mt-10 inline-flex items-center gap-3 border-b-2 border-ink pb-1 text-[13px] font-semibold uppercase tracking-[0.18em] text-ink transition-colors duration-200 hover:text-ink/70"
+            className="btn-outline group mt-10 inline-flex items-center gap-3 px-7 py-3 text-[13px] font-semibold uppercase tracking-[0.18em]"
           >
             About Us
             <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />

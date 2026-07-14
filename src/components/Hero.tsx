@@ -9,8 +9,6 @@ const SLIDES = [
   '/nature-valley.jpg',
 ]
 
-const CAPTAIN = '/rsw_1280h_1118.webp'
-
 export function Hero() {
   const [active, setActive] = useState(0)
 
@@ -39,52 +37,31 @@ export function Hero() {
         ))}
       </div>
 
-      {/* Legibility overlay — darker on the left where the copy sits */}
-      <div className="absolute inset-0 bg-gradient-to-r from-ink/85 via-ink/45 to-ink/10" />
+      {/* Legibility overlay — evenly weighted now that the copy is centred */}
+      <div className="absolute inset-0 bg-gradient-to-r from-ink/70 via-ink/55 to-ink/70" />
       <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-ink/20" />
 
       <SiteHeader />
 
-      {/* Content: copy on the left, Captain Ryan on the right */}
+      {/* Content: centred copy */}
       <div className="absolute inset-0 z-10 flex items-center pb-16">
-        <div className="mx-auto grid w-full max-w-[1440px] grid-cols-1 items-center gap-10 px-6 md:px-10 lg:grid-cols-[1.05fr_0.95fr]">
-          {/* Left copy — pulled downwards by 20% */}
-          <div className="hero-fade max-w-2xl text-left translate-y-[20%]">
+        <div className="mx-auto w-full max-w-[1440px] px-6 md:px-10">
+          <div className="hero-fade mx-auto flex max-w-3xl flex-col items-center text-center">
             <h1 className="font-display text-[clamp(2.2rem,4.9vw,4.6rem)] uppercase leading-[0.98] text-white [text-shadow:0_2px_30px_rgba(0,0,0,0.45)]">
               Experience Oregon&apos;s Premier Fishing Adventures
             </h1>
-            <p className="mt-6 max-w-md text-base leading-relaxed text-white/80 [text-shadow:0_1px_12px_rgba(0,0,0,0.55)] md:text-lg">
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-white/80 [text-shadow:0_1px_12px_rgba(0,0,0,0.55)] md:text-lg">
               Expert-guided excursions on the Pacific Northwest&apos;s most
               pristine waters.
             </p>
 
             <a
-              href="#"
-              className="group mt-9 inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 text-[13px] font-semibold uppercase tracking-[0.14em] text-ink shadow-xl transition-all duration-200 hover:bg-cream"
+              href="/contact"
+              className="btn-primary group mt-9 inline-flex items-center gap-3 px-8 py-4 text-[13px] font-semibold uppercase tracking-[0.14em] shadow-xl"
             >
               Book Now
               <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
             </a>
-          </div>
-
-          {/* Right: Captain Ryan — pulled downwards by 20% and corners made pointy */}
-          <div className="hero-fade hidden justify-self-end lg:block translate-y-[20%] z-30">
-            <div className="relative w-[26rem] max-w-full">
-              <img
-                src={CAPTAIN}
-                alt="Captain Ryan on the water"
-                className="aspect-[4/5] w-full rounded-none object-cover object-center shadow-2xl ring-1 ring-white/20"
-              />
-              {/* Name badge */}
-              <div className="absolute bottom-5 left-5 rounded-full border border-white/20 bg-ink/70 px-5 py-2.5 backdrop-blur-sm">
-                <div className="text-[13px] font-semibold uppercase tracking-[0.16em] text-white">
-                  Captain Ryan
-                </div>
-                <div className="text-[10px] tracking-[0.22em] text-accent">
-                  USCG · 40+ YEARS
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

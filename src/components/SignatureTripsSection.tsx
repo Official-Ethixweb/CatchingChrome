@@ -7,13 +7,13 @@ const TRIPS = [
     season: 'AUG – OCT',
     title: 'Fall Chinook',
     image: '/fallchinook.png',
-    body: 'Our best pure king fishery. Season opens in August and runs through late October — the most powerful, chrome-bright kings of the year.',
+    body: 'Our best pure king fishery. Season opens in August and runs through late October, the most powerful, chrome-bright kings of the year.',
   },
   {
     season: 'MID-MAR – MID-JUN',
     title: 'Spring Chinook',
     image: '/summerchinook.png',
-    body: 'Columbia River spring chinook — prized worldwide for their flavor. Anglers travel across the country for this run.',
+    body: 'Columbia River spring chinook, prized worldwide for their flavor. Anglers travel across the country for this run.',
   },
   {
     season: 'MID-MAY – MID-JUN',
@@ -47,8 +47,8 @@ export function SignatureTripsSection({ className = "bg-cream" }: { className?: 
           </h2>
 
           <p className="max-w-sm text-[17px] leading-relaxed text-ink/55 lg:mb-3">
-            Our most popular fishing adventures on Oregon&apos;s pristine waters
-            — each one guided personally by Captain Ryan.
+            Our most popular fishing adventures on Oregon&apos;s pristine waters,
+            each one guided personally by Captain Ryan.
           </p>
         </div>
 
@@ -87,7 +87,7 @@ export function SignatureTripsSection({ className = "bg-cream" }: { className?: 
 
                 <a
                   href="#"
-                  className="mt-6 inline-flex w-fit items-center gap-2 border-b border-ink pb-1 text-[12px] font-semibold uppercase tracking-[0.18em] text-ink transition-colors duration-200 group-hover:border-accent group-hover:text-accent"
+                  className="btn-outline mt-6 inline-flex w-fit items-center gap-2 px-5 py-2 text-[12px] font-semibold uppercase tracking-[0.18em]"
                 >
                   Book Now
                   <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -100,13 +100,11 @@ export function SignatureTripsSection({ className = "bg-cream" }: { className?: 
         {/* View all */}
         <div className="mt-16 flex justify-center md:mt-20">
           <a
-            href="#"
-            className="group inline-flex items-center gap-4 rounded-full border border-ink/80 py-2 pl-8 pr-2 text-[13px] font-semibold uppercase tracking-[0.18em] text-ink transition-colors duration-200 hover:bg-ink/5"
+            href="/excursions"
+            className="btn-outline group inline-flex items-center gap-3 px-8 py-3.5 text-[13px] font-semibold uppercase tracking-[0.18em]"
           >
             View All Excursions
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-ink text-cream">
-              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
-            </span>
+            <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
           </a>
         </div>
 
@@ -126,11 +124,11 @@ export function SignatureTripsSection({ className = "bg-cream" }: { className?: 
           >
             <FlowingMenu
               items={DESTINATIONS}
-              bgColor="#F7F6F2"
-              textColor="#0E2A3B"
-              marqueeBgColor="#167A8E"
-              marqueeTextColor="#F7F6F2"
-              borderColor="#B9C4CC"
+              bgColor="#0E2A3B"
+              textColor="#F7F6F2"
+              marqueeBgColor="#F7F6F2"
+              marqueeTextColor="#0E2A3B"
+              borderColor="rgba(247, 246, 242, 0.18)"
             />
           </div>
         </div>

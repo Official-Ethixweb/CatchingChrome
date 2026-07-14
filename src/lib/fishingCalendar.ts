@@ -98,7 +98,7 @@ export const SPECIES: Species[] = [
       'Nehalem',
     ],
     blurb:
-      'Our best pure king fishery. Chrome-bright, full of fight — the season anglers travel across the country for.',
+      'Our best pure king fishery. Chrome-bright, full of fight, the season anglers travel across the country for.',
     ratings: [P, P, P, P, P, P, F, E, E, E, G, F],
   },
   {

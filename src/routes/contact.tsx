@@ -186,7 +186,7 @@ function ContactSection() {
                       setSubmitted(false)
                       setFormData({ name: '', email: '', phone: '', tripType: 'Salmon', groupSize: '2', message: '' })
                     }}
-                    className="mt-8 text-xs font-bold uppercase tracking-[0.2em] text-accent border-b border-accent pb-1 hover:text-accent/80 transition-colors"
+                    className="btn-outline-cta mt-8 px-5 py-2 text-xs font-bold uppercase tracking-[0.2em]"
                   >
                     Send another message
                   </button>
@@ -290,7 +290,7 @@ function ContactSection() {
                             onClick={() => setFormData({ ...formData, groupSize: num })}
                             className={`flex-1 py-2.5 text-xs sm:text-sm font-semibold rounded-sm border transition-all ${
                               formData.groupSize === num
-                                ? 'border-accent bg-accent text-ink'
+                                ? 'border-cta bg-cta text-ink'
                                 : 'border-cream/10 bg-white/[0.02] text-cream/70 hover:border-cream/20'
                             }`}
                           >
@@ -320,7 +320,7 @@ function ContactSection() {
 
                     <button
                       type="submit"
-                      className="group w-full inline-flex items-center justify-center gap-2 rounded-full bg-accent py-4 text-[13px] font-semibold uppercase tracking-[0.14em] text-ink transition-all duration-200 hover:brightness-110"
+                      className="btn-primary group w-full inline-flex items-center justify-center gap-2 py-4 text-[13px] font-semibold uppercase tracking-[0.14em]"
                     >
                       Send Message
                       <svg

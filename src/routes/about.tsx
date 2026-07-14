@@ -19,13 +19,13 @@ import type { ComponentType, SVGProps } from 'react'
 export const Route = createFileRoute('/about')({
   head: () => ({
     meta: [
-      { title: 'About — Catching Chrome Guide Service' },
+      { title: 'About Catching Chrome Guide Service' },
       {
         name: 'description',
         content:
           "The story behind Catching Chrome: forty-plus years chasing chrome-bright salmon and steelhead across Oregon's rivers with Captain Ryan.",
       },
-      { property: 'og:title', content: 'About — Catching Chrome' },
+      { property: 'og:title', content: 'About Catching Chrome' },
       {
         property: 'og:description',
         content:
@@ -124,7 +124,7 @@ function AboutHero() {
 
         <Reveal delay={0.16}>
           <p className="mx-auto mt-7 max-w-xl text-[17px] leading-relaxed text-cream/65">
-            Four decades of Oregon river knowledge, one relentless obsession —
+            Four decades of Oregon river knowledge, one relentless obsession,
             putting you on the brightest, hardest-fighting fish of the run.
           </p>
         </Reveal>
@@ -133,7 +133,7 @@ function AboutHero() {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Link
               to="/contact"
-              className="group inline-flex items-center gap-3 rounded-full bg-accent px-8 py-3.5 text-[13px] font-semibold uppercase tracking-[0.16em] text-ink transition-all duration-200 hover:brightness-110"
+              className="btn-primary group inline-flex items-center gap-3 px-8 py-3.5 text-[13px] font-semibold uppercase tracking-[0.16em]"
             >
               Book a Trip
               <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -171,15 +171,15 @@ function StorySection() {
           <Reveal delay={0.12}>
             <div className="mt-8 max-w-xl space-y-5 text-[17px] leading-relaxed text-ink/60">
               <p>
-                Catching Chrome started the way most good things on the water do
-                — with a kid, a rod, and a river that wouldn&apos;t let go.
+                Catching Chrome started the way most good things on the water do,
+                with a kid, a rod, and a river that wouldn&apos;t let go.
                 Growing up on Oregon&apos;s banks, Captain Ryan spent forty-plus
                 years learning how these waters breathe: where the fish hold,
                 how the runs time out, and what it takes to turn a tough day into
                 a memorable one.
               </p>
               <p>
-                That obsession became a guide service built on one promise — an
+                That obsession became a guide service built on one promise, an
                 honest shot at the brightest fish of the year, guided personally,
                 every single trip.
               </p>
@@ -188,7 +188,7 @@ function StorySection() {
           <Reveal delay={0.18}>
             <Link
               to="/excursions"
-              className="group mt-10 inline-flex items-center gap-3 border-b-2 border-ink pb-1 text-[13px] font-semibold uppercase tracking-[0.18em] text-ink transition-colors duration-200 hover:text-ink/70"
+              className="btn-outline group mt-10 inline-flex items-center gap-3 px-7 py-3 text-[13px] font-semibold uppercase tracking-[0.18em]"
             >
               See Our Excursions
               <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
@@ -251,14 +251,14 @@ function ChromeSection() {
         <Reveal delay={0.08}>
           <p className="mt-8 font-display text-[clamp(2rem,4.2vw,3.4rem)] uppercase leading-[1.05] text-cream">
             <span className="chrome-text">Chrome</span> is a fish fresh from the
-            salt —
+            salt.
           </p>
         </Reveal>
         <Reveal delay={0.14}>
           <p className="mx-auto mt-6 max-w-2xl text-[19px] leading-relaxed text-cream/70">
             mirror-bright, sea-lice still on, and full of ocean fight. Landing
-            one is the whole point. That chase — chinook, coho, and steelhead
-            straight off the tide — is what we named ourselves after, and what we
+            one is the whole point. That chase, chinook, coho, and steelhead
+            straight off the tide, is what we named ourselves after, and what we
             put you on.
           </p>
         </Reveal>
@@ -322,7 +322,7 @@ const VALUES: {
   {
     icon: MapPinIcon,
     title: 'Four Decades of Local Water',
-    body: "Forty-plus years reading Oregon's rivers — we know where fish hold in every tide, flow, and season.",
+    body: "Forty-plus years reading Oregon's rivers, we know where fish hold in every tide, flow, and season.",
   },
   {
     icon: ShieldCheckIcon,
@@ -378,7 +378,7 @@ const JOURNEY: { phase: string; title: string; body: string }[] = [
   {
     phase: 'Phase 01',
     title: 'The First Cast',
-    body: "Ryan grew up on Oregon's banks, learning the rivers one drift at a time — long before any of it was a business.",
+    body: "Ryan grew up on Oregon's banks, learning the rivers one drift at a time, long before any of it was a business.",
   },
   {
     phase: 'Phase 02',
@@ -393,7 +393,7 @@ const JOURNEY: { phase: string; title: string; body: string }[] = [
   {
     phase: 'Phase 04',
     title: 'The Next Run',
-    body: 'Today we chase runs across the Columbia, Willamette, and coastal tributaries — and protect them for the runs to come.',
+    body: 'Today we chase runs across the Columbia, Willamette, and coastal tributaries, and protect them for the runs to come.',
   },
 ]
 
@@ -564,7 +564,7 @@ function CtaBand() {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Link
               to="/contact"
-              className="group inline-flex items-center gap-3 rounded-full bg-accent px-9 py-4 text-[13px] font-semibold uppercase tracking-[0.16em] text-ink transition-all duration-200 hover:brightness-110"
+              className="btn-primary group inline-flex items-center gap-3 px-9 py-4 text-[13px] font-semibold uppercase tracking-[0.16em]"
             >
               Book Your Trip
               <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

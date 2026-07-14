@@ -4,8 +4,12 @@ import { FacebookIcon, InstagramIcon, PhoneIcon, TikTokIcon } from './icons'
 const QUICK_LINKS = [
   { label: 'About Us', to: '/about' },
   { label: 'Excursions', to: '/excursions' },
+  { label: 'Commercial', to: '/commercial' },
   { label: 'Pricing', to: '/pricing' },
-  { label: 'Order Merch', to: '/', hash: 'merch' },
+  {
+    label: 'Order Merch',
+    href: 'https://envy-prints.com/collections/catching-chrome-guide-service',
+  },
   { label: 'Contact', to: '/contact' },
 ]
 
@@ -25,7 +29,7 @@ export function SiteFooter() {
             <img
               src="/Catching-Chrome-logo_color-1536x1533.png"
               alt="Catching Chrome Guide Service"
-              className="h-20 w-auto object-contain"
+              className="h-28 w-auto object-contain"
             />
           </a>
           <p className="max-w-xs text-center text-sm leading-relaxed text-cream/50 md:text-left">
@@ -54,13 +58,23 @@ export function SiteFooter() {
           <ul className="flex flex-col items-center gap-3 text-sm text-cream/70 md:items-start">
             {QUICK_LINKS.map((link) => (
               <li key={link.label}>
-                <Link
-                  to={link.to}
-                  hash={link.hash}
-                  className="transition-colors duration-200 hover:text-accent"
-                >
-                  {link.label}
-                </Link>
+                {link.href ? (
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="transition-colors duration-200 hover:text-accent"
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link
+                    to={link.to}
+                    className="transition-colors duration-200 hover:text-accent"
+                  >
+                    {link.label}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>

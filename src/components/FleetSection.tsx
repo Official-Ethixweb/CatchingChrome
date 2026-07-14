@@ -19,6 +19,8 @@ type Vessel = {
  featured: boolean
  title: string
  body: string
+ image: string
+ alt: string
  specs: Spec[]
 }
 
@@ -28,6 +30,8 @@ const VESSELS: Vessel[] = [
  featured: true,
  title: '22-FT River Wild Sled',
  body: 'Our flagship sled seats up to 4 anglers with ample gear and cooler space. State-of-the-art electronics for finding fish in any water.',
+ image: '/22ft%20boat%202.jpg',
+ alt: 'The 22-foot Catching Chrome River Wild sled on the water, rigged with a Yamaha 150 and a landing net',
  specs: [
  { icon: UsersIcon, label: '4 PASSENGERS' },
  { icon: RulerIcon, label: '22 FEET' },
@@ -40,6 +44,8 @@ const VESSELS: Vessel[] = [
  featured: false,
  title: '18-FT Clackacraft',
  body: 'Spacious Clackamax with walk-around seating for three. Ideal for winter steelhead, fall chinook, and coho on smaller rivers.',
+ image: '/18ft%20boat.png',
+ alt: 'The 18-foot Clackacraft drift boat moored on a river bank, with salmon artwork along the hull',
  specs: [
  { icon: UsersIcon, label: '3 PASSENGERS' },
  { icon: RulerIcon, label: '18 FEET' },
@@ -49,33 +55,10 @@ const VESSELS: Vessel[] = [
  },
 ]
 
-function BoatOutline(props: SVGProps<SVGSVGElement>) {
- return (
- <svg
- viewBox="0 0 400 150"
- fill="none"
- stroke="currentColor"
- strokeWidth={2}
- strokeLinecap="round"
- strokeLinejoin="round"
- {...props}
- >
- {/* Windshield / console */}
- <path d="M150 55 L192 55 L216 92 L120 92 Z" />
- {/* Hull */}
- <path d="M70 92 L330 92 L298 120 L102 120 Z" />
- {/* Waterline */}
- <line x1="48" y1="133" x2="352" y2="133" strokeDasharray="4 9" />
- </svg>
- )
-}
-
 function VesselCard({ vessel }: { vessel: Vessel }) {
  return (
  <article
- className={`card-glow group flex flex-col overflow-hidden rounded-2xl border bg-white p-6 md:p-8 ${
- vessel.featured ? 'border-accent/70' : 'border-ink/12'
- }`}
+ className="card-glow group flex flex-col overflow-hidden rounded-2xl border border-ink/12 bg-white p-6 md:p-8"
  >
  {/* Card head */}
  <div className="flex items-center gap-2.5">
@@ -93,15 +76,15 @@ function VesselCard({ vessel }: { vessel: Vessel }) {
  </span>
  </div>
 
- {/* Blueprint vessel panel */}
- <div className="relative mt-6 flex aspect-[5/2] items-center justify-center overflow-hidden rounded-xl">
- <div className="absolute inset-0 photo-gradient" />
- <div className="fleet-blueprint absolute inset-0" />
- <BoatOutline
- aria-hidden="true"
- className={`relative w-1/2 transition-transform duration-500 group-hover:scale-105 ${
- vessel.featured ? 'text-accent/80' : 'text-cream/75'
- }`}
+ {/* Vessel photo. 2:1 matches both boats' own framing, so the crop stays
+ off the hull. The glare rides a pseudo-element overlay above it. */}
+ <div className="fleet-glare relative mt-6 aspect-[2/1] overflow-hidden rounded-xl bg-ink">
+ <img
+ src={vessel.image}
+ alt={vessel.alt}
+ loading="lazy"
+ decoding="async"
+ className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
  />
  </div>
 

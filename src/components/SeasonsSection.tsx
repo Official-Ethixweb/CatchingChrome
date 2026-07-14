@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState, type SVGProps } from 'react'
-import { ArrowUpRight } from './icons'
+import { useEffect, useMemo, useRef, useState, type SVGProps } from 'react'
+import { ArrowUpRight, ChevronDown } from './icons'
 import { FishGlyph } from './FishArt'
 import { Eyebrow } from './Eyebrow'
 import {
@@ -147,7 +147,7 @@ function WeatherStrip({
                 Seasonal outlook
               </div>
               <div className="mt-1.5 text-[12px] tracking-[0.04em] text-cream/45">
-                Live conditions offline — showing the run calendar.
+                Live conditions offline, showing the run calendar.
               </div>
             </>
           )}
@@ -180,6 +180,8 @@ function WeatherStrip({
 
 /* --- Main section ------------------------------------------------------- */
 
+const AUTO_CYCLE_MS = 4500
+
 export function SeasonsSection() {
   const currentMonth = useMemo(() => new Date().getMonth(), [])
 
@@ -188,6 +190,37 @@ export function SeasonsSection() {
     species: SPECIES.indexOf(speciesByMonth(currentMonth)[0]),
     month: currentMonth,
   }))
+
+  // Automated tour: step through each species at its own peak month so the
+  // calendar keeps surfacing the run that's most worth booking.
+  const cycle = useMemo(
+    () =>
+      SPECIES.map((sp, si) => {
+        let best = 0
+        sp.ratings.forEach((r, mi) => {
+          if (RATING_META[r].rank > RATING_META[sp.ratings[best]].rank) best = mi
+        })
+        return { species: si, month: best }
+      }),
+    [],
+  )
+  const [autoPaused, setAutoPaused] = useState(false)
+  const [calendarOpen, setCalendarOpen] = useState(false)
+  const stepRef = useRef(-1)
+
+  useEffect(() => {
+    if (autoPaused) return
+    if (
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    )
+      return
+    const id = window.setInterval(() => {
+      stepRef.current = (stepRef.current + 1) % cycle.length
+      setSel(cycle[stepRef.current])
+    }, AUTO_CYCLE_MS)
+    return () => window.clearInterval(id)
+  }, [autoPaused, cycle])
 
   const [wx, setWx] = useState<RiverConditions | null>(null)
   const [wxLoading, setWxLoading] = useState(true)
@@ -215,20 +248,13 @@ export function SeasonsSection() {
       data-chapter="dark"
       className="theme-invert relative overflow-hidden bg-ink py-24 md:py-28"
     >
-      {/* Watermark */}
       <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 flex items-end justify-start overflow-hidden"
+        className="relative z-10 mx-auto max-w-[1440px] px-6 md:px-10"
+        onMouseEnter={() => setAutoPaused(true)}
+        onMouseLeave={() => setAutoPaused(false)}
+        onFocusCapture={() => setAutoPaused(true)}
+        onBlurCapture={() => setAutoPaused(false)}
       >
-        <span
-          className="whitespace-nowrap font-display uppercase leading-[0.8] text-cream/[0.035]"
-          style={{ fontSize: '20vw' }}
-        >
-          Salmon
-        </span>
-      </div>
-
-      <div className="relative z-10 mx-auto max-w-[1440px] px-6 md:px-10">
         <Eyebrow label="Fishing Calendar" tone="light" />
 
         <div className="mt-8 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
@@ -237,7 +263,7 @@ export function SeasonsSection() {
             <span className="block text-accent">calendar</span>
           </h2>
           <p className="max-w-md text-[15.5px] leading-relaxed text-cream/60">
-            The best months to fish our rivers, by species — pulled straight
+            The best months to fish our rivers, by species, pulled straight
             from Captain Ryan&apos;s log. Tap a month or a run to see where the
             fish are and when to book.
           </p>
@@ -246,8 +272,36 @@ export function SeasonsSection() {
         {/* Live weather + bite outlook */}
         <WeatherStrip wx={wx} loading={wxLoading} monthIndex={sel.month} />
 
+        {/* The full grid is a lot of detail for a first read, so it stays
+            folded away behind a toggle until asked for. */}
+        <button
+          type="button"
+          onClick={() => setCalendarOpen((o) => !o)}
+          aria-expanded={calendarOpen}
+          aria-controls="season-calendar"
+          className="glow-border mt-8 flex w-full items-center justify-between gap-4 rounded-md border bg-cream/[0.03] px-5 py-4 text-left sm:px-6"
+        >
+          <span className="text-[12px] font-semibold uppercase tracking-[0.22em] text-cream/70">
+            View Full Season Calendar
+          </span>
+          <ChevronDown
+            aria-hidden="true"
+            className={`h-5 w-5 shrink-0 text-cta transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+              calendarOpen ? 'rotate-180' : ''
+            }`}
+          />
+        </button>
+
+        <div
+          id="season-calendar"
+          className="collapse-grid"
+          data-open={calendarOpen}
+          inert={!calendarOpen}
+        >
+          <div className="collapse-inner">
+            <div className="collapse-content">
         {/* Calendar grid */}
-        <div className="mt-10 overflow-x-auto pb-2">
+        <div className="mt-8 overflow-x-auto pb-2">
           <div className="min-w-[680px]">
             <div
               role="grid"
@@ -374,14 +428,22 @@ export function SeasonsSection() {
               </span>
               <span className="text-[12px] tracking-[0.04em] text-cream/55">
                 <span className="text-cream/80">{RATING_META[r].label}</span>
-                <span className="text-cream/40"> — {RATING_META[r].note}</span>
+                <span className="text-cream/40">, {RATING_META[r].note}</span>
               </span>
             </div>
           ))}
         </div>
+            </div>
+          </div>
+        </div>
 
-        {/* Detail panel — reacts to the selected species + month */}
-        <div className="mt-10 grid grid-cols-1 gap-8 rounded-md border border-cream/12 bg-cream/[0.03] p-6 md:grid-cols-[1.2fr_1fr] md:gap-12 md:p-9">
+        {/* Detail panel — reacts to the selected species + month, and eases
+            in on every automated switch. */}
+        <div className="relative mt-10">
+          <div
+            key={`${sel.species}-${sel.month}`}
+            className="panel-swap grid grid-cols-1 gap-8 rounded-md border border-cream/12 bg-cream/[0.03] p-6 md:grid-cols-[1.2fr_1fr] md:gap-12 md:p-9"
+          >
           <div>
             <div className="flex flex-wrap items-center gap-3">
               <span className="font-display text-[11px] uppercase tracking-[0.2em] text-cream/45">
@@ -425,7 +487,7 @@ export function SeasonsSection() {
 
             <a
               href="/#excursions"
-              className="group mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-[13px] font-semibold uppercase tracking-[0.14em] text-ink transition-all duration-200 hover:brightness-110"
+              className="btn-primary group mt-8 inline-flex w-fit items-center gap-2 px-7 py-3.5 text-[13px] font-semibold uppercase tracking-[0.14em]"
             >
               Book a {species.name.split(' ')[0]} Trip
               <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -476,11 +538,12 @@ export function SeasonsSection() {
                 (s) => s.ratings[sel.month] !== 'poor' && s.id !== species.id,
               ).length === 0 && (
                 <p className="text-[13px] text-cream/40">
-                  A quiet month — the runs are resting.
+                  A quiet month, the runs are resting.
                 </p>
               )}
             </div>
           </div>
+        </div>
         </div>
       </div>
     </section>

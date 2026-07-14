@@ -259,7 +259,7 @@ export function PricingSection() {
           </div>
           <a
             href="tel:5039369090"
-            className="group inline-flex items-center gap-2 rounded-full bg-accent px-8 py-3.5 text-[13px] font-semibold uppercase tracking-[0.14em] text-ink transition-all duration-200 hover:brightness-110"
+            className="btn-primary group inline-flex items-center gap-2 px-8 py-3.5 text-[13px] font-semibold uppercase tracking-[0.14em]"
           >
             Book Your Trip Now
             <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
