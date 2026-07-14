@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { ArrowRight, QuoteIcon } from './icons'
+import { Eyebrow } from './Eyebrow'
 
 type Testimonial = {
   quote: string
@@ -63,17 +64,9 @@ export function TestimonialsSection() {
   }
 
   return (
-    <section className="relative z-10 overflow-hidden bg-paper py-24 md:py-28">
+    <section className="theme-transition relative z-10 overflow-hidden bg-cream py-24 md:py-28">
       <div className="mx-auto max-w-3xl px-6 text-center md:px-10">
-        {/* Eyebrow */}
-        <div className="flex items-center justify-center gap-4">
-          <span className="text-sm font-semibold text-accent">08</span>
-          <span className="h-px w-10 bg-ink/30" />
-          <span className="text-[12px] font-medium tracking-[0.3em] text-ink/70">
-            CLIENT LOG
-          </span>
-          <span className="h-px w-10 bg-ink/30" />
-        </div>
+        <Eyebrow label="Client Log" tone="dark" center />
 
         {/* Headline */}
         <h2 className="mt-6 font-display text-[clamp(2.75rem,5.5vw,4.8rem)] uppercase leading-[0.9] text-ink">

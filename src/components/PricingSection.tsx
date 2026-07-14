@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { ArrowUpRight, PhoneIcon } from './icons'
+import { Eyebrow } from './Eyebrow'
 
 type PricingItem = {
   name: string
@@ -180,14 +181,7 @@ export function PricingSection() {
       <div className="absolute -right-64 top-1/3 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-accent/5 blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 mx-auto max-w-[1440px] px-6 md:px-10">
-        {/* Eyebrow */}
-        <div className="flex items-center gap-4">
-          <span className="text-sm font-semibold text-accent">07</span>
-          <span className="h-px w-10 bg-cream/25" />
-          <span className="text-[12px] font-medium tracking-[0.3em] text-cream/50">
-            PRICING OPTIONS
-          </span>
-        </div>
+        <Eyebrow label="Pricing Options" tone="light" />
 
         {/* Heading */}
         <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">

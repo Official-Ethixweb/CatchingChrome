@@ -9,7 +9,7 @@ const PARTNERS = [
 
 export function PartnersSection() {
   return (
-    <section id="partners" className="bg-paper pt-8 pb-12 md:pt-10 md:pb-16 flex flex-col items-center">
+    <section id="partners" className="bg-cream pt-8 pb-12 md:pt-10 md:pb-16 flex flex-col items-center">
       {/* Animating asset container */}
       <div className="relative w-full h-[70px] md:h-[130px] overflow-hidden">
         <CurvedLogoLoop

@@ -7,6 +7,7 @@ import {
  RulerIcon,
  UsersIcon,
 } from './icons'
+import { Eyebrow } from './Eyebrow'
 
 type Spec = {
  icon: ComponentType<SVGProps<SVGSVGElement>>
@@ -14,7 +15,6 @@ type Spec = {
 }
 
 type Vessel = {
- index: string
  tag: string
  featured: boolean
  title: string
@@ -24,7 +24,6 @@ type Vessel = {
 
 const VESSELS: Vessel[] = [
  {
- index: '01',
  tag: 'FLAGSHIP',
  featured: true,
  title: '22-FT River Wild Sled',
@@ -37,7 +36,6 @@ const VESSELS: Vessel[] = [
  ],
  },
  {
- index: '02',
  tag: 'SMALL-WATER',
  featured: false,
  title: '18-FT Clackacraft',
@@ -75,33 +73,43 @@ function BoatOutline(props: SVGProps<SVGSVGElement>) {
 function VesselCard({ vessel }: { vessel: Vessel }) {
  return (
  <article
- className={`rounded-sm border bg-[#faf8f2] p-6 md:p-8 ${
- vessel.featured ? 'border-accent' : 'border-ink/12'
+ className={`card-glow group flex flex-col overflow-hidden rounded-2xl border bg-white p-6 md:p-8 ${
+ vessel.featured ? 'border-accent/70' : 'border-ink/12'
  }`}
  >
  {/* Card head */}
- <div className="flex items-center justify-between">
- <span className="text-accent">
- {vessel.index}
- </span>
- <span className="text-[11px] tracking-[0.25em] text-ink/45">
+ <div className="flex items-center gap-2.5">
+ <span
+ className={`h-1.5 w-1.5 rounded-full ${
+ vessel.featured ? 'bg-accent' : 'bg-primary'
+ }`}
+ />
+ <span
+ className={`text-[11px] font-semibold uppercase tracking-[0.25em] ${
+ vessel.featured ? 'text-accent' : 'text-primary'
+ }`}
+ >
  {vessel.tag}
  </span>
  </div>
 
- {/* Photo slot */}
- <div className="relative mt-6 flex aspect-[5/2] items-center justify-center bg-[#d9e1e2]">
- <BoatOutline aria-hidden="true" className="w-1/2 text-ink/35" />
- <span className="absolute bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap text-[11px] tracking-[0.25em] text-ink/40">
- 
- </span>
+ {/* Blueprint vessel panel */}
+ <div className="relative mt-6 flex aspect-[5/2] items-center justify-center overflow-hidden rounded-xl">
+ <div className="absolute inset-0 photo-gradient" />
+ <div className="fleet-blueprint absolute inset-0" />
+ <BoatOutline
+ aria-hidden="true"
+ className={`relative w-1/2 transition-transform duration-500 group-hover:scale-105 ${
+ vessel.featured ? 'text-accent/80' : 'text-cream/75'
+ }`}
+ />
  </div>
 
  {/* Title + body */}
  <h3 className="mt-6 font-display text-3xl uppercase leading-none text-ink">
  {vessel.title}
  </h3>
- <p className="mt-3 text-[15px] leading-relaxed text-ink/55">
+ <p className="mt-3 flex-1 text-[15px] leading-relaxed text-ink/55">
  {vessel.body}
  </p>
 
@@ -125,16 +133,9 @@ function VesselCard({ vessel }: { vessel: Vessel }) {
 
 export function FleetSection() {
  return (
- <section className="bg-paper py-24 md:py-28">
+ <section className="theme-transition pop bg-cream py-24 md:py-28">
  <div className="mx-auto max-w-6xl px-6 md:px-10">
- {/* Eyebrow */}
- <div className="flex items-center gap-4">
- <span className="text-sm font-semibold text-accent">06</span>
- <span className="h-px w-10 bg-ink/30" />
- <span className="text-[12px] font-medium tracking-[0.3em] text-ink/70">
- THE FLEET
- </span>
- </div>
+ <Eyebrow label="The Fleet" tone="dark" />
 
  {/* Headline */}
  <h2 className="mt-6 font-display text-[clamp(2.75rem,6vw,5.2rem)] uppercase leading-[0.9] text-ink">
@@ -147,7 +148,7 @@ export function FleetSection() {
  {/* Vessel cards */}
  <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
  {VESSELS.map((vessel) => (
- <VesselCard key={vessel.index} vessel={vessel} />
+ <VesselCard key={vessel.title} vessel={vessel} />
  ))}
  </div>
  </div>
