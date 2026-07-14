@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import type { ComponentType, SVGProps } from 'react'
 import { ArrowUpRight, CartIcon } from './icons'
+import { Eyebrow } from './Eyebrow'
 
 type Product = {
   index: string
@@ -119,6 +120,10 @@ function ToteArt(props: SVGProps<SVGSVGElement>) {
   )
 }
 
+// Ryan's live storefront (Envy Prints). Products link out to the collection.
+const STORE_URL =
+  'https://envy-prints.com/collections/catching-chrome-guide-service'
+
 const PRODUCTS: Product[] = [
   {
     index: '01',
@@ -156,14 +161,17 @@ const PRODUCTS: Product[] = [
 
 function ProductCard({ product }: { product: Product }) {
   return (
-    <article className="group flex flex-col rounded-sm border border-cream/10 bg-cream/[0.03] p-3 transition-colors duration-300 hover:border-accent/60 sm:p-4">
+    <a
+      href={STORE_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Shop ${product.name} at the Catching Chrome store`}
+      className="group flex flex-col rounded-sm border border-cream/10 bg-cream/[0.03] p-3 transition-colors duration-300 hover:border-accent/60 sm:p-4"
+    >
       {/* Product visual */}
       <div className="portrait-gradient relative flex aspect-[4/4.4] items-center justify-center overflow-hidden rounded-sm">
         <span className="absolute left-3 top-3 text-[10px] font-semibold tracking-[0.25em] text-cream/45">
           {product.tag}
-        </span>
-        <span className="absolute right-3 top-3 text-[11px] font-semibold text-accent">
-          {product.index}
         </span>
         <product.Art
           aria-hidden="true"
@@ -186,15 +194,14 @@ function ProductCard({ product }: { product: Product }) {
         <span className="text-[15px] font-semibold text-accent">
           {product.price}
         </span>
-        <button
-          type="button"
-          aria-label={`Add ${product.name} to cart`}
-          className="flex h-9 w-9 items-center justify-center rounded-full bg-accent text-ink transition-all duration-200 hover:brightness-110"
+        <span
+          aria-hidden="true"
+          className="flex h-9 w-9 items-center justify-center rounded-full bg-accent text-ink transition-all duration-200 group-hover:brightness-110"
         >
           <CartIcon className="h-4 w-4" />
-        </button>
+        </span>
       </div>
-    </article>
+    </a>
   )
 }
 
@@ -241,7 +248,8 @@ export function CustomMerchSection() {
     <section
       ref={sectionRef}
       id="merch"
-      className="relative overflow-hidden bg-night py-28 md:py-36"
+      data-chapter="dark"
+      className="theme-invert relative overflow-hidden bg-ink py-28 md:py-36"
     >
       {/* Scroll-driven background watermark */}
       <div
@@ -261,13 +269,7 @@ export function CustomMerchSection() {
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-10">
           {/* Left rail: section text */}
           <div className="flex flex-col justify-center lg:col-span-4 xl:col-span-3">
-            <div className="flex items-center gap-4">
-              <span className="text-sm font-semibold text-accent">02</span>
-              <span className="h-px w-10 bg-cream/25" />
-              <span className="text-[12px] font-medium tracking-[0.3em] text-cream/50">
-                CUSTOM MERCH
-              </span>
-            </div>
+            <Eyebrow label="Custom Merch" tone="light" />
 
             <h2 className="mt-6 font-display text-[clamp(2.2rem,3.4vw,3.3rem)] uppercase leading-[0.9] text-cream">
               <span className="block">Create Your</span>
@@ -282,10 +284,12 @@ export function CustomMerchSection() {
             </p>
 
             <a
-              href="#"
+              href={STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group mt-8 inline-flex items-center gap-2 self-start rounded-full bg-primary px-7 py-3.5 text-[13px] font-semibold uppercase tracking-[0.14em] text-cream transition-all duration-200 hover:brightness-110"
             >
-              Start Designing
+              Shop the Collection
               <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
           </div>

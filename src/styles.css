@@ -186,6 +186,201 @@
   animation-play-state: paused;
 }
 
+/* ===================================================================
+   Scroll-driven theme
+   A single [data-theme] on <html> (set by ThemeController as you scroll
+   through "dark chapters") flips opted-in light sections to dark. Light
+   mode is the default and is left pixel-identical — the inversion rules
+   below only match under [data-theme="dark"] and only inside sections
+   that opt in with .theme-transition. Accent (gold) + primary (teal)
+   are deliberately untouched so branding is stable in both themes.
+   =================================================================== */
+
+/* Smooth colour cross-fade when the theme flips. */
+@media (prefers-reduced-motion: no-preference) {
+  .theme-transition,
+  .theme-transition *:not(img):not(svg):not(svg *),
+  .theme-invert,
+  .theme-invert *:not(img):not(svg):not(svg *) {
+    transition:
+      background-color 0.55s ease,
+      color 0.5s ease,
+      border-color 0.5s ease;
+  }
+}
+
+/* ---- Light-authored sections (.theme-transition): ink-on-cream by default,
+   inverted to cream-on-navy while the dark theme is active. ---- */
+[data-theme='dark'] .theme-transition:is(.bg-cream, .bg-paper, .bg-white) {
+  background-color: #0e2a3b;
+}
+[data-theme='dark'] .theme-transition :is(.bg-cream, .bg-paper, .bg-white) {
+  background-color: #153a54;
+}
+[data-theme='dark'] .theme-transition .text-ink {
+  color: #f7f6f2;
+}
+[data-theme='dark'] .theme-transition [class*='text-ink/'] {
+  color: rgba(247, 246, 242, 0.62);
+}
+[data-theme='dark'] .theme-transition [class*='border-ink/'] {
+  border-color: rgba(247, 246, 242, 0.16);
+}
+
+/* ---- Dark-authored sections (.theme-invert): the INVERSE. They are shown
+   light (ink-on-cream) by default and only revert to their natural
+   cream-on-navy while the dark theme is active — so a "dark chapter" looks
+   light until you scroll onto it, then turns dark with the rest of the view.
+   ---- */
+:root:not([data-theme='dark']) .theme-invert:is(.bg-ink, .bg-night),
+:root:not([data-theme='dark']) .theme-invert :is(.bg-ink, .bg-night) {
+  background-color: #f7f6f2;
+}
+:root:not([data-theme='dark']) .theme-invert .text-cream {
+  color: #0e2a3b;
+}
+:root:not([data-theme='dark']) .theme-invert [class*='text-cream/'] {
+  color: rgba(14, 42, 59, 0.62);
+}
+:root:not([data-theme='dark']) .theme-invert [class*='border-cream/'] {
+  border-color: rgba(14, 42, 59, 0.16);
+}
+
+/* Opt-out: subtrees that must stay dark in both modes (e.g. the Seasons fish
+   "specimen plates", which carry their own dark imagery + cream captions). */
+:root:not([data-theme='dark']) .theme-invert .keep-dark:is(.bg-ink, .bg-night),
+:root:not([data-theme='dark']) .theme-invert .keep-dark :is(.bg-ink, .bg-night) {
+  background-color: #0e2a3b;
+}
+:root:not([data-theme='dark']) .theme-invert .keep-dark .text-cream {
+  color: #f7f6f2;
+}
+:root:not([data-theme='dark']) .theme-invert .keep-dark [class*='text-cream/'] {
+  color: rgba(247, 246, 242, 0.7);
+}
+:root:not([data-theme='dark']) .theme-invert .keep-dark [class*='border-cream/'] {
+  border-color: rgba(247, 246, 242, 0.1);
+}
+
+/* ===================================================================
+   Scroll "pop up" for images and text (Chromium view-timeline; degrades
+   to no animation where unsupported). Text rises + fades; images fade
+   only, so elements carrying a persistent transform (the rotated captain
+   portrait, the scaled fish plates) are never disturbed.
+   =================================================================== */
+@keyframes popRise {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes popFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .pop :is(h1, h2, h3, h4, p, figure, blockquote, li, .pop-item) {
+      animation: popRise both;
+      animation-timeline: view();
+      animation-range: entry 3% entry 42%;
+    }
+    .pop img {
+      animation: popFade both;
+      animation-timeline: view();
+      animation-range: entry 3% entry 42%;
+    }
+  }
+}
+
+/* Scroll-reveal: rise + fade the first time an element enters view.
+   Drives the About page storytelling. */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Brushed-chrome shimmer for accent headline words — the whole "Catching
+   Chrome" idea, rendered in metal. */
+.chrome-text {
+  background: linear-gradient(
+    100deg,
+    #9fb0bb 0%,
+    #f7f6f2 22%,
+    #167a8e 46%,
+    #f7f6f2 62%,
+    #9fb0bb 100%
+  );
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: chromeShimmer 7s linear infinite;
+}
+
+@keyframes chromeShimmer {
+  to {
+    background-position: 220% center;
+  }
+}
+
+/* Slow lateral drift for the decorative fish silhouettes. */
+@keyframes fishDrift {
+  from {
+    transform: translateX(-6%);
+  }
+  to {
+    transform: translateX(6%);
+  }
+}
+
+.fish-drift {
+  animation: fishDrift 16s ease-in-out infinite alternate;
+}
+
+/* Subtle graph-paper grid for the Fleet "blueprint" vessel panels. */
+.fleet-blueprint {
+  background-image:
+    linear-gradient(rgba(247, 246, 242, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(247, 246, 242, 0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Shared card lift + gold glow on hover. Used by the Signature Trips and
+   Fleet cards so both sections share one interaction language. */
+.card-glow {
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+  will-change: transform;
+}
+
+.card-glow:hover {
+  transform: translateY(-8px);
+  border-color: rgba(245, 166, 35, 0.55);
+  box-shadow:
+    0 22px 48px -20px rgba(14, 42, 59, 0.45),
+    0 0 34px -6px rgba(245, 166, 35, 0.4);
+}
+
 /* Respect users who prefer reduced motion: neutralize transitions,
    animations, and any JS-driven smooth scrolling. */
 @media (prefers-reduced-motion: reduce) {
@@ -200,5 +395,11 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* Never leave scroll-reveal content stuck hidden when motion is off. */
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

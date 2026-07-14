@@ -6,6 +6,7 @@ import {
 } from '@tanstack/react-router'
 import type { ReactNode } from 'react'
 import appCss from '~/styles.css?url'
+import { ThemeController } from '~/components/ThemeController'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -83,6 +84,7 @@ function RootDocument({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        <ThemeController />
         {children}
         <Scripts />
       </body>

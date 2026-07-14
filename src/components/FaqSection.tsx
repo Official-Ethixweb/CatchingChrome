@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Eyebrow } from './Eyebrow'
 
 type Faq = {
   q: string
@@ -105,18 +106,11 @@ export function FaqSection() {
   const [open, setOpen] = useState(0)
 
   return (
-    <section className="bg-cream py-24 md:py-28">
+    <section className="theme-transition pop bg-cream py-24 md:py-28">
       <div className="mx-auto max-w-3xl px-6 md:px-10">
         {/* Heading */}
         <div className="text-center">
-          <div className="flex items-center justify-center gap-4">
-            <span className="text-sm font-semibold text-accent">09</span>
-            <span className="h-px w-10 bg-ink/30" />
-            <span className="text-[12px] font-medium tracking-[0.3em] text-ink/70">
-              FAQ
-            </span>
-            <span className="h-px w-10 bg-ink/30" />
-          </div>
+          <Eyebrow label="FAQ" tone="dark" center />
 
           <h2 className="mt-6 font-display text-[clamp(2.5rem,5vw,4.4rem)] uppercase leading-[0.9] text-ink">
             <span className="block">Frequently</span>

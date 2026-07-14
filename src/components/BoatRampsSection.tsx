@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { MapPinIcon } from './icons'
+import { Eyebrow } from './Eyebrow'
 
 type LaunchPoint = {
  id: string
@@ -36,15 +37,9 @@ export function BoatRampsSection() {
  }
 
  return (
- <section className="bg-night py-24 md:py-28">
+ <section data-chapter="dark" className="theme-invert pop bg-ink py-24 md:py-28">
  <div className="mx-auto max-w-[1440px] px-6 md:px-10">
- {/* Eyebrow */}
- <div className="flex items-center gap-4">
- <span className="text-sm font-semibold text-accent">07</span>
- <span className="text-[12px] font-medium tracking-[0.3em] text-cream/45">
- LAUNCH POINTS
- </span>
- </div>
+ <Eyebrow label="Launch Points" tone="light" />
 
  {/* Headline */}
  <h2 className="mt-5 flex items-baseline gap-[0.16em] font-display text-[clamp(3rem,6vw,5.2rem)] uppercase leading-[0.9] text-cream">
@@ -124,7 +119,7 @@ export function BoatRampsSection() {
        aria-label="Activate map to zoom and pan"
        className="group absolute inset-0 z-20 flex items-end justify-center bg-transparent pb-6"
      >
-       <span className="rounded-full bg-night/75 px-4 py-2 text-[11px] font-medium tracking-[0.18em] text-cream/85 uppercase backdrop-blur-sm transition-colors duration-200 group-hover:bg-night/90">
+       <span className="rounded-full bg-ink/75 px-4 py-2 text-[11px] font-medium tracking-[0.18em] text-cream/85 uppercase backdrop-blur-sm transition-colors duration-200 group-hover:bg-ink/90">
          Click to interact
        </span>
      </button>

@@ -2,7 +2,7 @@ import { Link } from '@tanstack/react-router'
 import { FacebookIcon, InstagramIcon, PhoneIcon, TikTokIcon } from './icons'
 
 const QUICK_LINKS = [
-  { label: 'About Us', to: '/', hash: 'about' },
+  { label: 'About Us', to: '/about' },
   { label: 'Excursions', to: '/excursions' },
   { label: 'Pricing', to: '/pricing' },
   { label: 'Order Merch', to: '/', hash: 'merch' },

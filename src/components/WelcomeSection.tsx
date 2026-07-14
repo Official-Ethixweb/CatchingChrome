@@ -1,4 +1,5 @@
 import { ArrowRight } from './icons'
+import { Eyebrow } from './Eyebrow'
 
 const STATS = [
   { value: '40+', label: 'Years' },
@@ -8,7 +9,7 @@ const STATS = [
 
 export function WelcomeSection() {
   return (
-    <section id="about" className="bg-paper py-20 md:py-28">
+    <section id="about" className="theme-transition pop bg-cream py-20 md:py-28">
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-center gap-12 px-6 md:px-10 lg:grid-cols-2 lg:gap-20">
         {/* Left photo + stats */}
         <div>
@@ -40,13 +41,7 @@ export function WelcomeSection() {
 
         {/* Right welcome copy */}
         <div>
-          <div className="flex items-center gap-4">
-            <span className="text-sm font-semibold text-accent">01</span>
-            <span className="h-px w-10 bg-ink/30" />
-            <span className="text-[12px] font-medium tracking-[0.3em] text-ink/70">
-              WELCOME
-            </span>
-          </div>
+          <Eyebrow label="Welcome" tone="dark" />
 
           <h2 className="mt-6 font-display text-[clamp(2.5rem,4.6vw,4.2rem)] uppercase leading-[0.9] text-ink">
             <span className="block">Welcome To</span>

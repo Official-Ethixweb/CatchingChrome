@@ -28,6 +28,21 @@ export default function CurvedLogoLoop({
   const lenRef = useRef(0)
   const [slots, setSlots] = useState<number[]>([])
   const [calculatedSpacing, setCalculatedSpacing] = useState(spacing)
+  // Track viewport width so both the logo count and size adapt to the screen.
+  const [vw, setVw] = useState(1024)
+
+  useEffect(() => {
+    const update = () => setVw(window.innerWidth)
+    update()
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
+  }, [])
+
+  // Wider gaps (fewer logos) on smaller screens so the row never crowds. The
+  // slot count comes from the fixed-viewBox path length, so without this the
+  // same number of logos gets squeezed into fewer pixels and overlaps.
+  const effectiveSpacing =
+    vw < 480 ? 470 : vw < 768 ? 390 : vw < 1200 ? 300 : spacing
 
   // Measure path length and build slot indices with mathematically equal spacing
   useEffect(() => {
@@ -37,15 +52,14 @@ export default function CurvedLogoLoop({
     lenRef.current = len
 
     // Determine how many slots can fit based on target spacing, at least logos.length
-    const targetSpacing = spacing
-    let n = Math.round(len / targetSpacing)
+    let n = Math.round(len / effectiveSpacing)
     n = Math.max(logos.length, n)
 
     // Calculate exact spacing so slots divide the path length with perfect uniformity
     const actualSpacing = len / n
     setCalculatedSpacing(actualSpacing)
     setSlots(Array.from({ length: n }, (_, i) => i))
-  }, [logos.length, spacing])
+  }, [logos.length, effectiveSpacing])
 
   // Update layout and run animation
   useEffect(() => {
@@ -133,7 +147,7 @@ export default function CurvedLogoLoop({
             <img
               src={logoUrl}
               alt="Partner logo"
-              className="h-9 w-auto max-w-[110px] md:h-12 md:max-w-[150px] object-contain transition-transform duration-300 hover:scale-105 cursor-pointer"
+              className="h-[clamp(1.5rem,5.5vw,3rem)] w-auto max-w-[clamp(60px,16vw,150px)] object-contain transition-transform duration-300 hover:scale-105 cursor-pointer"
               style={isCatchZone ? { filter: 'brightness(0)' } : undefined}
             />
           </div>

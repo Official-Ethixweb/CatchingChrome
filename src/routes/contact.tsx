@@ -3,6 +3,7 @@ import { SiteHeader } from '~/components/SiteHeader'
 import { SiteFooter } from '~/components/SiteFooter'
 import { useState } from 'react'
 import { PhoneIcon, FacebookIcon, InstagramIcon, TikTokIcon, MapPinIcon } from '~/components/icons'
+import { Eyebrow } from '~/components/Eyebrow'
 
 export const Route = createFileRoute('/contact')({
   component: ContactPage,
@@ -73,14 +74,7 @@ function ContactSection() {
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-20">
           {/* Left Column: Direct Info */}
           <div className="flex flex-col justify-center">
-            {/* Eyebrow */}
-            <div className="flex items-center gap-4">
-              <span className="text-sm font-semibold text-accent">08</span>
-              <span className="h-px w-10 bg-cream/25" />
-              <span className="text-[12px] font-medium tracking-[0.3em] text-cream/50">
-                GET IN TOUCH
-              </span>
-            </div>
+            <Eyebrow label="Get In Touch" tone="light" />
 
             {/* Heading */}
             <h2 className="mt-6 font-display text-[clamp(2.75rem,5.5vw,4.8rem)] uppercase leading-[0.9] text-cream">

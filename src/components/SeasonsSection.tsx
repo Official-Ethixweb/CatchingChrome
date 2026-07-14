@@ -1,338 +1,484 @@
-import { useState } from 'react'
+import { useEffect, useMemo, useState, type SVGProps } from 'react'
 import { ArrowUpRight } from './icons'
+import { FishGlyph } from './FishArt'
+import { Eyebrow } from './Eyebrow'
+import {
+  SPECIES,
+  MONTHS_SHORT,
+  MONTHS_FULL,
+  RATING_META,
+  speciesByMonth,
+  type Rating,
+} from '~/lib/fishingCalendar'
+import {
+  getRiverConditions,
+  biteOutlook,
+  type RiverConditions,
+  type OutlookTier,
+} from '~/lib/weather'
 
-type Level = 'PEAK RUN' | 'STRONG' | 'FAIR'
+/* --- Small inline marks ------------------------------------------------- */
 
-type FishInfo = {
-  name: string
-  /** Preferred species photo — drop the real file at this path in public/fish/. */
-  image: string
-  /** Shown until the species photo above is added (existing asset). */
-  fallback: string
-}
-
-// One entry per species. Add the real photos at the `image` paths (see
-// public/fish/README.md) and they upgrade automatically; until then the
-// `fallback` keeps the cards looking intact.
-const FISH = {
-  springChinook: {
-    name: 'Spring Chinook',
-    image: '/fish/spring-chinook.jpg',
-    fallback: '/summerchinook.png',
-  },
-  sturgeon: {
-    name: 'Sturgeon',
-    image: '/fish/sturgeon.jpg',
-    fallback: '/nature-river.jpg',
-  },
-  winterSteelhead: {
-    name: 'Winter Steelhead',
-    image: '/fish/winter-steelhead.jpg',
-    fallback: '/wintersteelhead.png',
-  },
-  americanShad: {
-    name: 'American Shad',
-    image: '/fish/american-shad.jpg',
-    fallback: '/20240831_124653-1488x1536.jpg',
-  },
-  summerSteelhead: {
-    name: 'Summer Steelhead',
-    image: '/fish/summer-steelhead.jpg',
-    fallback: '/wintersteelhead.png',
-  },
-  sockeyeSalmon: {
-    name: 'Sockeye Salmon',
-    image: '/fish/sockeye-salmon.jpg',
-    fallback: '/nature-mountain.jpg',
-  },
-  fallChinook: {
-    name: 'Fall Chinook',
-    image: '/fish/fall-chinook.jpg',
-    fallback: '/fallchinook.png',
-  },
-  cohoSalmon: {
-    name: 'Coho Salmon',
-    image: '/fish/coho-salmon.jpg',
-    fallback: '/rsw_1280h_1118.webp',
-  },
-  cutthroatTrout: {
-    name: 'Cutthroat Trout',
-    image: '/fish/cutthroat-trout.jpg',
-    fallback: '/nature-forest.jpg',
-  },
-} satisfies Record<string, FishInfo>
-
-type Catch = {
-  fish: FishInfo
-  months: string
-  level: Level
-  pct: number
-}
-
-type Season = {
-  id: string
-  label: string
-  months: string
-  headline: string
-  description: string
-  catches: Catch[]
-}
-
-const SEASONS: Season[] = [
-  {
-    id: 'spring',
-    label: 'Spring',
-    months: 'MAR – MAY',
-    headline: 'The river wakes up',
-    description:
-      'Spring chinook pour into the Columbia, prized worldwide for their rich, high-fat meat. Sturgeon fishing stays hot in the deep holes, and the tail end of the winter steelhead run still rewards early risers.',
-    catches: [
-      { fish: FISH.springChinook, months: 'MAR – JUN', level: 'PEAK RUN', pct: 95 },
-      { fish: FISH.sturgeon, months: 'ALL SEASON', level: 'STRONG', pct: 75 },
-      { fish: FISH.winterSteelhead, months: 'MAR – APR', level: 'FAIR', pct: 45 },
-    ],
-  },
-  {
-    id: 'summer',
-    label: 'Summer',
-    months: 'JUN – AUG',
-    headline: 'Non-stop light-gear action',
-    description:
-      'Millions of shad flood the river for the fastest fishing of the year, perfect for kids and first-timers. Summer steelhead and sockeye run strong through the warm months, with walleye filling in the slow tides.',
-    catches: [
-      { fish: FISH.americanShad, months: 'JUN – JUL', level: 'PEAK RUN', pct: 95 },
-      { fish: FISH.summerSteelhead, months: 'JUN – SEP', level: 'STRONG', pct: 80 },
-      { fish: FISH.sockeyeSalmon, months: 'JUN – JUL', level: 'STRONG', pct: 70 },
-    ],
-  },
-  {
-    id: 'fall',
-    label: 'Fall',
-    months: 'SEP – NOV',
-    headline: 'The kings of the year',
-    description:
-      'Our best pure king fishery. Fall chinook arrive chrome-bright and full of fight, joined by aggressive coho on the tides. This is the season anglers travel across the country for, and dates go fast.',
-    catches: [
-      { fish: FISH.fallChinook, months: 'AUG – OCT', level: 'PEAK RUN', pct: 100 },
-      { fish: FISH.cohoSalmon, months: 'SEP – NOV', level: 'STRONG', pct: 85 },
-      { fish: FISH.sturgeon, months: 'ALL SEASON', level: 'FAIR', pct: 50 },
-    ],
-  },
-  {
-    id: 'winter',
-    label: 'Winter',
-    months: 'DEC – FEB',
-    headline: 'Chrome in the cold',
-    description:
-      'Winter steelhead are the hardest-earned and most rewarding fish of the year, sea-bright and strong in the coastal tributaries. Sturgeon keep the big-fish action going on the mainstem between storms.',
-    catches: [
-      { fish: FISH.winterSteelhead, months: 'DEC – MAR', level: 'PEAK RUN', pct: 90 },
-      { fish: FISH.sturgeon, months: 'ALL SEASON', level: 'STRONG', pct: 70 },
-      { fish: FISH.cutthroatTrout, months: 'DEC – FEB', level: 'FAIR', pct: 40 },
-    ],
-  },
-]
-
-const LEVEL_COLOR: Record<Level, string> = {
-  'PEAK RUN': 'text-accent',
-  STRONG: 'text-primary',
-  FAIR: 'text-cream/70',
-}
-
-// (per-species image map with SSR-safe fallback lives in FishImage below)
-
-// Falls back to an existing asset when the species photo hasn't been added
-// yet. Because this is SSR, the image can 404 before React hydrates (so the
-// error event is missed) — the ref catches that already-failed case, and
-// onError covers failures after hydration.
-function FishImage({
-  src,
-  fallback,
-  alt,
-  className,
-}: {
-  src: string
-  fallback: string
-  alt: string
-  className: string
-}) {
-  const swap = (img: HTMLImageElement | null) => {
-    if (!img) return
-    if (img.complete && img.naturalWidth === 0 && !img.src.endsWith(fallback)) {
-      img.src = fallback
-    }
-  }
+function StarMark(props: SVGProps<SVGSVGElement>) {
   return (
-    <img
-      ref={swap}
-      src={src}
-      alt={alt}
-      className={className}
-      onError={(e) => {
-        const img = e.currentTarget
-        if (!img.src.endsWith(fallback)) img.src = fallback
-      }}
-    />
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+      <path d="M12 2.5l2.9 5.88 6.49.94-4.7 4.58 1.11 6.46L12 17.9l-5.8 3.05 1.1-6.46-4.69-4.58 6.49-.94L12 2.5z" />
+    </svg>
   )
 }
 
-export function SeasonsSection() {
-  const [active, setActive] = useState(0)
-  const [dir, setDir] = useState(1)
-
-  const season = SEASONS[active]
-  const slideClass = dir >= 0 ? 'season-in-right' : 'season-in-left'
-
-  const select = (i: number) => {
-    if (i === active) return
-    setDir(i > active ? 1 : -1)
-    setActive(i)
+function WeatherGlyph({
+  id,
+  ...props
+}: { id: number } & Omit<SVGProps<SVGSVGElement>, 'id'>) {
+  const common = {
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: 1.6,
+    strokeLinecap: 'round' as const,
+    strokeLinejoin: 'round' as const,
+    'aria-hidden': true,
+    ...props,
   }
+  if (id >= 200 && id < 300)
+    // thunderstorm
+    return (
+      <svg {...common}>
+        <path d="M17 15a4 4 0 0 0-1-7.87A5.5 5.5 0 0 0 5.5 9 4.5 4.5 0 0 0 6 18" />
+        <path d="m12 12-2 4h3l-2 4" />
+      </svg>
+    )
+  if (id >= 300 && id < 600)
+    // rain / drizzle
+    return (
+      <svg {...common}>
+        <path d="M17 14a4 4 0 0 0-1-7.87A5.5 5.5 0 0 0 5.5 8 4.5 4.5 0 0 0 6 17" />
+        <path d="M9 18l-1 2M13 18l-1 2M17 18l-1 2" />
+      </svg>
+    )
+  if (id >= 600 && id < 700)
+    // snow
+    return (
+      <svg {...common}>
+        <path d="M17 14a4 4 0 0 0-1-7.87A5.5 5.5 0 0 0 5.5 8 4.5 4.5 0 0 0 6 17" />
+        <path d="M9 19h.01M13 19h.01M11 21h.01" />
+      </svg>
+    )
+  if (id >= 700 && id < 800)
+    // mist / fog
+    return (
+      <svg {...common}>
+        <path d="M4 9h16M4 13h16M6 17h12" />
+      </svg>
+    )
+  if (id === 800)
+    // clear
+    return (
+      <svg {...common}>
+        <circle cx="12" cy="12" r="4.2" />
+        <path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6L17 7M7 17l-1.4 1.4" />
+      </svg>
+    )
+  // clouds
+  return (
+    <svg {...common}>
+      <path d="M17.5 18a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.6-1.5A4 4 0 0 0 6 18z" />
+    </svg>
+  )
+}
+
+/* --- Rating cell -------------------------------------------------------- */
+
+const CELL_FILL: Record<Rating, string> = {
+  excellent: 'bg-accent',
+  good: 'bg-primary',
+  fair: 'bg-primary/25',
+  poor: 'bg-transparent border border-cream/15',
+}
+
+/* --- Weather / outlook strip ------------------------------------------- */
+
+const FILL_BY_TIER: Record<OutlookTier, string> = {
+  prime: 'bg-gradient-to-r from-primary to-accent',
+  promising: 'bg-primary',
+  fair: 'bg-primary/70',
+  slow: 'bg-cream/45',
+  tough: 'bg-cream/30',
+}
+
+function WeatherStrip({
+  wx,
+  loading,
+  monthIndex,
+}: {
+  wx: RiverConditions | null
+  loading: boolean
+  monthIndex: number
+}) {
+  const outlook = useMemo(() => biteOutlook(monthIndex, wx), [monthIndex, wx])
 
   return (
-    <section className="relative overflow-hidden bg-ink py-24 md:py-28">
-      {/* Giant season watermark, slides with the season */}
+    <div className="mt-10 grid grid-cols-1 gap-6 rounded-md border border-cream/12 bg-cream/[0.03] p-5 sm:p-6 md:grid-cols-[1fr_1.15fr] md:gap-10">
+      {/* Live conditions */}
+      <div className="flex items-center gap-4">
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-cream/15 text-accent">
+          <WeatherGlyph id={wx?.conditionId ?? 802} className="h-6 w-6" />
+        </div>
+        <div className="min-w-0">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-cream/45">
+            On the water today
+          </div>
+          {loading ? (
+            <div className="mt-1 text-sm text-cream/50">Reading the river…</div>
+          ) : wx ? (
+            <>
+              <div className="mt-1 font-display text-xl uppercase leading-none text-cream">
+                {wx.tempF}°F · {wx.description || wx.main}
+              </div>
+              <div className="mt-1.5 text-[12px] tracking-[0.04em] text-cream/50">
+                {wx.locationLabel} · Wind {wx.windMph} mph
+                {wx.gustMph ? ` (gusts ${wx.gustMph})` : ''}
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="mt-1 font-display text-xl uppercase leading-none text-cream">
+                Seasonal outlook
+              </div>
+              <div className="mt-1.5 text-[12px] tracking-[0.04em] text-cream/45">
+                Live conditions offline — showing the run calendar.
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+
+      {/* Bite outlook meter */}
+      <div className="flex flex-col justify-center border-t border-cream/10 pt-5 md:border-l md:border-t-0 md:pl-10 md:pt-0">
+        <div className="flex items-baseline justify-between">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-cream/45">
+            Bite outlook
+          </span>
+          <span className="font-display text-lg uppercase text-accent">
+            {outlook.label}
+          </span>
+        </div>
+        <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-cream/12">
+          <div
+            className={`h-full rounded-full transition-all duration-700 ${FILL_BY_TIER[outlook.tier]}`}
+            style={{ width: `${outlook.score}%` }}
+          />
+        </div>
+        <p className="mt-3 text-[13px] leading-relaxed text-cream/55">
+          {outlook.reason}
+        </p>
+      </div>
+    </div>
+  )
+}
+
+/* --- Main section ------------------------------------------------------- */
+
+export function SeasonsSection() {
+  const currentMonth = useMemo(() => new Date().getMonth(), [])
+
+  // Default the selection to the strongest species in the current month.
+  const [sel, setSel] = useState(() => ({
+    species: SPECIES.indexOf(speciesByMonth(currentMonth)[0]),
+    month: currentMonth,
+  }))
+
+  const [wx, setWx] = useState<RiverConditions | null>(null)
+  const [wxLoading, setWxLoading] = useState(true)
+
+  useEffect(() => {
+    let alive = true
+    getRiverConditions()
+      .then((data) => {
+        if (alive) setWx(data)
+      })
+      .catch(() => {})
+      .finally(() => {
+        if (alive) setWxLoading(false)
+      })
+    return () => {
+      alive = false
+    }
+  }, [])
+
+  const species = SPECIES[sel.species]
+  const selRating = species.ratings[sel.month]
+
+  return (
+    <section
+      data-chapter="dark"
+      className="theme-invert relative overflow-hidden bg-ink py-24 md:py-28"
+    >
+      {/* Watermark */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 flex items-end justify-start overflow-hidden"
       >
         <span
-          key={season.id}
-          className={`whitespace-nowrap font-display uppercase leading-[0.8] text-cream/[0.04] ${slideClass}`}
+          className="whitespace-nowrap font-display uppercase leading-[0.8] text-cream/[0.035]"
           style={{ fontSize: '20vw' }}
         >
-          {season.label}
+          Salmon
         </span>
       </div>
 
       <div className="relative z-10 mx-auto max-w-[1440px] px-6 md:px-10">
-        {/* Eyebrow */}
-        <div className="flex items-center gap-4">
-          <span className="text-sm font-semibold text-accent">04</span>
-          <span className="h-px w-10 bg-cream/25" />
-          <span className="text-[12px] font-medium tracking-[0.3em] text-cream/50">
-            SEASONAL CATALOGUE
-          </span>
+        <Eyebrow label="Fishing Calendar" tone="light" />
+
+        <div className="mt-8 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <h2 className="font-display text-[clamp(2.6rem,5vw,4.4rem)] uppercase leading-[0.9] text-cream">
+            <span className="block">Oregon Salmon</span>
+            <span className="block text-accent">calendar</span>
+          </h2>
+          <p className="max-w-md text-[15.5px] leading-relaxed text-cream/60">
+            The best months to fish our rivers, by species — pulled straight
+            from Captain Ryan&apos;s log. Tap a month or a run to see where the
+            fish are and when to book.
+          </p>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-14 lg:grid-cols-[400px_1fr] lg:gap-16">
-          {/* ---- Left: headline, season menu, description ---- */}
-          <div>
-            <h2 className="font-display text-[clamp(2.6rem,4.5vw,4rem)] uppercase leading-[0.9] text-cream">
-              <span className="flex flex-wrap items-baseline gap-x-[0.22em]">
-                <span>What&apos;s</span>
-                <span className="text-accent">running</span>
-              </span>
-            </h2>
+        {/* Live weather + bite outlook */}
+        <WeatherStrip wx={wx} loading={wxLoading} monthIndex={sel.month} />
 
-            {/* Season menu — vertical, underlined like a log book index */}
-            <div role="tablist" aria-label="Season" className="mt-10">
-              {SEASONS.map((s, i) => {
-                const isActive = i === active
+        {/* Calendar grid */}
+        <div className="mt-10 overflow-x-auto pb-2">
+          <div className="min-w-[680px]">
+            <div
+              role="grid"
+              aria-label="Salmon fishing calendar by species and month"
+              className="grid items-stretch gap-1.5"
+              style={{
+                gridTemplateColumns: 'minmax(150px, 1.3fr) repeat(12, 1fr)',
+              }}
+            >
+              {/* Header row */}
+              <div aria-hidden="true" />
+              {MONTHS_SHORT.map((m, i) => {
+                const isNow = i === currentMonth
+                const isSel = i === sel.month
                 return (
                   <button
-                    key={s.id}
+                    key={m}
                     type="button"
-                    role="tab"
-                    aria-selected={isActive}
-                    onClick={() => select(i)}
-                    className={`group flex w-full items-baseline justify-between border-b py-3.5 text-left transition-all duration-300 ${
-                      isActive
-                        ? 'border-accent pl-3'
-                        : 'border-cream/12 pl-0 hover:border-cream/35'
-                    }`}
+                    onClick={() => setSel((s) => ({ ...s, month: i }))}
+                    className="group flex flex-col items-center gap-1 pb-1.5"
                   >
                     <span
-                      className={`font-display text-lg uppercase tracking-wide transition-colors duration-300 md:text-xl ${
-                        isActive
+                      className={`text-[11px] font-semibold uppercase tracking-[0.12em] transition-colors ${
+                        isSel
                           ? 'text-accent'
                           : 'text-cream/55 group-hover:text-cream'
                       }`}
                     >
-                      {s.label}
+                      {m}
                     </span>
-                    <span
-                      className={`text-[10px] tracking-[0.25em] transition-colors duration-300 ${
-                        isActive ? 'text-cream/70' : 'text-cream/35'
-                      }`}
-                    >
-                      {s.months}
-                    </span>
+                    {isNow ? (
+                      <span className="rounded-full bg-accent px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-[0.14em] text-ink">
+                        Now
+                      </span>
+                    ) : (
+                      <span className="h-[3px] w-4 rounded-full bg-transparent" />
+                    )}
                   </button>
                 )
               })}
-            </div>
 
-            {/* Season description — slides on change */}
-            <div key={season.id} className={`mt-10 ${slideClass}`}>
-              <h3 className="font-display text-2xl uppercase leading-[1.05] text-cream md:text-[1.7rem]">
-                {season.headline}
-              </h3>
+              {/* Species rows */}
+              {SPECIES.map((sp, si) => {
+                const rowActive = si === sel.species
+                return (
+                  <div key={sp.id} className="contents">
+                    {/* Row label */}
+                    <button
+                      type="button"
+                      onClick={() => setSel((s) => ({ ...s, species: si }))}
+                      className={`flex items-center gap-3 rounded-sm border-l-2 py-2 pl-3 pr-2 text-left transition-colors ${
+                        rowActive
+                          ? 'border-accent bg-cream/[0.04]'
+                          : 'border-transparent hover:bg-cream/[0.02]'
+                      }`}
+                    >
+                      <FishGlyph
+                        shape={sp.shape}
+                        className={`h-6 w-11 shrink-0 transition-colors ${
+                          rowActive ? 'text-accent' : 'text-cream/45'
+                        }`}
+                      />
+                      <span className="min-w-0">
+                        <span
+                          className={`block font-display text-[13px] uppercase leading-tight transition-colors ${
+                            rowActive ? 'text-cream' : 'text-cream/75'
+                          }`}
+                        >
+                          {sp.name}
+                        </span>
+                        <span className="block text-[10px] tracking-[0.14em] text-cream/40">
+                          Peak {sp.peak}
+                        </span>
+                      </span>
+                    </button>
 
-              <p className="mt-5 max-w-md text-[15.5px] leading-relaxed text-cream/60">
-                {season.description}
-              </p>
-
-              <a
-                href="#"
-                className="group mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-[13px] font-semibold uppercase tracking-[0.14em] text-ink transition-all duration-200 hover:brightness-110"
-              >
-                Book a {season.label} Trip
-                <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </a>
+                    {/* Rating cells */}
+                    {sp.ratings.map((r, mi) => {
+                      const isSelCell = si === sel.species && mi === sel.month
+                      const inSelCol = mi === sel.month
+                      const isNowCol = mi === currentMonth
+                      const meta = RATING_META[r]
+                      return (
+                        <button
+                          key={mi}
+                          type="button"
+                          role="gridcell"
+                          aria-label={`${sp.name}, ${MONTHS_FULL[mi]}: ${meta.label}`}
+                          onClick={() => setSel({ species: si, month: mi })}
+                          className={`relative flex h-11 items-center justify-center rounded-sm transition-all duration-200 ${CELL_FILL[r]} ${
+                            isSelCell
+                              ? 'outline outline-2 outline-accent outline-offset-[-2px]'
+                              : inSelCol
+                                ? 'opacity-100'
+                                : 'opacity-90 hover:opacity-100'
+                          }`}
+                        >
+                          {r === 'excellent' && (
+                            <StarMark className="h-4 w-4 text-ink" />
+                          )}
+                          {isNowCol && r === 'poor' && (
+                            <span className="h-1 w-1 rounded-full bg-cream/25" />
+                          )}
+                        </button>
+                      )
+                    })}
+                  </div>
+                )
+              })}
             </div>
           </div>
+        </div>
 
-          {/* ---- Right: diagonal fish panels ---- */}
-          <div className="relative overflow-hidden">
-            <div
-              key={season.id}
-              className="flex flex-col gap-4 md:-mx-10 md:h-[34rem] md:flex-row md:gap-3 lg:mx-0 lg:-mr-16 lg:pl-6"
-            >
-              {season.catches.map((c, i) => (
-                <div
-                  key={c.fish.name}
-                  className="season-panel-in relative h-52 md:h-auto md:flex-1"
-                  style={{ animationDelay: `${0.1 + i * 0.13}s` }}
-                >
-                  {/* Skewed frame */}
-                  <div className="absolute inset-0 -skew-x-12 overflow-hidden rounded-sm border border-cream/10 bg-night">
-                    <FishImage
-                      src={c.fish.image}
-                      fallback={c.fish.fallback}
-                      alt={c.fish.name}
-                      className="absolute inset-0 h-full w-full skew-x-12 scale-[1.45] object-cover opacity-80 transition-all duration-700 hover:scale-[1.55] hover:opacity-100"
-                    />
-                    {/* Bottom gradient for the caption */}
-                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-ink via-ink/70 to-transparent" />
+        {/* Legend */}
+        <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+          {(['excellent', 'good', 'fair', 'poor'] as Rating[]).map((r) => (
+            <div key={r} className="flex items-center gap-2">
+              <span
+                className={`flex h-4 w-4 items-center justify-center rounded-[3px] ${CELL_FILL[r]}`}
+              >
+                {r === 'excellent' && (
+                  <StarMark className="h-2.5 w-2.5 text-ink" />
+                )}
+              </span>
+              <span className="text-[12px] tracking-[0.04em] text-cream/55">
+                <span className="text-cream/80">{RATING_META[r].label}</span>
+                <span className="text-cream/40"> — {RATING_META[r].note}</span>
+              </span>
+            </div>
+          ))}
+        </div>
 
-                    {/* Caption — counter-skewed back upright */}
-                    <div className="absolute inset-x-0 bottom-0 skew-x-12 px-10 pb-6 md:px-12">
-                      <div
-                        className={`text-[10px] font-bold tracking-[0.22em] ${LEVEL_COLOR[c.level]}`}
-                      >
-                        {c.level}
-                      </div>
-                      <div className="mt-1.5 font-display text-lg uppercase leading-tight text-cream md:text-xl">
-                        {c.fish.name}
-                      </div>
-                      <div className="mt-1 text-[10px] tracking-[0.22em] text-cream/50">
-                        {c.months}
-                      </div>
-                      {/* Run-strength meter */}
-                      <div className="mt-3 h-1 w-full max-w-[9rem] overflow-hidden rounded-full bg-cream/15">
-                        <div
-                          className="season-bar h-full rounded-full bg-gradient-to-r from-primary to-accent"
-                          style={{
-                            width: `${c.pct}%`,
-                            animationDelay: `${0.35 + i * 0.13}s`,
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div>
+        {/* Detail panel — reacts to the selected species + month */}
+        <div className="mt-10 grid grid-cols-1 gap-8 rounded-md border border-cream/12 bg-cream/[0.03] p-6 md:grid-cols-[1.2fr_1fr] md:gap-12 md:p-9">
+          <div>
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="font-display text-[11px] uppercase tracking-[0.2em] text-cream/45">
+                {MONTHS_FULL[sel.month]}
+              </span>
+              <span
+                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] ${
+                  selRating === 'excellent'
+                    ? 'bg-accent text-ink'
+                    : selRating === 'good'
+                      ? 'bg-primary text-cream'
+                      : selRating === 'fair'
+                        ? 'bg-primary/25 text-cream'
+                        : 'border border-cream/20 text-cream/60'
+                }`}
+              >
+                {selRating === 'excellent' && (
+                  <StarMark className="h-3 w-3" />
+                )}
+                {RATING_META[selRating].label}
+              </span>
+            </div>
+
+            <h3 className="mt-4 font-display text-3xl uppercase leading-none text-cream md:text-4xl">
+              {species.name}
+            </h3>
+            <p className="mt-4 max-w-md text-[15px] leading-relaxed text-cream/60">
+              {species.blurb}
+            </p>
+
+            <div className="mt-6 flex items-center gap-6">
+              <div>
+                <div className="text-[10px] uppercase tracking-[0.2em] text-cream/40">
+                  Peak window
                 </div>
+                <div className="mt-1 font-display text-lg uppercase text-accent">
+                  {species.peak}
+                </div>
+              </div>
+            </div>
+
+            <a
+              href="/#excursions"
+              className="group mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-[13px] font-semibold uppercase tracking-[0.14em] text-ink transition-all duration-200 hover:brightness-110"
+            >
+              Book a {species.name.split(' ')[0]} Trip
+              <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
+          </div>
+
+          {/* Best rivers for this run */}
+          <div className="border-t border-cream/10 pt-7 md:border-l md:border-t-0 md:pl-12 md:pt-0">
+            <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-cream/45">
+              Best rivers
+            </div>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {species.rivers.map((river) => (
+                <span
+                  key={river}
+                  className="rounded-full border border-cream/15 px-3.5 py-1.5 text-[12px] tracking-[0.03em] text-cream/70"
+                >
+                  {river}
+                </span>
               ))}
+            </div>
+
+            <div className="mt-8 text-[11px] font-semibold uppercase tracking-[0.22em] text-cream/45">
+              Also running in {MONTHS_SHORT[sel.month]}
+            </div>
+            <div className="mt-3 space-y-1.5">
+              {speciesByMonth(sel.month)
+                .filter((s) => s.ratings[sel.month] !== 'poor' && s.id !== species.id)
+                .map((s) => (
+                  <button
+                    key={s.id}
+                    type="button"
+                    onClick={() =>
+                      setSel((prev) => ({
+                        ...prev,
+                        species: SPECIES.indexOf(s),
+                      }))
+                    }
+                    className="flex w-full items-center justify-between text-left text-[13px] text-cream/60 transition-colors hover:text-cream"
+                  >
+                    <span>{s.name}</span>
+                    <span className="text-cream/40">
+                      {RATING_META[s.ratings[sel.month]].label}
+                    </span>
+                  </button>
+                ))}
+              {speciesByMonth(sel.month).filter(
+                (s) => s.ratings[sel.month] !== 'poor' && s.id !== species.id,
+              ).length === 0 && (
+                <p className="text-[13px] text-cream/40">
+                  A quiet month — the runs are resting.
+                </p>
+              )}
             </div>
           </div>
         </div>
