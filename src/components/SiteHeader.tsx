@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { FacebookIcon, InstagramIcon, PhoneIcon, TikTokIcon } from './icons'
+import { StaggeredMenu } from './StaggeredMenu'
 
 const NAV_ITEMS = [
   { label: 'About Us', to: '/about' },
@@ -74,7 +75,7 @@ function StickyBar({ visible }: { visible: boolean }) {
           />
         </a>
 
-        <div className="flex shrink-0 items-center gap-2.5 md:gap-3">
+        <div className="flex shrink-0 items-center gap-2.5 pr-20 md:gap-3 lg:pr-0">
           <a
             href={PHONE_HREF}
             className="hidden items-center gap-2 text-[13px] tracking-wide opacity-80 transition-colors duration-200 hover:text-cta hover:opacity-100 sm:flex"
@@ -169,7 +170,7 @@ export function SiteHeader() {
             <NavLinks />
           </nav>
 
-          <div className="flex shrink-0 items-center gap-3">
+          <div className="flex shrink-0 items-center gap-3 pr-20 lg:pr-0">
             <a
               href={PHONE_HREF}
               aria-label={`Call ${PHONE}`}
@@ -201,6 +202,17 @@ export function SiteHeader() {
       </header>
 
       <StickyBar visible={stuck} />
+
+      <StaggeredMenu
+        className="lg:hidden"
+        isFixed={true}
+        stuck={stuck}
+        colors={['#167A8E', '#0F5A69', '#0E2A3B']}
+        accentColor="#00CCCC"
+        logoUrl={LOGO}
+        items={NAV_ITEMS}
+        socialItems={SOCIALS.map((s) => ({ label: s.label, link: '#' }))}
+      />
     </>
   )
 }
