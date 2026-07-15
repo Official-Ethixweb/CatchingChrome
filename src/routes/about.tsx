@@ -292,9 +292,13 @@ function StatsBand() {
           <Reveal
             key={s.label}
             delay={i * 0.08}
-            className="border-l border-cream/15 px-6 first:border-l-0 lg:px-8"
+            className="border-l border-cream/15 px-4 first:border-l-0 sm:px-6 lg:px-8"
           >
-            <div className="font-display text-[clamp(2.5rem,5vw,3.6rem)] leading-none text-accent">
+            {/* Sized against "10,000+", the longest value, in the narrowest
+                cell it ever gets: the four-up row at exactly 1024, where each
+                column is ~167px wide. Both the floor and the slope have to
+                clear it, or the number sets wider than the column it sits in. */}
+            <div className="font-display text-[clamp(1.6rem,3.5vw,3.6rem)] leading-none text-accent">
               <CountUp target={s.target} prefix={s.prefix} suffix={s.suffix} />
             </div>
             <div className="mt-3 text-[12px] font-medium uppercase tracking-[0.2em] text-cream/55">

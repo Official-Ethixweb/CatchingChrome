@@ -114,7 +114,7 @@ export function FaqSection() {
 
           <h2 className="mt-6 font-display text-[clamp(2.5rem,5vw,4.4rem)] uppercase leading-[0.9] text-ink">
             <span className="block">Frequently</span>
-            <span className="flex items-baseline justify-center gap-[0.2em]">
+            <span className="flex flex-wrap items-baseline justify-center gap-x-[0.2em]">
               <span className="text-accent">asked</span>
               <span>Questions</span>
             </span>

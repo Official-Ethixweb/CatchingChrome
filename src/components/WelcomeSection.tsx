@@ -28,7 +28,7 @@ export function WelcomeSection() {
                 key={stat.label}
                 className="border border-ink/15 py-6 text-center"
               >
-                <div className="font-display text-4xl leading-none text-ink">
+                <div className="font-display text-3xl leading-none text-ink sm:text-4xl">
                   {stat.value}
                 </div>
                 <div className="mt-2 text-[11px] uppercase tracking-[0.2em] text-ink/50">
@@ -62,7 +62,7 @@ export function WelcomeSection() {
           </div>
 
           <a
-            href="#"
+            href="/about"
             className="btn-outline group mt-10 inline-flex items-center gap-3 px-7 py-3 text-[13px] font-semibold uppercase tracking-[0.18em]"
           >
             About Us

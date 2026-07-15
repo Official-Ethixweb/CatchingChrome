@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { SiteHeader } from './SiteHeader'
+import { WaveDivider } from './WaveDivider'
 import { ArrowRight } from './icons'
 
 const SLIDES = [
@@ -66,16 +67,10 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Curved section — a wavy curve sweeping into the light section below */}
-      <svg
-        aria-hidden="true"
-        preserveAspectRatio="none"
-        viewBox="0 0 1440 200"
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[70px] w-full fill-paper md:h-[130px]"
-      >
-        <path d="M0,200 L0,150 C 360,190 1080,70 1440,130 L1440,200 Z" />
-      </svg>
-
+      {/* Sweeps into PartnersSection, which is bg-cream. It filled with `paper`
+          until now — a frost-blue left over from when that token was still a
+          section background, which drew a faint blue band across the seam. */}
+      <WaveDivider fill="fill-cream" />
     </section>
   )
 }

@@ -105,15 +105,15 @@ function PricingRow({ item, index }: { item: PricingItem; index: number }) {
             className="transition-all duration-300"
           />
           {/* Guides */}
-          <circle cx="16" cy="20" r="1.5" stroke="#F5A623" strokeWidth="1" />
-          <circle cx="22" cy="14" r="1" stroke="#F5A623" strokeWidth="1" />
+          <circle cx="16" cy="20" r="1.5" stroke="#00CCCC" strokeWidth="1" />
+          <circle cx="22" cy="14" r="1" stroke="#00CCCC" strokeWidth="1" />
         </svg>
 
         {/* Fishing Line (SVG path) */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible">
           <path
             d={pathD}
-            stroke={isHovered ? "#F5A623" : "#B9C4CC"}
+            stroke={isHovered ? "#00CCCC" : "#B9C4CC"}
             strokeWidth={isHovered ? "1.8" : "1"}
             fill="none"
             className="transition-all duration-300"

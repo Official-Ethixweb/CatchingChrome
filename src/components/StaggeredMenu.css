@@ -240,7 +240,7 @@
   color: var(--sm-accent, #00CCCC); /* Chrome Cyan hover */
 }
 
-/* Numbering style matches premium salmon gold / chrome cyan accents */
+/* Numbering style matches the Chrome Cyan accent */
 .sm-panel-list[data-numbering] {
   counter-reset: smItem;
 }
@@ -254,7 +254,7 @@
   font-family: var(--font-sans), sans-serif;
   font-size: 14px;
   font-weight: 500;
-  color: var(--color-accent, #F5A623); /* Salmon Gold */
+  color: var(--color-accent, #00CCCC); /* Chrome Cyan */
   letter-spacing: 0.05em;
   pointer-events: none;
   user-select: none;
@@ -278,7 +278,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--color-accent, #F5A623); /* Salmon Gold */
+  color: var(--color-accent, #00CCCC); /* Chrome Cyan */
 }
 
 .sm-socials-list {

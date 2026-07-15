@@ -45,7 +45,12 @@
   text-decoration: none;
   white-space: nowrap;
   font-weight: 600;
-  font-size: 4vh;
+  /* Height-based sizing alone ignores the axis the label actually has to fit
+     in: on a tall, narrow phone 4vh sets a size that runs the longest label
+     ("Coastal Tributaries") straight off the side, and nowrap forbids the
+     escape. The vw cap only ever binds when the viewport is narrow, so wider
+     screens keep the 4vh they already had. */
+  font-size: min(4vh, 7.5vw);
 }
 
 .menu__item-link:hover,

@@ -1,180 +1,100 @@
-import type { ComponentType, SVGProps } from 'react'
 import { ArrowUpRight, CartIcon } from './icons'
 import { Eyebrow } from './Eyebrow'
 
 type Product = {
-  index: string
+  id: string
   tag: string
   name: string
   sub: string
   price: string
-  Art: ComponentType<SVGProps<SVGSVGElement>>
+  image: string
+  alt: string
+  /** Deep link to this exact product on the Envy Prints storefront. */
+  href: string
 }
 
-function TeeArt(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      viewBox="0 0 120 120"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2.5}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
-    >
-      {/* Body */}
-      <path d="M38 32c2 8 8 12 22 12s20-4 22-12l20 10-7 16-11-4v42H36V54l-11 4-7-16Z" />
-      {/* Collar */}
-      <path d="M46 34c3 5 25 5 28 0" opacity={0.4} />
-      {/* Chest print */}
-      <g className="text-accent" stroke="currentColor">
-        <path d="M49 68c6-6 16-6 22 0-6 6-16 6-22 0Z" />
-        <path d="m71 68 7-5-2.5 5 2.5 5Z" />
-      </g>
-    </svg>
-  )
-}
-
-function HoodieArt(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      viewBox="0 0 120 120"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2.5}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
-    >
-      {/* Body */}
-      <path d="M44 34c2 6 6 9 16 9s14-3 16-9l22 10-7 16-11-4v46H40V56l-11 4-7-16Z" />
-      {/* Hood */}
-      <path d="M44 34a16 12 0 0 1 32 0" />
-      {/* Drawstrings */}
-      <path d="M56 45v8M64 45v8" opacity={0.5} />
-      {/* Kangaroo pocket */}
-      <path d="M46 102V89l5-5h18l5 5v13" opacity={0.5} />
-      {/* Chest print */}
-      <g className="text-accent" stroke="currentColor">
-        <path d="M51 68c5-5 13-5 18 0-5 5-13 5-18 0Z" />
-        <path d="m69 68 6-4-2 4 2 4Z" />
-      </g>
-    </svg>
-  )
-}
-
-function CapArt(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      viewBox="0 0 120 120"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2.5}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
-    >
-      {/* Crown */}
-      <path d="M30 62a30 28 0 0 1 60 0v4H30Z" />
-      {/* Panel seams */}
-      <path d="M60 34v28M44 39c-5 8-6 15-6 23M76 39c5 8 6 15 6 23" opacity={0.4} />
-      {/* Button */}
-      <circle cx="60" cy="33" r="2" />
-      {/* Brim */}
-      <path d="M26 66h68c-6 13-62 13-68 0Z" />
-      {/* Front mark */}
-      <g className="text-accent" stroke="currentColor">
-        <path d="M52 52c4.5-4.5 11.5-4.5 16 0-4.5 4.5-11.5 4.5-16 0Z" />
-        <path d="m68 52 5.5-3.5-2 3.5 2 3.5Z" />
-      </g>
-    </svg>
-  )
-}
-
-function ToteArt(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      viewBox="0 0 120 120"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2.5}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
-    >
-      {/* Handle */}
-      <path d="M45 42a15 17 0 0 1 30 0" />
-      {/* Bag */}
-      <path d="M32 42h56l6 56H26Z" />
-      {/* Hem */}
-      <path d="M31 52h58" opacity={0.4} />
-      {/* Print */}
-      <g className="text-accent" stroke="currentColor">
-        <path d="M46 72c7-7 21-7 28 0-7 7-21 7-28 0Z" />
-        <path d="m74 72 8-6-3 6 3 6Z" />
-      </g>
-      {/* Water line */}
-      <path d="M48 86c4 3 8 3 12 0s8-3 12 0" opacity={0.4} />
-    </svg>
-  )
-}
-
-// Ryan's live storefront (Envy Prints). Products link out to the collection.
+// Ryan's live storefront (Envy Prints).
 const STORE_URL =
   'https://envy-prints.com/collections/catching-chrome-guide-service'
 
+/**
+ * The four products Ryan actually sells. Names, prices and photos were read
+ * off the storefront's own product JSON rather than written here by hand —
+ * these cards quote a price and then take the visitor to a checkout, so an
+ * invented one is a promise the store won't honour. If a price moves on Envy
+ * Prints, it has to be moved here too.
+ */
 const PRODUCTS: Product[] = [
   {
-    index: '01',
+    id: 'sweatshirt',
     tag: 'APPAREL',
-    name: 'Chrome Chaser Tee',
-    sub: 'Bone White · Unisex',
-    price: '$34',
-    Art: TeeArt,
+    name: 'Sweatshirt',
+    sub: 'Athletic Heather Grey · S–3XL',
+    price: '$35',
+    image: '/merch/sweatshirt.png',
+    alt: 'Athletic heather grey Catching Chrome crewneck sweatshirt with the chrome logo across the chest',
+    href: 'https://envy-prints.com/products/template-sweatshirt',
   },
   {
-    index: '02',
+    id: 'long-sleeve',
     tag: 'APPAREL',
-    name: 'First Light Hoodie',
-    sub: 'Steel Navy · Heavyweight',
-    price: '$62',
-    Art: HoodieArt,
-  },
-  {
-    index: '03',
-    tag: 'HEADWEAR',
-    name: 'River Guide Cap',
-    sub: 'Charcoal · Adjustable',
+    name: 'Long Sleeve',
+    sub: 'Black · S–3XL',
     price: '$28',
-    Art: CapArt,
+    image: '/merch/long-sleeve.png',
+    alt: 'Black Catching Chrome long sleeve tee with a chest logo and a sleeve print',
+    href: 'https://envy-prints.com/products/template-long-sleeve',
   },
   {
-    index: '04',
+    // One product spanning hoodie / tee / onesie variants, $20–$25 — hence
+    // "From $20" rather than a single figure.
+    id: 'youth',
+    tag: 'YOUTH',
+    name: 'Youth Apparel',
+    sub: 'Black · Hoodie, Tee or Onesie',
+    price: 'From $20',
+    image: '/merch/youth-apparel.png',
+    alt: 'Black Catching Chrome baby onesie with the round salmon logo',
+    href: 'https://envy-prints.com/products/template-onesie?variant=62536677032307',
+  },
+  {
+    id: 'sticker',
     tag: 'GEAR',
-    name: 'Deck Hand Tote',
-    sub: 'Waxed Canvas · 20 L',
-    price: '$38',
-    Art: ToteArt,
+    name: 'Logo Sticker',
+    sub: '4"×4" or 5"×1"',
+    price: '$5',
+    image: '/merch/sticker.png',
+    alt: 'Catching Chrome Guide Service die-cut sticker showing a leaping salmon',
+    href: 'https://envy-prints.com/products/template-sticker',
   },
 ]
 
 function ProductCard({ product }: { product: Product }) {
   return (
     <a
-      href={STORE_URL}
+      href={product.href}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`Shop ${product.name} at the Catching Chrome store`}
+      aria-label={`Shop the ${product.name} at the Catching Chrome store`}
       className="group flex flex-col rounded-sm border border-cream/10 bg-cream/[0.03] p-3 transition-colors duration-300 hover:border-accent/60 sm:p-4"
     >
-      {/* Product visual */}
-      <div className="portrait-gradient relative flex aspect-[4/4.4] items-center justify-center overflow-hidden rounded-sm">
-        <span className="absolute left-3 top-3 text-[10px] font-semibold tracking-[0.25em] text-cream/45">
+      {/* Product visual.
+          The tile is white because the storefront shoots every product on
+          white — the photo's backdrop then disappears into it and the garment
+          is all you see. The old dark gradient panel can't work here: these
+          are photographs, not the line-art it was built for, and any blend
+          that hides a white backdrop against a dark panel also crushes the
+          grey sweatshirt to near-black. */}
+      <div className="relative flex aspect-[4/4.4] items-center justify-center overflow-hidden rounded-sm bg-white">
+        <span className="absolute left-3 top-3 z-10 text-[10px] font-semibold tracking-[0.25em] text-ink/40">
           {product.tag}
         </span>
-        <product.Art
-          aria-hidden="true"
-          className="w-3/4 max-w-[190px] text-cream/80 transition-transform duration-500 group-hover:scale-105"
+        <img
+          src={product.image}
+          alt={product.alt}
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
         />
       </div>
 
@@ -243,7 +163,7 @@ export function CustomMerchSection() {
           {/* Right: product cards */}
           <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:col-span-8 xl:col-span-9 xl:grid-cols-4">
             {PRODUCTS.map((product) => (
-              <ProductCard key={product.index} product={product} />
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </div>

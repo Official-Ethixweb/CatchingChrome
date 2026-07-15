@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { SiteHeader } from '~/components/SiteHeader'
 import { SiteFooter } from '~/components/SiteFooter'
+import { WaveDivider } from '~/components/WaveDivider'
 import { SignatureTripsSection } from '~/components/SignatureTripsSection'
 
 export const Route = createFileRoute('/excursions')({
@@ -36,6 +37,10 @@ function ExcursionsHeader() {
           <span className="h-px w-6 bg-accent" />
         </div>
       </div>
+
+      {/* This page's first section is SignatureTrips overridden to bg-white,
+          not the cream the other pages use — hence fill-white here. */}
+      <WaveDivider fill="fill-white" />
     </section>
   )
 }

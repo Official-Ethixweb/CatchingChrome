@@ -22,7 +22,7 @@ const SOCIALS = [
 export function SiteFooter() {
   return (
     <footer id="contact" className="bg-ink text-cream">
-      <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-12 px-6 py-16 md:grid-cols-3 md:gap-10 md:px-10 md:py-20">
+      <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-12 px-6 py-16 md:grid-cols-3 md:gap-6 md:px-10 md:py-20 lg:gap-10">
         {/* Brand + socials */}
         <div className="flex flex-col items-center gap-6 md:items-start">
           <a href="/" className="flex items-center">
@@ -97,12 +97,15 @@ export function SiteFooter() {
             </a>
             <a
               href="mailto:ryanbfishin@gmail.com"
-              className="group flex items-center gap-3 text-sm text-cream/70 transition-colors duration-200 hover:text-cream"
+              className="group flex min-w-0 max-w-full items-center gap-3 text-sm text-cream/70 transition-colors duration-200 hover:text-cream"
             >
-              <span className="flex h-9 w-9 items-center justify-center rounded-full border border-cream/15 bg-cream/5 text-accent transition-colors duration-200 group-hover:border-accent">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-cream/15 bg-cream/5 text-accent transition-colors duration-200 group-hover:border-accent">
                 <MailIcon className="h-4 w-4" />
               </span>
-              ryanbfishin@gmail.com
+              {/* An address is one unbreakable token to the line breaker, so in
+                  a column narrower than it, it leaves the box rather than
+                  wrapping. This only ever engages if that happens. */}
+              <span className="min-w-0 break-all">ryanbfishin@gmail.com</span>
             </a>
           </div>
         </div>

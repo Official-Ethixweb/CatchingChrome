@@ -23,11 +23,17 @@ const TRIPS = [
   },
 ]
 
+// No page exists per destination, so these point at the excursions page rather
+// than at "#", which reads as a link, takes the click and does nothing.
 const DESTINATIONS = [
-  { link: '#', text: 'Columbia River', image: '/nature-river.jpg' },
-  { link: '#', text: 'Deschutes River', image: '/nature-mountain.jpg' },
-  { link: '#', text: 'Willamette River', image: '/nature-valley.jpg' },
-  { link: '#', text: 'Coastal Tributaries', image: '/nature-forest.jpg' },
+  { link: '/excursions', text: 'Columbia River', image: '/nature-river.jpg' },
+  { link: '/excursions', text: 'Deschutes River', image: '/nature-mountain.jpg' },
+  { link: '/excursions', text: 'Willamette River', image: '/nature-valley.jpg' },
+  {
+    link: '/excursions',
+    text: 'Coastal Tributaries',
+    image: '/nature-forest.jpg',
+  },
 ]
 
 export function SignatureTripsSection({ className = "bg-cream" }: { className?: string } = {}) {
@@ -41,7 +47,7 @@ export function SignatureTripsSection({ className = "bg-cream" }: { className?: 
 
         {/* Headline + intro */}
         <div className="mt-6 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <h2 className="font-display text-[clamp(3rem,6.2vw,5.6rem)] uppercase leading-[0.9] text-ink">
+          <h2 className="font-display text-[clamp(2.6rem,6.2vw,5.6rem)] uppercase leading-[0.9] text-ink">
             <span className="block">Our Signature</span>
             <span className="block leading-[0.85] text-accent">trips</span>
           </h2>
@@ -77,7 +83,11 @@ export function SignatureTripsSection({ className = "bg-cream" }: { className?: 
               </div>
 
               <div className="flex flex-1 flex-col p-6">
-                <h3 className="font-display text-3xl uppercase leading-none text-ink lg:text-[2.3rem]">
+                {/* md is where the columns are narrowest — three of them across
+                    a tablet leaves ~153px of text box, and "American" alone
+                    sets wider than that at 3xl. The size climbs back at lg,
+                    where the columns are wide enough to carry it. */}
+                <h3 className="font-display text-3xl uppercase leading-none text-ink md:text-2xl lg:text-[2.3rem]">
                   {trip.title}
                 </h3>
 
@@ -86,7 +96,7 @@ export function SignatureTripsSection({ className = "bg-cream" }: { className?: 
                 </p>
 
                 <a
-                  href="#"
+                  href="/contact"
                   className="btn-outline mt-6 inline-flex w-fit items-center gap-2 px-5 py-2 text-[12px] font-semibold uppercase tracking-[0.18em]"
                 >
                   Book Now

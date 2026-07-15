@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { SiteHeader } from '~/components/SiteHeader'
 import { SiteFooter } from '~/components/SiteFooter'
+import { WaveDivider } from '~/components/WaveDivider'
 import { Eyebrow } from '~/components/Eyebrow'
 import {
   AnchorIcon,
@@ -100,6 +101,8 @@ function CommercialHeader() {
           <span className="h-px w-6 bg-accent" />
         </div>
       </div>
+
+      <WaveDivider fill="fill-cream" />
     </section>
   )
 }
@@ -204,7 +207,7 @@ function CommercialPage() {
               {STEPS.map((s) => (
                 <article
                   key={s.step}
-                  className="flex flex-col rounded-2xl border border-ink/10 bg-white p-8"
+                  className="flex flex-col rounded-2xl border border-ink/10 bg-white p-8 md:p-6 lg:p-8"
                 >
                   <span className="font-display text-5xl leading-none text-accent">
                     {s.step}

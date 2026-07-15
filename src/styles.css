@@ -12,16 +12,18 @@
   --color-paper: #DCEEF3; /* Frost Tint (Section backgrounds) */
   --color-muted: #B9C4CC; /* Chrome Silver (Borders, muted fills) */
   --color-primary: #167A8E; /* River Teal (Primary brand, links) */
-  --color-accent: #F5A623; /* Salmon Gold (Section accents, headline words) */
-  --color-cta: #00CCCC; /* Chrome Cyan (Buttons + CTAs only) */
+  --color-accent: #00CCCC; /* Chrome Cyan (Section accents, headline words) */
+  --color-cta: #00CCCC; /* Chrome Cyan (Buttons + CTAs) */
 }
 
 /* ===================================================================
    Buttons / CTAs
    Every button on the site is a bordered pill drawn from exactly two
    colours: Chrome Cyan (--color-cta) and Deep Steel Navy (--color-ink).
-   Salmon Gold stays on section accents and headline words, never on a
-   button. No underline-style links are used as buttons.
+   Accent and CTA are both Chrome Cyan now — the Salmon Gold that used to
+   carry section accents and headline words is gone from the palette
+   entirely (2026-07-16, user directive: no yellow anywhere). The site is
+   navy / bone white / cyan. No underline-style links are used as buttons.
      .btn-primary — cyan fill, navy label. The default CTA.
      .btn-outline — navy outline on light sections.
      .btn-outline-cta — cyan outline, for use on dark (navy) sections.
@@ -841,11 +843,14 @@
    agree at one exact viewport per breakpoint and the crop creeps back in
    between. Columns track any width for free. */
 .gal-mosaic {
+  /* Two columns on a phone as well. Left to `auto` the mosaic collapses to a
+     single track, and a portrait photo then renders taller than the viewport —
+     one fish per screen, with no sense that there are eighty more behind it. */
+  column-count: 2;
   column-gap: 6px;
 }
 @media (min-width: 640px) {
   .gal-mosaic {
-    column-count: 2;
     column-gap: 8px;
   }
 }
@@ -866,6 +871,16 @@
 @media (min-width: 640px) {
   .gal-mosaic > * {
     margin-bottom: 8px;
+  }
+}
+
+/* The editorial blocks are prose, and prose in a half-phone-width track is a
+   column of two-word lines. They run the full width on a phone instead, where
+   the photos either side of them can't hold them to a shared column. */
+@media (max-width: 639px) {
+  .gal-mosaic > .gal-note {
+    column-span: all;
+    margin-bottom: 6px;
   }
 }
 

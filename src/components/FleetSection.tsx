@@ -97,7 +97,7 @@ function VesselCard({ vessel }: { vessel: Vessel }) {
  </p>
 
  {/* Specs */}
- <div className="mt-5 grid grid-cols-2 gap-x-8">
+ <div className="mt-5 grid grid-cols-2 gap-x-4 lg:gap-x-8">
  {vessel.specs.map((spec) => (
  <div
  key={spec.label}

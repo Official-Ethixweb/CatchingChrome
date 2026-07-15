@@ -25,7 +25,7 @@ export function MeetCaptainSection() {
 
           <h2 className="mt-6 font-display text-[clamp(2.75rem,5.4vw,4.8rem)] uppercase leading-[0.88] text-cream">
             <span className="block">Meet</span>
-            <span className="flex items-baseline gap-[0.28em]">
+            <span className="flex flex-wrap items-baseline gap-x-[0.28em]">
               <span className="text-accent">Captain</span>
               <span>Ryan</span>
             </span>

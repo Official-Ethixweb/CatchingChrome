@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { SiteHeader } from '~/components/SiteHeader'
 import { SiteFooter } from '~/components/SiteFooter'
+import { WaveDivider } from '~/components/WaveDivider'
 import { Eyebrow } from '~/components/Eyebrow'
 import { ArrowRight, ArrowUpRight, FishIcon } from '~/components/icons'
 import {
@@ -57,6 +58,8 @@ function GalleryHeader() {
           <span className="h-px w-6 bg-accent" />
         </div>
       </div>
+
+      <WaveDivider fill="fill-cream" />
     </section>
   )
 }
@@ -184,7 +187,7 @@ function Note({
   children?: React.ReactNode
 }) {
   return (
-    <div className="gal-in flex flex-col justify-center rounded-2xl border border-ink/10 bg-white/60 px-6 py-8">
+    <div className="gal-note gal-in flex flex-col justify-center rounded-2xl border border-ink/10 bg-white/60 px-5 py-7 sm:px-6 sm:py-8">
       <span className="flex items-center gap-2.5 text-[10px] font-bold uppercase tracking-[0.22em] text-ink/40">
         <span className="h-px w-5 bg-accent" />
         {eyebrow}
@@ -356,6 +359,19 @@ function Lightbox({
   onStep: (dir: number) => void
 }) {
   const item = items[index]
+  const touchX = useRef<number | null>(null)
+
+  // A phone has no arrow keys and no hover, so swiping is the only gesture a
+  // visitor arrives already knowing. The buttons stay for everyone else.
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchX.current = e.touches[0].clientX
+  }
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchX.current == null) return
+    const dx = e.changedTouches[0].clientX - touchX.current
+    touchX.current = null
+    if (Math.abs(dx) > 45) onStep(dx < 0 ? 1 : -1)
+  }
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -383,7 +399,12 @@ function Lightbox({
       aria-modal="true"
       aria-label={item.caption}
       onClick={onClose}
-      className="gal-lightbox fixed inset-0 z-[100] flex items-center justify-center bg-ink/95 p-4 backdrop-blur-sm sm:p-8"
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+      /* The extra bottom padding on a phone is the landing strip for the step
+         buttons, which move under the photo there rather than sitting on top
+         of it. */
+      className="gal-lightbox fixed inset-0 z-[100] flex items-center justify-center bg-ink/95 p-4 pb-24 backdrop-blur-sm sm:p-8"
     >
       <button
         type="button"
@@ -408,7 +429,7 @@ function Lightbox({
           onStep(-1)
         }}
         aria-label="Previous photo"
-        className="absolute left-2 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-cream/20 text-cream/70 transition-colors duration-200 hover:border-cta hover:text-cta sm:left-6"
+        className="absolute bottom-7 left-[calc(50%-4.5rem)] z-10 flex h-12 w-12 items-center justify-center rounded-full border border-cream/20 text-cream/70 transition-colors duration-200 hover:border-cta hover:text-cta sm:bottom-auto sm:left-6 sm:h-11 sm:w-11"
       >
         <ArrowRight className="h-4 w-4 rotate-180" />
       </button>
@@ -420,7 +441,7 @@ function Lightbox({
           onStep(1)
         }}
         aria-label="Next photo"
-        className="absolute right-2 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-cream/20 text-cream/70 transition-colors duration-200 hover:border-cta hover:text-cta sm:right-6"
+        className="absolute bottom-7 right-[calc(50%-4.5rem)] z-10 flex h-12 w-12 items-center justify-center rounded-full border border-cream/20 text-cream/70 transition-colors duration-200 hover:border-cta hover:text-cta sm:bottom-auto sm:right-6 sm:h-11 sm:w-11"
       >
         <ArrowRight className="h-4 w-4" />
       </button>
@@ -433,7 +454,7 @@ function Lightbox({
         <img
           src={item.src}
           alt={item.alt}
-          className="max-h-[74vh] w-auto rounded-xl object-contain shadow-2xl"
+          className="max-h-[62vh] w-auto rounded-xl object-contain shadow-2xl sm:max-h-[74vh]"
         />
         <figcaption className="mt-5 flex flex-col items-center gap-2 text-center">
           <span className="text-[15px] font-medium text-cream">

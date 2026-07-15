@@ -4,6 +4,7 @@ import { SiteFooter } from '~/components/SiteFooter'
 import { useState } from 'react'
 import { PhoneIcon, FacebookIcon, InstagramIcon, TikTokIcon, MapPinIcon } from '~/components/icons'
 import { Eyebrow } from '~/components/Eyebrow'
+import { sendContactEnquiry } from '~/lib/contact'
 
 export const Route = createFileRoute('/contact')({
   component: ContactPage,
@@ -44,6 +45,8 @@ function ContactHeader() {
 
 function ContactSection() {
   const [submitted, setSubmitted] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [failed, setFailed] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -53,12 +56,41 @@ function ContactSection() {
     message: '',
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  /**
+   * If delivery fails there is still a real person on the other end, so the
+   * error branch hands the guest a mail link with everything they just typed
+   * already in it. Losing the enquiry is the one outcome worth engineering
+   * against.
+   */
+  const mailtoFallback = (() => {
+    const body = [
+      `Name: ${formData.name}`,
+      `Email: ${formData.email}`,
+      `Phone: ${formData.phone}`,
+      `Trip interest: ${formData.tripType}`,
+      `Group size: ${formData.groupSize}`,
+      '',
+      formData.message,
+    ].join('\n')
+    return `mailto:ryanbfishin@gmail.com?subject=${encodeURIComponent(
+      `Trip enquiry — ${formData.name}`,
+    )}&body=${encodeURIComponent(body)}`
+  })()
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Simulate API call
-    setTimeout(() => {
-      setSubmitted(true)
-    }, 600)
+    if (sending) return
+    setSending(true)
+    setFailed(false)
+    try {
+      const res = await sendContactEnquiry({ data: formData })
+      if (res.ok) setSubmitted(true)
+      else setFailed(true)
+    } catch {
+      setFailed(true)
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
@@ -318,21 +350,54 @@ function ContactSection() {
                       />
                     </div>
 
+                    {failed && (
+                      <div
+                        role="alert"
+                        className="rounded-sm border border-accent/40 bg-accent/5 p-4 text-sm leading-relaxed text-cream/80"
+                      >
+                        <strong className="block font-semibold text-cream">
+                          That didn&apos;t send.
+                        </strong>
+                        <p className="mt-1 text-cream/60">
+                          Nothing you typed is lost. Send it straight to Ryan
+                          instead, or call him — he answers the phone.
+                        </p>
+                        <div className="mt-3 flex flex-wrap gap-2.5">
+                          <a
+                            href={mailtoFallback}
+                            className="btn-outline-cta px-4 py-2 text-[11px] font-bold uppercase tracking-[0.16em]"
+                          >
+                            Email It
+                          </a>
+                          <a
+                            href="tel:5039369090"
+                            className="btn-outline-cta px-4 py-2 text-[11px] font-bold uppercase tracking-[0.16em]"
+                          >
+                            (503) 936-9090
+                          </a>
+                        </div>
+                      </div>
+                    )}
+
                     <button
                       type="submit"
-                      className="btn-primary group w-full inline-flex items-center justify-center gap-2 py-4 text-[13px] font-semibold uppercase tracking-[0.14em]"
+                      disabled={sending}
+                      aria-busy={sending}
+                      className="btn-primary group w-full inline-flex items-center justify-center gap-2 py-4 text-[13px] font-semibold uppercase tracking-[0.14em] disabled:cursor-not-allowed disabled:opacity-60"
                     >
-                      Send Message
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                      >
-                        <line x1="22" y1="2" x2="11" y2="13" />
-                        <polygon points="22 2 15 22 11 13 2 9 22 2" />
-                      </svg>
+                      {sending ? 'Sending…' : 'Send Message'}
+                      {!sending && (
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                          className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                        >
+                          <line x1="22" y1="2" x2="11" y2="13" />
+                          <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                        </svg>
+                      )}
                     </button>
                   </form>
                 </>

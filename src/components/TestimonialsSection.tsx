@@ -86,7 +86,7 @@ export function TestimonialsSection() {
 
         {/* Headline */}
         <h2 className="mt-6 font-display text-[clamp(2.75rem,5.5vw,4.8rem)] uppercase leading-[0.9] text-ink">
-          <span className="flex items-baseline justify-center gap-[0.22em]">
+          <span className="flex flex-wrap items-baseline justify-center gap-x-[0.22em]">
             <span>In Their</span>
             <span className="text-accent">own</span>
           </span>
