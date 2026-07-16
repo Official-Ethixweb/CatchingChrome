@@ -26,8 +26,10 @@ const LOGO = '/Catching-Chrome-logo_color-1536x1533.png'
 const PHONE = '(503) 936-9090'
 const PHONE_HREF = 'tel:5039369090'
 
+// The nav only earns its roomier sizing at 2xl. Below that the row has to seat
+// the logo, phone and socials as well, and the wider tracking overflows it.
 const NAV_LINK_CLASS =
-  'nav-link px-2.5 py-1.5 text-[11px] uppercase xl:px-3 xl:text-[12.5px]'
+  'nav-link px-2.5 py-1.5 text-[11px] uppercase 2xl:px-3 2xl:text-[12.5px]'
 
 function NavLinks() {
   return (
@@ -166,7 +168,7 @@ export function SiteHeader() {
             />
           </a>
 
-          <nav className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 font-medium tracking-[0.14em] text-white/90 lg:flex xl:gap-1.5 xl:tracking-[0.16em]">
+          <nav className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 font-medium tracking-[0.14em] text-white/90 lg:flex 2xl:gap-1.5 2xl:tracking-[0.16em]">
             <NavLinks />
           </nav>
 
@@ -185,15 +187,15 @@ export function SiteHeader() {
               <PhoneIcon className="h-4 w-4" />
               {PHONE}
             </a>
-            <div className="hidden items-center gap-2 md:flex lg:hidden 2xl:flex">
+            <div className="hidden items-center gap-1.5 md:flex lg:hidden xl:flex xl:gap-2">
               {SOCIALS.map(({ Icon, label }) => (
                 <a
                   key={label}
                   href="#"
                   aria-label={label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-white/40 text-white transition-colors duration-200 hover:border-cta hover:text-cta"
+                  className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-white/40 text-white transition-colors duration-200 hover:border-cta hover:text-cta xl:h-9 xl:w-9"
                 >
-                  <Icon className="h-4 w-4" />
+                  <Icon className="h-3.5 w-3.5 xl:h-4 xl:w-4" />
                 </a>
               ))}
             </div>

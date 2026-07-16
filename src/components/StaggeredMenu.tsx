@@ -24,10 +24,7 @@ interface StaggeredMenuProps {
   displayItemNumbering?: boolean;
   className?: string;
   logoUrl?: string;
-  menuButtonColor?: string;
-  openMenuButtonColor?: string;
   accentColor?: string;
-  changeMenuColorOnOpen?: boolean;
   isFixed?: boolean;
   stuck?: boolean;
   closeOnClickAway?: boolean;
@@ -44,10 +41,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   displayItemNumbering = true,
   className,
   logoUrl = '/Catching-Chrome-logo_color-1536x1533.png',
-  menuButtonColor = '#fff',
-  openMenuButtonColor = '#fff',
   accentColor = '#00CCCC',
-  changeMenuColorOnOpen = true,
   isFixed = false,
   stuck = false,
   closeOnClickAway = true,
@@ -70,7 +64,6 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   const closeTweenRef = useRef<gsap.core.Tween | null>(null);
   const spinTweenRef = useRef<gsap.core.Tween | null>(null);
   const textCycleAnimRef = useRef<gsap.core.Tween | null>(null);
-  const colorTweenRef = useRef<gsap.core.Tween | null>(null);
   const toggleBtnRef = useRef<HTMLButtonElement>(null);
   const busyRef = useRef(false);
   const itemEntranceTweenRef = useRef<gsap.core.Tween | null>(null);
@@ -102,10 +95,9 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       gsap.set(plusV, { transformOrigin: '50% 50%', rotate: 90 });
       gsap.set(icon, { rotate: 0, transformOrigin: '50% 50%' });
       gsap.set(textInner, { yPercent: 0 });
-      if (toggleBtnRef.current) gsap.set(toggleBtnRef.current, { color: menuButtonColor });
     });
     return () => ctx.revert();
-  }, [menuButtonColor, position]);
+  }, [position]);
 
   const buildOpenTimeline = useCallback(() => {
     const panel = panelRef.current;
@@ -279,37 +271,6 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     }
   }, []);
 
-  const animateColor = useCallback(
-    (opening: boolean) => {
-      const btn = toggleBtnRef.current;
-      if (!btn) return;
-      colorTweenRef.current?.kill();
-      if (changeMenuColorOnOpen) {
-        const targetColor = opening ? openMenuButtonColor : menuButtonColor;
-        colorTweenRef.current = gsap.to(btn, {
-          color: targetColor,
-          delay: 0.18,
-          duration: 0.3,
-          ease: 'power2.out'
-        });
-      } else {
-        gsap.set(btn, { color: menuButtonColor });
-      }
-    },
-    [openMenuButtonColor, menuButtonColor, changeMenuColorOnOpen]
-  );
-
-  useEffect(() => {
-    if (toggleBtnRef.current) {
-      if (changeMenuColorOnOpen) {
-        const targetColor = openRef.current ? openMenuButtonColor : menuButtonColor;
-        gsap.set(toggleBtnRef.current, { color: targetColor });
-      } else {
-        gsap.set(toggleBtnRef.current, { color: menuButtonColor });
-      }
-    }
-  }, [changeMenuColorOnOpen, menuButtonColor, openMenuButtonColor]);
-
   const animateText = useCallback((opening: boolean) => {
     const inner = textInnerRef.current;
     if (!inner) return;
@@ -350,9 +311,8 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       playClose();
     }
     animateIcon(target);
-    animateColor(target);
     animateText(target);
-  }, [playOpen, playClose, animateIcon, animateColor, animateText, onMenuOpen, onMenuClose]);
+  }, [playOpen, playClose, animateIcon, animateText, onMenuOpen, onMenuClose]);
 
   const closeMenu = useCallback(() => {
     if (openRef.current) {
@@ -361,10 +321,9 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       onMenuClose?.();
       playClose();
       animateIcon(false);
-      animateColor(false);
       animateText(false);
     }
-  }, [playClose, animateIcon, animateColor, animateText, onMenuClose]);
+  }, [playClose, animateIcon, animateText, onMenuClose]);
 
   // Close the menu on route navigation
   useEffect(() => {
