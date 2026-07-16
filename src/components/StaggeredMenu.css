@@ -94,9 +94,10 @@
   color: var(--color-cream, #F7F6F2); /* Cream color on dark sticky bar */
 }
 
-/* Always cream when open */
+/* Always cream when open — delayed so it flips once the panel is behind it */
 .staggered-menu-wrapper[data-open] .sm-toggle {
   color: var(--color-cream, #F7F6F2) !important;
+  transition-delay: 0.18s;
 }
 
 .sm-toggle:focus-visible {
