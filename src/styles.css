@@ -98,11 +98,21 @@
   }
 
   body {
-    background-color: var(--color-ink);
+    /* Match the dominant chapter colour so sub-pixel seams between sections
+       don't bleed a hairline of a contrasting page background (the thin lines
+       that showed at section breaks, worst on fractional-DPR mobile screens).
+       Cream by default (the light chapters), navy while a dark chapter owns
+       the viewport — tracks the same [data-theme] the sections do. */
+    background-color: var(--color-cream);
     color: var(--color-cream);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    transition: background-color 0.55s ease;
+  }
+
+  [data-theme='dark'] body {
+    background-color: var(--color-ink);
   }
 }
 

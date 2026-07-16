@@ -53,9 +53,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   const panelRef = useRef<HTMLElement>(null);
   const preLayersRef = useRef<HTMLDivElement>(null);
   const preLayerElsRef = useRef<Element[]>([]);
-  const plusHRef = useRef<HTMLSpanElement>(null);
-  const plusVRef = useRef<HTMLSpanElement>(null);
-  const iconRef = useRef<HTMLSpanElement>(null);
+  const iconRef = useRef<SVGSVGElement>(null);
   const textInnerRef = useRef<HTMLSpanElement>(null);
   const textWrapRef = useRef<HTMLSpanElement>(null);
   const [textLines, setTextLines] = useState<string[]>(['Menu', 'Close']);
@@ -74,11 +72,9 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     const ctx = gsap.context(() => {
       const panel = panelRef.current;
       const preContainer = preLayersRef.current;
-      const plusH = plusHRef.current;
-      const plusV = plusVRef.current;
       const icon = iconRef.current;
       const textInner = textInnerRef.current;
-      if (!panel || !plusH || !plusV || !icon || !textInner) return;
+      if (!panel || !icon || !textInner) return;
 
       let preLayers: Element[] = [];
       if (preContainer) {
@@ -91,8 +87,6 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       if (preContainer) {
         gsap.set(preContainer, { xPercent: 0, opacity: 1 });
       }
-      gsap.set(plusH, { transformOrigin: '50% 50%', rotate: 0 });
-      gsap.set(plusV, { transformOrigin: '50% 50%', rotate: 90 });
       gsap.set(icon, { rotate: 0, transformOrigin: '50% 50%' });
       gsap.set(textInner, { yPercent: 0 });
     });
@@ -400,10 +394,18 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
               ))}
             </span>
           </span>
-          <span ref={iconRef} className="sm-icon" aria-hidden="true">
-            <span ref={plusHRef} className="sm-icon-line" />
-            <span ref={plusVRef} className="sm-icon-line sm-icon-line-v" />
-          </span>
+          {/* SVG plus — GSAP rotates the whole icon to 225° to read as a cross
+              when open. Stroke-based so it paints reliably on mobile GPUs (the
+              previous 2px divs could drop out intermittently). */}
+          <svg
+            ref={iconRef}
+            className="sm-icon"
+            viewBox="0 0 14 14"
+            aria-hidden="true"
+          >
+            <line className="sm-icon-line" x1="0.75" y1="7" x2="13.25" y2="7" />
+            <line className="sm-icon-line" x1="7" y1="0.75" x2="7" y2="13.25" />
+          </svg>
         </button>
       </header>
 
@@ -475,6 +477,10 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                       href={s.link}
                       className="sm-socials-link"
                       onClick={closeMenu}
+                      {...(s.link !== '#' && {
+                        target: '_blank',
+                        rel: 'noopener noreferrer',
+                      })}
                     >
                       {s.label}
                     </a>
