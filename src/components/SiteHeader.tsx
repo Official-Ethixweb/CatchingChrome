@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from '@tanstack/react-router'
-import { FacebookIcon, InstagramIcon, PhoneIcon, TikTokIcon } from './icons'
+import { PhoneIcon } from './icons'
+import { SOCIALS } from '~/lib/socials'
+import { OregonWeather } from './OregonWeather'
 import { StaggeredMenu } from './StaggeredMenu'
 
 const NAV_ITEMS = [
@@ -14,12 +16,6 @@ const NAV_ITEMS = [
     href: 'https://envy-prints.com/collections/catching-chrome-guide-service',
   },
   { label: 'Contact', to: '/contact' },
-]
-
-const SOCIALS = [
-  { Icon: FacebookIcon, label: 'Facebook' },
-  { Icon: InstagramIcon, label: 'Instagram' },
-  { Icon: TikTokIcon, label: 'TikTok' },
 ]
 
 const LOGO = '/Catching-Chrome-logo_color-1536x1533.png'
@@ -68,7 +64,7 @@ function StickyBar({ visible }: { visible: boolean }) {
       }`}
       aria-hidden={!visible}
     >
-      <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-4 px-6 py-2.5 md:px-10">
+      <div className="relative mx-auto flex max-w-[1440px] items-center justify-between gap-4 px-6 py-2.5 md:px-10">
         <a href="/" className="flex shrink-0 items-center">
           <img
             src={LOGO}
@@ -76,6 +72,13 @@ function StickyBar({ visible }: { visible: boolean }) {
             className="h-12 w-auto object-contain sm:h-14 md:h-16"
           />
         </a>
+
+        {/* Live Oregon weather, centred on the row axis (absolute, so uneven
+            logo/actions widths don't pull it off-centre). Hidden on the cramped
+            mobile bar; pointer-events off so it never blocks the controls. */}
+        <div className="pointer-events-none absolute inset-y-0 left-1/2 hidden -translate-x-1/2 items-center lg:flex">
+          <OregonWeather />
+        </div>
 
         <div className="flex shrink-0 items-center gap-2.5 pr-20 md:gap-3 lg:pr-0">
           <a
@@ -87,11 +90,15 @@ function StickyBar({ visible }: { visible: boolean }) {
           </a>
 
           <div className="hidden items-center gap-2 xl:flex">
-            {SOCIALS.map(({ Icon, label }) => (
+            {SOCIALS.map(({ Icon, label, href }) => (
               <a
                 key={label}
-                href="#"
+                href={href}
                 aria-label={label}
+                {...(href !== '#' && {
+                  target: '_blank',
+                  rel: 'noopener noreferrer',
+                })}
                 tabIndex={visible ? 0 : -1}
                 className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-current opacity-60 transition-colors duration-200 hover:border-cta hover:text-cta hover:opacity-100"
               >
@@ -188,11 +195,15 @@ export function SiteHeader() {
               {PHONE}
             </a>
             <div className="hidden items-center gap-1.5 md:flex lg:hidden xl:flex xl:gap-2">
-              {SOCIALS.map(({ Icon, label }) => (
+              {SOCIALS.map(({ Icon, label, href }) => (
                 <a
                   key={label}
-                  href="#"
+                  href={href}
                   aria-label={label}
+                  {...(href !== '#' && {
+                    target: '_blank',
+                    rel: 'noopener noreferrer',
+                  })}
                   className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-white/40 text-white transition-colors duration-200 hover:border-cta hover:text-cta xl:h-9 xl:w-9"
                 >
                   <Icon className="h-3.5 w-3.5 xl:h-4 xl:w-4" />
@@ -213,7 +224,7 @@ export function SiteHeader() {
         accentColor="#00CCCC"
         logoUrl={LOGO}
         items={NAV_ITEMS}
-        socialItems={SOCIALS.map((s) => ({ label: s.label, link: '#' }))}
+        socialItems={SOCIALS.map((s) => ({ label: s.label, link: s.href }))}
       />
     </>
   )

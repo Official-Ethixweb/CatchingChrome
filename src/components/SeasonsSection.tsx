@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type SVGProps } from 'react'
-import { ArrowUpRight, ChevronDown } from './icons'
+import { ArrowUpRight, ChevronDown, WeatherGlyph } from './icons'
 import { FishGlyph } from './FishArt'
 import { Eyebrow } from './Eyebrow'
 import {
@@ -23,67 +23,6 @@ function StarMark(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
       <path d="M12 2.5l2.9 5.88 6.49.94-4.7 4.58 1.11 6.46L12 17.9l-5.8 3.05 1.1-6.46-4.69-4.58 6.49-.94L12 2.5z" />
-    </svg>
-  )
-}
-
-function WeatherGlyph({
-  id,
-  ...props
-}: { id: number } & Omit<SVGProps<SVGSVGElement>, 'id'>) {
-  const common = {
-    viewBox: '0 0 24 24',
-    fill: 'none',
-    stroke: 'currentColor',
-    strokeWidth: 1.6,
-    strokeLinecap: 'round' as const,
-    strokeLinejoin: 'round' as const,
-    'aria-hidden': true,
-    ...props,
-  }
-  if (id >= 200 && id < 300)
-    // thunderstorm
-    return (
-      <svg {...common}>
-        <path d="M17 15a4 4 0 0 0-1-7.87A5.5 5.5 0 0 0 5.5 9 4.5 4.5 0 0 0 6 18" />
-        <path d="m12 12-2 4h3l-2 4" />
-      </svg>
-    )
-  if (id >= 300 && id < 600)
-    // rain / drizzle
-    return (
-      <svg {...common}>
-        <path d="M17 14a4 4 0 0 0-1-7.87A5.5 5.5 0 0 0 5.5 8 4.5 4.5 0 0 0 6 17" />
-        <path d="M9 18l-1 2M13 18l-1 2M17 18l-1 2" />
-      </svg>
-    )
-  if (id >= 600 && id < 700)
-    // snow
-    return (
-      <svg {...common}>
-        <path d="M17 14a4 4 0 0 0-1-7.87A5.5 5.5 0 0 0 5.5 8 4.5 4.5 0 0 0 6 17" />
-        <path d="M9 19h.01M13 19h.01M11 21h.01" />
-      </svg>
-    )
-  if (id >= 700 && id < 800)
-    // mist / fog
-    return (
-      <svg {...common}>
-        <path d="M4 9h16M4 13h16M6 17h12" />
-      </svg>
-    )
-  if (id === 800)
-    // clear
-    return (
-      <svg {...common}>
-        <circle cx="12" cy="12" r="4.2" />
-        <path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6L17 7M7 17l-1.4 1.4" />
-      </svg>
-    )
-  // clouds
-  return (
-    <svg {...common}>
-      <path d="M17.5 18a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.6-1.5A4 4 0 0 0 6 18z" />
     </svg>
   )
 }

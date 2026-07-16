@@ -1,5 +1,6 @@
 import { Link } from '@tanstack/react-router'
-import { FacebookIcon, InstagramIcon, PhoneIcon, TikTokIcon } from './icons'
+import { PhoneIcon } from './icons'
+import { SOCIALS } from '~/lib/socials'
 
 const QUICK_LINKS = [
   { label: 'About Us', to: '/about' },
@@ -11,12 +12,6 @@ const QUICK_LINKS = [
     href: 'https://envy-prints.com/collections/catching-chrome-guide-service',
   },
   { label: 'Contact', to: '/contact' },
-]
-
-const SOCIALS = [
-  { Icon: FacebookIcon, label: 'Facebook' },
-  { Icon: InstagramIcon, label: 'Instagram' },
-  { Icon: TikTokIcon, label: 'TikTok' },
 ]
 
 export function SiteFooter() {
@@ -37,11 +32,15 @@ export function SiteFooter() {
             Northwest&apos;s most pristine waters.
           </p>
           <div className="flex items-center gap-3">
-            {SOCIALS.map(({ Icon, label }) => (
+            {SOCIALS.map(({ Icon, label, href }) => (
               <a
                 key={label}
-                href="#"
+                href={href}
                 aria-label={label}
+                {...(href !== '#' && {
+                  target: '_blank',
+                  rel: 'noopener noreferrer',
+                })}
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-cream/15 bg-cream/5 text-cream/80 transition-colors duration-200 hover:border-accent hover:bg-accent hover:text-ink"
               >
                 <Icon className="h-4 w-4" />

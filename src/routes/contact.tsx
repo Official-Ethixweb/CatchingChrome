@@ -2,7 +2,8 @@ import { createFileRoute } from '@tanstack/react-router'
 import { SiteHeader } from '~/components/SiteHeader'
 import { SiteFooter } from '~/components/SiteFooter'
 import { useState } from 'react'
-import { PhoneIcon, FacebookIcon, InstagramIcon, TikTokIcon, MapPinIcon } from '~/components/icons'
+import { PhoneIcon, MapPinIcon } from '~/components/icons'
+import { SOCIALS } from '~/lib/socials'
 import { Eyebrow } from '~/components/Eyebrow'
 import { sendContactEnquiry } from '~/lib/contact'
 
@@ -175,15 +176,15 @@ function ContactSection() {
             <div className="mt-10 border-t border-cream/10 pt-8">
               <span className="text-[11px] font-bold uppercase tracking-wider text-cream/40">Follow Captain Ryan</span>
               <div className="mt-4 flex items-center gap-3">
-                {[
-                  { Icon: FacebookIcon, label: 'Facebook', href: '#' },
-                  { Icon: InstagramIcon, label: 'Instagram', href: '#' },
-                  { Icon: TikTokIcon, label: 'TikTok', href: '#' },
-                ].map(({ Icon, label, href }) => (
+                {SOCIALS.map(({ Icon, label, href }) => (
                   <a
                     key={label}
                     href={href}
                     aria-label={label}
+                    {...(href !== '#' && {
+                      target: '_blank',
+                      rel: 'noopener noreferrer',
+                    })}
                     className="flex h-10 w-10 items-center justify-center rounded-full border border-cream/15 bg-white/[0.02] text-cream/70 transition-all hover:border-accent hover:bg-accent hover:text-ink"
                   >
                     <Icon className="h-4.5 w-4.5" />
