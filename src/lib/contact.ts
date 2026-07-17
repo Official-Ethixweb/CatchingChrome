@@ -110,7 +110,7 @@ export const sendContactEnquiry = createServerFn({ method: 'POST' })
           to: [to],
           // So Ryan can hit reply and land in the guest's inbox.
           reply_to: email,
-          subject: `Trip enquiry — ${name} (${tripType}, ${groupSize})`,
+          subject: `Trip enquiry from ${name} (${tripType}, ${groupSize})`,
           html,
         }),
         signal: AbortSignal.timeout(10000),

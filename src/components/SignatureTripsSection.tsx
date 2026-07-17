@@ -4,19 +4,19 @@ import { Eyebrow } from './Eyebrow'
 
 const TRIPS = [
   {
-    season: 'AUG – OCT',
+    season: 'AUG to OCT',
     title: 'Fall Chinook',
     image: '/fallchinook.png',
     body: 'Our best pure king fishery. Season opens in August and runs through late October, the most powerful, chrome-bright kings of the year.',
   },
   {
-    season: 'MID-MAR – MID-JUN',
+    season: 'MID-MAR to MID-JUN',
     title: 'Spring Chinook',
     image: '/summerchinook.png',
     body: 'Columbia River spring chinook, prized worldwide for their flavor. Anglers travel across the country for this run.',
   },
   {
-    season: 'MID-MAY – MID-JUN',
+    season: 'MID-MAY to MID-JUN',
     title: 'American Shad',
     image: '/wintersteelhead.png',
     body: 'Warm-weather, light-gear action. Non-stop bites make this the perfect trip for kids or first-time anglers.',

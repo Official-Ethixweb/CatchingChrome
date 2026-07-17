@@ -13,15 +13,54 @@ import { getRiverConditions, type RiverConditions } from '~/lib/weather'
 export function OregonWeather({ className = '' }: { className?: string }) {
   const [wx, setWx] = useState<RiverConditions | null>(null)
 
+  // Keep the readout live: fetch on mount, retry a few times if the call fails
+  // or the key is briefly unavailable, refresh every 10 minutes, and refetch
+  // whenever the tab regains focus. A failed refresh keeps the last good
+  // reading on screen rather than blanking it.
   useEffect(() => {
     let alive = true
-    getRiverConditions()
-      .then((data) => {
-        if (alive) setWx(data)
-      })
-      .catch(() => {})
+    let attempts = 0
+
+    const load = () => {
+      getRiverConditions()
+        .then((data) => {
+          if (!alive) return
+          if (data) {
+            setWx(data)
+            attempts = 0
+          } else if (attempts < 3) {
+            attempts++
+            setTimeout(load, 4000)
+          }
+        })
+        .catch(() => {
+          if (alive && attempts < 3) {
+            attempts++
+            setTimeout(load, 4000)
+          }
+        })
+    }
+
+    load()
+    const refresh = setInterval(
+      () => {
+        attempts = 0
+        load()
+      },
+      10 * 60 * 1000,
+    )
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') {
+        attempts = 0
+        load()
+      }
+    }
+    document.addEventListener('visibilitychange', onVisible)
+
     return () => {
       alive = false
+      clearInterval(refresh)
+      document.removeEventListener('visibilitychange', onVisible)
     }
   }, [])
 

@@ -66,7 +66,7 @@ export const SPECIES: Species[] = [
     id: 'spring-chinook',
     name: 'Spring Chinook',
     shape: 'salmon',
-    peak: 'Apr – May',
+    peak: 'Apr to May',
     rivers: ['Willamette', 'Clackamas', 'Sandy', 'McKenzie', 'Rogue'],
     blurb:
       'Prized worldwide for their rich, high-fat meat. The first great run of the year and worth the wait.',
@@ -87,7 +87,7 @@ export const SPECIES: Species[] = [
     id: 'fall-chinook',
     name: 'Fall Chinook',
     shape: 'salmon',
-    peak: 'Late Aug – Oct',
+    peak: 'Late Aug to Oct',
     rivers: [
       'Columbia',
       'Rogue',
@@ -105,7 +105,7 @@ export const SPECIES: Species[] = [
     id: 'coho',
     name: 'Coho (Silver)',
     shape: 'salmon',
-    peak: 'Sep – Oct',
+    peak: 'Sep to Oct',
     rivers: ['Tillamook Bay', 'Siletz', 'Alsea', 'Siuslaw', 'Coos', 'Coquille'],
     blurb:
       'Aggressive, acrobatic silvers that flood the coastal rivers in fall. A blast on lighter gear.',

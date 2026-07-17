@@ -74,7 +74,7 @@ function ContactSection() {
       formData.message,
     ].join('\n')
     return `mailto:ryanbfishin@gmail.com?subject=${encodeURIComponent(
-      `Trip enquiry — ${formData.name}`,
+      `Trip enquiry from ${formData.name}`,
     )}&body=${encodeURIComponent(body)}`
   })()
 
@@ -361,7 +361,7 @@ function ContactSection() {
                         </strong>
                         <p className="mt-1 text-cream/60">
                           Nothing you typed is lost. Send it straight to Ryan
-                          instead, or call him — he answers the phone.
+                          instead, or call him. He answers the phone.
                         </p>
                         <div className="mt-3 flex flex-wrap gap-2.5">
                           <a

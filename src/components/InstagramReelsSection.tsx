@@ -79,7 +79,7 @@ export function InstagramReelsSection() {
           </h2>
 
           <p className="mt-7 max-w-md text-[17px] leading-relaxed text-ink/60">
-            Chrome-bright chinook, screaming drags and Oregon at first light —
+            Chrome-bright chinook, screaming drags and Oregon at first light.
             Captain Ryan posts it all. Tap a reel to watch it on Instagram, then
             follow along for the latest from the water.
           </p>

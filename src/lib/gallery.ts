@@ -159,8 +159,8 @@ export const GROUPS: Array<{ id: MediaGroup; label: string; blurb: string }> = [
 ]
 
 export const SPECIES: Array<{ id: Species; label: string; note: string }> = [
-  { id: 'chinook', label: 'Chinook', note: 'King salmon — the heavyweight' },
-  { id: 'coho', label: 'Coho', note: 'Silvers — fast, bright, acrobatic' },
+  { id: 'chinook', label: 'Chinook', note: 'King salmon, the heavyweight' },
+  { id: 'coho', label: 'Coho', note: 'Silvers: fast, bright, acrobatic' },
   { id: 'steelhead', label: 'Steelhead', note: 'Winter drift-boat chrome' },
   { id: 'sturgeon', label: 'Sturgeon', note: 'Prehistoric, and enormous' },
 ]

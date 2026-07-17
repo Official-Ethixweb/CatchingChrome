@@ -636,7 +636,7 @@ function GalleryPage() {
           <div className="mx-auto max-w-[1440px] px-6 md:px-10">
             {filtered.length === 0 ? (
               <p className="py-24 text-center text-[15px] text-ink/45">
-                No shots match that combination yet — try a different species.
+                No shots match that combination yet. Try a different species.
               </p>
             ) : (
               <div key={passKey} className="gal-mosaic">
