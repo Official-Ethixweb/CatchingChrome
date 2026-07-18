@@ -77,6 +77,10 @@ export function MeetCaptainSection() {
               <img
                 src="/rsw_1280h_1118.webp"
                 alt="Captain Ryan holding a Columbia River chinook"
+                width={1118}
+                height={1280}
+                loading="lazy"
+                decoding="async"
                 className="h-full w-full object-cover"
               />
             </div>

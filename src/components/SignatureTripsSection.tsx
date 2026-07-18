@@ -4,23 +4,37 @@ import { Eyebrow } from './Eyebrow'
 
 const TRIPS = [
   {
-    season: 'AUG to OCT',
+    season: 'Aug to Oct',
     title: 'Fall Chinook',
     image: '/fallchinook.png',
     body: 'Our best pure king fishery. Season opens in August and runs through late October, the most powerful, chrome-bright kings of the year.',
   },
   {
-    season: 'MID-MAR to MID-JUN',
+    season: 'Mid March to Mid June',
     title: 'Spring Chinook',
     image: '/summerchinook.png',
     body: 'Columbia River spring chinook, prized worldwide for their flavor. Anglers travel across the country for this run.',
   },
   {
-    season: 'MID-MAY to MID-JUN',
-    title: 'American Shad',
+    season: 'Dec to April',
+    title: 'Winter Steelhead',
     image: '/wintersteelhead.png',
+    body: 'Chrome winter fish on the coastal tributaries. Hard-running, acrobatic, and the reason a lot of anglers put up with the rain.',
+  },
+  {
+    season: 'May to July',
+    title: 'Sturgeon',
+    image: '/sturgeon.jpg',
+    body: 'The prehistoric heavyweight of the Columbia. Big, powerful fish that pull back harder than anything else in the river.',
+  },
+  // Shad stays last: a niche fishery, so the marquee runs get the top spots.
+  {
+    season: 'Mid May to Mid June',
+    title: 'American Shad',
+    image: '/americanshad.png',
     body: 'Warm-weather, light-gear action. Non-stop bites make this the perfect trip for kids or first-time anglers.',
   },
+  // Crab has its own dedicated section (CrabTripsSection) rather than a card here.
 ]
 
 // No page exists per destination, so these point at the excursions page rather
@@ -72,6 +86,8 @@ export function SignatureTripsSection({ className = "bg-cream" }: { className?: 
                 <img
                   src={trip.image}
                   alt={trip.title}
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                 />
                 {/* Darkening wash on hover for caption legibility */}

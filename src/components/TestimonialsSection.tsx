@@ -9,6 +9,10 @@ import {
 
 const AUTOPLAY_MS = 3000
 
+// Opens the Google Maps review dialog for the business listing.
+const GOOGLE_REVIEW_URL =
+  'https://www.google.com/maps/place//@45.4819691,-122.6543856,11z/data=!3m1!4b1!4m3!3m2!1s0x5e6214cf4e6cde5:0xfbf37ae5c8f3bd19!12e1?entry=ttu&g_ep=EgoyMDI2MDcxNC4wIKXMDSoASAFQAw%3D%3D'
+
 function Stars({ rating }: { rating: number }) {
   return (
     <span
@@ -215,6 +219,19 @@ export function TestimonialsSection() {
         >
           <ArrowRight className="h-4 w-4" />
         </button>
+      </div>
+
+      {/* Leave-a-review CTA */}
+      <div className="mt-12 flex justify-center px-6">
+        <a
+          href={GOOGLE_REVIEW_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 rounded-full bg-accent px-8 py-3.5 text-[13px] font-bold uppercase tracking-[0.18em] text-ink transition-opacity duration-200 hover:opacity-85"
+        >
+          Leave a Review on Google
+          <ArrowRight className="h-4 w-4" />
+        </a>
       </div>
     </section>
   )
