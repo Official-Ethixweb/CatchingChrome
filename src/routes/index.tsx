@@ -4,12 +4,12 @@ import { PartnersSection } from '~/components/PartnersSection'
 import { WelcomeSection } from '~/components/WelcomeSection'
 import { CustomMerchSection } from '~/components/CustomMerchSection'
 import { SignatureTripsSection } from '~/components/SignatureTripsSection'
+import { CrabTripsSection } from '~/components/CrabTripsSection'
 import { SeasonsSection } from '~/components/SeasonsSection'
 import { MeetCaptainSection } from '~/components/MeetCaptainSection'
 import { FleetSection } from '~/components/FleetSection'
 import { BoatRampsSection } from '~/components/BoatRampsSection'
 import { TestimonialsSection } from '~/components/TestimonialsSection'
-import { InstagramReelsSection } from '~/components/InstagramReelsSection'
 import { FaqSection } from '~/components/FaqSection'
 import { SiteFooter } from '~/components/SiteFooter'
 
@@ -26,8 +26,8 @@ function Home() {
         <WelcomeSection />
         <MeetCaptainSection />
         <TestimonialsSection />
-        <InstagramReelsSection />
         <SignatureTripsSection />
+        <CrabTripsSection />
         <SeasonsSection />
         <FleetSection />
         <BoatRampsSection />

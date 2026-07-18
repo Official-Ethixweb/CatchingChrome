@@ -12,18 +12,28 @@ type PricingItem = {
 const PRICING_ITEMS: PricingItem[] = [
   {
     name: 'Salmon Trips',
-    price: 'Full Day $250 / Half Day $175',
+    price: 'Full Day $250 / Half Day $150',
     subtext: 'Targeting hard-fighting Chinook and Coho on the Columbia and coastal rivers.',
   },
   {
     name: 'Steelhead Trips',
-    price: '$200 / person',
+    price: '$250 / person',
     subtext: 'Chasing legendary winter and summer runs with light tackle or fly rods.',
   },
   {
-    name: 'Shad & Crabbing Trips',
+    name: 'Sturgeon Trips',
+    price: '$250 / person',
+    subtext: 'Battling the prehistoric heavyweights of the Columbia, the hardest pull in the river.',
+  },
+  {
+    name: 'Crab Trips',
+    price: 'From $150 / person',
+    subtext: 'Ocean-fresh Dungeness off the Oregon coast. Pots, bait and gear all handled for you.',
+  },
+  {
+    name: 'Shad Trips',
     price: 'Call for pricing',
-    subtext: 'Non-stop action for the family, or ocean-fresh crabbing on the bays.',
+    subtext: 'Non-stop light gear action, and the perfect first trip for kids.',
     isCallForPricing: true,
   },
   {

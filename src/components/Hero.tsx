@@ -12,30 +12,47 @@ const SLIDES = [
 
 export function Hero() {
   const [active, setActive] = useState(0)
+  // Only the first slide loads with the page — it's the LCP. The rest are
+  // mounted after first paint so they don't compete for bandwidth on slow
+  // connections (this was pulling ~2.3MB of JPGs before the hero could show).
+  const [loadRest, setLoadRest] = useState(false)
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const warm = setTimeout(() => setLoadRest(true), 1500)
     const id = setInterval(() => {
       setActive((a) => (a + 1) % SLIDES.length)
     }, 5500)
-    return () => clearInterval(id)
+    return () => {
+      clearTimeout(warm)
+      clearInterval(id)
+    }
   }, [])
 
   return (
     <section className="relative h-screen min-h-[640px] w-full bg-ink">
       {/* Background slideshow */}
       <div className="absolute inset-0 overflow-hidden">
-        {SLIDES.map((src, i) => (
-          <img
-            key={src}
-            src={src}
-            alt=""
-            aria-hidden="true"
-            className={`hero-kenburns absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-[1600ms] ease-in-out ${
-              i === active ? 'opacity-100' : 'opacity-0'
-            }`}
-          />
-        ))}
+        {SLIDES.map((src, i) => {
+          // Defer every slide after the first until the hero has painted.
+          if (i > 0 && !loadRest) return null
+          return (
+            <img
+              key={src}
+              src={src}
+              alt=""
+              aria-hidden="true"
+              width={1920}
+              height={1280}
+              decoding="async"
+              loading={i === 0 ? 'eager' : 'lazy'}
+              fetchPriority={i === 0 ? 'high' : 'low'}
+              className={`hero-kenburns absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-[1600ms] ease-in-out ${
+                i === active ? 'opacity-100' : 'opacity-0'
+              }`}
+            />
+          )
+        })}
       </div>
 
       {/* Legibility overlay — evenly weighted now that the copy is centred */}

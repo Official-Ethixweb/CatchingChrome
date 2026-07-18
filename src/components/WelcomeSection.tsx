@@ -17,6 +17,10 @@ export function WelcomeSection() {
             <img
               src="/20240831_124653-1488x1536.jpg"
               alt="Guests aboard with a limit of Columbia River salmon"
+              width={1488}
+              height={1536}
+              loading="lazy"
+              decoding="async"
               className="h-full w-full object-cover"
             />
           </div>
