@@ -17,6 +17,7 @@ function Stars({ rating }: { rating: number }) {
   return (
     <span
       className="flex items-center gap-1"
+      role="img"
       aria-label={`${rating} out of 5 stars`}
     >
       {[0, 1, 2, 3, 4].map((i) => (
@@ -159,7 +160,7 @@ export function TestimonialsSection() {
                       {t.author}
                     </span>
                     {t.relativeTime && (
-                      <span className="text-[11px] tracking-[0.08em] text-ink/40">
+                      <span className="text-[11px] tracking-[0.08em] text-ink/70">
                         {t.relativeTime}
                       </span>
                     )}

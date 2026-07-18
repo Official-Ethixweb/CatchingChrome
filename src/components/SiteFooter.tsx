@@ -27,7 +27,7 @@ export function SiteFooter() {
               className="h-28 w-auto object-contain"
             />
           </a>
-          <p className="max-w-xs text-center text-sm leading-relaxed text-cream/50 md:text-left">
+          <p className="max-w-xs text-center text-sm leading-relaxed text-cream/70 md:text-left">
             Expert-guided fishing excursions on Oregon and the Pacific
             Northwest&apos;s most pristine waters.
           </p>
@@ -111,7 +111,7 @@ export function SiteFooter() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-cream/10 py-6 text-center text-[11px] tracking-[0.1em] text-cream/40">
+      <div className="border-t border-cream/10 py-6 text-center text-[11px] tracking-[0.1em] text-cream/70">
         &copy; {new Date().getFullYear()} Catching Chrome Guide Service. All
         rights reserved.
       </div>

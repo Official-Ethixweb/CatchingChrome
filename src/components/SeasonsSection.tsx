@@ -65,17 +65,17 @@ function WeatherStrip({
           <WeatherGlyph id={wx?.conditionId ?? 802} className="h-6 w-6" />
         </div>
         <div className="min-w-0">
-          <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-cream/45">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-cream/70">
             On the water today
           </div>
           {loading ? (
-            <div className="mt-1 text-sm text-cream/50">Reading the river…</div>
+            <div className="mt-1 text-sm text-cream/70">Reading the river…</div>
           ) : wx ? (
             <>
               <div className="mt-1 font-display text-xl uppercase leading-none text-cream">
                 {wx.tempF}°F · {wx.description || wx.main}
               </div>
-              <div className="mt-1.5 text-[12px] tracking-[0.04em] text-cream/50">
+              <div className="mt-1.5 text-[12px] tracking-[0.04em] text-cream/70">
                 {wx.locationLabel} · Wind {wx.windMph} mph
                 {wx.gustMph ? ` (gusts ${wx.gustMph})` : ''}
               </div>
@@ -85,7 +85,7 @@ function WeatherStrip({
               <div className="mt-1 font-display text-xl uppercase leading-none text-cream">
                 Seasonal outlook
               </div>
-              <div className="mt-1.5 text-[12px] tracking-[0.04em] text-cream/45">
+              <div className="mt-1.5 text-[12px] tracking-[0.04em] text-cream/70">
                 Live conditions offline, showing the run calendar.
               </div>
             </>
@@ -96,7 +96,7 @@ function WeatherStrip({
       {/* Bite outlook meter */}
       <div className="flex flex-col justify-center border-t border-cream/10 pt-5 md:border-l md:border-t-0 md:pl-10 md:pt-0">
         <div className="flex items-baseline justify-between">
-          <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-cream/45">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-cream/70">
             Bite outlook
           </span>
           <span className="font-display text-lg uppercase text-accent">
@@ -109,7 +109,7 @@ function WeatherStrip({
             style={{ width: `${outlook.score}%` }}
           />
         </div>
-        <p className="mt-3 text-[13px] leading-relaxed text-cream/55">
+        <p className="mt-3 text-[13px] leading-relaxed text-cream/70">
           {outlook.reason}
         </p>
       </div>
@@ -201,7 +201,7 @@ export function SeasonsSection() {
             <span className="block">Oregon Salmon</span>
             <span className="block text-accent">calendar</span>
           </h2>
-          <p className="max-w-md text-[15.5px] leading-relaxed text-cream/60">
+          <p className="max-w-md text-[15.5px] leading-relaxed text-cream/70">
             The best months to fish our rivers, by species, pulled straight
             from Captain Ryan&apos;s log. Tap a month or a run to see where the
             fish are and when to book.
@@ -266,7 +266,7 @@ export function SeasonsSection() {
                       className={`text-[11px] font-semibold uppercase tracking-[0.12em] transition-colors ${
                         isSel
                           ? 'text-accent'
-                          : 'text-cream/55 group-hover:text-cream'
+                          : 'text-cream/70 group-hover:text-cream'
                       }`}
                     >
                       {m}
@@ -300,7 +300,7 @@ export function SeasonsSection() {
                       <FishGlyph
                         shape={sp.shape}
                         className={`h-6 w-11 shrink-0 transition-colors ${
-                          rowActive ? 'text-accent' : 'text-cream/45'
+                          rowActive ? 'text-accent' : 'text-cream/70'
                         }`}
                       />
                       <span className="min-w-0">
@@ -311,7 +311,7 @@ export function SeasonsSection() {
                         >
                           {sp.name}
                         </span>
-                        <span className="block text-[10px] tracking-[0.14em] text-cream/40">
+                        <span className="block text-[10px] tracking-[0.14em] text-cream/70">
                           Peak {sp.peak}
                         </span>
                       </span>
@@ -365,9 +365,9 @@ export function SeasonsSection() {
                   <StarMark className="h-2.5 w-2.5 text-ink" />
                 )}
               </span>
-              <span className="text-[12px] tracking-[0.04em] text-cream/55">
+              <span className="text-[12px] tracking-[0.04em] text-cream/70">
                 <span className="text-cream/80">{RATING_META[r].label}</span>
-                <span className="text-cream/40">, {RATING_META[r].note}</span>
+                <span className="text-cream/70">, {RATING_META[r].note}</span>
               </span>
             </div>
           ))}
@@ -385,7 +385,7 @@ export function SeasonsSection() {
           >
           <div>
             <div className="flex flex-wrap items-center gap-3">
-              <span className="font-display text-[11px] uppercase tracking-[0.2em] text-cream/45">
+              <span className="font-display text-[11px] uppercase tracking-[0.2em] text-cream/70">
                 {MONTHS_FULL[sel.month]}
               </span>
               <span
@@ -396,7 +396,7 @@ export function SeasonsSection() {
                       ? 'bg-primary text-cream'
                       : selRating === 'fair'
                         ? 'bg-primary/25 text-cream'
-                        : 'border border-cream/20 text-cream/60'
+                        : 'border border-cream/20 text-cream/70'
                 }`}
               >
                 {selRating === 'excellent' && (
@@ -409,13 +409,13 @@ export function SeasonsSection() {
             <h3 className="mt-4 font-display text-3xl uppercase leading-none text-cream md:text-4xl">
               {species.name}
             </h3>
-            <p className="mt-4 max-w-md text-[15px] leading-relaxed text-cream/60">
+            <p className="mt-4 max-w-md text-[15px] leading-relaxed text-cream/70">
               {species.blurb}
             </p>
 
             <div className="mt-6 flex items-center gap-6">
               <div>
-                <div className="text-[10px] uppercase tracking-[0.2em] text-cream/40">
+                <div className="text-[10px] uppercase tracking-[0.2em] text-cream/70">
                   Peak window
                 </div>
                 <div className="mt-1 font-display text-lg uppercase text-accent">
@@ -435,7 +435,7 @@ export function SeasonsSection() {
 
           {/* Best rivers for this run */}
           <div className="border-t border-cream/10 pt-7 md:border-l md:border-t-0 md:pl-12 md:pt-0">
-            <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-cream/45">
+            <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-cream/70">
               Best rivers
             </div>
             <div className="mt-4 flex flex-wrap gap-2">
@@ -449,7 +449,7 @@ export function SeasonsSection() {
               ))}
             </div>
 
-            <div className="mt-8 text-[11px] font-semibold uppercase tracking-[0.22em] text-cream/45">
+            <div className="mt-8 text-[11px] font-semibold uppercase tracking-[0.22em] text-cream/70">
               Also running in {MONTHS_SHORT[sel.month]}
             </div>
             <div className="mt-3 space-y-1.5">
@@ -465,10 +465,10 @@ export function SeasonsSection() {
                         species: SPECIES.indexOf(s),
                       }))
                     }
-                    className="flex w-full items-center justify-between text-left text-[13px] text-cream/60 transition-colors hover:text-cream"
+                    className="flex w-full items-center justify-between text-left text-[13px] text-cream/70 transition-colors hover:text-cream"
                   >
                     <span>{s.name}</span>
-                    <span className="text-cream/40">
+                    <span className="text-cream/70">
                       {RATING_META[s.ratings[sel.month]].label}
                     </span>
                   </button>
@@ -476,7 +476,7 @@ export function SeasonsSection() {
               {speciesByMonth(sel.month).filter(
                 (s) => s.ratings[sel.month] !== 'poor' && s.id !== species.id,
               ).length === 0 && (
-                <p className="text-[13px] text-cream/40">
+                <p className="text-[13px] text-cream/70">
                   A quiet month, the runs are resting.
                 </p>
               )}

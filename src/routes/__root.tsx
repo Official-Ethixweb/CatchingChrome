@@ -10,6 +10,9 @@ import { ThemeController } from '~/components/ThemeController'
 import { SiteHeader } from '~/components/SiteHeader'
 import { SiteFooter } from '~/components/SiteFooter'
 
+const FONT_URL =
+  'https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap'
+
 export const Route = createRootRoute({
   head: () => ({
     meta: [
@@ -62,10 +65,9 @@ export const Route = createRootRoute({
         href: 'https://fonts.gstatic.com',
         crossOrigin: 'anonymous',
       },
-      {
-        rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap',
-      },
+      // The font stylesheet is loaded asynchronously (see RootDocument) so it
+      // never render-blocks; this warms the fetch in parallel.
+      { rel: 'preload', as: 'style', href: FONT_URL },
     ],
   }),
   component: RootComponent,
@@ -98,7 +100,7 @@ function NotFound() {
         <h1 className="mt-4 font-display text-[clamp(1.6rem,4vw,2.6rem)] uppercase leading-[0.95] text-cream">
           That page slipped the hook
         </h1>
-        <p className="mx-auto mt-5 max-w-md text-[16px] leading-relaxed text-cream/60">
+        <p className="mx-auto mt-5 max-w-md text-[16px] leading-relaxed text-cream/70">
           The link you followed doesn&apos;t exist. The fish, however, are still
           out there.
         </p>
@@ -129,6 +131,18 @@ function RootDocument({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        {/* Load the Google Fonts stylesheet without render-blocking: append it
+            as a print-media sheet (fetched but not applied), then flip to all
+            once it loads. `display=swap` already prevents invisible text. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var l=document.createElement('link');l.rel='stylesheet';l.href='${FONT_URL}';l.media='print';l.onload=function(){l.media='all'};document.head.appendChild(l);})();`,
+          }}
+        />
+        <noscript>
+          {/* eslint-disable-next-line */}
+          <link rel="stylesheet" href={FONT_URL} />
+        </noscript>
       </head>
       <body>
         <ThemeController />

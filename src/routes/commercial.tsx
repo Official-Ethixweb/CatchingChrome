@@ -124,7 +124,7 @@ function CommercialPage() {
                 <span className="block text-accent">bigger groups</span>
               </h2>
 
-              <p className="max-w-md text-[17px] leading-relaxed text-ink/55 lg:mb-3">
+              <p className="max-w-md text-[17px] leading-relaxed text-ink/70 lg:mb-3">
                 Most guide services cap you at a single boat. We scale the trip
                 to the group, running a coordinated fleet so your whole company
                 fishes the same water on the same day.
@@ -145,7 +145,7 @@ function CommercialPage() {
                   <h3 className="mt-6 font-display text-2xl uppercase leading-none text-ink">
                     {item.title}
                   </h3>
-                  <p className="mt-4 text-[15px] leading-relaxed text-ink/55">
+                  <p className="mt-4 text-[15px] leading-relaxed text-ink/70">
                     {item.body}
                   </p>
                 </article>
@@ -166,7 +166,7 @@ function CommercialPage() {
                 <span className="block">One Invoice,</span>
                 <span className="block text-accent">everything handled</span>
               </h2>
-              <p className="mt-7 max-w-lg text-[16px] leading-relaxed text-cream/60">
+              <p className="mt-7 max-w-lg text-[16px] leading-relaxed text-cream/70">
                 Every commercial booking is quoted per person with the whole day
                 covered. No per-boat surprises, no gear rental line items.
               </p>
@@ -215,7 +215,7 @@ function CommercialPage() {
                   <h3 className="mt-6 font-display text-2xl uppercase leading-none text-ink">
                     {s.title}
                   </h3>
-                  <p className="mt-4 text-[15px] leading-relaxed text-ink/55">
+                  <p className="mt-4 text-[15px] leading-relaxed text-ink/70">
                     {s.body}
                   </p>
                 </article>

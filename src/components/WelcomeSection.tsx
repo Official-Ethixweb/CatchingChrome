@@ -35,7 +35,7 @@ export function WelcomeSection() {
                 <div className="font-display text-3xl leading-none text-ink sm:text-4xl">
                   {stat.value}
                 </div>
-                <div className="mt-2 text-[11px] uppercase tracking-[0.2em] text-ink/50">
+                <div className="mt-2 text-[11px] uppercase tracking-[0.2em] text-ink/70">
                   {stat.label}
                 </div>
               </div>
@@ -55,7 +55,7 @@ export function WelcomeSection() {
             <span className="block">Guide Service</span>
           </h2>
 
-          <div className="mt-8 max-w-xl space-y-5 text-[17px] leading-relaxed text-ink/60">
+          <div className="mt-8 max-w-xl space-y-5 text-[17px] leading-relaxed text-ink/70">
             <p>
               Premium fishing experiences throughout Oregon&apos;s legendary
               waterways. With over forty years of local knowledge, Captain Ryan

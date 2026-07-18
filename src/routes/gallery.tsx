@@ -86,13 +86,13 @@ function Chip({
       className={`gal-chip inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.14em] ${
         on
           ? 'border-cta bg-cta text-ink'
-          : 'border-ink/15 bg-transparent text-ink/60 hover:border-ink/40 hover:text-ink'
+          : 'border-ink/15 bg-transparent text-ink/70 hover:border-ink/40 hover:text-ink'
       }`}
     >
       {children}
       {count != null && (
         <span
-          className={`text-[10px] tabular-nums ${on ? 'text-ink/50' : 'text-ink/35'}`}
+          className={`text-[10px] tabular-nums ${on ? 'text-ink/70' : 'text-ink/35'}`}
         >
           {count}
         </span>
@@ -188,14 +188,14 @@ function Note({
 }) {
   return (
     <div className="gal-note gal-in flex flex-col justify-center rounded-2xl border border-ink/10 bg-white/60 px-5 py-7 sm:px-6 sm:py-8">
-      <span className="flex items-center gap-2.5 text-[10px] font-bold uppercase tracking-[0.22em] text-ink/40">
+      <span className="flex items-center gap-2.5 text-[10px] font-bold uppercase tracking-[0.22em] text-ink/70">
         <span className="h-px w-5 bg-accent" />
         {eyebrow}
       </span>
       <h3 className="mt-4 font-display text-[clamp(1.5rem,2vw,1.9rem)] uppercase leading-[0.95] text-ink">
         {title}
       </h3>
-      <p className="mt-3 text-[14px] leading-relaxed text-ink/55">{body}</p>
+      <p className="mt-3 text-[14px] leading-relaxed text-ink/70">{body}</p>
       {children}
     </div>
   )
@@ -285,7 +285,7 @@ function ClipDeck() {
                 onEnded={() => setHeld(false)}
                 className="block aspect-[478/850] w-full bg-black"
               />
-              <figcaption className="px-5 py-4 text-[12px] font-semibold uppercase tracking-[0.14em] text-cream/60">
+              <figcaption className="px-5 py-4 text-[12px] font-semibold uppercase tracking-[0.14em] text-cream/70">
                 {clip.caption}
               </figcaption>
             </figure>
@@ -560,7 +560,7 @@ function GalleryPage() {
                 <span className="block text-accent">real fish</span>
               </h2>
 
-              <p className="max-w-md text-[17px] leading-relaxed text-ink/55 lg:mb-3">
+              <p className="max-w-md text-[17px] leading-relaxed text-ink/70 lg:mb-3">
                 Nothing here is a stock photo. Every frame came off Ryan&apos;s
                 phone or a guest&apos;s, on an Oregon river, on a day someone
                 booked. Filter by who was aboard, or by what they caught.
@@ -571,7 +571,7 @@ function GalleryPage() {
 
             {/* Who's aboard */}
             <div className="mt-10 text-center">
-              <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-ink/40">
+              <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-ink/70">
                 Who&apos;s aboard
               </p>
               <div className="mt-4 flex flex-wrap justify-center gap-2.5">
@@ -597,7 +597,7 @@ function GalleryPage() {
 
             {/* What they caught */}
             <div className="mt-8 text-center">
-              <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-ink/40">
+              <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-ink/70">
                 What they caught
               </p>
               <div className="mt-4 flex flex-wrap justify-center gap-2.5">
@@ -619,7 +619,7 @@ function GalleryPage() {
 
             {/* Live caption for the current selection */}
             <div className="mt-9 flex flex-col items-center gap-1.5 text-center">
-              <p className="max-w-xl text-[15px] leading-relaxed text-ink/55">
+              <p className="max-w-xl text-[15px] leading-relaxed text-ink/70">
                 {activeGroup?.blurb ??
                   'Eighty-plus photos and clips from the last twelve seasons.'}
                 {activeSpecies && ` ${activeSpecies.note}.`}
@@ -635,7 +635,7 @@ function GalleryPage() {
         <section className="theme-transition bg-cream pb-24 md:pb-28">
           <div className="mx-auto max-w-[1440px] px-6 md:px-10">
             {filtered.length === 0 ? (
-              <p className="py-24 text-center text-[15px] text-ink/45">
+              <p className="py-24 text-center text-[15px] text-ink/70">
                 No shots match that combination yet. Try a different species.
               </p>
             ) : (
@@ -704,7 +704,7 @@ function GalleryPage() {
                 <span className="block">Sound On,</span>
                 <span className="block text-accent">rods bent</span>
               </h2>
-              <p className="max-w-md text-[16px] leading-relaxed text-cream/60 lg:mb-3">
+              <p className="max-w-md text-[16px] leading-relaxed text-cream/70 lg:mb-3">
                 A few seconds from the middle of a fight, straight off the deck.
               </p>
             </div>
@@ -720,7 +720,7 @@ function GalleryPage() {
             <h2 className="mt-6 font-display text-[clamp(2.4rem,4.6vw,3.8rem)] uppercase leading-[0.9] text-ink">
               The Next One Is Yours
             </h2>
-            <p className="mx-auto mt-7 max-w-xl text-[17px] leading-relaxed text-ink/55">
+            <p className="mx-auto mt-7 max-w-xl text-[17px] leading-relaxed text-ink/70">
               Every photo on this page started with someone picking a date.
               Tell Ryan when you want to go and who&apos;s coming.
             </p>

@@ -92,7 +92,7 @@ function VesselCard({ vessel }: { vessel: Vessel }) {
  <h3 className="mt-6 font-display text-3xl uppercase leading-none text-ink">
  {vessel.title}
  </h3>
- <p className="mt-3 flex-1 text-[15px] leading-relaxed text-ink/55">
+ <p className="mt-3 flex-1 text-[15px] leading-relaxed text-ink/70">
  {vessel.body}
  </p>
 

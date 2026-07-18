@@ -31,7 +31,7 @@ export function MeetCaptainSection() {
             </span>
           </h2>
 
-          <div className="mt-8 max-w-xl space-y-5 text-[17px] leading-relaxed text-cream/60">
+          <div className="mt-8 max-w-xl space-y-5 text-[17px] leading-relaxed text-cream/70">
             <p>
               With over 40 years of fishing experience across Oregon&apos;s
               waterways, Captain Ryan brings unparalleled expertise to every

@@ -66,7 +66,7 @@ export function SignatureTripsSection({ className = "bg-cream" }: { className?: 
             <span className="block leading-[0.85] text-accent">trips</span>
           </h2>
 
-          <p className="max-w-sm text-[17px] leading-relaxed text-ink/55 lg:mb-3">
+          <p className="max-w-sm text-[17px] leading-relaxed text-ink/70 lg:mb-3">
             Our most popular fishing adventures on Oregon&apos;s pristine waters,
             each one guided personally by Captain Ryan.
           </p>
@@ -107,7 +107,7 @@ export function SignatureTripsSection({ className = "bg-cream" }: { className?: 
                   {trip.title}
                 </h3>
 
-                <p className="mt-4 flex-1 text-[15px] leading-relaxed text-ink/55">
+                <p className="mt-4 flex-1 text-[15px] leading-relaxed text-ink/70">
                   {trip.body}
                 </p>
 

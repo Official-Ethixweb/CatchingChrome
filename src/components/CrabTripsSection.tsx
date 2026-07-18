@@ -23,7 +23,7 @@ export function CrabTripsSection() {
             <span className="block text-accent">by the pot</span>
           </h2>
 
-          <p className="mt-7 max-w-md text-[17px] leading-relaxed text-ink/55">
+          <p className="mt-7 max-w-md text-[17px] leading-relaxed text-ink/70">
             Drop the pots, pull them back loaded, and take home ocean-fresh
             Dungeness. It is hands-on, easy to pick up, and one of the best days
             on the water for families and first timers.
@@ -31,16 +31,16 @@ export function CrabTripsSection() {
 
           {/* Price */}
           <div className="mt-8 flex items-baseline gap-3">
-            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-ink/45">
+            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-ink/70">
               From
             </span>
             <span className="font-display text-[clamp(2.4rem,4vw,3.4rem)] leading-none text-ink">
               $150
             </span>
-            <span className="text-[14px] text-ink/50">per person</span>
+            <span className="text-[14px] text-ink/70">per person</span>
           </div>
 
-          <ul className="mt-7 flex flex-col gap-2.5 text-[15px] text-ink/60">
+          <ul className="mt-7 flex flex-col gap-2.5 text-[15px] text-ink/70">
             {[
               'Pots, bait, gear and licence handled for you',
               'Great for kids and first time crabbers',

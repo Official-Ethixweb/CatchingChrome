@@ -86,7 +86,7 @@ export function PartnersSection() {
 
       {/* Title below the logos */}
       <div className="mt-6 flex select-none flex-col items-center justify-center gap-1.5 px-4 text-center md:mt-8">
-        <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-ink/50 md:text-[11px]">
+        <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-ink/70 md:text-[11px]">
           Our Partners
         </span>
         <h2 className="text-[13px] font-semibold uppercase tracking-[0.2em] text-primary md:text-[16px]">
