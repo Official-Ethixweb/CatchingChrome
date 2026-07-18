@@ -39,36 +39,73 @@ export type RiverConditions = {
   fetchedAt: number
 }
 
+// One call actually to OpenWeather, no caching. Returns null only on a real
+// failure (missing key, non-200, timeout, network error).
+async function fetchLive(key: string): Promise<RiverConditions | null> {
+  const url =
+    `https://api.openweathermap.org/data/2.5/weather` +
+    `?lat=${SPOT.lat}&lon=${SPOT.lon}&units=imperial&appid=${key}`
+  try {
+    const res = await fetch(url, { signal: AbortSignal.timeout(8000) })
+    if (!res.ok) return null
+    const d = await res.json()
+    const w = d.weather?.[0] ?? {}
+    return {
+      tempF: Math.round(d.main?.temp ?? 0),
+      feelsF: Math.round(d.main?.feels_like ?? d.main?.temp ?? 0),
+      windMph: Math.round(d.wind?.speed ?? 0),
+      gustMph: d.wind?.gust != null ? Math.round(d.wind.gust) : null,
+      cloudsPct: Math.round(d.clouds?.all ?? 0),
+      main: w.main ?? 'Unknown',
+      description: w.description ?? '',
+      conditionId: w.id ?? 800,
+      pressure: Math.round(d.main?.pressure ?? 1013),
+      locationLabel: SPOT.label,
+      fetchedAt: Date.now(),
+    }
+  } catch {
+    return null
+  }
+}
+
+/**
+ * Server-side cache so the widget stays online 24/7. Lives for the life of the
+ * server process (persistent Nitro/Node deploy), which does two things:
+ *  1. Rate-limit safety — OpenWeather is hit at most once per FRESH_MS no matter
+ *     how much traffic the site gets, so we never trip the free-tier 60/min cap
+ *     (the thing that was silently knocking the widget offline).
+ *  2. Resilience — if a refresh fails, we keep serving the LAST good reading
+ *     instead of returning null (which hides the widget). Once it has ever had a
+ *     reading, it doesn't go dark.
+ */
+let cache: { data: RiverConditions; at: number } | null = null
+let inFlight: Promise<RiverConditions | null> | null = null
+const FRESH_MS = 10 * 60 * 1000
+
 export const getRiverConditions = createServerFn({ method: 'GET' }).handler(
   async (): Promise<RiverConditions | null> => {
     const key = process.env.OPENWEATHER_API_KEY
-    if (!key) return null
+    // No key configured: still serve a prior reading if we somehow have one.
+    if (!key) return cache?.data ?? null
 
-    const url =
-      `https://api.openweathermap.org/data/2.5/weather` +
-      `?lat=${SPOT.lat}&lon=${SPOT.lon}&units=imperial&appid=${key}`
+    const now = Date.now()
+    // Cache is fresh enough — serve it without touching the API.
+    if (cache && now - cache.at < FRESH_MS) return cache.data
 
-    try {
-      const res = await fetch(url, { signal: AbortSignal.timeout(6000) })
-      if (!res.ok) return null
-      const d = await res.json()
-      const w = d.weather?.[0] ?? {}
-      return {
-        tempF: Math.round(d.main?.temp ?? 0),
-        feelsF: Math.round(d.main?.feels_like ?? d.main?.temp ?? 0),
-        windMph: Math.round(d.wind?.speed ?? 0),
-        gustMph: d.wind?.gust != null ? Math.round(d.wind.gust) : null,
-        cloudsPct: Math.round(d.clouds?.all ?? 0),
-        main: w.main ?? 'Unknown',
-        description: w.description ?? '',
-        conditionId: w.id ?? 800,
-        pressure: Math.round(d.main?.pressure ?? 1013),
-        locationLabel: SPOT.label,
-        fetchedAt: Date.now(),
-      }
-    } catch {
-      return null
+    // De-dupe concurrent refreshes into a single upstream call.
+    if (!inFlight) {
+      inFlight = fetchLive(key).finally(() => {
+        inFlight = null
+      })
     }
+    const fresh = await inFlight
+
+    if (fresh) {
+      cache = { data: fresh, at: Date.now() }
+      return fresh
+    }
+    // Refresh failed — serve the last good reading rather than going offline.
+    return cache?.data ?? null
   },
 )
 

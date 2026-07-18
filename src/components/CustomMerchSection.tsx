@@ -86,7 +86,7 @@ function ProductCard({ product }: { product: Product }) {
           that hides a white backdrop against a dark panel also crushes the
           grey sweatshirt to near-black. */}
       <div className="relative flex aspect-[4/4.4] items-center justify-center overflow-hidden rounded-sm bg-white">
-        <span className="absolute left-3 top-3 z-10 text-[10px] font-semibold tracking-[0.25em] text-ink/40">
+        <span className="absolute left-3 top-3 z-10 text-[10px] font-semibold tracking-[0.25em] text-ink/70">
           {product.tag}
         </span>
         <img
@@ -103,7 +103,7 @@ function ProductCard({ product }: { product: Product }) {
         <h3 className="font-display text-lg uppercase leading-tight text-cream sm:text-xl">
           {product.name}
         </h3>
-        <p className="mt-1.5 text-[12px] tracking-[0.06em] text-cream/45">
+        <p className="mt-1.5 text-[12px] tracking-[0.06em] text-cream/70">
           {product.sub}
         </p>
       </div>
@@ -143,7 +143,7 @@ export function CustomMerchSection() {
               <span className="block text-accent">merch</span>
             </h2>
 
-            <p className="mt-7 max-w-lg text-[16px] leading-relaxed text-cream/60">
+            <p className="mt-7 max-w-lg text-[16px] leading-relaxed text-cream/70">
               Bring your ideas to life with high-quality custom merchandise
               tailored to your brand or personal style from apparel to promo
               products, quick and hassle-free.

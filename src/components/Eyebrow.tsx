@@ -15,7 +15,7 @@ export function Eyebrow({
   center?: boolean
   className?: string
 }) {
-  const labelColor = tone === 'light' ? 'text-cream/60' : 'text-ink/65'
+  const labelColor = tone === 'light' ? 'text-cream/70' : 'text-ink/65'
   return (
     <div
       className={`flex items-center gap-3 ${center ? 'justify-center' : ''} ${className}`}

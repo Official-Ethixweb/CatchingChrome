@@ -93,7 +93,7 @@ function AccordionItem({
         }`}
       >
         <div className="overflow-hidden">
-          <p className="px-6 pb-6 text-[15px] leading-relaxed text-ink/60 md:px-8">
+          <p className="px-6 pb-6 text-[15px] leading-relaxed text-ink/70 md:px-8">
             {faq.a}
           </p>
         </div>
@@ -120,7 +120,7 @@ export function FaqSection() {
             </span>
           </h2>
 
-          <p className="mx-auto mt-6 max-w-lg text-[17px] leading-relaxed text-ink/60">
+          <p className="mx-auto mt-6 max-w-lg text-[17px] leading-relaxed text-ink/70">
             Everything you need to know before you step aboard. Still have
             something on your mind? Give us a call, we&apos;re happy to help.
           </p>

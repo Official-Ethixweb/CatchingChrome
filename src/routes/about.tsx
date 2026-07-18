@@ -169,7 +169,7 @@ function StorySection() {
             </h2>
           </Reveal>
           <Reveal delay={0.12}>
-            <div className="mt-8 max-w-xl space-y-5 text-[17px] leading-relaxed text-ink/60">
+            <div className="mt-8 max-w-xl space-y-5 text-[17px] leading-relaxed text-ink/70">
               <p>
                 Catching Chrome started the way most good things on the water do,
                 with a kid, a rod, and a river that wouldn&apos;t let go.
@@ -209,7 +209,7 @@ function StorySection() {
             <div className="font-display text-4xl leading-none text-accent">
               40+
             </div>
-            <div className="mt-1.5 text-[11px] uppercase tracking-[0.2em] text-ink/55">
+            <div className="mt-1.5 text-[11px] uppercase tracking-[0.2em] text-ink/70">
               Years Guiding
             </div>
           </div>
@@ -301,7 +301,7 @@ function StatsBand() {
             <div className="font-display text-[clamp(1.6rem,3.5vw,3.6rem)] leading-none text-accent">
               <CountUp target={s.target} prefix={s.prefix} suffix={s.suffix} />
             </div>
-            <div className="mt-3 text-[12px] font-medium uppercase tracking-[0.2em] text-cream/55">
+            <div className="mt-3 text-[12px] font-medium uppercase tracking-[0.2em] text-cream/70">
               {s.label}
             </div>
           </Reveal>
@@ -364,7 +364,7 @@ function ValuesSection() {
                 <h3 className="mt-6 font-display text-xl uppercase leading-tight text-ink">
                   {v.title}
                 </h3>
-                <p className="mt-3 flex-1 text-[15px] leading-relaxed text-ink/55">
+                <p className="mt-3 flex-1 text-[15px] leading-relaxed text-ink/70">
                   {v.body}
                 </p>
               </article>
@@ -516,7 +516,7 @@ function JourneySection() {
                     <h3 className="mt-2 font-display text-2xl uppercase leading-none text-ink">
                       {m.title}
                     </h3>
-                    <p className="mt-3 text-[15px] leading-relaxed text-ink/55">
+                    <p className="mt-3 text-[15px] leading-relaxed text-ink/70">
                       {m.body}
                     </p>
                   </div>

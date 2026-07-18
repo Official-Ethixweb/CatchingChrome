@@ -114,14 +114,14 @@ export function BoatRampsSection() {
  {p.name}
  </div>
  {coords && (
- <div className="mt-1 text-[11px] tracking-[0.15em] text-cream/40">
+ <div className="mt-1 text-[11px] tracking-[0.15em] text-cream/70">
  {coords}
  </div>
  )}
  </div>
  <MapPinIcon
  className={`h-5 w-5 shrink-0 transition-colors duration-200 ${
- active ? 'text-accent' : 'text-cream/40'
+ active ? 'text-accent' : 'text-cream/70'
  }`}
  />
  </button>

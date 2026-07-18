@@ -83,7 +83,7 @@ function PricingRow({ item, index }: { item: PricingItem; index: number }) {
         <h3 className="font-display text-xl uppercase tracking-wide text-cream transition-colors duration-300 group-hover:text-accent md:text-2xl">
           {item.name}
         </h3>
-        <p className="mt-1.5 text-sm text-cream/50 leading-relaxed">
+        <p className="mt-1.5 text-sm text-cream/70 leading-relaxed">
           {item.subtext}
         </p>
       </div>
@@ -200,7 +200,7 @@ export function PricingSection() {
             <span className="block leading-[0.9] text-accent">No Hidden Fees</span>
           </h2>
 
-          <p className="max-w-md text-base leading-relaxed text-cream/60 lg:mb-2">
+          <p className="max-w-md text-base leading-relaxed text-cream/70 lg:mb-2">
             Choose your next Pacific Northwest adventure. All gear, bait, and clean-up are fully covered.
           </p>
         </div>
@@ -230,7 +230,7 @@ export function PricingSection() {
                   <h4 className="font-semibold text-accent uppercase tracking-wider text-[11px]">
                     Deposit & Payment
                   </h4>
-                  <p className="mt-2 text-cream/60 leading-relaxed">
+                  <p className="mt-2 text-cream/70 leading-relaxed">
                     A $50 deposit per person is required to secure your booking date. The remaining balance is due on the day of your trip.
                   </p>
                 </div>
@@ -241,7 +241,7 @@ export function PricingSection() {
                   <h4 className="font-semibold text-accent uppercase tracking-wider text-[11px]">
                     Cancelation Policy
                   </h4>
-                  <p className="mt-2 text-cream/60 leading-relaxed">
+                  <p className="mt-2 text-cream/70 leading-relaxed">
                     Cancel 14+ days in advance for a full refund or to reschedule. Cancellations made within 14 days forfeit the deposit.
                   </p>
                 </div>
@@ -252,7 +252,7 @@ export function PricingSection() {
                   <h4 className="font-semibold text-accent uppercase tracking-wider text-[11px]">
                     Captain's Guarantee
                   </h4>
-                  <p className="mt-2 text-cream/60 leading-relaxed">
+                  <p className="mt-2 text-cream/70 leading-relaxed">
                     If the captain has to cancel due to weather, river safety conditions, or unforeseen events, you receive a full refund or rescheduling options.
                   </p>
                 </div>
@@ -265,7 +265,7 @@ export function PricingSection() {
         <div className="mt-16 flex flex-col items-center justify-center gap-6 rounded-sm border border-cream/5 bg-white/[0.01] p-8 text-center md:flex-row md:justify-between md:text-left">
           <div>
             <h4 className="font-display text-xl uppercase text-cream">Ready to lock in your dates?</h4>
-            <p className="mt-1 text-sm text-cream/55">Calendar fills up fast during peak salmon and steelhead runs.</p>
+            <p className="mt-1 text-sm text-cream/70">Calendar fills up fast during peak salmon and steelhead runs.</p>
           </div>
           <a
             href="tel:5039369090"

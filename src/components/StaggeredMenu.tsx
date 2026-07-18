@@ -364,7 +364,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         })()}
       </div>
       <header className="staggered-menu-header" aria-label="Main navigation header">
-        <div className="sm-logo" aria-label="Logo">
+        <div className="sm-logo">
           <Link to="/" onClick={closeMenu}>
             <img
               src={logoUrl}
@@ -468,7 +468,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
           </div>
 
           {displaySocials && socialItems && socialItems.length > 0 && (
-            <div className="sm-socials" aria-label="Social links">
+            <nav className="sm-socials" aria-label="Social links">
               <h3 className="sm-socials-title">Socials</h3>
               <ul className="sm-socials-list" role="list">
                 {socialItems.map((s, i) => (
@@ -487,7 +487,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
           )}
         </div>
       </aside>

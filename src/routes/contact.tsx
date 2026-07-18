@@ -115,7 +115,7 @@ function ContactSection() {
               <span className="block text-accent">excursion</span>
             </h2>
 
-            <p className="mt-6 max-w-lg text-[16px] leading-relaxed text-cream/60">
+            <p className="mt-6 max-w-lg text-[16px] leading-relaxed text-cream/70">
               Have questions about run seasons, current conditions, group sizing, or custom multi-boat charters? Feel free to reach out using the form, or contact Captain Ryan directly by phone or email. We are happy to walk you through everything you need to know.
             </p>
 
@@ -130,7 +130,7 @@ function ContactSection() {
                   <PhoneIcon className="h-5 w-5" />
                 </div>
                 <div>
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-cream/40">Call Captain Ryan</div>
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-cream/70">Call Captain Ryan</div>
                   <div className="font-medium mt-0.5 transition-colors group-hover:text-accent">(503) 936-9090</div>
                 </div>
               </a>
@@ -155,7 +155,7 @@ function ContactSection() {
                   </svg>
                 </div>
                 <div>
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-cream/40">Email Us</div>
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-cream/70">Email Us</div>
                   <div className="font-medium mt-0.5 transition-colors group-hover:text-accent">ryanbfishin@gmail.com</div>
                 </div>
               </a>
@@ -166,7 +166,7 @@ function ContactSection() {
                   <MapPinIcon className="h-5 w-5" />
                 </div>
                 <div>
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-cream/40">Home Port & Waters</div>
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-cream/70">Home Port & Waters</div>
                   <div className="font-medium mt-0.5">Columbia River & Coastal Streams, Oregon</div>
                 </div>
               </div>
@@ -174,7 +174,7 @@ function ContactSection() {
 
             {/* Social Accounts */}
             <div className="mt-10 border-t border-cream/10 pt-8">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-cream/40">Follow Captain Ryan</span>
+              <span className="text-[11px] font-bold uppercase tracking-wider text-cream/70">Follow Captain Ryan</span>
               <div className="mt-4 flex items-center gap-3">
                 {SOCIALS.map(({ Icon, label, href }) => (
                   <a
@@ -211,7 +211,7 @@ function ContactSection() {
                     </svg>
                   </div>
                   <h3 className="mt-6 font-display text-2xl uppercase tracking-wide text-cream">Message Sent!</h3>
-                  <p className="mt-3 max-w-sm text-sm text-cream/60 leading-relaxed">
+                  <p className="mt-3 max-w-sm text-sm text-cream/70 leading-relaxed">
                     Thanks for reaching out, {formData.name}. Captain Ryan will review your request and get back to you via email or phone within 24 hours.
                   </p>
                   <button
@@ -234,7 +234,7 @@ function ContactSection() {
                       <div>
                         <label
                           htmlFor="name"
-                          className="block text-[11px] font-bold uppercase tracking-wider text-cream/50 mb-2"
+                          className="block text-[11px] font-bold uppercase tracking-wider text-cream/70 mb-2"
                         >
                           Your Name
                         </label>
@@ -252,7 +252,7 @@ function ContactSection() {
                       <div>
                         <label
                           htmlFor="email"
-                          className="block text-[11px] font-bold uppercase tracking-wider text-cream/50 mb-2"
+                          className="block text-[11px] font-bold uppercase tracking-wider text-cream/70 mb-2"
                         >
                           Email Address
                         </label>
@@ -272,7 +272,7 @@ function ContactSection() {
                       <div>
                         <label
                           htmlFor="phone"
-                          className="block text-[11px] font-bold uppercase tracking-wider text-cream/50 mb-2"
+                          className="block text-[11px] font-bold uppercase tracking-wider text-cream/70 mb-2"
                         >
                           Phone Number
                         </label>
@@ -290,7 +290,7 @@ function ContactSection() {
                       <div>
                         <label
                           htmlFor="tripType"
-                          className="block text-[11px] font-bold uppercase tracking-wider text-cream/50 mb-2"
+                          className="block text-[11px] font-bold uppercase tracking-wider text-cream/70 mb-2"
                         >
                           Trip Interest
                         </label>
@@ -311,7 +311,7 @@ function ContactSection() {
                     <div>
                       <label
                         htmlFor="groupSize"
-                        className="block text-[11px] font-bold uppercase tracking-wider text-cream/50 mb-2"
+                        className="block text-[11px] font-bold uppercase tracking-wider text-cream/70 mb-2"
                       >
                         Group Size
                       </label>
@@ -336,7 +336,7 @@ function ContactSection() {
                     <div>
                       <label
                         htmlFor="message"
-                        className="block text-[11px] font-bold uppercase tracking-wider text-cream/50 mb-2"
+                        className="block text-[11px] font-bold uppercase tracking-wider text-cream/70 mb-2"
                       >
                         Preferred Dates or Message
                         <span className="text-cream/30 font-normal lowercase ml-1">(optional)</span>
@@ -359,7 +359,7 @@ function ContactSection() {
                         <strong className="block font-semibold text-cream">
                           That didn&apos;t send.
                         </strong>
-                        <p className="mt-1 text-cream/60">
+                        <p className="mt-1 text-cream/70">
                           Nothing you typed is lost. Send it straight to Ryan
                           instead, or call him. He answers the phone.
                         </p>
