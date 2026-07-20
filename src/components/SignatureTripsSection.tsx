@@ -27,6 +27,14 @@ const TRIPS = [
     image: '/sturgeon.jpg',
     body: 'The prehistoric heavyweight of the Columbia. Big, powerful fish that pull back harder than anything else in the river.',
   },
+  {
+    // No season chip: Ryan hasn't given the crab window, and the season is the
+    // one thing on these cards a guest plans a drive around — so it's left off
+    // rather than guessed at. Add `season` here once he confirms it.
+    title: 'Dungeness Crab',
+    image: '/crabtrip.jpg',
+    body: 'Drop the pots, pull them back loaded, and take home ocean-fresh Dungeness. Hands-on, easy to pick up, and a great day out for families.',
+  },
   // Shad stays last: a niche fishery, so the marquee runs get the top spots.
   {
     season: 'Mid May to Mid June',
@@ -34,7 +42,6 @@ const TRIPS = [
     image: '/americanshad.png',
     body: 'Warm-weather, light-gear action. Non-stop bites make this the perfect trip for kids or first-time anglers.',
   },
-  // Crab has its own dedicated section (CrabTripsSection) rather than a card here.
 ]
 
 // No page exists per destination, so these point at the excursions page rather
@@ -72,9 +79,6 @@ export function SignatureTripsSection({ className = "bg-cream" }: { className?: 
           </p>
         </div>
 
-        {/* Divider */}
-        <hr className="mt-10 border-t border-ink/15" />
-
         {/* Trip grid */}
         <div className="mt-14 grid grid-cols-1 gap-8 md:grid-cols-3">
           {TRIPS.map((trip) => (
@@ -92,10 +96,13 @@ export function SignatureTripsSection({ className = "bg-cream" }: { className?: 
                 />
                 {/* Darkening wash on hover for caption legibility */}
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                {/* Season chip */}
-                <span className="absolute left-4 top-4 rounded-full bg-cream/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-ink backdrop-blur-sm">
-                  {trip.season}
-                </span>
+                {/* Season chip — omitted where the window isn't known, so the
+                    card never shows an empty pill. */}
+                {trip.season && (
+                  <span className="absolute left-4 top-4 rounded-full bg-cream/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-ink backdrop-blur-sm">
+                    {trip.season}
+                  </span>
+                )}
               </div>
 
               <div className="flex flex-1 flex-col p-6">

@@ -52,7 +52,7 @@ const INCLUDED = [
   'Multiple guided boats running as one group',
   'All rods, reels, tackle and bait',
   'Licensed, insured USCG captains on every vessel',
-  'Fish cleaning, bagging and vacuum sealing',
+  'Fish filleting, cleaning and packing',
   'Flexible launch points across Oregon rivers',
   'Invoicing and COI paperwork for company bookings',
 ]
@@ -130,8 +130,6 @@ function CommercialPage() {
                 fishes the same water on the same day.
               </p>
             </div>
-
-            <hr className="mt-10 border-t border-ink/15" />
 
             <div className="mt-14 grid grid-cols-1 gap-8 md:grid-cols-2">
               {OFFERINGS.map((item) => (

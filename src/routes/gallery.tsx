@@ -10,7 +10,10 @@ import {
   GROUPS,
   MEDIA,
   SPECIES,
+  fullOf,
   ratioOf,
+  sizeOf,
+  thumbOf,
   type MediaGroup,
   type MediaItem,
   type Species,
@@ -36,9 +39,14 @@ function GalleryHeader() {
   return (
     <section className="relative h-[45vh] min-h-[300px] w-full overflow-hidden bg-ink">
       <div className="absolute inset-0">
+        {/* LCP element for this route — fetched eagerly and at high priority so
+            it isn't queued behind the mosaic's lazy images. */}
         <img
           src="/Gallery/rsw_1280h_960-3.webp"
           alt="Sunrise over the Columbia River with guide boats on the water"
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
           className="absolute inset-0 h-full w-full object-cover object-center opacity-45"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-ink/90 via-ink/40 to-ink" />
@@ -128,10 +136,14 @@ function Tile({
       className="gal-card gal-in group relative block w-full overflow-hidden rounded-2xl bg-ink text-left shadow-sm hover:-translate-y-1 hover:shadow-2xl focus-visible:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cta focus-visible:ring-offset-2"
     >
       <img
-        src={item.src}
+        src={thumbOf(item.src)}
         alt={item.alt}
         loading="lazy"
         decoding="async"
+        // Intrinsic size alongside the ratio, so the browser reserves the slot
+        // before any bytes land and the mosaic doesn't reflow as photos stream.
+        width={sizeOf(item.src)?.width}
+        height={sizeOf(item.src)?.height}
         style={{ aspectRatio: ratioOf(item.src) }}
         className="gal-media block w-full"
       />
@@ -452,7 +464,7 @@ function Lightbox({
         className="gal-lightbox-panel flex max-h-full max-w-5xl flex-col items-center"
       >
         <img
-          src={item.src}
+          src={fullOf(item.src)}
           alt={item.alt}
           className="max-h-[62vh] w-auto rounded-xl object-contain shadow-2xl sm:max-h-[74vh]"
         />
@@ -567,8 +579,6 @@ function GalleryPage() {
               </p>
             </div>
 
-            <hr className="mt-10 border-t border-ink/15" />
-
             {/* Who's aboard */}
             <div className="mt-10 text-center">
               <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-ink/70">
@@ -666,7 +676,7 @@ function GalleryPage() {
                             <span className="block text-accent">on fish</span>
                           </>
                         }
-                        body="USCG-licensed, fully insured, running Oregon water since 2012. Rods, tackle and coaching are aboard, and your catch leaves cleaned, bagged and sealed."
+                        body="USCG-licensed, fully insured, running Oregon water since 2012. Rods, tackle and coaching are aboard, and your catch leaves filleted, cleaned and packed."
                       >
                         <a
                           href="/contact"

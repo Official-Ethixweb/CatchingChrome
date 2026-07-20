@@ -4,7 +4,6 @@ import { PartnersSection } from '~/components/PartnersSection'
 import { WelcomeSection } from '~/components/WelcomeSection'
 import { CustomMerchSection } from '~/components/CustomMerchSection'
 import { SignatureTripsSection } from '~/components/SignatureTripsSection'
-import { CrabTripsSection } from '~/components/CrabTripsSection'
 import { SeasonsSection } from '~/components/SeasonsSection'
 import { MeetCaptainSection } from '~/components/MeetCaptainSection'
 import { FleetSection } from '~/components/FleetSection'
@@ -27,7 +26,6 @@ function Home() {
         <MeetCaptainSection />
         <TestimonialsSection />
         <SignatureTripsSection />
-        <CrabTripsSection />
         <SeasonsSection />
         <FleetSection />
         <BoatRampsSection />
