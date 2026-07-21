@@ -18,7 +18,7 @@ const NAV_ITEMS = [
   { label: 'Contact', to: '/contact' },
 ]
 
-const LOGO = '/Catching-Chrome-logo_color-1536x1533.png'
+const LOGO = '/Catching-Chrome-logo_color-1536x1533.webp'
 const PHONE = '(503) 936-9090'
 const PHONE_HREF = 'tel:5039369090'
 
@@ -73,11 +73,21 @@ function StickyBar({ visible }: { visible: boolean }) {
           />
         </a>
 
-        {/* Live Oregon weather, centred on the row axis (absolute, so uneven
-            logo/actions widths don't pull it off-centre). Hidden on the cramped
-            mobile bar; pointer-events off so it never blocks the controls. */}
-        <div className="pointer-events-none absolute inset-y-0 left-1/2 hidden -translate-x-1/2 items-center lg:flex">
-          <OregonWeather />
+        {/* Live Oregon weather, centred in the gap between the logo and the
+            actions on desktop. On mobile/tablet (<lg), Book Now is centered here. */}
+        <div className="flex min-w-0 flex-1 items-center justify-center">
+          <div className="pointer-events-none hidden lg:flex">
+            <OregonWeather />
+          </div>
+          <div className="lg:hidden">
+            <Link
+              to="/contact"
+              tabIndex={visible ? 0 : -1}
+              className="btn-primary whitespace-nowrap px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em]"
+            >
+              Book Now
+            </Link>
+          </div>
         </div>
 
         <div className="flex shrink-0 items-center gap-2.5 pr-20 md:gap-3 lg:pr-0">
@@ -117,7 +127,7 @@ function StickyBar({ visible }: { visible: boolean }) {
           <Link
             to="/contact"
             tabIndex={visible ? 0 : -1}
-            className="btn-primary px-5 py-2 text-[12px] font-semibold uppercase tracking-[0.14em]"
+            className="btn-primary hidden whitespace-nowrap px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] lg:inline-flex"
           >
             Book Now
           </Link>
@@ -178,6 +188,15 @@ export function SiteHeader() {
           <nav className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 font-medium tracking-[0.14em] text-white/90 lg:flex 2xl:gap-1.5 2xl:tracking-[0.16em]">
             <NavLinks />
           </nav>
+
+          <div className="flex min-w-0 flex-1 items-center justify-center lg:hidden">
+            <Link
+              to="/contact"
+              className="btn-primary whitespace-nowrap px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em]"
+            >
+              Book Now
+            </Link>
+          </div>
 
           <div className="flex shrink-0 items-center gap-3 pr-20 lg:pr-0">
             <a

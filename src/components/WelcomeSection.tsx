@@ -15,7 +15,7 @@ export function WelcomeSection() {
         <div>
           <div className="relative aspect-[4/5] w-[85%] overflow-hidden rounded-sm">
             <img
-              src="/20240831_124653-1488x1536.jpg"
+              src="/20240831_124653-1488x1536.webp"
               alt="Guests aboard with a limit of Columbia River salmon"
               width={1488}
               height={1536}

@@ -40,7 +40,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   displaySocials = true,
   displayItemNumbering = true,
   className,
-  logoUrl = '/Catching-Chrome-logo_color-1536x1533.png',
+  logoUrl = '/Catching-Chrome-logo_color-1536x1533.webp',
   accentColor = '#00CCCC',
   isFixed = false,
   stuck = false,

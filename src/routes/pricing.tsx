@@ -13,7 +13,7 @@ function PricingHeader() {
       {/* Background image matching the nature/river aesthetic */}
       <div className="absolute inset-0">
         <img
-          src="/nature-river.jpg"
+          src="/nature-river.webp"
           alt="River background"
           className="absolute inset-0 h-full w-full object-cover object-center opacity-40"
         />

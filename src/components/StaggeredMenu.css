@@ -16,12 +16,17 @@
   overflow: hidden;
 }
 
+/* The toggle is vertically centred inside this header, so this height has to
+   equal the height of whichever bar is on screen, or the "MENU +" button sits
+   above or below the logo / Book Now beside it. Both bars grow with their logo
+   across breakpoints, so the height is matched per breakpoint (values measured
+   off the live bars). The menu is lg:hidden, so only base/sm/md matter. */
 .staggered-menu-header {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 108px; /* Matches absolute header height on mobile */
+  height: 118px; /* top header: logo 86 + py-4 (32) */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -31,10 +36,25 @@
   z-index: 20;
   transition: height 0.35s ease;
 }
+@media (min-width: 640px) {
+  .staggered-menu-header {
+    height: 138px; /* top header at sm+: logo 106 + py-4 */
+  }
+}
 
-/* Adjust header height to center toggle button perfectly inside the StickyBar */
+/* Stuck = the compact StickyBar is showing; match its shorter height instead. */
 .staggered-menu-wrapper[data-stuck] .staggered-menu-header {
-  height: 64px;
+  height: 79px; /* sticky bar: logo 58 + py-2.5 + border */
+}
+@media (min-width: 640px) {
+  .staggered-menu-wrapper[data-stuck] .staggered-menu-header {
+    height: 88px; /* sticky logo 67 */
+  }
+}
+@media (min-width: 768px) {
+  .staggered-menu-wrapper[data-stuck] .staggered-menu-header {
+    height: 98px; /* sticky logo 77 */
+  }
 }
 
 .staggered-menu-header > * {

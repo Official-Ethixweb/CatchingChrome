@@ -6,25 +6,25 @@ const TRIPS = [
   {
     season: 'Aug to Oct',
     title: 'Fall Chinook',
-    image: '/fallchinook.png',
+    image: '/fallchinook.webp',
     body: 'Our best pure king fishery. Season opens in August and runs through late October, the most powerful, chrome-bright kings of the year.',
   },
   {
     season: 'Mid March to Mid June',
     title: 'Spring Chinook',
-    image: '/summerchinook.png',
+    image: '/summerchinook.webp',
     body: 'Columbia River spring chinook, prized worldwide for their flavor. Anglers travel across the country for this run.',
   },
   {
     season: 'Dec to April',
     title: 'Winter Steelhead',
-    image: '/wintersteelhead.png',
+    image: '/wintersteelhead.webp',
     body: 'Chrome winter fish on the coastal tributaries. Hard-running, acrobatic, and the reason a lot of anglers put up with the rain.',
   },
   {
     season: 'May to July',
     title: 'Sturgeon',
-    image: '/sturgeon.jpg',
+    image: '/sturgeon.webp',
     body: 'The prehistoric heavyweight of the Columbia. Big, powerful fish that pull back harder than anything else in the river.',
   },
   {
@@ -32,14 +32,14 @@ const TRIPS = [
     // one thing on these cards a guest plans a drive around — so it's left off
     // rather than guessed at. Add `season` here once he confirms it.
     title: 'Dungeness Crab',
-    image: '/crabtrip.jpg',
+    image: '/crabtrip.webp',
     body: 'Drop the pots, pull them back loaded, and take home ocean-fresh Dungeness. Hands-on, easy to pick up, and a great day out for families.',
   },
   // Shad stays last: a niche fishery, so the marquee runs get the top spots.
   {
     season: 'Mid May to Mid June',
     title: 'American Shad',
-    image: '/americanshad.png',
+    image: '/americanshad.webp',
     body: 'Warm-weather, light-gear action. Non-stop bites make this the perfect trip for kids or first-time anglers.',
   },
 ]
@@ -47,13 +47,13 @@ const TRIPS = [
 // No page exists per destination, so these point at the excursions page rather
 // than at "#", which reads as a link, takes the click and does nothing.
 const DESTINATIONS = [
-  { link: '/excursions', text: 'Columbia River', image: '/nature-river.jpg' },
-  { link: '/excursions', text: 'Deschutes River', image: '/nature-mountain.jpg' },
-  { link: '/excursions', text: 'Willamette River', image: '/nature-valley.jpg' },
+  { link: '/excursions', text: 'Columbia River', image: '/nature-river.webp' },
+  { link: '/excursions', text: 'Deschutes River', image: '/nature-mountain.webp' },
+  { link: '/excursions', text: 'Willamette River', image: '/nature-valley.webp' },
   {
     link: '/excursions',
     text: 'Coastal Tributaries',
-    image: '/nature-forest.jpg',
+    image: '/nature-forest.webp',
   },
 ]
 

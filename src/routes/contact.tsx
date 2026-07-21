@@ -17,7 +17,7 @@ function ContactHeader() {
       {/* Background image matching the forest backdrop */}
       <div className="absolute inset-0">
         <img
-          src="/nature-forest.jpg"
+          src="/nature-forest.webp"
           alt="Forest backdrop"
           className="absolute inset-0 h-full w-full object-cover object-center opacity-40"
         />
