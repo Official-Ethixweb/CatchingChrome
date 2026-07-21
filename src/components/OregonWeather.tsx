@@ -69,19 +69,21 @@ export function OregonWeather({ className = '' }: { className?: string }) {
   return (
     <div
       className={`flex items-center gap-2 text-[12.5px] tracking-wide ${className}`}
-      title={`Oregon · ${wx.description} · ${wx.locationLabel}`}
+      title={`Today's weather in Oregon · ${wx.description} · ${wx.locationLabel}`}
     >
+      {/* Leading label. The location now lives here, so the old trailing
+          "· Oregon" is gone. It only appears from xl up, where the centre of
+          the sticky bar has room; below that the socials/CTAs close in and the
+          readout stays as just icon + temperature. The condition word was
+          dropped from the bar to keep the labelled widget narrow enough to
+          clear the CTAs (it survives in the hover tooltip above). */}
+      <span className="hidden font-semibold uppercase tracking-[0.1em] opacity-60 xl:inline">
+        Today&apos;s Weather in Oregon
+      </span>
       {/* currentColor so it stays readable on both the light and dark bar
           (accent/cyan washes out on the bone-white sticky bar). */}
       <WeatherGlyph id={wx.conditionId} className="h-[18px] w-[18px] opacity-90" />
       <span className="font-semibold">{wx.tempF}°F</span>
-      {/* The condition + location only appear at 2xl; at narrower widths the
-          sticky-bar socials/CTAs crowd the centre, so we keep it compact. */}
-      <span className="hidden opacity-40 2xl:inline">·</span>
-      <span className="hidden capitalize opacity-80 2xl:inline">
-        {wx.description || wx.main}
-      </span>
-      <span className="hidden opacity-55 2xl:inline">· Oregon</span>
     </div>
   )
 }

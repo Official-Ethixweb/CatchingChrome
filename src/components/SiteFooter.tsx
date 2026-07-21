@@ -22,7 +22,7 @@ export function SiteFooter() {
         <div className="flex flex-col items-center gap-6 md:items-start">
           <a href="/" className="flex items-center">
             <img
-              src="/Catching-Chrome-logo_color-1536x1533.png"
+              src="/Catching-Chrome-logo_color-1536x1533.webp"
               alt="Catching Chrome Guide Service"
               className="h-28 w-auto object-contain"
             />

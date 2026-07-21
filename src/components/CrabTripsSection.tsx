@@ -67,7 +67,7 @@ export function CrabTripsSection() {
           <div className="relative">
             <div className="overflow-hidden rounded-2xl border border-ink/10 shadow-2xl shadow-ink/20">
               <img
-                src="/crabpots.jpg"
+                src="/crabpots.webp"
                 alt="Two anglers hauling Dungeness crab aboard next to the crab pots"
                 width={1440}
                 height={1080}
@@ -81,7 +81,7 @@ export function CrabTripsSection() {
                 never crowds the main photo. */}
             <div className="absolute -bottom-8 -left-6 hidden w-[38%] overflow-hidden rounded-2xl border-4 border-cream shadow-xl shadow-ink/25 sm:block">
               <img
-                src="/crabcatch.jpg"
+                src="/crabcatch.webp"
                 alt="A cooler filled with fresh Dungeness crab"
                 width={898}
                 height={1599}

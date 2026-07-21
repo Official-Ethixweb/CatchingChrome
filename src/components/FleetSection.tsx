@@ -30,7 +30,7 @@ const VESSELS: Vessel[] = [
  featured: true,
  title: '22-FT River Wild Sled',
  body: 'Our flagship sled seats up to 4 anglers with ample gear and cooler space. State-of-the-art electronics for finding fish in any water.',
- image: '/22ft%20boat%202.jpg',
+ image: '/22ft%20boat%202.webp',
  alt: 'The 22-foot Catching Chrome River Wild sled on the water, rigged with a Yamaha 150 and a landing net',
  specs: [
  { icon: UsersIcon, label: '4 PASSENGERS' },
@@ -44,7 +44,7 @@ const VESSELS: Vessel[] = [
  featured: false,
  title: '18-FT Clackacraft',
  body: 'Spacious Clackamax with walk-around seating for three. Ideal for winter steelhead, fall chinook, and coho on smaller rivers.',
- image: '/18ft%20boat.png',
+ image: '/18ft%20boat.webp',
  alt: 'The 18-foot Clackacraft drift boat moored on a river bank, with salmon artwork along the hull',
  specs: [
  { icon: UsersIcon, label: '3 PASSENGERS' },

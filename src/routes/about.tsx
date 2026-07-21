@@ -73,7 +73,7 @@ function AboutHero() {
       {/* Background image + gradients */}
       <div className="absolute inset-0">
         <img
-          src="/nature-river.jpg"
+          src="/nature-river.webp"
           alt="Fog lifting off an Oregon river at dawn"
           className="h-full w-full object-cover object-center opacity-40"
         />
@@ -200,8 +200,12 @@ function StorySection() {
         <Reveal delay={0.1} className="relative">
           <div className="relative aspect-[4/5] w-[88%] overflow-hidden rounded-2xl border border-ink/10 shadow-2xl shadow-ink/20">
             <img
-              src="/20240831_124653-1488x1536.jpg"
+              src="/20240831_124653-1488x1536.webp"
               alt="Guests aboard with a limit of Columbia River salmon"
+              width={1488}
+              height={1536}
+              loading="lazy"
+              decoding="async"
               className="h-full w-full object-cover"
             />
           </div>

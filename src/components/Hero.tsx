@@ -4,10 +4,10 @@ import { WaveDivider } from './WaveDivider'
 import { ArrowRight } from './icons'
 
 const SLIDES = [
-  '/nature-river.jpg',
-  '/nature-forest.jpg',
-  '/nature-mountain.jpg',
-  '/nature-valley.jpg',
+  '/nature-river.webp',
+  '/nature-forest.webp',
+  '/nature-mountain.webp',
+  '/nature-valley.webp',
 ]
 
 export function Hero() {
