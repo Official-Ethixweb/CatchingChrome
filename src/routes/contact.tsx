@@ -6,7 +6,7 @@ import { PhoneIcon, MapPinIcon } from '~/components/icons'
 import { SOCIALS } from '~/lib/socials'
 import { Eyebrow } from '~/components/Eyebrow'
 import { sendContactEnquiry } from '~/lib/contact'
-import { Recaptcha } from '~/components/Recaptcha'
+import { Recaptcha, resetRecaptcha } from '~/components/Recaptcha'
 
 // Public reCAPTCHA v2 site key (safe to expose). When unset, the checkbox is
 // hidden and the form works without it — the server only enforces the challenge
@@ -91,9 +91,7 @@ function ContactSection() {
 
   const resetCaptcha = () => {
     setCaptchaToken('')
-    if (captchaWidgetId.current !== null) {
-      window.grecaptcha?.reset(captchaWidgetId.current)
-    }
+    resetRecaptcha(captchaWidgetId.current)
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
