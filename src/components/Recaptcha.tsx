@@ -3,37 +3,57 @@ import { useEffect, useRef } from 'react'
 /**
  * Google reCAPTCHA v2 ("I'm not a robot" checkbox) widget.
  *
- * Loads api.js once (explicit-render mode, via a shared ready promise so
- * multiple mounts never inject the script twice) and renders a single checkbox
- * widget. SSR-safe: the script only loads and the widget only renders in the
- * browser. The parent gets the solved token through `onToken`, is told when it
- * expires through `onExpire`, and receives the widget id so it can reset the
- * box after a submit.
+ * Loads the reCAPTCHA script once (explicit-render mode, via a shared ready
+ * promise so multiple mounts never inject it twice) and renders a single
+ * checkbox. SSR-safe: the script only loads and the widget only renders in the
+ * browser.
+ *
+ * We load **enterprise.js**, because keys created in Google's current
+ * Cloud-managed reCAPTCHA console (the only kind you can make now) render with
+ * the enterprise loader — the classic api.js reports "Invalid site key" for
+ * them. We still verify tokens with the classic `siteverify` endpoint on the
+ * server (confirmed working for these keys), so no Google Cloud project /
+ * CreateAssessment is required. The `enterprise ?? classic` fallback below
+ * keeps this working even with a legacy key.
  */
+
+type GrecaptchaApi = {
+  render: (el: HTMLElement, opts: Record<string, unknown>) => number
+  reset: (id?: number) => void
+  getResponse: (id?: number) => string
+}
 
 declare global {
   interface Window {
-    grecaptcha?: {
-      render: (el: HTMLElement, opts: Record<string, unknown>) => number
-      reset: (id?: number) => void
-      getResponse: (id?: number) => string
-    }
+    grecaptcha?: GrecaptchaApi & { enterprise?: GrecaptchaApi }
     __ccGrecaptchaReady?: () => void
   }
 }
 
+/** The active reCAPTCHA API — enterprise namespace when present, else classic. */
+function grecaptchaApi(): GrecaptchaApi | undefined {
+  if (typeof window === 'undefined') return undefined
+  return window.grecaptcha?.enterprise ?? window.grecaptcha
+}
+
+/** Reset a rendered widget (clears the check + token). Safe to call with null. */
+export function resetRecaptcha(widgetId: number | null) {
+  if (widgetId === null) return
+  grecaptchaApi()?.reset(widgetId)
+}
+
 let readyPromise: Promise<void> | null = null
 
-/** Resolves once window.grecaptcha.render is available. */
+/** Resolves once the reCAPTCHA render API is available. */
 function grecaptchaReady(): Promise<void> {
   if (typeof window === 'undefined') return new Promise<void>(() => {})
-  if (window.grecaptcha?.render) return Promise.resolve()
+  if (grecaptchaApi()?.render) return Promise.resolve()
   if (readyPromise) return readyPromise
   readyPromise = new Promise<void>((resolve) => {
     window.__ccGrecaptchaReady = () => resolve()
     const s = document.createElement('script')
     s.src =
-      'https://www.google.com/recaptcha/api.js?onload=__ccGrecaptchaReady&render=explicit'
+      'https://www.google.com/recaptcha/enterprise.js?onload=__ccGrecaptchaReady&render=explicit'
     s.async = true
     s.defer = true
     document.head.appendChild(s)
@@ -58,11 +78,10 @@ export function Recaptcha({
   useEffect(() => {
     let cancelled = false
     grecaptchaReady().then(() => {
-      if (cancelled || rendered.current || !ref.current || !window.grecaptcha) {
-        return
-      }
+      const api = grecaptchaApi()
+      if (cancelled || rendered.current || !ref.current || !api) return
       rendered.current = true
-      const id = window.grecaptcha.render(ref.current, {
+      const id = api.render(ref.current, {
         sitekey: siteKey,
         theme: 'dark',
         callback: onToken,
