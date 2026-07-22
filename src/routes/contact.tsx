@@ -1,11 +1,19 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { SiteHeader } from '~/components/SiteHeader'
 import { SiteFooter } from '~/components/SiteFooter'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { PhoneIcon, MapPinIcon } from '~/components/icons'
 import { SOCIALS } from '~/lib/socials'
 import { Eyebrow } from '~/components/Eyebrow'
 import { sendContactEnquiry } from '~/lib/contact'
+import { Recaptcha } from '~/components/Recaptcha'
+
+// Public reCAPTCHA v2 site key (safe to expose). When unset, the checkbox is
+// hidden and the form works without it — the server only enforces the challenge
+// once its secret key is configured.
+const RECAPTCHA_SITE_KEY = (
+  import.meta.env as Record<string, string | undefined>
+).VITE_RECAPTCHA_SITE_KEY
 
 export const Route = createFileRoute('/contact')({
   component: ContactPage,
@@ -48,6 +56,9 @@ function ContactSection() {
   const [submitted, setSubmitted] = useState(false)
   const [sending, setSending] = useState(false)
   const [failed, setFailed] = useState(false)
+  const [captchaToken, setCaptchaToken] = useState('')
+  const [captchaError, setCaptchaError] = useState(false)
+  const captchaWidgetId = useRef<number | null>(null)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -78,15 +89,38 @@ function ContactSection() {
     )}&body=${encodeURIComponent(body)}`
   })()
 
+  const resetCaptcha = () => {
+    setCaptchaToken('')
+    if (captchaWidgetId.current !== null) {
+      window.grecaptcha?.reset(captchaWidgetId.current)
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (sending) return
+
+    // If the challenge is active, require it before we bother the server.
+    if (RECAPTCHA_SITE_KEY && !captchaToken) {
+      setCaptchaError(true)
+      return
+    }
+
     setSending(true)
     setFailed(false)
+    setCaptchaError(false)
     try {
-      const res = await sendContactEnquiry({ data: formData })
-      if (res.ok) setSubmitted(true)
-      else setFailed(true)
+      const res = await sendContactEnquiry({
+        data: { ...formData, captchaToken },
+      })
+      if (res.ok) {
+        setSubmitted(true)
+      } else if (res.reason === 'captcha') {
+        setCaptchaError(true)
+        resetCaptcha()
+      } else {
+        setFailed(true)
+      }
     } catch {
       setFailed(true)
     } finally {
@@ -217,7 +251,9 @@ function ContactSection() {
                   <button
                     onClick={() => {
                       setSubmitted(false)
+                      setFailed(false)
                       setFormData({ name: '', email: '', phone: '', tripType: 'Salmon', groupSize: '2', message: '' })
+                      resetCaptcha()
                     }}
                     className="btn-outline-cta mt-8 px-5 py-2 text-xs font-bold uppercase tracking-[0.2em]"
                   >
@@ -377,6 +413,27 @@ function ContactSection() {
                             (503) 936-9090
                           </a>
                         </div>
+                      </div>
+                    )}
+
+                    {RECAPTCHA_SITE_KEY && (
+                      <div>
+                        <Recaptcha
+                          siteKey={RECAPTCHA_SITE_KEY}
+                          onToken={(t) => {
+                            setCaptchaToken(t)
+                            setCaptchaError(false)
+                          }}
+                          onExpire={() => setCaptchaToken('')}
+                          onWidgetId={(id) => {
+                            captchaWidgetId.current = id
+                          }}
+                        />
+                        {captchaError && (
+                          <p role="alert" className="mt-2 text-[12px] text-accent">
+                            Please confirm you&apos;re not a robot before sending.
+                          </p>
+                        )}
                       </div>
                     )}
 
