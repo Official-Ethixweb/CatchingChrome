@@ -9,6 +9,7 @@ import appCss from '~/styles.css?url'
 import { ThemeController } from '~/components/ThemeController'
 import { SiteHeader } from '~/components/SiteHeader'
 import { SiteFooter } from '~/components/SiteFooter'
+import { Analytics, GtmHeadScript, GtmNoScript } from '~/components/Analytics'
 
 const FONT_URL =
   'https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap'
@@ -77,6 +78,9 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <RootDocument>
+      {/* Pushes a page_view to GTM's dataLayer on every route change (no-op
+          until VITE_GTM_ID is set). */}
+      <Analytics />
       <Outlet />
     </RootDocument>
   )
@@ -130,6 +134,9 @@ function RootDocument({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
+        {/* GTM as high in <head> as possible, per Google's guidance. No-op
+            unless VITE_GTM_ID is set. */}
+        <GtmHeadScript />
         <HeadContent />
         {/* Load the Google Fonts stylesheet without render-blocking: append it
             as a print-media sheet (fetched but not applied), then flip to all
@@ -145,6 +152,8 @@ function RootDocument({ children }: { children: ReactNode }) {
         </noscript>
       </head>
       <body>
+        {/* GTM no-JS fallback, immediately after <body> open per Google. */}
+        <GtmNoScript />
         <ThemeController />
         {children}
         <Scripts />

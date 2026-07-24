@@ -7,6 +7,7 @@ import { SOCIALS } from '~/lib/socials'
 import { Eyebrow } from '~/components/Eyebrow'
 import { sendContactEnquiry } from '~/lib/contact'
 import { Recaptcha, resetRecaptcha } from '~/components/Recaptcha'
+import { trackEvent } from '~/components/Analytics'
 
 // Public reCAPTCHA v2 site key (safe to expose). When unset, the checkbox is
 // hidden and the form works without it — the server only enforces the challenge
@@ -113,6 +114,14 @@ function ContactSection() {
       })
       if (res.ok) {
         setSubmitted(true)
+        // Conversion: the enquiry actually reached Ryan. Fired only on a
+        // confirmed send (not on a click of Send), and carries no PII — just
+        // the trip interest and group size, which are useful for reporting.
+        trackEvent('contact_form_submit', {
+          form_name: 'contact',
+          trip_type: formData.tripType,
+          group_size: formData.groupSize,
+        })
       } else if (res.reason === 'captcha') {
         setCaptchaError(true)
         resetCaptcha()
