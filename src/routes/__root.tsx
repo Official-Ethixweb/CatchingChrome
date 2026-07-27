@@ -9,7 +9,12 @@ import appCss from '~/styles.css?url'
 import { ThemeController } from '~/components/ThemeController'
 import { SiteHeader } from '~/components/SiteHeader'
 import { SiteFooter } from '~/components/SiteFooter'
-import { Analytics, GtmHeadScript, GtmNoScript } from '~/components/Analytics'
+import {
+  Analytics,
+  GtmHeadScript,
+  GtmNoScript,
+  GoogleAdsHeadScript,
+} from '~/components/Analytics'
 
 const FONT_URL =
   'https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap'
@@ -137,6 +142,8 @@ function RootDocument({ children }: { children: ReactNode }) {
         {/* GTM as high in <head> as possible, per Google's guidance. No-op
             unless VITE_GTM_ID is set. */}
         <GtmHeadScript />
+        {/* Google Ads global site tag (gtag.js). No-op in dev. */}
+        <GoogleAdsHeadScript />
         <HeadContent />
         {/* Load the Google Fonts stylesheet without render-blocking: append it
             as a print-media sheet (fetched but not applied), then flip to all

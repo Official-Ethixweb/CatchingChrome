@@ -25,11 +25,14 @@ declare const process: { env: Record<string, string | undefined> }
 
 export type ContactPayload = {
   name: string
-  email: string
-  phone: string
-  tripType: string
-  groupSize: string
-  message: string
+  /** At least one of email / phone must be present (server-enforced). */
+  email?: string
+  phone?: string
+  tripType?: string
+  groupSize?: string
+  message?: string
+  /** Where the enquiry came from, e.g. "Homepage hero form". */
+  source?: string
   /** reCAPTCHA v2 token; only enforced when RECAPTCHA_SECRET_KEY is set. */
   captchaToken?: string
 }
@@ -59,7 +62,7 @@ async function verifyCaptcha(secret: string, token: string): Promise<boolean> {
   }
 }
 
-const MAX = { name: 120, email: 200, phone: 40, tripType: 60, groupSize: 8, message: 4000 }
+const MAX = { name: 120, email: 200, phone: 40, tripType: 60, groupSize: 8, message: 4000, source: 60 }
 
 /** Trim, cap length, and strip CR/LF so nothing can be injected into headers. */
 function clean(v: unknown, max: number): string {
@@ -85,13 +88,17 @@ export const sendContactEnquiry = createServerFn({ method: 'POST' })
     const phone = clean(data.phone, MAX.phone)
     const tripType = clean(data.tripType, MAX.tripType)
     const groupSize = clean(data.groupSize, MAX.groupSize)
+    const source = clean(data.source, MAX.source)
     // The message is the one field allowed to keep its line breaks.
     const message = String(data.message ?? '').trim().slice(0, MAX.message)
 
     // Re-check on the server: the `required` attributes in the markup are a
-    // convenience for the guest, not a guarantee about what arrives here.
-    if (!name || !email || !phone) return { ok: false, reason: 'invalid' }
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+    // convenience for the guest, not a guarantee about what arrives here. A
+    // name plus at least one way to reach them back is the minimum a lead
+    // needs — the short hero form sends name + phone, the contact page sends
+    // all three.
+    if (!name || (!email && !phone)) return { ok: false, reason: 'invalid' }
+    if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
       return { ok: false, reason: 'invalid' }
     }
 
@@ -114,13 +121,16 @@ export const sendContactEnquiry = createServerFn({ method: 'POST' })
       process.env.CONTACT_FROM_EMAIL ?? 'noreply@catchingchromeguideservice.com'
     if (!key || !to) return { ok: false, reason: 'unconfigured' }
 
+    // Only surface the fields the guest actually gave — the short hero form
+    // omits email / group size, and blank rows just add noise to Ryan's inbox.
     const rows: Array<[string, string]> = [
       ['Name', name],
       ['Email', email],
       ['Phone', phone],
       ['Trip interest', tripType],
       ['Group size', groupSize],
-    ]
+      ['Source', source],
+    ].filter(([, v]) => v) as Array<[string, string]>
 
     const html = `
       <h2>New trip enquiry</h2>
@@ -132,18 +142,24 @@ export const sendContactEnquiry = createServerFn({ method: 'POST' })
           )
           .join('')}
       </table>
-      <p style="color:#666;margin-top:16px">Message</p>
-      <p>${escapeHtml(message).replace(/\n/g, '<br>') || '<em>(none)</em>'}</p>
+      ${
+        message
+          ? `<p style="color:#666;margin-top:16px">Message</p><p>${escapeHtml(message).replace(/\n/g, '<br>')}</p>`
+          : ''
+      }
     `
 
     // Plain-text alternative — improves deliverability and covers text clients.
     const text = [
       'New trip enquiry',
       ...rows.map(([k, v]) => `${k}: ${v}`),
-      '',
-      'Message:',
-      message || '(none)',
+      ...(message ? ['', 'Message:', message] : []),
     ].join('\n')
+
+    const subject =
+      `New trip enquiry from ${name}` +
+      (tripType ? ` – ${tripType}` : '') +
+      (source ? ` [${source}]` : '')
 
     try {
       const res = await fetch('https://api.smtp2go.com/v3/email/send', {
@@ -156,11 +172,14 @@ export const sendContactEnquiry = createServerFn({ method: 'POST' })
         body: JSON.stringify({
           sender: `Catching Chrome <${from}>`,
           to: [to],
-          subject: `Trip enquiry from ${name} (${tripType}, ${groupSize})`,
+          subject,
           html_body: html,
           text_body: text,
-          // So Ryan can hit reply and land in the guest's inbox.
-          custom_headers: [{ header: 'Reply-To', value: email }],
+          // So Ryan can hit reply and land in the guest's inbox — only when an
+          // email was actually given (the short form may be phone-only).
+          ...(email
+            ? { custom_headers: [{ header: 'Reply-To', value: email }] }
+            : {}),
         }),
         signal: AbortSignal.timeout(10000),
       })

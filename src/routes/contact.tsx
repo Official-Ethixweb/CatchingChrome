@@ -7,7 +7,7 @@ import { SOCIALS } from '~/lib/socials'
 import { Eyebrow } from '~/components/Eyebrow'
 import { sendContactEnquiry } from '~/lib/contact'
 import { Recaptcha, resetRecaptcha } from '~/components/Recaptcha'
-import { trackEvent } from '~/components/Analytics'
+import { trackEvent, trackAdsConversion } from '~/components/Analytics'
 
 // Public reCAPTCHA v2 site key (safe to expose). When unset, the checkbox is
 // hidden and the form works without it — the server only enforces the challenge
@@ -122,6 +122,8 @@ function ContactSection() {
           trip_type: formData.tripType,
           group_size: formData.groupSize,
         })
+        // Google Ads "Contact" conversion for the paid search campaign.
+        trackAdsConversion()
       } else if (res.reason === 'captcha') {
         setCaptchaError(true)
         resetCaptcha()

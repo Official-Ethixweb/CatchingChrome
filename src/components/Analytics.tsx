@@ -56,6 +56,65 @@ export function GtmNoScript() {
   )
 }
 
+/**
+ * Google Ads conversion tracking.
+ *
+ * This is separate from the GTM/GA4 container above. It loads the Google Ads
+ * global site tag (gtag.js) and fires the "Contact" conversion action so paid
+ * search leads are attributed back to the campaign. The id and label come
+ * straight from the Google Ads conversion snippet and are public, client-side
+ * identifiers (they ship in the page regardless), so they live in code rather
+ * than an env var.
+ *
+ * Gated on a production build so local dev never loads the tag or reports a
+ * conversion into the live campaign. The event fires only on a confirmed lead
+ * (see trackAdsConversion callers), never on page load.
+ */
+const ADS_ID = 'AW-16543898975'
+const ADS_CONTACT_LABEL = 'EfvSCJi0nKoZEN-639A9'
+const adsEnabled = import.meta.env.PROD
+
+type GtagWindow = Window & {
+  dataLayer?: unknown[]
+  gtag?: (...args: unknown[]) => void
+}
+
+/** Loads gtag.js for the Google Ads tag and initialises the command queue. */
+export function GoogleAdsHeadScript() {
+  if (!adsEnabled) return null
+  return (
+    <>
+      <script
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${ADS_ID}`}
+      />
+      <script
+        dangerouslySetInnerHTML={{
+          __html:
+            `window.dataLayer=window.dataLayer||[];` +
+            `function gtag(){dataLayer.push(arguments);}` +
+            `gtag('js',new Date());` +
+            `gtag('config','${ADS_ID}');`,
+        }}
+      />
+    </>
+  )
+}
+
+/**
+ * Report a Google Ads conversion for a completed contact enquiry. Safe to call
+ * from anywhere: it no-ops on the server and when the Ads tag never loaded
+ * (local dev, or before the gtag.js request resolves).
+ */
+export function trackAdsConversion(): void {
+  if (typeof window === 'undefined') return
+  const w = window as GtagWindow
+  if (typeof w.gtag !== 'function') return
+  w.gtag('event', 'conversion', {
+    send_to: `${ADS_ID}/${ADS_CONTACT_LABEL}`,
+  })
+}
+
 type DataLayerWindow = Window & { dataLayer?: Array<Record<string, unknown>> }
 
 /**

@@ -30,7 +30,7 @@ export function Hero() {
   }, [])
 
   return (
-    <section className="relative h-screen min-h-[640px] w-full bg-ink">
+    <section className="relative min-h-screen w-full overflow-hidden bg-ink">
       {/* Background slideshow */}
       <div className="absolute inset-0 overflow-hidden">
         {SLIDES.map((src, i) => {
@@ -55,32 +55,45 @@ export function Hero() {
         })}
       </div>
 
-      {/* Legibility overlay — evenly weighted now that the copy is centred */}
+      {/* Legibility overlay — even weight now the copy is centred */}
       <div className="absolute inset-0 bg-gradient-to-r from-ink/70 via-ink/55 to-ink/70" />
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-ink/20" />
+      <div className="absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-ink/25" />
 
       <SiteHeader />
 
-      {/* Content: centred copy */}
-      <div className="absolute inset-0 z-10 flex items-center pb-16">
-        <div className="mx-auto w-full max-w-[1440px] px-6 md:px-10">
-          <div className="hero-fade mx-auto flex max-w-3xl flex-col items-center text-center">
-            <h1 className="font-display text-[clamp(2.2rem,4.9vw,4.6rem)] uppercase leading-[0.98] text-white [text-shadow:0_2px_30px_rgba(0,0,0,0.45)]">
-              Experience Oregon&apos;s Premier Fishing Adventures
-            </h1>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-white/80 [text-shadow:0_1px_12px_rgba(0,0,0,0.55)] md:text-lg">
-              Expert-guided excursions on the Pacific Northwest&apos;s most
-              pristine waters.
-            </p>
+      {/* Content: centred headline + CTA (the lead form that used to sit on the
+          right was removed on request; the hero now drives to the contact page). */}
+      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-[1440px] items-center justify-center px-6 pb-16 pt-28 md:px-10 md:pt-32">
+        <div className="hero-fade mx-auto max-w-3xl text-center">
+          <h1 className="font-display text-[clamp(2.4rem,5.4vw,4.8rem)] uppercase leading-[0.98] text-white [text-shadow:0_2px_30px_rgba(0,0,0,0.45)]">
+            Experience Oregon&apos;s Premier Fishing Adventures
+          </h1>
+          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/80 [text-shadow:0_1px_12px_rgba(0,0,0,0.55)] md:text-lg">
+            Expert-guided excursions on the Pacific Northwest&apos;s most
+            pristine waters.
+          </p>
 
-            <a
-              href="/contact"
-              className="btn-primary group mt-9 inline-flex items-center gap-3 px-8 py-4 text-[13px] font-semibold uppercase tracking-[0.14em] shadow-xl"
-            >
-              Book Now
-              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-            </a>
+          {/* Trust chips */}
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+            {['USCG Certified', '40+ Years Experience', 'Gear Included'].map(
+              (chip) => (
+                <div key={chip} className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                  <span className="text-[12px] font-medium uppercase tracking-[0.14em] text-white/75">
+                    {chip}
+                  </span>
+                </div>
+              ),
+            )}
           </div>
+
+          <a
+            href="/contact"
+            className="btn-primary group mt-9 inline-flex items-center gap-3 px-8 py-4 text-[13px] font-semibold uppercase tracking-[0.14em] shadow-xl"
+          >
+            Book Now
+            <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+          </a>
         </div>
       </div>
 
