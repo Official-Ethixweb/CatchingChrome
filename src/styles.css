@@ -188,6 +188,98 @@
   animation: heroFadeUp 0.9s ease-out both;
 }
 
+/* ===================================================================
+   Hero call-to-action (see HeroCall.tsx).
+   The tap-to-call pill is the hero's only CTA. Every bit of motion here
+   is CSS keyframes rather than rAF/GSAP, so it keeps running in
+   background and preview tabs, and it all switches off under
+   prefers-reduced-motion at the foot of this block.
+   =================================================================== */
+
+/* Slow cyan breathe so the number reads as tappable before anyone
+   hovers it — this is the hero's primary phone affordance. */
+@keyframes heroPhoneGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 204, 204, 0);
+  }
+  50% {
+    box-shadow: 0 0 28px -4px rgba(0, 204, 204, 0.5);
+  }
+}
+
+.hero-phone {
+  animation: heroPhoneGlow 3.6s ease-in-out infinite;
+}
+
+/* Ripple rings: only animate while hovered/focused, so they sit at
+   opacity 0 the rest of the time instead of holding a paused frame. */
+.hero-phone-ring {
+  position: absolute;
+  inset: -2px;
+  border-radius: 9999px;
+  border: 2px solid var(--color-cta);
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes heroRipple {
+  0% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  70% {
+    opacity: 0.08;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.4);
+  }
+}
+
+.hero-phone:hover .hero-phone-ring,
+.hero-phone:focus-visible .hero-phone-ring {
+  animation: heroRipple 1.9s ease-out infinite;
+}
+
+.hero-phone-ring-2 {
+  animation-delay: 0.95s;
+}
+
+/* Handset gives a short ring-shake on hover. */
+@keyframes heroPhoneShake {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(-15deg);
+  }
+  40% {
+    transform: rotate(12deg);
+  }
+  60% {
+    transform: rotate(-8deg);
+  }
+  80% {
+    transform: rotate(5deg);
+  }
+}
+
+.hero-phone:hover .hero-phone-icon {
+  animation: heroPhoneShake 0.7s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Static CTA: the pill keeps its border and colour, the motion goes. */
+  .hero-phone,
+  .hero-phone:hover .hero-phone-ring,
+  .hero-phone:focus-visible .hero-phone-ring,
+  .hero-phone:hover .hero-phone-icon {
+    animation: none;
+  }
+}
+
 /* Directional slide-ins for the seasonal catalogue panels */
 @keyframes seasonInRight {
   from {
@@ -281,12 +373,19 @@
    are deliberately untouched so branding is stable in both themes.
    =================================================================== */
 
-/* Smooth colour cross-fade when the theme flips. */
+/* Smooth colour cross-fade when the theme flips.
+
+   This is a transition *shorthand* on every descendant, at a specificity that
+   beats Tailwind's transition utilities — so any element inside a themed
+   section that needs to animate something other than colour has to be excluded
+   here, or its own transition is silently discarded. .captain-slide (the Meet
+   the Captain carousel) is the one such case; images and SVGs were already
+   exempt for the same reason. */
 @media (prefers-reduced-motion: no-preference) {
   .theme-transition,
-  .theme-transition *:not(img):not(svg):not(svg *),
+  .theme-transition *:not(img):not(svg):not(svg *):not(.captain-slide),
   .theme-invert,
-  .theme-invert *:not(img):not(svg):not(svg *) {
+  .theme-invert *:not(img):not(svg):not(svg *):not(.captain-slide) {
     transition:
       background-color 0.55s ease,
       color 0.5s ease,

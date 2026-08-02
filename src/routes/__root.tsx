@@ -53,16 +53,29 @@ export const Route = createRootRoute({
         content:
           "Expert-guided fishing excursions on Oregon and the Pacific Northwest's most pristine waters.",
       },
+      { property: 'og:image', content: '/brand/og-image.png' },
+      { name: 'twitter:image', content: '/brand/og-image.png' },
     ],
     links: [
+      // Favicons crop to the salmon roundel on a navy tile — the full lockup's
+      // wordmark is unreadable at 16/32px. See scripts/optimize-brand.mjs.
+      { rel: 'icon', href: '/favicon.ico', sizes: '32x32' },
       {
         rel: 'icon',
         type: 'image/png',
-        href: '/Catching-Chrome-logo_color-1536x1533.png',
+        sizes: '32x32',
+        href: '/brand/favicon-32.png',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '192x192',
+        href: '/brand/favicon-192.png',
       },
       {
         rel: 'apple-touch-icon',
-        href: '/Catching-Chrome-logo_color-1536x1533.png',
+        sizes: '180x180',
+        href: '/brand/apple-touch-icon.png',
       },
       { rel: 'stylesheet', href: appCss },
       { rel: 'preconnect', href: 'https://fonts.googleapis.com' },

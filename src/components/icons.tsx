@@ -275,6 +275,38 @@ export function ChevronDown(props: SVGProps<SVGSVGElement>) {
  )
 }
 
+export function ChevronLeft(props: SVGProps<SVGSVGElement>) {
+ return (
+ <svg
+ viewBox="0 0 24 24"
+ fill="none"
+ stroke="currentColor"
+ strokeWidth={2}
+ strokeLinecap="round"
+ strokeLinejoin="round"
+ {...props}
+ >
+ <path d="m15 18-6-6 6-6" />
+ </svg>
+ )
+}
+
+export function ChevronRight(props: SVGProps<SVGSVGElement>) {
+ return (
+ <svg
+ viewBox="0 0 24 24"
+ fill="none"
+ stroke="currentColor"
+ strokeWidth={2}
+ strokeLinecap="round"
+ strokeLinejoin="round"
+ {...props}
+ >
+ <path d="m9 18 6-6-6-6" />
+ </svg>
+ )
+}
+
 /**
  * Weather line-icon chosen from an OpenWeather condition id (2xx thunder,
  * 3xx/5xx rain, 6xx snow, 7xx mist, 800 clear, 80x clouds). Shared by the

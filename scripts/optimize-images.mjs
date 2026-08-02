@@ -47,8 +47,10 @@ const JOBS = [
   ['merch/long-sleeve.png', 800, 84],
   ['merch/youth-apparel.png', 800, 84],
   ['merch/sticker.png', 800, 84],
-  // Logo — displayed at most ~200px; a small WebP beats the full PNG.
-  ['Catching-Chrome-logo_color-1536x1533.png', 288, 88],
+  // NOTE: the logo moved to scripts/optimize-brand.mjs (2026-08-02), which
+  // builds the whole set — header WebP, favicons, share card — off the new
+  // master. Catching-Chrome-logo_color-1536x1533.* is the retired logo and is
+  // no longer referenced by any component.
   // NOTE: the two partner logos (3KB / 10KB PNG) are already tiny — WebP
   // re-encoding makes them larger, so they stay PNG.
 ]

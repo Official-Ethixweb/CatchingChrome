@@ -18,7 +18,7 @@ const NAV_ITEMS = [
   { label: 'Contact', to: '/contact' },
 ]
 
-const LOGO = '/Catching-Chrome-logo_color-1536x1533.webp'
+const LOGO = '/brand/logo.webp'
 const PHONE = '(503) 936-9090'
 const PHONE_HREF = 'tel:5039369090'
 

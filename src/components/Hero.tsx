@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { SiteHeader } from './SiteHeader'
 import { WaveDivider } from './WaveDivider'
-import { ArrowRight } from './icons'
+import { HeroCall } from './HeroCall'
 
 const SLIDES = [
   '/nature-river.webp',
@@ -61,8 +61,10 @@ export function Hero() {
 
       <SiteHeader />
 
-      {/* Content: centred headline + CTA (the lead form that used to sit on the
-          right was removed on request; the hero now drives to the contact page). */}
+      {/* Content: centred headline + CTA. The lead form that used to sit on the
+          right was removed on request, and the Book Now button that replaced it
+          gave way to the tap-to-call number (2026-08-02) — calling is the
+          fastest route to a booking, so nothing competes with it here. */}
       <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-[1440px] items-center justify-center px-6 pb-16 pt-28 md:px-10 md:pt-32">
         <div className="hero-fade mx-auto max-w-3xl text-center">
           <h1 className="font-display text-[clamp(2.4rem,5.4vw,4.8rem)] uppercase leading-[0.98] text-white [text-shadow:0_2px_30px_rgba(0,0,0,0.45)]">
@@ -87,13 +89,8 @@ export function Hero() {
             )}
           </div>
 
-          <a
-            href="/contact"
-            className="btn-primary group mt-9 inline-flex items-center gap-3 px-8 py-4 text-[13px] font-semibold uppercase tracking-[0.14em] shadow-xl"
-          >
-            Book Now
-            <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-          </a>
+          {/* Tap-to-call phone number — the hero's only CTA. */}
+          <HeroCall />
         </div>
       </div>
 

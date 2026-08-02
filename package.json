@@ -6,6 +6,7 @@
     "dev": "vite dev --port 3000",
     "build": "vite build",
     "start": "node .output/server/index.mjs",
+    "optimize:brand": "node scripts/optimize-brand.mjs",
     "optimize:gallery": "node scripts/optimize-gallery.mjs",
     "optimize:images": "node scripts/optimize-images.mjs"
   },
