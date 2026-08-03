@@ -165,7 +165,7 @@ function StorySection() {
           <Reveal delay={0.06}>
             <h2 className="mt-6 font-display text-[clamp(2.4rem,4.4vw,3.8rem)] uppercase leading-[0.92] text-ink">
               <span className="block">Born on the</span>
-              <span className="block text-accent">river</span>
+              <span className="block accent-underline text-accent">river</span>
             </h2>
           </Reveal>
           <Reveal delay={0.12}>
@@ -354,7 +354,7 @@ function ValuesSection() {
         <Reveal delay={0.06}>
           <h2 className="mt-6 max-w-2xl font-display text-[clamp(2.4rem,4.6vw,4rem)] uppercase leading-[0.92] text-ink">
             <span className="block">The Catching Chrome</span>
-            <span className="block text-accent">difference</span>
+            <span className="block accent-underline text-accent">difference</span>
           </h2>
         </Reveal>
 
@@ -465,7 +465,7 @@ function JourneySection() {
         </Reveal>
         <Reveal delay={0.06} className="text-center">
           <h2 className="mx-auto mt-6 font-display text-[clamp(2.4rem,4.6vw,3.8rem)] uppercase leading-[0.92] text-ink">
-            From one river to a<span className="text-accent"> lifetime</span>
+            From one river to a<span className="accent-underline text-accent"> lifetime</span>
           </h2>
         </Reveal>
 

@@ -19,13 +19,13 @@ export function HeroCall() {
         href={PHONE_HREF}
         data-cta="hero-call"
         aria-label={`Call Catching Chrome at ${PHONE}`}
-        className="hero-phone group relative inline-flex items-center gap-4 rounded-full border-2 border-accent/70 bg-ink/50 px-6 py-3.5 backdrop-blur-sm transition-colors duration-200 hover:border-accent md:px-8 md:py-4"
+        className="hero-phone group relative inline-flex items-center gap-4 rounded-full border-2 border-btn/70 bg-ink/50 px-6 py-3.5 backdrop-blur-sm transition-colors duration-200 hover:border-btn md:px-8 md:py-4"
       >
         {/* Ripple rings, emitted on hover/focus */}
         <span aria-hidden="true" className="hero-phone-ring" />
         <span aria-hidden="true" className="hero-phone-ring hero-phone-ring-2" />
 
-        <span className="hero-phone-icon flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent text-ink md:h-12 md:w-12">
+        <span className="hero-phone-icon flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-btn text-ink md:h-12 md:w-12">
           <PhoneIcon className="h-5 w-5 md:h-6 md:w-6" />
         </span>
 
@@ -33,7 +33,7 @@ export function HeroCall() {
           <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/65 md:text-[11px]">
             Call the captain
           </span>
-          <span className="mt-1.5 font-display text-[20px] tracking-wide text-white transition-colors duration-200 group-hover:text-accent md:text-[26px]">
+          <span className="mt-1.5 font-display text-[20px] tracking-wide text-white transition-colors duration-200 group-hover:text-btn md:text-[26px]">
             {PHONE}
           </span>
         </span>

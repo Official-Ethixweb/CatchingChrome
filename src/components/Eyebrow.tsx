@@ -3,6 +3,10 @@
  * consistent treatment across every section: a small accent dot + the tracked
  * uppercase label. `tone="light"` is for dark backgrounds (cream text),
  * `tone="dark"` is for light backgrounds (ink text).
+ *
+ * The dot is Salmon Gold rather than the brand blue — with the accent
+ * underline under the headline word below it, those two are the site's only
+ * warm notes (2026-08-03).
  */
 export function Eyebrow({
   label,
@@ -20,7 +24,7 @@ export function Eyebrow({
     <div
       className={`flex items-center gap-3 ${center ? 'justify-center' : ''} ${className}`}
     >
-      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
       <span
         className={`text-[12px] font-semibold uppercase tracking-[0.3em] ${labelColor}`}
       >

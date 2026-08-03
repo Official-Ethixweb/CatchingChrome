@@ -26,7 +26,7 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 118px; /* top header: logo 86 + py-4 (32) */
+  height: 132px; /* top header: logo 100 + py-4 (32) */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -38,17 +38,17 @@
 }
 @media (min-width: 640px) {
   .staggered-menu-header {
-    height: 138px; /* top header at sm+: logo 106 + py-4 */
+    height: 144px; /* top header at sm+: logo 112 + py-4 */
   }
 }
 
 /* Stuck = the compact StickyBar is showing; match its shorter height instead. */
 .staggered-menu-wrapper[data-stuck] .staggered-menu-header {
-  height: 79px; /* sticky bar: logo 58 + py-2.5 + border */
+  height: 93px; /* sticky bar: logo 72 + py-2.5 + border */
 }
 @media (min-width: 640px) {
   .staggered-menu-wrapper[data-stuck] .staggered-menu-header {
-    height: 88px; /* sticky logo 67 */
+    height: 97px; /* sticky logo 76 */
   }
 }
 @media (min-width: 768px) {
@@ -64,6 +64,7 @@
 .sm-logo {
   display: flex;
   align-items: center;
+  justify-content: center;
   user-select: none;
   opacity: 0;
   pointer-events: none;
@@ -78,7 +79,7 @@
 
 .sm-logo-img {
   display: block;
-  height: 42px;
+  height: 60px;
   width: auto;
   object-fit: contain;
 }
@@ -101,6 +102,51 @@
   transition: color 0.3s ease;
 }
 
+/* Wrapper that holds Book Now + the menu toggle side by side */
+.sm-header-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  pointer-events: auto;
+}
+
+/* Book Now button — pill button, same text size as the menu toggle */
+.sm-book-btn {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  padding: 0.4rem 0.75rem;
+  text-decoration: none;
+  white-space: nowrap;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 9999px;
+  background-color: var(--color-btn);
+  border-color: var(--color-btn);
+  color: var(--color-ink) !important;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.sm-book-btn:hover {
+  background-color: var(--color-ink);
+  border-color: var(--color-btn);
+  color: var(--color-btn) !important;
+}
+
+.sm-book-btn:focus-visible {
+  outline: 2px solid var(--color-cta, #60B1D2);
+  outline-offset: 4px;
+  border-radius: 9999px;
+}
+
 /* Color adaptivity based on stuck bar and document theme */
 .staggered-menu-wrapper:not([data-stuck]) .sm-toggle {
   color: var(--color-cream, #F7F6F2); /* Always white/cream on dark hero background */
@@ -121,7 +167,7 @@
 }
 
 .sm-toggle:focus-visible {
-  outline: 2px solid var(--color-cta, #00CCCC);
+  outline: 2px solid var(--color-cta, #60B1D2);
   outline-offset: 4px;
   border-radius: 4px;
 }
@@ -246,10 +292,10 @@
 }
 
 .sm-panel-item:hover {
-  color: var(--sm-accent, #00CCCC); /* Chrome Cyan hover */
+  color: var(--sm-accent, #60B1D2); /* Chrome Blue hover */
 }
 
-/* Numbering style matches the Chrome Cyan accent */
+/* Numbering style matches the Chrome Blue accent */
 .sm-panel-list[data-numbering] {
   counter-reset: smItem;
 }
@@ -263,7 +309,7 @@
   font-family: var(--font-sans), sans-serif;
   font-size: 14px;
   font-weight: 500;
-  color: var(--color-accent, #00CCCC); /* Chrome Cyan */
+  color: var(--color-accent, #60B1D2); /* Chrome Blue */
   letter-spacing: 0.05em;
   pointer-events: none;
   user-select: none;
@@ -287,7 +333,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--color-accent, #00CCCC); /* Chrome Cyan */
+  color: var(--color-accent, #60B1D2); /* Chrome Blue */
 }
 
 .sm-socials-list {
@@ -320,11 +366,11 @@
 
 .sm-socials-list:hover .sm-socials-link:hover {
   opacity: 1;
-  color: var(--sm-accent, #00CCCC);
+  color: var(--sm-accent, #60B1D2);
 }
 
 .sm-socials-link:focus-visible {
-  outline: 2px solid var(--sm-accent, #00CCCC);
+  outline: 2px solid var(--sm-accent, #60B1D2);
   outline-offset: 3px;
 }
 

@@ -20,7 +20,7 @@ export function CrabTripsSection() {
 
           <h2 className="mt-6 font-display text-[clamp(2.6rem,5.4vw,4.8rem)] uppercase leading-[0.9] text-ink">
             <span className="block">Dungeness</span>
-            <span className="block text-accent">by the pot</span>
+            <span className="block accent-underline text-accent">by the pot</span>
           </h2>
 
           <p className="mt-7 max-w-md text-[17px] leading-relaxed text-ink/70">

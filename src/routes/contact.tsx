@@ -155,7 +155,7 @@ function ContactSection() {
             {/* Heading */}
             <h2 className="mt-6 font-display text-[clamp(2.75rem,5.5vw,4.8rem)] uppercase leading-[0.9] text-cream">
               <span className="block">Plan Your</span>
-              <span className="block text-accent">excursion</span>
+              <span className="block accent-underline text-accent">excursion</span>
             </h2>
 
             <p className="mt-6 max-w-lg text-[16px] leading-relaxed text-cream/70">

@@ -569,7 +569,7 @@ function GalleryPage() {
             <div className="mt-6 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
               <h2 className="font-display text-[clamp(2.6rem,5.4vw,4.6rem)] uppercase leading-[0.9] text-ink">
                 <span className="block">Real Days,</span>
-                <span className="block text-accent">real fish</span>
+                <span className="block accent-underline text-accent">real fish</span>
               </h2>
 
               <p className="max-w-md text-[17px] leading-relaxed text-ink/70 lg:mb-3">
@@ -659,7 +659,7 @@ function GalleryPage() {
                         title={
                           <>
                             <span className="block">Twelve Seasons,</span>
-                            <span className="block text-accent">
+                            <span className="block accent-underline text-accent">
                               one river system
                             </span>
                           </>
@@ -673,7 +673,7 @@ function GalleryPage() {
                         title={
                           <>
                             <span className="block">Ryan Puts You</span>
-                            <span className="block text-accent">on fish</span>
+                            <span className="block accent-underline text-accent">on fish</span>
                           </>
                         }
                         body="USCG-licensed, fully insured, running Oregon water since 2012. Rods, tackle and coaching are aboard, and your catch leaves filleted, cleaned and packed."
@@ -712,7 +712,7 @@ function GalleryPage() {
             <div className="mt-6 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
               <h2 className="font-display text-[clamp(2.4rem,4.6vw,3.8rem)] uppercase leading-[0.9] text-cream">
                 <span className="block">Sound On,</span>
-                <span className="block text-accent">rods bent</span>
+                <span className="block accent-underline text-accent">rods bent</span>
               </h2>
               <p className="max-w-md text-[16px] leading-relaxed text-cream/70 lg:mb-3">
                 A few seconds from the middle of a fight, straight off the deck.

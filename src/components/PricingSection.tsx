@@ -115,15 +115,15 @@ function PricingRow({ item, index }: { item: PricingItem; index: number }) {
             className="transition-all duration-300"
           />
           {/* Guides */}
-          <circle cx="16" cy="20" r="1.5" stroke="#00CCCC" strokeWidth="1" />
-          <circle cx="22" cy="14" r="1" stroke="#00CCCC" strokeWidth="1" />
+          <circle cx="16" cy="20" r="1.5" stroke="#60B1D2" strokeWidth="1" />
+          <circle cx="22" cy="14" r="1" stroke="#60B1D2" strokeWidth="1" />
         </svg>
 
         {/* Fishing Line (SVG path) */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible">
           <path
             d={pathD}
-            stroke={isHovered ? "#00CCCC" : "#B9C4CC"}
+            stroke={isHovered ? "#60B1D2" : "#B9C4CC"}
             strokeWidth={isHovered ? "1.8" : "1"}
             fill="none"
             className="transition-all duration-300"
@@ -197,7 +197,7 @@ export function PricingSection() {
         <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <h2 className="font-display text-[clamp(2.75rem,6vw,5.2rem)] uppercase leading-[0.9] text-cream">
             <span className="block">Fair Rates,</span>
-            <span className="block leading-[0.9] text-accent">No Hidden Fees</span>
+            <span className="block leading-[0.9] accent-underline text-accent">No Hidden Fees</span>
           </h2>
 
           <p className="max-w-md text-base leading-relaxed text-cream/70 lg:mb-2">

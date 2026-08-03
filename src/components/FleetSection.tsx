@@ -123,7 +123,7 @@ export function FleetSection() {
  {/* Headline */}
  <h2 className="mt-6 font-display text-[clamp(2.75rem,6vw,5.2rem)] uppercase leading-[0.9] text-ink">
  <span className="block">Premium Fishing</span>
- <span className="block leading-[0.9] text-accent">
+ <span className="block leading-[0.9] accent-underline text-accent">
  vessels
  </span>
  </h2>

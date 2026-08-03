@@ -121,7 +121,7 @@ function CommercialPage() {
             <div className="mt-6 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
               <h2 className="font-display text-[clamp(2.6rem,5.4vw,4.6rem)] uppercase leading-[0.9] text-ink">
                 <span className="block">Bigger Boats,</span>
-                <span className="block text-accent">bigger groups</span>
+                <span className="block accent-underline text-accent">bigger groups</span>
               </h2>
 
               <p className="max-w-md text-[17px] leading-relaxed text-ink/70 lg:mb-3">
@@ -162,7 +162,7 @@ function CommercialPage() {
               <Eyebrow label="What's Included" tone="light" />
               <h2 className="mt-6 font-display text-[clamp(2.4rem,4.6vw,3.8rem)] uppercase leading-[0.9] text-cream">
                 <span className="block">One Invoice,</span>
-                <span className="block text-accent">everything handled</span>
+                <span className="block accent-underline text-accent">everything handled</span>
               </h2>
               <p className="mt-7 max-w-lg text-[16px] leading-relaxed text-cream/70">
                 Every commercial booking is quoted per person with the whole day

@@ -70,7 +70,7 @@ export function SignatureTripsSection({ className = "bg-cream" }: { className?: 
         <div className="mt-6 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <h2 className="font-display text-[clamp(2.6rem,6.2vw,5.6rem)] uppercase leading-[0.9] text-ink">
             <span className="block">Our Signature</span>
-            <span className="block leading-[0.85] text-accent">trips</span>
+            <span className="block leading-[0.85] accent-underline text-accent">trips</span>
           </h2>
 
           <p className="max-w-sm text-[17px] leading-relaxed text-ink/70 lg:mb-3">

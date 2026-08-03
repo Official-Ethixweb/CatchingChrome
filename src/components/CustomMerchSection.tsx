@@ -140,7 +140,7 @@ export function CustomMerchSection() {
             <h2 className="mt-6 font-display text-[clamp(2.2rem,3.4vw,3.3rem)] uppercase leading-[0.9] text-cream">
               <span className="block">Create Your</span>
               <span className="block">Custom</span>
-              <span className="block text-accent">merch</span>
+              <span className="block accent-underline text-accent">merch</span>
             </h2>
 
             <p className="mt-7 max-w-lg text-[16px] leading-relaxed text-cream/70">

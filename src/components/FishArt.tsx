@@ -117,9 +117,9 @@ export function FishArt({
     >
       <defs>
         <linearGradient id={`${gid}-bg`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#0F5A69" />
+          <stop offset="0%" stopColor="#184B60" />
           <stop offset="55%" stopColor="#0E2A3B" />
-          <stop offset="100%" stopColor="#061a1f" />
+          <stop offset="100%" stopColor="#08181F" />
         </linearGradient>
         <linearGradient id={`${gid}-fish`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#F7F6F2" />

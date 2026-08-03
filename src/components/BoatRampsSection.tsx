@@ -82,7 +82,7 @@ export function BoatRampsSection() {
  {/* Headline */}
  <h2 className="mt-5 flex flex-wrap items-baseline gap-x-[0.16em] font-display text-[clamp(2.25rem,6vw,5.2rem)] uppercase leading-[0.9] text-cream">
  <span>Boat</span>
- <span className="text-accent">
+ <span className="accent-underline text-accent">
  ramps
  </span>
  </h2>

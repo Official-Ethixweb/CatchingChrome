@@ -199,7 +199,7 @@ export function SeasonsSection() {
         <div className="mt-8 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <h2 className="font-display text-[clamp(2.6rem,5vw,4.4rem)] uppercase leading-[0.9] text-cream">
             <span className="block">Oregon Salmon</span>
-            <span className="block text-accent">calendar</span>
+            <span className="block accent-underline text-accent">calendar</span>
           </h2>
           <p className="max-w-md text-[15.5px] leading-relaxed text-cream/70">
             The best months to fish our rivers, by species, pulled straight

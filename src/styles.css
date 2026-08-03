@@ -4,31 +4,45 @@
   --font-display: 'Archivo Black', ui-sans-serif, system-ui, sans-serif;
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
 
-  /* Brand palette - River & Steel */
+  /* Brand palette - River & Steel.
+     Every blue in the site is one hue (197) at different lightness, anchored on
+     --color-accent. The palette was teal (hue 190) until 2026-08-03, when the
+     user moved the brand to #60B1D2; the deeper tones were rotated with it so
+     no teal-green is left in the gradients. */
   --color-ink: #0E2A3B; /* Deep Steel Navy (Headings, dark sections) */
-  --color-deep: #0F5A69; /* Current Teal (Hover states, gradients) */
+  --color-deep: #184B60; /* Deep River (Hover states, gradients) */
   --color-cream: #F7F6F2; /* Bone White (Page background, light text) */
   --color-night: #37444E; /* Charcoal Steel (Body text, secondary UI) */
   --color-paper: #DCEEF3; /* Frost Tint (Section backgrounds) */
   --color-muted: #B9C4CC; /* Chrome Silver (Borders, muted fills) */
-  --color-primary: #167A8E; /* River Teal (Primary brand, links) */
-  --color-accent: #00CCCC; /* Chrome Cyan (Section accents, headline words) */
-  --color-cta: #00CCCC; /* Chrome Cyan (Buttons + CTAs) */
+  --color-primary: #216783; /* River Blue (Primary brand, links) */
+  --color-accent: #60B1D2; /* Chrome Blue (Section accents, headline words) */
+  --color-cta: #60B1D2; /* Chrome Blue (Buttons + CTAs) */
+  /* Warm counterpoint, used in small doses only: eyebrow dots and the underline
+     under highlighted words. Never a fill, never body text. 7.2:1 on ink. */
+  --color-gold: #F5A623; /* Salmon Gold (accent underlines, eyebrow dots) */
+  /* Every button on the site. Sampled from the sunset in the logo (2026-08-03,
+     user directive: buttons should match the logo). It is deliberately NOT
+     --color-cta: that token also drives hover states, focus rings and icon
+     accents which stay blue, and repointing it would turn those amber too.
+     7.3:1 against an ink label, and it holds up on cream and navy alike — the
+     logo's ring blue (#0F5DAA) does not, at 2.2:1 on the navy sections. */
+  --color-btn: #F2A75D; /* Sunset Amber (buttons) */
 }
 
 /* ===================================================================
    Buttons / CTAs
    Every button on the site is a bordered pill drawn from exactly two
-   colours: Chrome Cyan (--color-cta) and Deep Steel Navy (--color-ink).
-   Accent and CTA are both Chrome Cyan now — the Salmon Gold that used to
-   carry section accents and headline words is gone from the palette
-   entirely (2026-07-16, user directive: no yellow anywhere). The site is
-   navy / bone white / cyan. No underline-style links are used as buttons.
-     .btn-primary — cyan fill, navy label. The default CTA.
+   colours: Sunset Amber (--color-btn, taken from the logo) and Deep
+   Steel Navy (--color-ink). The amber is what separates a CTA from the
+   blue the rest of the site is built from, so buttons read as buttons.
+     .btn-primary — amber fill, navy label. The default CTA.
      .btn-outline — navy outline on light sections.
-     .btn-outline-cta — cyan outline, for use on dark (navy) sections.
+     .btn-outline-cta — amber outline, for use on dark (navy) sections.
    Hover always swaps fill and label between the same two colours, so
-   contrast holds on both light and dark backgrounds.
+   contrast holds on both light and dark backgrounds. Amber on cream is
+   only 1.8:1, which is why .btn-outline-cta is for dark sections and the
+   sticky bar overrides it to navy while a light chapter is behind it.
    =================================================================== */
 .btn-primary,
 .btn-outline,
@@ -43,15 +57,15 @@
 }
 
 .btn-primary {
-  background-color: var(--color-cta);
-  border-color: var(--color-cta);
+  background-color: var(--color-btn);
+  border-color: var(--color-btn);
   color: var(--color-ink);
 }
 
 .btn-primary:hover {
   background-color: var(--color-ink);
-  border-color: var(--color-cta);
-  color: var(--color-cta);
+  border-color: var(--color-btn);
+  color: var(--color-btn);
 }
 
 .btn-outline {
@@ -63,30 +77,30 @@
 .btn-outline:hover {
   background-color: var(--color-ink);
   border-color: var(--color-ink);
-  color: var(--color-cta);
+  color: var(--color-btn);
 }
 
 .btn-outline-cta {
   background-color: transparent;
-  border-color: var(--color-cta);
-  color: var(--color-cta);
+  border-color: var(--color-btn);
+  color: var(--color-btn);
 }
 
 .btn-outline-cta:hover {
-  background-color: var(--color-cta);
-  border-color: var(--color-cta);
+  background-color: var(--color-btn);
+  border-color: var(--color-btn);
   color: var(--color-ink);
 }
 
 /* On dark chapters the navy outline would vanish into the background,
-   so it borrows the cyan treatment. */
+   so it borrows the amber treatment. */
 [data-theme='dark'] .theme-transition .btn-outline {
-  border-color: var(--color-cta);
-  color: var(--color-cta);
+  border-color: var(--color-btn);
+  color: var(--color-btn);
 }
 
 [data-theme='dark'] .theme-transition .btn-outline:hover {
-  background-color: var(--color-cta);
+  background-color: var(--color-btn);
   color: var(--color-ink);
 }
 
@@ -116,35 +130,51 @@
   }
 }
 
-/* Deep teal radial glow used behind the hero */
+/* ===================================================================
+   Highlighted heading words.
+   Every section headline puts one word in Chrome Blue; this draws a
+   Salmon Gold rule under that word, the site's one warm note. It uses
+   text-decoration rather than a background gradient on purpose: the
+   spans it lands on are a mix of inline and full-width `block`, left
+   aligned and centred, and only text-decoration tracks the glyphs in
+   all of those instead of the box.
+   =================================================================== */
+.accent-underline {
+  text-decoration-line: underline;
+  text-decoration-color: var(--color-gold);
+  text-decoration-thickness: 0.055em;
+  text-underline-offset: 0.14em;
+}
+
+/* Deep blue radial glow used behind the hero */
 .hero-gradient {
   background:
     radial-gradient(
       125% 115% at 27% 16%,
-      #167A8E 0%,
-      #0F5A69 40%,
+      #216783 0%,
+      #184B60 40%,
       #0E2A3B 68%,
       #0E2A3B 88%,
-      #061a1f 100%
+      #08181F 100%
     );
 }
 
-/* Diagonal teal fill used for the welcome image placeholder */
+/* Diagonal blue fill used for the welcome image placeholder */
 .photo-gradient {
   background:
     linear-gradient(
       135deg,
       #0E2A3B 0%,
-      #0F5A69 42%,
-      #167A8E 54%,
-      #0F5A69 78%,
+      #184B60 42%,
+      #216783 54%,
+      #184B60 78%,
       #0E2A3B 100%
     );
 }
 
-/* Muted slate-teal fill for the captain portrait card */
+/* Muted slate-blue fill for the captain portrait card */
 .portrait-gradient {
-  background: linear-gradient(165deg, #37444E 0%, #0F5A69 52%, #0E2A3B 100%);
+  background: linear-gradient(165deg, #37444E 0%, #184B60 52%, #0E2A3B 100%);
 }
 
 /* Faint horizontal rule lines layered over the hero */
@@ -196,15 +226,15 @@
    prefers-reduced-motion at the foot of this block.
    =================================================================== */
 
-/* Slow cyan breathe so the number reads as tappable before anyone
+/* Slow amber breathe so the number reads as tappable before anyone
    hovers it — this is the hero's primary phone affordance. */
 @keyframes heroPhoneGlow {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgba(0, 204, 204, 0);
+    box-shadow: 0 0 0 0 rgba(242, 167, 93, 0);
   }
   50% {
-    box-shadow: 0 0 28px -4px rgba(0, 204, 204, 0.5);
+    box-shadow: 0 0 28px -4px rgba(242, 167, 93, 0.5);
   }
 }
 
@@ -218,7 +248,7 @@
   position: absolute;
   inset: -2px;
   border-radius: 9999px;
-  border: 2px solid var(--color-cta);
+  border: 2px solid var(--color-btn);
   opacity: 0;
   pointer-events: none;
 }
@@ -369,7 +399,7 @@
    through "dark chapters") flips opted-in light sections to dark. Light
    mode is the default and is left pixel-identical — the inversion rules
    below only match under [data-theme="dark"] and only inside sections
-   that opt in with .theme-transition. Accent (gold) + primary (teal)
+   that opt in with .theme-transition. Accent (blue) + primary (blue)
    are deliberately untouched so branding is stable in both themes.
    =================================================================== */
 
@@ -507,7 +537,7 @@
     100deg,
     #9fb0bb 0%,
     #f7f6f2 22%,
-    #167a8e 46%,
+    #216783 46%,
     #f7f6f2 62%,
     #9fb0bb 100%
   );
@@ -547,7 +577,7 @@
   background-size: 24px 24px;
 }
 
-/* Shared card lift + gold glow on hover. Used by the Signature Trips and
+/* Shared card lift + blue glow on hover. Used by the Signature Trips and
    Fleet cards so both sections share one interaction language. */
 .card-glow {
   transition:
@@ -559,10 +589,10 @@
 
 .card-glow:hover {
   transform: translateY(-8px);
-  border-color: rgba(245, 166, 35, 0.55);
+  border-color: rgba(96, 177, 210, 0.55);
   box-shadow:
     0 22px 48px -20px rgba(14, 42, 59, 0.45),
-    0 0 34px -6px rgba(245, 166, 35, 0.4);
+    0 0 34px -6px rgba(96, 177, 210, 0.4);
 }
 
 /* Auto-cycling fishing calendar: the detail panel eases in on each switch. */
@@ -605,8 +635,8 @@
   color: #f7f6f2;
 }
 
-/* Cyan on bone white is unreadable, so the bar's outline button rides navy
-   while the light chapter is behind it and only goes cyan over dark. */
+/* Sunset Amber on bone white is only 1.9:1, so the bar's outline button rides
+   navy while a light chapter is behind it and takes the amber over dark. */
 .sticky-bar .btn-outline-cta {
   border-color: var(--color-ink);
   color: var(--color-ink);
@@ -614,21 +644,21 @@
 
 .sticky-bar .btn-outline-cta:hover {
   background-color: var(--color-ink);
-  color: var(--color-cta);
+  color: var(--color-btn);
 }
 
 [data-theme='dark'] .sticky-bar .btn-outline-cta {
-  border-color: var(--color-cta);
-  color: var(--color-cta);
+  border-color: var(--color-btn);
+  color: var(--color-btn);
 }
 
 [data-theme='dark'] .sticky-bar .btn-outline-cta:hover {
-  background-color: var(--color-cta);
+  background-color: var(--color-btn);
   color: var(--color-ink);
 }
 
 /* ===================================================================
-   Nav links — a cyan pill that eases out from the label on hover.
+   Nav links — a blue pill that eases out from the label on hover.
    ::before carries the pill so the link itself never changes size and
    the row can't reflow (which is what made items collide before).
    =================================================================== */
@@ -666,13 +696,13 @@
 }
 
 /* ===================================================================
-   Glowing cyan border — draws the eye to the calendar's disclosure toggle.
+   Glowing blue border — draws the eye to the calendar's disclosure toggle.
    The glow breathes slowly so it reads as inviting rather than an alert,
    and lifts on hover. Reduced-motion users get the static mid-state.
    =================================================================== */
 .glow-border {
   position: relative;
-  border-color: rgba(0, 204, 204, 0.5);
+  border-color: rgba(96, 177, 210, 0.5);
   transition: border-color 0.3s ease;
 }
 
@@ -686,8 +716,8 @@
   border-radius: inherit;
   pointer-events: none;
   box-shadow:
-    0 0 22px -2px rgba(0, 204, 204, 0.55),
-    inset 0 0 16px -7px rgba(0, 204, 204, 0.55);
+    0 0 22px -2px rgba(96, 177, 210, 0.55),
+    inset 0 0 16px -7px rgba(96, 177, 210, 0.55);
   opacity: 0.4;
   animation: glowBreathe 3.2s ease-in-out infinite;
   transition: opacity 0.3s ease;

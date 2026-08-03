@@ -34,14 +34,14 @@ interface StaggeredMenuProps {
 
 export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   position = 'right',
-  colors = ['#167A8E', '#0F5A69', '#0E2A3B'],
+  colors = ['#216783', '#184B60', '#0E2A3B'],
   items = [],
   socialItems = [],
   displaySocials = true,
   displayItemNumbering = true,
   className,
   logoUrl = '/brand/logo.webp',
-  accentColor = '#00CCCC',
+  accentColor = '#60B1D2',
   isFixed = false,
   stuck = false,
   closeOnClickAway = true,
@@ -354,7 +354,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     >
       <div ref={preLayersRef} className="sm-prelayers" aria-hidden="true">
         {(() => {
-          const raw = colors && colors.length ? colors.slice(0, 4) : ['#0E2A3B', '#0F5A69', '#167A8E'];
+          const raw = colors && colors.length ? colors.slice(0, 4) : ['#0E2A3B', '#184B60', '#216783'];
           let arr = [...raw];
           if (arr.length >= 3) {
             const mid = Math.floor(arr.length / 2);
@@ -376,37 +376,46 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
             />
           </Link>
         </div>
-        <button
-          ref={toggleBtnRef}
-          className="sm-toggle"
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          aria-expanded={open}
-          aria-controls="staggered-menu-panel"
-          onClick={toggleMenu}
-          type="button"
-        >
-          <span ref={textWrapRef} className="sm-toggle-textWrap" aria-hidden="true">
-            <span ref={textInnerRef} className="sm-toggle-textInner">
-              {textLines.map((l, i) => (
-                <span className="sm-toggle-line" key={i}>
-                  {l}
-                </span>
-              ))}
-            </span>
-          </span>
-          {/* SVG plus — GSAP rotates the whole icon to 225° to read as a cross
-              when open. Stroke-based so it paints reliably on mobile GPUs (the
-              previous 2px divs could drop out intermittently). */}
-          <svg
-            ref={iconRef}
-            className="sm-icon"
-            viewBox="0 0 14 14"
-            aria-hidden="true"
+        <div className="sm-header-actions">
+          <Link
+            to="/contact"
+            className="sm-book-btn"
+            onClick={closeMenu}
           >
-            <line className="sm-icon-line" x1="0.75" y1="7" x2="13.25" y2="7" />
-            <line className="sm-icon-line" x1="7" y1="0.75" x2="7" y2="13.25" />
-          </svg>
-        </button>
+            Book Now
+          </Link>
+          <button
+            ref={toggleBtnRef}
+            className="sm-toggle"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-expanded={open}
+            aria-controls="staggered-menu-panel"
+            onClick={toggleMenu}
+            type="button"
+          >
+            <span ref={textWrapRef} className="sm-toggle-textWrap" aria-hidden="true">
+              <span ref={textInnerRef} className="sm-toggle-textInner">
+                {textLines.map((l, i) => (
+                  <span className="sm-toggle-line" key={i}>
+                    {l}
+                  </span>
+                ))}
+              </span>
+            </span>
+            {/* SVG plus — GSAP rotates the whole icon to 225° to read as a cross
+                when open. Stroke-based so it paints reliably on mobile GPUs (the
+                previous 2px divs could drop out intermittently). */}
+            <svg
+              ref={iconRef}
+              className="sm-icon"
+              viewBox="0 0 14 14"
+              aria-hidden="true"
+            >
+              <line className="sm-icon-line" x1="0.75" y1="7" x2="13.25" y2="7" />
+              <line className="sm-icon-line" x1="7" y1="0.75" x2="7" y2="13.25" />
+            </svg>
+          </button>
+        </div>
       </header>
 
       <aside id="staggered-menu-panel" ref={panelRef} className="staggered-menu-panel" aria-hidden={!open}>

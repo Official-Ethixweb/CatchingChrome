@@ -50,7 +50,7 @@ export function WelcomeSection() {
           <h2 className="mt-6 font-display text-[clamp(2.5rem,4.6vw,4.2rem)] uppercase leading-[0.9] text-ink">
             <span className="block">Welcome To</span>
             <span className="block">
-              <span className="text-accent">Catching</span> Chrome
+              <span className="accent-underline text-accent">Catching</span> Chrome
             </span>
             <span className="block">Guide Service</span>
           </h2>

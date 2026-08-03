@@ -27,6 +27,14 @@ const PHONE_HREF = 'tel:5039369090'
 const NAV_LINK_CLASS =
   'nav-link px-2.5 py-1.5 text-[11px] uppercase 2xl:px-3 2xl:text-[12.5px]'
 
+// Book Now as it appears on phones, in the sticky bar. It used to be px-3/py-1
+// at 10px — a ~24px tall target, well under the 44px minimum, and the hardest
+// thing on the page to hit with a thumb. The bar is taller than 48px (the logo
+// sets its height), so the taller target costs no layout. Horizontal padding
+// stays modest because the row also has to seat the logo and the menu toggle.
+const MOBILE_BOOK_CLASS =
+  'btn-primary inline-flex min-h-[48px] items-center whitespace-nowrap px-5 text-[13px] font-semibold uppercase tracking-[0.12em]'
+
 function NavLinks() {
   return (
     <>
@@ -69,7 +77,7 @@ function StickyBar({ visible }: { visible: boolean }) {
           <img
             src={LOGO}
             alt="Catching Chrome Guide Service"
-            className="h-[58px] w-auto object-contain sm:h-[67px] md:h-[77px]"
+            className="h-[72px] w-auto object-contain sm:h-[76px] md:h-[77px]"
           />
         </a>
 
@@ -83,7 +91,7 @@ function StickyBar({ visible }: { visible: boolean }) {
             <Link
               to="/contact"
               tabIndex={visible ? 0 : -1}
-              className="btn-primary whitespace-nowrap px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em]"
+              className={MOBILE_BOOK_CLASS}
             >
               Book Now
             </Link>
@@ -181,7 +189,7 @@ export function SiteHeader() {
             <img
               src={LOGO}
               alt="Catching Chrome Guide Service"
-              className="h-[86px] w-auto object-contain drop-shadow-lg sm:h-[106px] lg:h-[125px] xl:h-[146px]"
+              className="h-[100px] w-auto object-contain drop-shadow-lg sm:h-[112px] lg:h-[125px] xl:h-[146px]"
             />
           </a>
 
@@ -189,14 +197,12 @@ export function SiteHeader() {
             <NavLinks />
           </nav>
 
-          <div className="flex min-w-0 flex-1 items-center justify-center lg:hidden">
-            <Link
-              to="/contact"
-              className="btn-primary whitespace-nowrap px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em]"
-            >
-              Book Now
-            </Link>
-          </div>
+          {/* No Book Now here on phones. Logo + Book Now + the menu toggle
+              overlapped each other at 375px, and at this scroll position the
+              hero's tap-to-call pill is a few hundred pixels below anyway. The
+              sticky bar carries Book Now instead, which is where it earns its
+              place: by then the hero CTA has scrolled off. */}
+          <div className="flex min-w-0 flex-1 lg:hidden" />
 
           <div className="flex shrink-0 items-center gap-3 pr-20 lg:pr-0">
             <a
@@ -239,8 +245,8 @@ export function SiteHeader() {
         className="lg:hidden"
         isFixed={true}
         stuck={stuck}
-        colors={['#167A8E', '#0F5A69', '#0E2A3B']}
-        accentColor="#00CCCC"
+        colors={['#216783', '#184B60', '#0E2A3B']}
+        accentColor="#60B1D2"
         logoUrl={LOGO}
         items={NAV_ITEMS}
         socialItems={SOCIALS.map((s) => ({ label: s.label, link: s.href }))}
