@@ -27,13 +27,11 @@ const PHONE_HREF = 'tel:5039369090'
 const NAV_LINK_CLASS =
   'nav-link px-2.5 py-1.5 text-[11px] uppercase 2xl:px-3 2xl:text-[12.5px]'
 
-// Book Now as it appears on phones, in the sticky bar. It used to be px-3/py-1
-// at 10px — a ~24px tall target, well under the 44px minimum, and the hardest
-// thing on the page to hit with a thumb. The bar is taller than 48px (the logo
-// sets its height), so the taller target costs no layout. Horizontal padding
-// stays modest because the row also has to seat the logo and the menu toggle.
+// Book Now on phones, in both the top header and the sticky bar. Matched to
+// the "MENU +" toggle sitting beside it in either bar: same 13px semibold
+// uppercase at 0.14em tracking, same 30px box, so the two read as a pair.
 const MOBILE_BOOK_CLASS =
-  'btn-primary inline-flex min-h-[48px] items-center whitespace-nowrap px-5 text-[13px] font-semibold uppercase tracking-[0.12em]'
+  'btn-primary inline-flex h-[30px] items-center whitespace-nowrap px-3 text-[13px] font-semibold uppercase leading-none tracking-[0.14em]'
 
 function NavLinks() {
   return (
@@ -98,7 +96,7 @@ function StickyBar({ visible }: { visible: boolean }) {
           </div>
         </div>
 
-        <div className="flex shrink-0 items-center gap-2.5 pr-20 md:gap-3 lg:pr-0">
+        <div className="flex shrink-0 items-center gap-2.5 pr-22 md:gap-3 lg:pr-0">
           <a
             href={PHONE_HREF}
             className="hidden items-center gap-2 text-[13px] tracking-wide opacity-80 transition-colors duration-200 hover:text-cta hover:opacity-100 sm:flex"
@@ -135,7 +133,7 @@ function StickyBar({ visible }: { visible: boolean }) {
           <Link
             to="/contact"
             tabIndex={visible ? 0 : -1}
-            className="btn-primary hidden whitespace-nowrap px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] lg:inline-flex"
+            className="btn-primary hidden whitespace-nowrap px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.1em] lg:inline-flex"
           >
             Book Now
           </Link>
@@ -180,7 +178,20 @@ export function SiteHeader() {
 
   return (
     <>
-      <header ref={headerRef} className="absolute inset-x-0 top-0 z-30">
+      {/* Exactly one bar is ever on screen. Handing over to the sticky bar is
+          instant, and coming back waits out that bar's 0.35s slide-out (see
+          .sticky-bar in styles.css) before fading in — otherwise both are up
+          together mid-transition and you see two Book Now buttons stacked,
+          which is what happens when you scroll back up. */}
+      <header
+        ref={headerRef}
+        aria-hidden={stuck}
+        className={`absolute inset-x-0 top-0 z-30 transition-opacity ${
+          stuck
+            ? 'invisible opacity-0 duration-0'
+            : 'visible opacity-100 delay-[350ms] duration-200'
+        }`}
+      >
         {/* Three flex tracks — logo | nav | actions. The logo and actions never
             shrink and the nav owns whatever is left, so the row reflows with the
             viewport instead of the nav free-floating over its neighbours. */}
@@ -197,14 +208,13 @@ export function SiteHeader() {
             <NavLinks />
           </nav>
 
-          {/* No Book Now here on phones. Logo + Book Now + the menu toggle
-              overlapped each other at 375px, and at this scroll position the
-              hero's tap-to-call pill is a few hundred pixels below anyway. The
-              sticky bar carries Book Now instead, which is where it earns its
-              place: by then the hero CTA has scrolled off. */}
-          <div className="flex min-w-0 flex-1 lg:hidden" />
+          <div className="flex min-w-0 flex-1 items-center justify-center lg:hidden">
+            <Link to="/contact" className={MOBILE_BOOK_CLASS}>
+              Book Now
+            </Link>
+          </div>
 
-          <div className="flex shrink-0 items-center gap-3 pr-20 lg:pr-0">
+          <div className="flex shrink-0 items-center gap-3 pr-22 lg:pr-0">
             <a
               href={PHONE_HREF}
               aria-label={`Call ${PHONE}`}

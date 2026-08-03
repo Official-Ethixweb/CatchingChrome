@@ -376,14 +376,9 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
             />
           </Link>
         </div>
+        {/* Book Now lives in SiteHeader / StickyBar, which sit behind this
+            overlay. A second one here stacked on top of theirs. */}
         <div className="sm-header-actions">
-          <Link
-            to="/contact"
-            className="sm-book-btn"
-            onClick={closeMenu}
-          >
-            Book Now
-          </Link>
           <button
             ref={toggleBtnRef}
             className="sm-toggle"

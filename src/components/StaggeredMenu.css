@@ -29,7 +29,7 @@
   height: 132px; /* top header: logo 100 + py-4 (32) */
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 0 1.5rem;
   background: transparent;
   pointer-events: none;
@@ -69,6 +69,8 @@
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
+  position: absolute;
+  left: 1.5rem;
 }
 
 /* Only display menu logo when the menu is open, so it doesn't conflict with site headers */
@@ -102,49 +104,15 @@
   transition: color 0.3s ease;
 }
 
-/* Wrapper that holds Book Now + the menu toggle side by side */
+/* Wrapper for the menu toggle */
 .sm-header-actions {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   pointer-events: auto;
-}
-
-/* Book Now button — pill button, same text size as the menu toggle */
-.sm-book-btn {
-  display: inline-flex;
-  align-items: center;
-  font-weight: 600;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  line-height: 1;
-  padding: 0.4rem 0.75rem;
-  text-decoration: none;
-  white-space: nowrap;
-  border-width: 2px;
-  border-style: solid;
-  border-radius: 9999px;
-  background-color: var(--color-btn);
-  border-color: var(--color-btn);
-  color: var(--color-ink) !important;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease,
-    border-color 0.2s ease;
-}
-
-.sm-book-btn:hover {
-  background-color: var(--color-ink);
-  border-color: var(--color-btn);
-  color: var(--color-btn) !important;
-}
-
-.sm-book-btn:focus-visible {
-  outline: 2px solid var(--color-cta, #60B1D2);
-  outline-offset: 4px;
-  border-radius: 9999px;
+  position: absolute;
+  right: 1.5rem;
 }
 
 /* Color adaptivity based on stuck bar and document theme */
