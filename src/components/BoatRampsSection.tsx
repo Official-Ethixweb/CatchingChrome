@@ -75,7 +75,7 @@ export function BoatRampsSection() {
  }
 
  return (
- <section data-chapter="dark" className="theme-invert pop bg-ink py-24 md:py-28">
+ <section id="boat-ramps" data-chapter="dark" className="theme-invert pop bg-ink py-24 md:py-28 scroll-mt-24">
  <div className="mx-auto max-w-[1440px] px-6 md:px-10">
  <Eyebrow label="Launch Points" tone="light" />
 

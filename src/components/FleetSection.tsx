@@ -116,7 +116,7 @@ function VesselCard({ vessel }: { vessel: Vessel }) {
 
 export function FleetSection() {
  return (
- <section className="theme-transition pop bg-cream py-24 md:py-28">
+ <section id="fleet" className="theme-transition pop bg-cream py-24 md:py-28 scroll-mt-24">
  <div className="mx-auto max-w-6xl px-6 md:px-10">
  <Eyebrow label="The Fleet" tone="dark" />
 

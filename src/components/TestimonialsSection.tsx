@@ -85,7 +85,7 @@ export function TestimonialsSection() {
   }
 
   return (
-    <section className="theme-transition relative z-10 overflow-hidden bg-cream py-24 md:py-28">
+    <section id="testimonials" className="theme-transition relative z-10 overflow-hidden bg-cream py-24 md:py-28 scroll-mt-24">
       <div className="mx-auto max-w-3xl px-6 text-center md:px-10">
         <Eyebrow label="Client Log" tone="dark" center />
 

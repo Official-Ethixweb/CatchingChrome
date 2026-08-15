@@ -57,6 +57,14 @@ const DESTINATIONS = [
   },
 ]
 
+/**
+ * Card anchor id, e.g. "American Shad" -> "american-shad". Legacy species URLs
+ * redirect to `/excursions#<slug>` (see src/lib/redirects.ts), so these ids are
+ * a link target, not decoration — renaming a trip renames its anchor.
+ */
+const slug = (title: string) =>
+  title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+
 export function SignatureTripsSection({ className = "bg-cream" }: { className?: string } = {}) {
   return (
     <section
@@ -84,7 +92,8 @@ export function SignatureTripsSection({ className = "bg-cream" }: { className?: 
           {TRIPS.map((trip) => (
             <article
               key={trip.title}
-              className="card-glow group flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-white"
+              id={slug(trip.title)}
+              className="card-glow group flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-white scroll-mt-28"
             >
               <div className="relative aspect-[4/3] w-full overflow-hidden">
                 <img

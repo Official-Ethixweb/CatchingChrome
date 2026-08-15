@@ -106,7 +106,7 @@ export function FaqSection() {
   const [open, setOpen] = useState(0)
 
   return (
-    <section className="theme-transition pop bg-cream py-24 md:py-28">
+    <section id="faq" className="theme-transition pop bg-cream py-24 md:py-28 scroll-mt-24">
       <div className="mx-auto max-w-3xl px-6 md:px-10">
         {/* Heading */}
         <div className="text-center">
