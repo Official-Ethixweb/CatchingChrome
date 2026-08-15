@@ -127,13 +127,27 @@ export function SignatureTripsSection({ className = "bg-cream" }: { className?: 
                   {trip.body}
                 </p>
 
-                <a
-                  href="/contact"
-                  className="btn-outline mt-6 inline-flex w-fit items-center gap-2 px-5 py-2 text-[12px] font-semibold uppercase tracking-[0.18em]"
-                >
-                  Book Now
-                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </a>
+                <div className="mt-6 flex flex-wrap items-center gap-4">
+                  <a
+                    href="/contact"
+                    className="btn-outline inline-flex w-fit items-center gap-2 px-5 py-2 text-[12px] font-semibold uppercase tracking-[0.18em]"
+                  >
+                    Book Now
+                    <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </a>
+
+                  {/* Every trip now has its own landing page, which the ads
+                      point at directly. Linking them from here gives those
+                      pages internal links rather than leaving them reachable
+                      only from an ad click. */}
+                  <a
+                    href={`/${slug(trip.title)}`}
+                    className="inline-flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-[0.18em] text-ink/60 underline-offset-4 transition-colors duration-200 hover:text-accent hover:underline"
+                  >
+                    Trip Details
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </a>
+                </div>
               </div>
             </article>
           ))}

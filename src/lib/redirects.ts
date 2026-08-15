@@ -14,9 +14,15 @@
  *     path, so /fishing/american-shad and /american-shad-trips-oregon land the
  *     same place as /american-shad without needing an entry each.
  *
- * Status codes: 301 for URL shapes that will never become pages (aliases like
- * /book-now, /rates). 302 for species and trip slugs, because those are the
- * likely candidates for real pages later and a 301 is cached hard by browsers.
+ * The six species slugs are NOT in here: /american-shad, /fall-chinook,
+ * /spring-chinook, /winter-steelhead, /sturgeon and /dungeness-crab are real
+ * routes serving real pages (see src/routes/*.tsx and src/lib/species.ts), so
+ * they never reach this file. What is here are the *variants* of those slugs,
+ * pointed at the canonical page.
+ *
+ * Status codes are 301 across the board now that every destination is a real,
+ * settled page. A permanent redirect is what consolidates ranking signal onto
+ * the canonical URL, and none of these targets are going to move.
  */
 
 export type RedirectTarget = {
@@ -25,50 +31,54 @@ export type RedirectTarget = {
   statusCode: 301 | 302
 }
 
-/** Trip-card anchors on /excursions (see SignatureTripsSection). */
+/** Canonical species landing pages. Variants below all funnel into these. */
 const TRIP = {
-  fallChinook: '/excursions#fall-chinook',
-  springChinook: '/excursions#spring-chinook',
-  steelhead: '/excursions#winter-steelhead',
-  sturgeon: '/excursions#sturgeon',
-  crab: '/excursions#dungeness-crab',
-  shad: '/excursions#american-shad',
+  fallChinook: '/fall-chinook',
+  springChinook: '/spring-chinook',
+  steelhead: '/winter-steelhead',
+  sturgeon: '/sturgeon',
+  crab: '/dungeness-crab',
+  shad: '/american-shad',
 } as const
 
-const species = (href: string): RedirectTarget => ({ href, statusCode: 302 })
+const species = (href: string): RedirectTarget => ({ href, statusCode: 301 })
 const alias = (href: string): RedirectTarget => ({ href, statusCode: 301 })
 
 const EXACT: Record<string, RedirectTarget> = {
-  // --- Species / trip slugs -> the matching card on Excursions ---------------
-  'american-shad': species(TRIP.shad),
+  // --- Species variants -> the canonical species page -----------------------
   shad: species(TRIP.shad),
   'shad-fishing': species(TRIP.shad),
+  'american-shad-fishing': species(TRIP.shad),
 
-  'fall-chinook': species(TRIP.fallChinook),
-  'spring-chinook': species(TRIP.springChinook),
   'summer-chinook': species(TRIP.fallChinook),
   chinook: species(TRIP.fallChinook),
   'chinook-salmon': species(TRIP.fallChinook),
+  'chinook-fishing': species(TRIP.fallChinook),
   'king-salmon': species(TRIP.fallChinook),
+  kings: species(TRIP.fallChinook),
   salmon: species(TRIP.fallChinook),
   'salmon-fishing': species(TRIP.fallChinook),
+  'salmon-trips': species(TRIP.fallChinook),
   coho: species(TRIP.fallChinook),
   'coho-salmon': species(TRIP.fallChinook),
   'silver-salmon': species(TRIP.fallChinook),
+  springers: species(TRIP.springChinook),
+  springer: species(TRIP.springChinook),
 
   steelhead: species(TRIP.steelhead),
-  'winter-steelhead': species(TRIP.steelhead),
   'summer-steelhead': species(TRIP.steelhead),
   'steelhead-fishing': species(TRIP.steelhead),
+  'steelhead-trips': species(TRIP.steelhead),
 
-  sturgeon: species(TRIP.sturgeon),
   'white-sturgeon': species(TRIP.sturgeon),
   'sturgeon-fishing': species(TRIP.sturgeon),
+  'sturgeon-trips': species(TRIP.sturgeon),
 
   crab: species(TRIP.crab),
   crabbing: species(TRIP.crab),
   'crab-trips': species(TRIP.crab),
-  'dungeness-crab': species(TRIP.crab),
+  'crab-fishing': species(TRIP.crab),
+  dungeness: species(TRIP.crab),
 
   // --- Trip / service pages -------------------------------------------------
   trips: alias('/excursions'),
@@ -172,10 +182,10 @@ const EXACT: Record<string, RedirectTarget> = {
  * generic "fishing"/"charter" catch-alls. Only run when EXACT misses.
  */
 const KEYWORD_RULES: Array<{ test: RegExp; target: RedirectTarget }> = [
-  { test: /\bshad\b/, target: species(TRIP.shad) },
+  { test: /shad/, target: species(TRIP.shad) },
   { test: /steelhead/, target: species(TRIP.steelhead) },
   { test: /sturgeon/, target: species(TRIP.sturgeon) },
-  { test: /\bcrab/, target: species(TRIP.crab) },
+  { test: /crab|dungeness/, target: species(TRIP.crab) },
   { test: /spring-?chinook|springer/, target: species(TRIP.springChinook) },
   {
     test: /chinook|salmon|coho|\bking\b|silver/,

@@ -31,22 +31,74 @@ const BRAND = path.join(PUBLIC, 'brand')
 const MASTER = path.join(SRC, 'logo-master.png')
 const INK = '#0E2A3B'
 
-// The roundel only — measured off the 1024px master. Stops above the wordmark
-// so the small icons carry the fish, not unreadable lettering.
-const ROUNDEL = { left: 145, top: 70, width: 715, height: 520 }
+const ACCENT = '#60B1D2'
 
-const tile = async (size) => {
-  // Scene inset inside the tile so the arc doesn't collide with the edges.
-  const inset = Math.round(size * 0.9)
+/**
+ * The leaping salmon, measured off the 1024px master.
+ *
+ * Square on purpose. The previous crop was 715x520, which did two visible
+ * things wrong: a non-square scene centred in a square tile left dead navy
+ * bands above and below it, and the box cut inside the badge's ring (the ring
+ * spans x 100-922) then stopped flat at y 590, so the round badge came out as
+ * a half-dome with its bottom sliced off.
+ *
+ * This box holds the whole fish (x 230-735, y 175-600) and stops above the
+ * wordmark, whose ascenders start around y 590. Keep the bottom edge under
+ * that line if you ever re-measure: the lettering is illegible at 16px and
+ * dragging it into frame is what made the old icon look cropped.
+ */
+const FISH = { left: 230, top: 95, width: 502, height: 502 }
+
+/**
+ * The badge is round, so the icon is round: a circular scene on a navy tile
+ * with a thin brand-blue ring. The ring matters at small sizes, it gives the
+ * mark a crisp edge instead of letting the dark scene bleed into dark browser
+ * chrome.
+ *
+ * Rendered once at 512 and scaled down per size rather than composited at each
+ * size directly, because masking and stroking a circle at 16px aliases badly
+ * whereas a downscale from 512 resolves to a clean soft edge.
+ */
+const MASTER_TILE = 512
+
+const badge = async () => {
+  const r = MASTER_TILE / 2 - 8
+  const c = MASTER_TILE / 2
+  const circle = (attrs) =>
+    Buffer.from(
+      `<svg width="${MASTER_TILE}" height="${MASTER_TILE}"><circle cx="${c}" cy="${c}" r="${r}" ${attrs}/></svg>`,
+    )
+
   const scene = await sharp(MASTER)
-    .extract(ROUNDEL)
-    .resize(inset, Math.round((inset * ROUNDEL.height) / ROUNDEL.width))
+    .extract(FISH)
+    .resize(MASTER_TILE, MASTER_TILE)
+    .toBuffer()
+
+  const masked = await sharp(scene)
+    .composite([{ input: circle('fill="#fff"'), blend: 'dest-in' }])
+    .png()
     .toBuffer()
 
   return sharp({
-    create: { width: size, height: size, channels: 4, background: INK },
+    create: {
+      width: MASTER_TILE,
+      height: MASTER_TILE,
+      channels: 4,
+      background: INK,
+    },
   })
-    .composite([{ input: scene, gravity: 'center' }])
+    .composite([
+      { input: masked },
+      { input: circle(`fill="none" stroke="${ACCENT}" stroke-width="14"`) },
+    ])
+    .png()
+    .toBuffer()
+}
+
+const tile = async (size, master) => {
+  const src = master ?? (await badge())
+  return sharp(src)
+    .resize(size, size)
     .png({ compressionLevel: 9, palette: true, quality: 80 })
     .toBuffer()
 }
@@ -99,22 +151,25 @@ const run = async () => {
   await report(logoPng)
 
   // --- Favicons -----------------------------------------------------------
+  // Built once, scaled per size.
+  const master = await badge()
+
   for (const size of [16, 32, 192, 512]) {
     const out = path.join(BRAND, `favicon-${size}.png`)
-    await writeFile(out, await tile(size))
+    await writeFile(out, await tile(size, master))
     await report(out)
   }
 
   const apple = path.join(BRAND, 'apple-touch-icon.png')
-  await writeFile(apple, await tile(180))
+  await writeFile(apple, await tile(180, master))
   await report(apple)
 
   const icoPath = path.join(PUBLIC, 'favicon.ico')
   await writeFile(
     icoPath,
     ico([
-      { size: 16, data: await tile(16) },
-      { size: 32, data: await tile(32) },
+      { size: 16, data: await tile(16, master) },
+      { size: 32, data: await tile(32, master) },
     ]),
   )
   await report(icoPath)
