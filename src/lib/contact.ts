@@ -116,6 +116,11 @@ export const sendContactEnquiry = createServerFn({ method: 'POST' })
 
     const key = process.env.SMTP2GO_API_KEY
     const to = process.env.CONTACT_TO_EMAIL
+    // Agency copies. Comma-separated so recipients can change without a deploy.
+    const bcc = (process.env.CONTACT_BCC_EMAILS ?? '')
+      .split(',')
+      .map((a) => a.trim())
+      .filter(Boolean)
     // Must be an address on the SMTP2GO-verified sender domain.
     const from =
       process.env.CONTACT_FROM_EMAIL ?? 'noreply@catchingchromeguideservice.com'
@@ -172,6 +177,7 @@ export const sendContactEnquiry = createServerFn({ method: 'POST' })
         body: JSON.stringify({
           sender: `Catching Chrome <${from}>`,
           to: [to],
+          ...(bcc.length ? { bcc } : {}),
           subject,
           html_body: html,
           text_body: text,
@@ -185,7 +191,7 @@ export const sendContactEnquiry = createServerFn({ method: 'POST' })
       })
 
       // SMTP2GO can return HTTP 200 with a per-message failure, so confirm the
-      // API actually accepted and queued exactly the one recipient.
+      // API actually accepted and queued at least one recipient.
       if (!res.ok) return { ok: false, reason: 'failed' }
       const json = (await res.json()) as {
         data?: { succeeded?: number; failed?: number }
