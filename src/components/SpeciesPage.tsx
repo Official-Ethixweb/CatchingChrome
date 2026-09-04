@@ -33,7 +33,7 @@ export function SpeciesPage({ data }: { data: Data }) {
 
 function SpeciesHero({ data }: { data: Data }) {
   return (
-    <section className="relative h-[62vh] min-h-[420px] w-full overflow-hidden bg-ink">
+    <section className="relative -mb-px h-[62vh] min-h-[420px] w-full overflow-hidden bg-ink">
       <div className="absolute inset-0">
         <img
           src={data.image}

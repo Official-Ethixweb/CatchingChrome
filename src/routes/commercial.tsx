@@ -77,7 +77,7 @@ const STEPS = [
 
 function CommercialHeader() {
   return (
-    <section className="relative h-[45vh] min-h-[300px] w-full overflow-hidden bg-ink">
+    <section className="relative -mb-px h-[45vh] min-h-[300px] w-full overflow-hidden bg-ink">
       <div className="absolute inset-0">
         <img
           src="/nature-river.webp"

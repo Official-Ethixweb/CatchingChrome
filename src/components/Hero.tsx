@@ -30,7 +30,7 @@ export function Hero() {
   }, [])
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-ink">
+    <section className="relative -mb-px min-h-screen w-full overflow-hidden bg-ink">
       {/* Background slideshow */}
       <div className="absolute inset-0 overflow-hidden">
         {SLIDES.map((src, i) => {

@@ -7,6 +7,13 @@
  * page (cream after most heroes, white after the excursions one), so it is a
  * prop rather than a constant.
  *
+ * The 1px overhang (`-bottom-px`, +1px height) and the path running to y=205
+ * are not cosmetic: with the fill edge landing exactly on the hero's bottom
+ * edge, that last device-pixel row was only partly covered and the hero's ink
+ * bled through as a thin line across the section seam. Overhanging puts solid
+ * fill on that row instead. The heroes pair this with `-mb-px` so a fractional
+ * viewport height can't open a real gap there either.
+ *
  * Drop it in as the last child of a `relative` hero that clips its overflow.
  */
 export function WaveDivider({
@@ -22,9 +29,9 @@ export function WaveDivider({
       aria-hidden="true"
       preserveAspectRatio="none"
       viewBox="0 0 1440 200"
-      className={`pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[70px] w-full md:h-[130px] ${fill} ${className}`}
+      className={`pointer-events-none absolute inset-x-0 -bottom-px z-10 h-[71px] w-full md:h-[131px] ${fill} ${className}`}
     >
-      <path d="M0,200 L0,150 C 360,190 1080,70 1440,130 L1440,200 Z" />
+      <path d="M0,205 L0,150 C 360,190 1080,70 1440,130 L1440,205 Z" />
     </svg>
   )
 }
