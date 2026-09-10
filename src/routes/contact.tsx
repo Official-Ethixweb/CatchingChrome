@@ -6,8 +6,9 @@ import { PhoneIcon, MapPinIcon } from '~/components/icons'
 import { SOCIALS } from '~/lib/socials'
 import { Eyebrow } from '~/components/Eyebrow'
 import { sendContactEnquiry } from '~/lib/contact'
-import { Recaptcha, resetRecaptcha } from '~/components/Recaptcha'
-import { trackEvent, trackAdsConversion } from '~/components/Analytics'
+import { Recaptcha } from '~/components/Recaptcha'
+import { resetRecaptcha } from '~/lib/recaptcha'
+import { trackEvent, trackAdsConversion } from '~/lib/analytics'
 
 // Public reCAPTCHA v2 site key (safe to expose). When unset, the checkbox is
 // hidden and the form works without it — the server only enforces the challenge
@@ -18,6 +19,34 @@ const RECAPTCHA_SITE_KEY = (
 
 export const Route = createFileRoute('/contact')({
   component: ContactPage,
+  head: () => ({
+    meta: [
+      { title: 'Contact Catching Chrome | Book a Guided Fishing Trip' },
+      {
+        name: 'description',
+        content:
+          "Book a guided salmon, steelhead, sturgeon or crab trip with Captain Ryan. Call (503) 936-9090 or send your dates and we'll get back to you within 24 hours.",
+      },
+      { property: 'og:title', content: 'Contact Catching Chrome' },
+      {
+        property: 'og:description',
+        content:
+          "Book a guided salmon, steelhead, sturgeon or crab trip with Captain Ryan. Call (503) 936-9090 or send your dates and we'll get back to you within 24 hours.",
+      },
+      { name: 'twitter:title', content: 'Contact Catching Chrome' },
+      {
+        name: 'twitter:description',
+        content:
+          "Book a guided salmon, steelhead, sturgeon or crab trip with Captain Ryan. Call (503) 936-9090 or send your dates and we'll get back to you within 24 hours.",
+      },
+    ],
+    links: [
+      {
+        rel: 'canonical',
+        href: 'https://www.catchingchromeguideservice.com/contact',
+      },
+    ],
+  }),
 })
 
 function ContactHeader() {

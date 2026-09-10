@@ -56,11 +56,6 @@ function formatCoords(p: LaunchPoint): string | null {
   return `${ns} ${ew}`
 }
 
-const TEAL_RIVER =
- 'M-10 240 C 120 200 230 258 350 262 C 470 266 560 322 690 340 C 725 345 760 346 775 347'
-const GREY_RIVER =
- 'M-10 253 C 120 213 230 271 350 275 C 470 279 560 335 690 353 C 725 358 760 359 775 360'
-
 export function BoatRampsSection() {
  const [selected, setSelected] = useState(LAUNCH_POINTS[0].id)
  const activeRamp = LAUNCH_POINTS.find((p) => p.id === selected)

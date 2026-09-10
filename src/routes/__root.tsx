@@ -8,6 +8,8 @@ import type { ReactNode } from 'react'
 import appCss from '~/styles.css?url'
 import { ThemeController } from '~/components/ThemeController'
 import { NotFoundPage } from '~/components/NotFoundPage'
+import { JsonLd } from '~/components/JsonLd'
+import { BUSINESS_LD } from '~/lib/business'
 import {
   Analytics,
   GtmHeadScript,
@@ -113,6 +115,8 @@ function RootDocument({ children }: { children: ReactNode }) {
         {/* Google Ads global site tag (gtag.js). No-op in dev. */}
         <GoogleAdsHeadScript />
         <HeadContent />
+        {/* Site-wide LocalBusiness schema — one identity, every page. */}
+        <JsonLd data={BUSINESS_LD} />
         {/* Load the Google Fonts stylesheet without render-blocking: append it
             as a print-media sheet (fetched but not applied), then flip to all
             once it loads. `display=swap` already prevents invisible text. */}
@@ -122,7 +126,6 @@ function RootDocument({ children }: { children: ReactNode }) {
           }}
         />
         <noscript>
-          {/* eslint-disable-next-line */}
           <link rel="stylesheet" href={FONT_URL} />
         </noscript>
       </head>

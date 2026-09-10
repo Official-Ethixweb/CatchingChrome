@@ -22,6 +22,12 @@ export const Route = createFileRoute('/commercial')({
           'Multi-boat corporate and group fishing charters on Oregon rivers. Team outings, client entertaining and large private parties, run end to end by Captain Ryan.',
       },
     ],
+    links: [
+      {
+        rel: 'canonical',
+        href: 'https://www.catchingchromeguideservice.com/commercial',
+      },
+    ],
   }),
 })
 

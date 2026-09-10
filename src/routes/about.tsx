@@ -32,6 +32,12 @@ export const Route = createFileRoute('/about')({
           "The story, the guide, and the obsession behind Oregon's chrome-chasing guide service.",
       },
     ],
+    links: [
+      {
+        rel: 'canonical',
+        href: 'https://www.catchingchromeguideservice.com/about',
+      },
+    ],
   }),
   component: AboutPage,
 })

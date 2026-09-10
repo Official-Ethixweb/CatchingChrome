@@ -30,6 +30,12 @@ export const Route = createFileRoute('/gallery')({
           'Photos and clips from the boat: kids landing their first king, families limiting out together, solo anglers with chinook, coho, steelhead and sturgeon on Oregon rivers.',
       },
     ],
+    links: [
+      {
+        rel: 'canonical',
+        href: 'https://www.catchingchromeguideservice.com/gallery',
+      },
+    ],
   }),
 })
 
@@ -514,13 +520,7 @@ function GalleryPage() {
    * lands in — an editorial block dropped inside would just fall wherever, and
    * the Catching Chrome one is meant to sit on the right. So the blocks are
    * lifted out as full-width bands and the photos are split around them.
-   */
-  const withIndex = useMemo(
-    () => filtered.map((item, i) => ({ item, mediaIndex: i })),
-    [filtered],
-  )
-
-  /**
+   *
    * One flat list, one mosaic: the copy is just another item in the column
    * flow. Splitting the photos into separate runs so text could sit beside
    * them is what produced the voids and the misaligned photo edges — separate

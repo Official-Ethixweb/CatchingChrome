@@ -1,8 +1,9 @@
 import { useRef, useState } from 'react'
 import { ArrowRight, PhoneIcon } from './icons'
-import { Recaptcha, resetRecaptcha } from './Recaptcha'
+import { Recaptcha } from './Recaptcha'
+import { resetRecaptcha } from '~/lib/recaptcha'
 import { sendContactEnquiry } from '~/lib/contact'
-import { trackEvent, trackAdsConversion } from './Analytics'
+import { trackEvent, trackAdsConversion } from '~/lib/analytics'
 
 // Public reCAPTCHA site key (safe to expose). When unset the checkbox is
 // hidden and the form still submits; the server only enforces the challenge

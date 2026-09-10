@@ -347,7 +347,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   return (
     <div
       className={(className ? className + ' ' : '') + 'staggered-menu-wrapper' + (isFixed ? ' fixed-wrapper' : '')}
-      style={accentColor ? { ['--sm-accent' as any]: accentColor } : undefined}
+      style={accentColor ? ({ '--sm-accent': accentColor } as React.CSSProperties) : undefined}
       data-position={position}
       data-open={open || undefined}
       data-stuck={stuck || undefined}
@@ -355,7 +355,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       <div ref={preLayersRef} className="sm-prelayers" aria-hidden="true">
         {(() => {
           const raw = colors && colors.length ? colors.slice(0, 4) : ['#0E2A3B', '#184B60', '#216783'];
-          let arr = [...raw];
+          const arr = [...raw];
           if (arr.length >= 3) {
             const mid = Math.floor(arr.length / 2);
             arr.splice(mid, 1);

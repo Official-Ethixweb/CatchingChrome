@@ -43,7 +43,7 @@ const PRICING_ITEMS: PricingItem[] = [
   },
 ]
 
-function PricingRow({ item, index }: { item: PricingItem; index: number }) {
+function PricingRow({ item }: { item: PricingItem }) {
   const [isHovered, setIsHovered] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const [width, setWidth] = useState(200)
@@ -209,8 +209,8 @@ export function PricingSection() {
         <div className="mt-16 grid grid-cols-1 gap-10 lg:grid-cols-3 lg:gap-14">
           {/* Main Pricing List: 2/3 width on desktop */}
           <div className="lg:col-span-2 space-y-2">
-            {PRICING_ITEMS.map((item, idx) => (
-              <PricingRow key={item.name} item={item} index={idx} />
+            {PRICING_ITEMS.map((item) => (
+              <PricingRow key={item.name} item={item} />
             ))}
           </div>
 

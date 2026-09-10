@@ -2,8 +2,42 @@ import { SiteHeader } from './SiteHeader'
 import { SiteFooter } from './SiteFooter'
 import { WaveDivider } from './WaveDivider'
 import { Eyebrow } from './Eyebrow'
+import { JsonLd } from './JsonLd'
 import { ArrowRight, ArrowUpRight } from './icons'
 import { INCLUDED, SPECIES_PAGES, type SpeciesPage as Data } from '~/lib/species'
+import { BUSINESS_LD } from '~/lib/business'
+
+/** Service + FAQPage schema, built from the same `data` the page renders. */
+function speciesLd(data: Data) {
+  const url = `https://www.catchingchromeguideservice.com/${data.slug}`
+  return [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      serviceType: `${data.name} Guided Fishing Trip`,
+      name: `${data.name} Fishing Trips`,
+      description: data.metaDescription,
+      url,
+      image: `https://www.catchingchromeguideservice.com${data.image}`,
+      areaServed: BUSINESS_LD.areaServed,
+      provider: {
+        '@type': 'LocalBusiness',
+        name: BUSINESS_LD.name,
+        telephone: BUSINESS_LD.telephone,
+        url: BUSINESS_LD.url,
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: data.faqs.map((faq) => ({
+        '@type': 'Question',
+        name: faq.q,
+        acceptedAnswer: { '@type': 'Answer', text: faq.a },
+      })),
+    },
+  ]
+}
 
 /**
  * Layout shared by every per-species landing page.
@@ -15,6 +49,11 @@ import { INCLUDED, SPECIES_PAGES, type SpeciesPage as Data } from '~/lib/species
 export function SpeciesPage({ data }: { data: Data }) {
   return (
     <>
+      {speciesLd(data).map((block, i) => (
+        // Two static, page-scoped blocks (Service + FAQPage) — index is a
+        // stable key since the array never reorders or changes length.
+        <JsonLd key={i} data={block} />
+      ))}
       <SpeciesHero data={data} />
 
       <main>
