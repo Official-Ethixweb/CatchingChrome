@@ -72,35 +72,40 @@ export function FaqSection() {
 
   return (
     <section id="faq" className="theme-transition pop bg-cream py-24 md:py-28 scroll-mt-24">
-      <div className="mx-auto max-w-3xl px-6 md:px-10">
-        {/* Heading */}
-        <div className="text-center">
-          <Eyebrow label="FAQ" tone="dark" center />
+      <div className="mx-auto max-w-[1440px] px-6 md:px-10">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.4fr] lg:gap-20">
+          {/* Heading — left, and pinned in place while the questions scroll
+              past beside it (same pattern as the "Trip At A Glance" card in
+              SpeciesPage's Intro). */}
+          <div className="lg:sticky lg:top-28 lg:h-fit">
+            <Eyebrow label="FAQ" tone="dark" />
 
-          <h2 className="mt-6 font-display text-[clamp(2.5rem,5vw,4.4rem)] uppercase leading-[0.9] text-ink">
-            <span className="block">Frequently</span>
-            <span className="flex flex-wrap items-baseline justify-center gap-x-[0.2em]">
-              <span className="accent-underline text-accent">asked</span>
-              <span>Questions</span>
-            </span>
-          </h2>
+            <h2 className="mt-6 font-display text-[clamp(2.5rem,5vw,4.4rem)] uppercase leading-[0.9] text-ink">
+              <span className="block">Frequently</span>
+              <span className="flex flex-wrap items-baseline gap-x-[0.2em]">
+                <span className="text-accent">asked</span>
+                <span>Questions</span>
+              </span>
+            </h2>
 
-          <p className="mx-auto mt-6 max-w-lg text-[17px] leading-relaxed text-ink/70">
-            Everything you need to know before you step aboard. Still have
-            something on your mind? Give us a call, we&apos;re happy to help.
-          </p>
-        </div>
+            <p className="mt-6 max-w-lg text-[17px] leading-relaxed text-ink/70">
+              Everything you need to know before you step aboard. Still have
+              something on your mind? Give us a call, we&apos;re happy to
+              help.
+            </p>
+          </div>
 
-        {/* Accordion */}
-        <div className="mt-12 space-y-3">
-          {FAQS.map((faq, i) => (
-            <AccordionItem
-              key={faq.q}
-              faq={faq}
-              open={open === i}
-              onToggle={() => setOpen(open === i ? -1 : i)}
-            />
-          ))}
+          {/* Accordion — right */}
+          <div className="space-y-3">
+            {FAQS.map((faq, i) => (
+              <AccordionItem
+                key={faq.q}
+                faq={faq}
+                open={open === i}
+                onToggle={() => setOpen(open === i ? -1 : i)}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
