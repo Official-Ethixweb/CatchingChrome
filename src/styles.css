@@ -130,20 +130,11 @@
   }
 }
 
-/* ===================================================================
-   Highlighted heading words.
-   Every section headline puts one word in Chrome Blue; this draws a
-   Salmon Gold rule under that word, the site's one warm note. It uses
-   text-decoration rather than a background gradient on purpose: the
-   spans it lands on are a mix of inline and full-width `block`, left
-   aligned and centred, and only text-decoration tracks the glyphs in
-   all of those instead of the box.
-   =================================================================== */
+/* Highlighted heading words (the "accent-underline" class still applied
+   across section headings) no longer draw the gold underline rule — the
+   Chrome Blue word color alone is the highlight now. */
 .accent-underline {
-  text-decoration-line: underline;
-  text-decoration-color: var(--color-gold);
-  text-decoration-thickness: 0.055em;
-  text-underline-offset: 0.14em;
+  text-decoration-line: none;
 }
 
 /* Deep blue radial glow used behind the hero */

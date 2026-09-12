@@ -133,7 +133,7 @@ function StickyBar({ visible }: { visible: boolean }) {
           <Link
             to="/contact"
             tabIndex={visible ? 0 : -1}
-            className="btn-primary hidden whitespace-nowrap px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.1em] lg:inline-flex"
+            className="btn-primary hidden whitespace-nowrap px-5 py-2 text-[12px] font-semibold uppercase tracking-[0.14em] lg:inline-flex"
           >
             Book Now
           </Link>

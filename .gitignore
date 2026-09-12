@@ -81,6 +81,9 @@ routeTree.gen.ts
 *.sln
 *.sw?
 
+# macOS Finder metadata
+.DS_Store
+
 # Local env files
 .env
 .env.local
