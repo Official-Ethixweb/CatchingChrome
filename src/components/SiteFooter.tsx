@@ -111,9 +111,17 @@ export function SiteFooter() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-cream/10 py-6 text-center text-[11px] tracking-[0.1em] text-cream/70">
-        &copy; {new Date().getFullYear()} Catching Chrome Guide Service. All
-        rights reserved.
+      <div className="flex flex-col items-center gap-2 border-t border-cream/10 py-6 text-center text-[11px] tracking-[0.1em] text-cream/70 sm:flex-row sm:justify-center sm:gap-4">
+        <span>
+          &copy; {new Date().getFullYear()} Catching Chrome Guide Service. All
+          rights reserved.
+        </span>
+        <Link
+          to="/privacy-policy"
+          className="transition-colors duration-200 hover:text-accent"
+        >
+          Privacy Policy
+        </Link>
       </div>
     </footer>
   )

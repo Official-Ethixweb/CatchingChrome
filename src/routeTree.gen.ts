@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WinterSteelheadRouteImport } from './routes/winter-steelhead'
 import { Route as SturgeonRouteImport } from './routes/sturgeon'
 import { Route as SpringChinookRouteImport } from './routes/spring-chinook'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as FallChinookRouteImport } from './routes/fall-chinook'
@@ -37,6 +38,11 @@ const SturgeonRoute = SturgeonRouteImport.update({
 const SpringChinookRoute = SpringChinookRouteImport.update({
   id: '/spring-chinook',
   path: '/spring-chinook',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PricingRoute = PricingRouteImport.update({
@@ -107,6 +113,7 @@ export interface FileRoutesByFullPath {
   '/fall-chinook': typeof FallChinookRoute
   '/gallery': typeof GalleryRoute
   '/pricing': typeof PricingRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/spring-chinook': typeof SpringChinookRoute
   '/sturgeon': typeof SturgeonRoute
   '/winter-steelhead': typeof WinterSteelheadRoute
@@ -123,6 +130,7 @@ export interface FileRoutesByTo {
   '/fall-chinook': typeof FallChinookRoute
   '/gallery': typeof GalleryRoute
   '/pricing': typeof PricingRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/spring-chinook': typeof SpringChinookRoute
   '/sturgeon': typeof SturgeonRoute
   '/winter-steelhead': typeof WinterSteelheadRoute
@@ -140,6 +148,7 @@ export interface FileRoutesById {
   '/fall-chinook': typeof FallChinookRoute
   '/gallery': typeof GalleryRoute
   '/pricing': typeof PricingRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/spring-chinook': typeof SpringChinookRoute
   '/sturgeon': typeof SturgeonRoute
   '/winter-steelhead': typeof WinterSteelheadRoute
@@ -158,6 +167,7 @@ export interface FileRouteTypes {
     | '/fall-chinook'
     | '/gallery'
     | '/pricing'
+    | '/privacy-policy'
     | '/spring-chinook'
     | '/sturgeon'
     | '/winter-steelhead'
@@ -174,6 +184,7 @@ export interface FileRouteTypes {
     | '/fall-chinook'
     | '/gallery'
     | '/pricing'
+    | '/privacy-policy'
     | '/spring-chinook'
     | '/sturgeon'
     | '/winter-steelhead'
@@ -190,6 +201,7 @@ export interface FileRouteTypes {
     | '/fall-chinook'
     | '/gallery'
     | '/pricing'
+    | '/privacy-policy'
     | '/spring-chinook'
     | '/sturgeon'
     | '/winter-steelhead'
@@ -207,6 +219,7 @@ export interface RootRouteChildren {
   FallChinookRoute: typeof FallChinookRoute
   GalleryRoute: typeof GalleryRoute
   PricingRoute: typeof PricingRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   SpringChinookRoute: typeof SpringChinookRoute
   SturgeonRoute: typeof SturgeonRoute
   WinterSteelheadRoute: typeof WinterSteelheadRoute
@@ -233,6 +246,13 @@ declare module '@tanstack/react-router' {
       path: '/spring-chinook'
       fullPath: '/spring-chinook'
       preLoaderRoute: typeof SpringChinookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pricing': {
@@ -327,6 +347,7 @@ const rootRouteChildren: RootRouteChildren = {
   FallChinookRoute: FallChinookRoute,
   GalleryRoute: GalleryRoute,
   PricingRoute: PricingRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
   SpringChinookRoute: SpringChinookRoute,
   SturgeonRoute: SturgeonRoute,
   WinterSteelheadRoute: WinterSteelheadRoute,
