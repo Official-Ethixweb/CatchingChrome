@@ -150,6 +150,11 @@ const EXACT: Record<string, RedirectTarget> = {
   'commercial-charters': alias('/commercial'),
   business: alias('/commercial'),
 
+  // --- Legal ------------------------------------------------------------
+  privacy: alias('/privacy-policy'),
+  'privacy-notice': alias('/privacy-policy'),
+  'data-privacy': alias('/privacy-policy'),
+
   // --- Home aliases ---------------------------------------------------------
   home: alias('/'),
   index: alias('/'),

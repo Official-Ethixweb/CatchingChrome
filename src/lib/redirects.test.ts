@@ -9,6 +9,17 @@ test('exact species-variant match redirects to the canonical species page', () =
   })
 })
 
+test('privacy-guess variants redirect to the real privacy policy page', () => {
+  const target = { href: '/privacy-policy', statusCode: 301 as const }
+  assert.deepEqual(resolveRedirect('/privacy'), target)
+  assert.deepEqual(resolveRedirect('/privacy-notice'), target)
+  assert.deepEqual(resolveRedirect('/data-privacy'), target)
+})
+
+test('the real /privacy-policy route itself is left alone (no keyword matches it)', () => {
+  assert.equal(resolveRedirect('/privacy-policy'), null)
+})
+
 test('every real route slug resolves to itself (a same-path 301), never null or elsewhere', () => {
   // resolveRedirect() has no notion of "this path already has a route" —
   // that guarantee comes entirely from route precedence in src/router.tsx
