@@ -9,85 +9,25 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as WinterSteelheadRouteImport } from './routes/winter-steelhead'
-import { Route as SturgeonRouteImport } from './routes/sturgeon'
-import { Route as SpringChinookRouteImport } from './routes/spring-chinook'
-import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
-import { Route as PricingRouteImport } from './routes/pricing'
-import { Route as GalleryRouteImport } from './routes/gallery'
-import { Route as FallChinookRouteImport } from './routes/fall-chinook'
-import { Route as ExcursionsRouteImport } from './routes/excursions'
-import { Route as DungenessCrabRouteImport } from './routes/dungeness-crab'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as CommercialRouteImport } from './routes/commercial'
-import { Route as AmericanShadRouteImport } from './routes/american-shad'
-import { Route as AboutRouteImport } from './routes/about'
-import { Route as SplatRouteImport } from './routes/$'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SplatRouteImport } from './routes/$'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AmericanShadRouteImport } from './routes/american-shad'
+import { Route as CommercialRouteImport } from './routes/commercial'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as DungenessCrabRouteImport } from './routes/dungeness-crab'
+import { Route as ExcursionsRouteImport } from './routes/excursions'
+import { Route as FallChinookRouteImport } from './routes/fall-chinook'
+import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
+import { Route as SpringChinookRouteImport } from './routes/spring-chinook'
+import { Route as SturgeonRouteImport } from './routes/sturgeon'
+import { Route as WinterSteelheadRouteImport } from './routes/winter-steelhead'
 
-const WinterSteelheadRoute = WinterSteelheadRouteImport.update({
-  id: '/winter-steelhead',
-  path: '/winter-steelhead',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SturgeonRoute = SturgeonRouteImport.update({
-  id: '/sturgeon',
-  path: '/sturgeon',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SpringChinookRoute = SpringChinookRouteImport.update({
-  id: '/spring-chinook',
-  path: '/spring-chinook',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
-  id: '/privacy-policy',
-  path: '/privacy-policy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PricingRoute = PricingRouteImport.update({
-  id: '/pricing',
-  path: '/pricing',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const GalleryRoute = GalleryRouteImport.update({
-  id: '/gallery',
-  path: '/gallery',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FallChinookRoute = FallChinookRouteImport.update({
-  id: '/fall-chinook',
-  path: '/fall-chinook',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ExcursionsRoute = ExcursionsRouteImport.update({
-  id: '/excursions',
-  path: '/excursions',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DungenessCrabRoute = DungenessCrabRouteImport.update({
-  id: '/dungeness-crab',
-  path: '/dungeness-crab',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CommercialRoute = CommercialRouteImport.update({
-  id: '/commercial',
-  path: '/commercial',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AmericanShadRoute = AmericanShadRouteImport.update({
-  id: '/american-shad',
-  path: '/american-shad',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SplatRoute = SplatRouteImport.update({
@@ -95,9 +35,69 @@ const SplatRoute = SplatRouteImport.update({
   path: '/$',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AmericanShadRoute = AmericanShadRouteImport.update({
+  id: '/american-shad',
+  path: '/american-shad',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommercialRoute = CommercialRouteImport.update({
+  id: '/commercial',
+  path: '/commercial',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DungenessCrabRoute = DungenessCrabRouteImport.update({
+  id: '/dungeness-crab',
+  path: '/dungeness-crab',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExcursionsRoute = ExcursionsRouteImport.update({
+  id: '/excursions',
+  path: '/excursions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FallChinookRoute = FallChinookRouteImport.update({
+  id: '/fall-chinook',
+  path: '/fall-chinook',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SpringChinookRoute = SpringChinookRouteImport.update({
+  id: '/spring-chinook',
+  path: '/spring-chinook',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SturgeonRoute = SturgeonRouteImport.update({
+  id: '/sturgeon',
+  path: '/sturgeon',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WinterSteelheadRoute = WinterSteelheadRouteImport.update({
+  id: '/winter-steelhead',
+  path: '/winter-steelhead',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -227,95 +227,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/winter-steelhead': {
-      id: '/winter-steelhead'
-      path: '/winter-steelhead'
-      fullPath: '/winter-steelhead'
-      preLoaderRoute: typeof WinterSteelheadRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sturgeon': {
-      id: '/sturgeon'
-      path: '/sturgeon'
-      fullPath: '/sturgeon'
-      preLoaderRoute: typeof SturgeonRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/spring-chinook': {
-      id: '/spring-chinook'
-      path: '/spring-chinook'
-      fullPath: '/spring-chinook'
-      preLoaderRoute: typeof SpringChinookRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy-policy': {
-      id: '/privacy-policy'
-      path: '/privacy-policy'
-      fullPath: '/privacy-policy'
-      preLoaderRoute: typeof PrivacyPolicyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/pricing': {
-      id: '/pricing'
-      path: '/pricing'
-      fullPath: '/pricing'
-      preLoaderRoute: typeof PricingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/gallery': {
-      id: '/gallery'
-      path: '/gallery'
-      fullPath: '/gallery'
-      preLoaderRoute: typeof GalleryRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/fall-chinook': {
-      id: '/fall-chinook'
-      path: '/fall-chinook'
-      fullPath: '/fall-chinook'
-      preLoaderRoute: typeof FallChinookRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/excursions': {
-      id: '/excursions'
-      path: '/excursions'
-      fullPath: '/excursions'
-      preLoaderRoute: typeof ExcursionsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/dungeness-crab': {
-      id: '/dungeness-crab'
-      path: '/dungeness-crab'
-      fullPath: '/dungeness-crab'
-      preLoaderRoute: typeof DungenessCrabRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/commercial': {
-      id: '/commercial'
-      path: '/commercial'
-      fullPath: '/commercial'
-      preLoaderRoute: typeof CommercialRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/american-shad': {
-      id: '/american-shad'
-      path: '/american-shad'
-      fullPath: '/american-shad'
-      preLoaderRoute: typeof AmericanShadRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$': {
@@ -325,11 +241,95 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SplatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/american-shad': {
+      id: '/american-shad'
+      path: '/american-shad'
+      fullPath: '/american-shad'
+      preLoaderRoute: typeof AmericanShadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/commercial': {
+      id: '/commercial'
+      path: '/commercial'
+      fullPath: '/commercial'
+      preLoaderRoute: typeof CommercialRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dungeness-crab': {
+      id: '/dungeness-crab'
+      path: '/dungeness-crab'
+      fullPath: '/dungeness-crab'
+      preLoaderRoute: typeof DungenessCrabRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/excursions': {
+      id: '/excursions'
+      path: '/excursions'
+      fullPath: '/excursions'
+      preLoaderRoute: typeof ExcursionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fall-chinook': {
+      id: '/fall-chinook'
+      path: '/fall-chinook'
+      fullPath: '/fall-chinook'
+      preLoaderRoute: typeof FallChinookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/spring-chinook': {
+      id: '/spring-chinook'
+      path: '/spring-chinook'
+      fullPath: '/spring-chinook'
+      preLoaderRoute: typeof SpringChinookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sturgeon': {
+      id: '/sturgeon'
+      path: '/sturgeon'
+      fullPath: '/sturgeon'
+      preLoaderRoute: typeof SturgeonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/winter-steelhead': {
+      id: '/winter-steelhead'
+      path: '/winter-steelhead'
+      fullPath: '/winter-steelhead'
+      preLoaderRoute: typeof WinterSteelheadRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
