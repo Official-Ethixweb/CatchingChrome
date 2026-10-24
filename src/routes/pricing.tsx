@@ -7,19 +7,19 @@ export const Route = createFileRoute('/pricing')({
   component: PricingPage,
   head: () => ({
     meta: [
-      { title: 'Trip Pricing & Rates | Catching Chrome Guide Service' },
+      { title: 'Guided Fishing Trip Prices in Oregon | Catching Chrome' },
       {
         name: 'description',
         content:
           'Guided fishing trip rates on Oregon rivers: salmon full day $250 / half day $150, steelhead and sturgeon $250 per person, crab from $150 per person. $50 deposit reserves your date.',
       },
-      { property: 'og:title', content: 'Trip Pricing & Rates | Catching Chrome' },
+      { property: 'og:title', content: 'Guided Fishing Trip Prices in Oregon | Catching Chrome' },
       {
         property: 'og:description',
         content:
           'Guided fishing trip rates on Oregon rivers: salmon full day $250 / half day $150, steelhead and sturgeon $250 per person, crab from $150 per person.',
       },
-      { name: 'twitter:title', content: 'Trip Pricing & Rates | Catching Chrome' },
+      { name: 'twitter:title', content: 'Guided Fishing Trip Prices in Oregon | Catching Chrome' },
       {
         name: 'twitter:description',
         content:

@@ -15,7 +15,7 @@ export const Route = createFileRoute('/commercial')({
   component: CommercialPage,
   head: () => ({
     meta: [
-      { title: 'Commercial & Corporate Charters | Catching Chrome' },
+      { title: 'Oregon Corporate & Group Fishing Charters | Catching Chrome' },
       {
         name: 'description',
         content:

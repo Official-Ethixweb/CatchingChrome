@@ -23,7 +23,7 @@ export const Route = createFileRoute('/gallery')({
   component: GalleryPage,
   head: () => ({
     meta: [
-      { title: 'Gallery | Catching Chrome Guide Service' },
+      { title: 'Fishing Trip Photo Gallery | Catching Chrome Guide Service' },
       {
         name: 'description',
         content:

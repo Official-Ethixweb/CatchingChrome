@@ -8,19 +8,19 @@ export const Route = createFileRoute('/excursions')({
   component: ExcursionsPage,
   head: () => ({
     meta: [
-      { title: 'Guided Fishing Excursions | Catching Chrome Guide Service' },
+      { title: 'Guided Fishing Trips in Oregon | Catching Chrome' },
       {
         name: 'description',
         content:
           'Signature guided trips on Oregon and Pacific Northwest waters: fall and spring Chinook, winter steelhead, sturgeon, Dungeness crab and American shad with Captain Ryan.',
       },
-      { property: 'og:title', content: 'Guided Fishing Excursions | Catching Chrome' },
+      { property: 'og:title', content: 'Guided Fishing Trips in Oregon | Catching Chrome' },
       {
         property: 'og:description',
         content:
           'Signature guided trips on Oregon and Pacific Northwest waters: fall and spring Chinook, winter steelhead, sturgeon, Dungeness crab and American shad with Captain Ryan.',
       },
-      { name: 'twitter:title', content: 'Guided Fishing Excursions | Catching Chrome' },
+      { name: 'twitter:title', content: 'Guided Fishing Trips in Oregon | Catching Chrome' },
       {
         name: 'twitter:description',
         content:

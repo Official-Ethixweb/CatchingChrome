@@ -19,17 +19,20 @@ import type { ComponentType, SVGProps } from 'react'
 export const Route = createFileRoute('/about')({
   head: () => ({
     meta: [
-      { title: 'About Catching Chrome Guide Service' },
+      { title: 'About Captain Ryan | Oregon Fishing Guide | Catching Chrome' },
       {
         name: 'description',
         content:
-          "The story behind Catching Chrome: forty-plus years chasing chrome-bright salmon and steelhead across Oregon's rivers with Captain Ryan.",
+          "Meet Captain Ryan: 40+ years guiding salmon, steelhead and sturgeon trips on Oregon's rivers. USCG-licensed, first aid and CPR trained, gear included.",
       },
-      { property: 'og:title', content: 'About Catching Chrome' },
+      {
+        property: 'og:title',
+        content: 'About Captain Ryan | Catching Chrome Guide Service',
+      },
       {
         property: 'og:description',
         content:
-          "The story, the guide, and the obsession behind Oregon's chrome-chasing guide service.",
+          'The guide behind Catching Chrome: 40+ years of salmon and steelhead fishing on Oregon rivers with Captain Ryan.',
       },
     ],
     links: [

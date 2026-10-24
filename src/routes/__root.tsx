@@ -25,11 +25,11 @@ export const Route = createRootRoute({
     meta: [
       { charSet: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'Catching Chrome | PNW Guide Service' },
+      { title: 'Oregon Fishing Guide Service | Catching Chrome' },
       {
         name: 'description',
         content:
-          "Expert-guided fishing excursions on Oregon and the Pacific Northwest's most pristine waters.",
+          'Guided salmon, steelhead and sturgeon trips on the Columbia and Oregon coastal rivers, plus ocean Dungeness crab. USCG-licensed, 40+ years, gear included.',
       },
       { name: 'theme-color', content: '#0E2A3B' },
       { name: 'robots', content: 'index, follow' },
@@ -37,22 +37,22 @@ export const Route = createRootRoute({
       { property: 'og:site_name', content: 'Catching Chrome' },
       {
         property: 'og:title',
-        content: 'Catching Chrome | PNW Guide Service',
+        content: 'Oregon Fishing Guide Service | Catching Chrome',
       },
       {
         property: 'og:description',
         content:
-          "Expert-guided fishing excursions on Oregon and the Pacific Northwest's most pristine waters.",
+          'Guided salmon, steelhead and sturgeon trips on the Columbia and Oregon coastal rivers, plus ocean Dungeness crab. USCG-licensed, 40+ years, gear included.',
       },
       { name: 'twitter:card', content: 'summary_large_image' },
       {
         name: 'twitter:title',
-        content: 'Catching Chrome | PNW Guide Service',
+        content: 'Oregon Fishing Guide Service | Catching Chrome',
       },
       {
         name: 'twitter:description',
         content:
-          "Expert-guided fishing excursions on Oregon and the Pacific Northwest's most pristine waters.",
+          'Guided salmon, steelhead and sturgeon trips on the Columbia and Oregon coastal rivers, plus ocean Dungeness crab. USCG-licensed, 40+ years, gear included.',
       },
       { property: 'og:image', content: '/brand/og-image.png' },
       { name: 'twitter:image', content: '/brand/og-image.png' },
