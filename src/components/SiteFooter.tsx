@@ -7,6 +7,7 @@ const QUICK_LINKS = [
   { label: 'Excursions', to: '/excursions' },
   { label: 'Commercial', to: '/commercial' },
   { label: 'Pricing', to: '/pricing' },
+  { label: 'Articles', to: '/articles' },
   {
     label: 'Order Merch',
     href: 'https://envy-prints.com/collections/catching-chrome-guide-service',

@@ -11,6 +11,7 @@ const NAV_ITEMS = [
   { label: 'Commercial', to: '/commercial' },
   { label: 'Pricing', to: '/pricing' },
   { label: 'Gallery', to: '/gallery' },
+  { label: 'Articles', to: '/articles' },
   {
     label: 'Order Merch',
     href: 'https://envy-prints.com/collections/catching-chrome-guide-service',
