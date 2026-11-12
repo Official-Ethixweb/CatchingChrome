@@ -541,6 +541,96 @@ export const ARTICLES: Article[] = [
       { type: 'cta', label: 'Book a winter steelhead trip', href: '/contact' },
     ],
   },
+  {
+    slug: 'oregon-fall-chinook-salmon-fishing-guide',
+    title: 'Oregon Fall Chinook Salmon Fishing Guide: What to Expect on the Water',
+    excerpt:
+      "Planning an Oregon fall Chinook salmon trip? Here's when the run peaks, which rivers fish best, and what a real day with Catching Chrome looks like.",
+    category: 'Salmon',
+    date: '2026-11-12',
+    readMins: 5,
+    image: '/articles/fall-chinook/cover.webp',
+    imageAlt:
+      'Illustration of a fall Chinook salmon leaping on an Oregon river at sunrise, with autumn trees, mountains and a guide boat on the water',
+    body: [
+      {
+        type: 'p',
+        text: `Fall Chinook is the trip Catching Chrome builds its reputation on. Captain Ryan calls it the best pure king fishery of the year, and it is easy to see why once you are next to one. These are the biggest salmon he targets all season, chrome-bright and strong enough to make a rod tip disappear on the first run. If you have only got room for one guided salmon trip this year, this is usually the one people come back for.`,
+      },
+      { type: 'h2', text: 'When the Run Actually Peaks' },
+      {
+        type: 'p',
+        text: `Fall Chinook fishing runs August through October, with the strongest fishing from late August through October. September is the sweet spot, and those dates tend to book up first, so a trip planned a season ahead has a real advantage over one booked the week before. Run size shifts year to year, so Captain Ryan is the one to call for a current read before you lock in a date.`,
+      },
+      {
+        type: 'img',
+        src: '/articles/fall-chinook/season-chart.webp',
+        alt: 'Chart of the Oregon fall Chinook season showing the run from August to October and the strongest fishing from late August through October',
+        width: 1800,
+        height: 904,
+        graphic: true,
+      },
+      { type: 'h2', text: 'The Rivers You Can Fish' },
+      {
+        type: 'p',
+        text: `This is a Columbia River trip and a coastal river trip, not just one or the other. Catching Chrome fishes the Columbia alongside a handful of Oregon coastal rivers, including the Rogue, Umpqua, Wilson, Trask, Nestucca and Nehalem. Rather than committing to one river out of habit, Captain Ryan picks whichever water is fishing best for your dates and confirms the launch point before you arrive. That flexibility is a big part of what a guide buys you here, since these rivers can fish very differently from each other depending on flows and run timing.`,
+      },
+      {
+        type: 'img',
+        src: '/articles/fall-chinook/rivers.webp',
+        alt: 'Schematic map of the rivers fished for fall Chinook: the Columbia plus the Nehalem, Wilson, Trask, Nestucca, Umpqua and Rogue',
+        width: 1800,
+        height: 1208,
+        graphic: true,
+      },
+      { type: 'h2', text: 'What a Day Looks Like' },
+      {
+        type: 'p',
+        text: `Trips start early, with rods already rigged and the boat ready when you arrive. Depending on the river and the tide stage, Captain Ryan runs the boat trolling, back-bouncing or anchor fishing, whichever technique the water calls for that day. You will fish from either a 22 foot sled or an 18 foot Clackacraft, and the gear changes with the boat and the river. Every rod, reel, piece of tackle and the bait itself is provided, and coaching is built in for anglers at any experience level, including a first hookset.`,
+      },
+      {
+        type: 'img',
+        src: '/articles/fall-chinook/techniques.webp',
+        alt: 'Diagrams of trolling, back-bouncing and anchor fishing for Chinook, with a 22 foot sled and an 18 foot Clackacraft',
+        width: 1400,
+        height: 852,
+        graphic: true,
+      },
+      { type: 'h2', text: "Know the Fish You're After" },
+      {
+        type: 'p',
+        text: `Fall Chinook are the largest salmon Catching Chrome targets, though exact sizes shift from year to year with the run. Rather than quote a number that might not hold up, Captain Ryan would rather give you a current read on the run when you call to book. What does not change is the fight. A fresh fall king on the end of your line is a different animal than anything else most anglers in this system will hook that season.`,
+      },
+      { type: 'h2', text: 'License and Tags' },
+      {
+        type: 'p',
+        text: `Anyone fishing needs a valid Oregon fishing license, along with a Combined Angling Tag to record what you keep. If your trip lands on the Columbia, you will also need a Columbia River Basin Endorsement, since that rule covers the Columbia and every river that feeds into it. It does not apply on the coastal rivers Catching Chrome fishes separately from the Columbia, like the Rogue or the Nehalem, so what you need depends on which water you end up on that day.`,
+      },
+      {
+        type: 'img',
+        src: '/articles/fall-chinook/license-checklist.webp',
+        alt: 'Checklist of an Oregon fishing license, a Combined Angling Tag and a Columbia River Basin Endorsement, which applies on the Columbia only',
+        width: 1800,
+        height: 940,
+        graphic: true,
+      },
+      { type: 'h2', text: 'What to Bring' },
+      {
+        type: 'p',
+        text: `Pack layers and real rain gear rather than a windbreaker, since fall mornings on the water start cold and can turn wet fast. Non-slip footwear matters on a boat deck, and a cooler with ice is worth bringing if you are hoping to take fish home. Your fishing license is the one thing you cannot fish without, so double check it is current before you leave the house.`,
+      },
+      { type: 'h2', text: 'Booking a Fall Chinook Trip' },
+      {
+        type: 'p',
+        text: `A full day runs $250 per person, and a half day is $150 per person. A $50 per person deposit holds your date, with the balance due the day of the trip. Since September books up first and the best water shifts with the year's run, the anglers who call ahead of the season tend to get first pick of both. [Check availability for a fall Chinook trip](/fall-chinook) or look over [full pricing for every trip Catching Chrome runs](/pricing) before you plan around a specific weekend, since Captain Ryan will give you the clearest read on what is actually running and where.`,
+      },
+      {
+        type: 'p',
+        text: `Fall Chinook is the trip that built Catching Chrome's name, and it is worth planning for rather than squeezing in last minute. Book early, stay flexible on the river, and go find out why this is the one anglers circle on the calendar every year.`,
+      },
+      { type: 'cta', label: 'Book a fall Chinook trip', href: '/contact' },
+    ],
+  },
 ]
 
 export function getArticle(slug: string): Article | undefined {
