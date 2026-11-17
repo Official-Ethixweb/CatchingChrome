@@ -33,19 +33,20 @@ export const Route = createFileRoute('/articles/$slug')({
         {
           // Brand suffix only while the whole title stays short enough not to truncate the keyword.
           title:
-            loaderData.title.length + 18 <= 70
+            loaderData.seoTitle ??
+            (loaderData.title.length + 18 <= 70
               ? `${loaderData.title} | Catching Chrome`
-              : loaderData.title,
+              : loaderData.title),
         },
-        { name: 'description', content: loaderData.excerpt },
+        { name: 'description', content: loaderData.metaDescription ?? loaderData.excerpt },
         { property: 'og:type', content: 'article' },
         { property: 'og:url', content: url },
         { property: 'og:title', content: loaderData.title },
-        { property: 'og:description', content: loaderData.excerpt },
+        { property: 'og:description', content: loaderData.metaDescription ?? loaderData.excerpt },
         { property: 'og:image', content: image },
         { property: 'article:published_time', content: loaderData.date },
         { name: 'twitter:title', content: loaderData.title },
-        { name: 'twitter:description', content: loaderData.excerpt },
+        { name: 'twitter:description', content: loaderData.metaDescription ?? loaderData.excerpt },
         { name: 'twitter:image', content: image },
       ],
       links: [{ rel: 'canonical', href: url }],

@@ -76,6 +76,8 @@ function StickyBar({ visible }: { visible: boolean }) {
           <img
             src={LOGO}
             alt="Catching Chrome Guide Service"
+              width={420}
+              height={417}
             className="h-[72px] w-auto object-contain sm:h-[76px] md:h-[77px]"
           />
         </a>
@@ -201,6 +203,8 @@ export function SiteHeader() {
             <img
               src={LOGO}
               alt="Catching Chrome Guide Service"
+              width={420}
+              height={417}
               className="h-[100px] w-auto object-contain drop-shadow-lg sm:h-[112px] lg:h-[125px] xl:h-[146px]"
             />
           </a>

@@ -11,7 +11,7 @@ export const Route = createFileRoute('/pricing')({
       {
         name: 'description',
         content:
-          'Guided fishing trip rates on Oregon rivers: salmon full day $250 / half day $150, steelhead and sturgeon $250 per person, crab from $150 per person. $50 deposit reserves your date.',
+          'Oregon guided fishing rates: salmon $250 full day or $150 half day, steelhead and sturgeon $250, crab from $150 per person. $50 deposit holds your date.',
       },
       { property: 'og:title', content: 'Guided Fishing Trip Prices in Oregon | Catching Chrome' },
       {

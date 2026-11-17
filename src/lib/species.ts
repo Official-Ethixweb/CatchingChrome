@@ -19,8 +19,16 @@ export type Faq = { q: string; a: string }
 
 export type SpeciesPage = {
   slug: string
-  /** H1 / card title. */
+  /** Card title and short label. */
   name: string
+  /**
+   * Page H1. Carries the search phrase people actually type ("Oregon winter
+   * steelhead fishing guide") so the hero heading matches the query; falls
+   * back to `name`.
+   */
+  h1?: string
+  /** In-depth article for this species, linked from the intro. */
+  guideArticle?: { href: string; label: string }
   /** Sits under the H1 in the hero. */
   tagline: string
   /** Season chip, omitted where the window isn't confirmed. */
@@ -45,13 +53,14 @@ export type SpeciesPage = {
 export const SPECIES_PAGES: Record<string, SpeciesPage> = {
   'american-shad': {
     slug: 'american-shad',
+    h1: 'Columbia River Shad Fishing Guide',
     name: 'American Shad',
     tagline: 'Light Gear, Non-Stop Bites',
     season: 'Mid May to Mid June',
     image: '/americanshad.webp',
     metaTitle: 'American Shad Fishing Trips in Oregon | Catching Chrome',
     metaDescription:
-      'Guided American shad trips on the Columbia, mid May to mid June. Warm weather, light tackle and non-stop action, the perfect first trip for kids and new anglers.',
+      'Guided American shad trips on the Columbia, mid May to mid June. Warm weather, light tackle and non-stop action, the perfect first trip for kids.',
     intro: [
       'Shad are the most underrated fishery in Oregon. For a few weeks in late spring, millions of them push up the Columbia, and when you find the school the bite simply does not stop. It is the one trip where the question is not whether you will hook up, but how long your arms will hold out.',
       'Because they hit hard on light gear, shad are the trip we point families and first-timers toward. There is no long wait between fish, no complicated technique to learn, and a four pound shad on a light rod pulls hard enough to make a ten year old shout.',
@@ -126,6 +135,8 @@ export const SPECIES_PAGES: Record<string, SpeciesPage> = {
 
   'fall-chinook': {
     slug: 'fall-chinook',
+    h1: 'Oregon Fall Chinook Fishing Guide',
+    guideArticle: { href: '/articles/oregon-fall-chinook-salmon-fishing-guide', label: 'Read our Oregon fall Chinook salmon fishing guide' },
     name: 'Fall Chinook',
     tagline: 'Our Best Pure King Fishery',
     season: 'August to October',
@@ -208,6 +219,7 @@ export const SPECIES_PAGES: Record<string, SpeciesPage> = {
 
   'spring-chinook': {
     slug: 'spring-chinook',
+    h1: 'Oregon Spring Chinook Fishing Guide',
     name: 'Spring Chinook',
     tagline: 'The Best Eating Salmon In The West',
     season: 'Mid March to Mid June',
@@ -290,11 +302,13 @@ export const SPECIES_PAGES: Record<string, SpeciesPage> = {
 
   'winter-steelhead': {
     slug: 'winter-steelhead',
+    h1: 'Oregon Winter Steelhead Fishing Guide',
+    guideArticle: { href: '/articles/oregon-winter-steelhead-fishing-guide', label: 'Read our Oregon winter steelhead fishing guide' },
     name: 'Winter Steelhead',
     tagline: 'Chrome Fish On Coastal Water',
     season: 'December to April',
     image: '/wintersteelhead.webp',
-    metaTitle: 'Winter Steelhead Fishing Trips in Oregon | Catching Chrome',
+    metaTitle: 'Oregon Winter Steelhead Fishing Guide & Trips | Catching Chrome',
     metaDescription:
       'Guided winter steelhead trips on Oregon coastal tributaries, December through April. Light tackle or fly rods, $250 per person. Hard-running, acrobatic chrome.',
     intro: [
@@ -372,6 +386,7 @@ export const SPECIES_PAGES: Record<string, SpeciesPage> = {
 
   sturgeon: {
     slug: 'sturgeon',
+    h1: 'Columbia River Sturgeon Fishing Guide',
     name: 'Sturgeon',
     tagline: 'The Hardest Pull In The River',
     season: 'May to July',
@@ -454,6 +469,8 @@ export const SPECIES_PAGES: Record<string, SpeciesPage> = {
 
   'dungeness-crab': {
     slug: 'dungeness-crab',
+    h1: 'Oregon Dungeness Crab Trips',
+    guideArticle: { href: '/articles/oregon-dungeness-crab-season', label: 'Read our Oregon Dungeness crab season guide' },
     name: 'Dungeness Crab',
     tagline: 'Pots Down, Coolers Full',
     // No season chip: Ryan hasn't confirmed the crab window, and the season is

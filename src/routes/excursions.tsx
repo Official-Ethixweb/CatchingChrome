@@ -12,19 +12,19 @@ export const Route = createFileRoute('/excursions')({
       {
         name: 'description',
         content:
-          'Signature guided trips on Oregon and Pacific Northwest waters: fall and spring Chinook, winter steelhead, sturgeon, Dungeness crab and American shad with Captain Ryan.',
+          'Guided Oregon fishing trips with Captain Ryan: fall and spring Chinook, winter steelhead, sturgeon, Dungeness crab and American shad on the Columbia and coast.',
       },
       { property: 'og:title', content: 'Guided Fishing Trips in Oregon | Catching Chrome' },
       {
         property: 'og:description',
         content:
-          'Signature guided trips on Oregon and Pacific Northwest waters: fall and spring Chinook, winter steelhead, sturgeon, Dungeness crab and American shad with Captain Ryan.',
+          'Guided Oregon fishing trips with Captain Ryan: fall and spring Chinook, winter steelhead, sturgeon, Dungeness crab and American shad on the Columbia and coast.',
       },
       { name: 'twitter:title', content: 'Guided Fishing Trips in Oregon | Catching Chrome' },
       {
         name: 'twitter:description',
         content:
-          'Signature guided trips on Oregon and Pacific Northwest waters: fall and spring Chinook, winter steelhead, sturgeon, Dungeness crab and American shad with Captain Ryan.',
+          'Guided Oregon fishing trips with Captain Ryan: fall and spring Chinook, winter steelhead, sturgeon, Dungeness crab and American shad on the Columbia and coast.',
       },
     ],
     links: [

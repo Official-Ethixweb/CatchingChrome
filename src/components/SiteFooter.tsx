@@ -25,6 +25,8 @@ export function SiteFooter() {
             <img
               src="/brand/logo.webp"
               alt="Catching Chrome Guide Service"
+              width={420}
+              height={417}
               className="h-28 w-auto object-contain"
             />
           </a>

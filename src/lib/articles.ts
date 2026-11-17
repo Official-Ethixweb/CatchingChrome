@@ -35,7 +35,16 @@ export type ArticleCategory = 'Salmon' | 'Steelhead' | 'Sturgeon' | 'Crabbing' |
 
 export type Article = {
   slug: string
+  /** H1 and card title. */
   title: string
+  /**
+   * <title> tag when it should differ from the H1: long H1s otherwise become
+   * the title verbatim (title = H1, and truncated past ~60 chars in results).
+   * Keep under 60 characters with the keyword first.
+   */
+  seoTitle?: string
+  /** Meta description when the excerpt runs past ~155 characters. */
+  metaDescription?: string
   /** Shown on cards and as the meta description. */
   excerpt: string
   category: ArticleCategory
@@ -417,6 +426,7 @@ export const ARTICLES: Article[] = [
   },
   {
     slug: 'oregon-winter-steelhead-fishing-guide',
+    seoTitle: 'Oregon Winter Steelhead Guide: Season & Rivers | Catching Chrome',
     title: 'Oregon Winter Steelhead Fishing Guide: What to Expect on the Water',
     excerpt:
       "Thinking about booking an Oregon winter steelhead fishing guide? Here's what the season, the coastal rivers, and a real day on the water look like.",
@@ -543,6 +553,7 @@ export const ARTICLES: Article[] = [
   },
   {
     slug: 'oregon-fall-chinook-salmon-fishing-guide',
+    seoTitle: 'Oregon Fall Chinook Guide: Season & Rivers | Catching Chrome',
     title: 'Oregon Fall Chinook Salmon Fishing Guide: What to Expect on the Water',
     excerpt:
       "Planning an Oregon fall Chinook salmon trip? Here's when the run peaks, which rivers fish best, and what a real day with Catching Chrome looks like.",
@@ -633,6 +644,8 @@ export const ARTICLES: Article[] = [
   },
   {
     slug: 'what-to-bring-guided-fishing-trip-oregon',
+    seoTitle: 'Guided Fishing Trip Packing List for Oregon | Catching Chrome',
+    metaDescription: 'What to bring on a guided fishing trip in Oregon: layers, footwear, food and paperwork, plus everything Catching Chrome already provides.',
     title: 'What to Bring on a Guided Fishing Trip in Oregon: A Practical Checklist',
     excerpt:
       'Wondering what to bring on a guided fishing trip in Oregon? Use this checklist for layers, footwear, food and paperwork, plus what Catching Chrome already provides.',
@@ -732,6 +745,8 @@ export const ARTICLES: Article[] = [
   },
   {
     slug: 'dungeness-crab-charter-good-for-kids',
+    seoTitle: 'Oregon Crab Charter With Kids: Is It a Good Fit?',
+    metaDescription: 'Is an Oregon Dungeness crab charter good for kids? How a family crabbing trip with Catching Chrome works and what to sort out before you go.',
     title: 'Is an Oregon Dungeness Crab Fishing Charter Good for Kids?',
     excerpt:
       'Thinking about a family trip? Here is what an Oregon Dungeness crab fishing charter with Catching Chrome involves, how it works with kids, and what to sort out before you go.',

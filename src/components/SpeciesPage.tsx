@@ -6,6 +6,7 @@ import { JsonLd } from './JsonLd'
 import { ArrowRight, ArrowUpRight } from './icons'
 import { INCLUDED, SPECIES_PAGES, type SpeciesPage as Data } from '~/lib/species'
 import { BUSINESS_LD } from '~/lib/business'
+import { CURATED_REVIEWS } from '~/lib/googleReviews'
 
 /** Service + FAQPage schema, built from the same `data` the page renders. */
 function speciesLd(data: Data) {
@@ -60,6 +61,7 @@ export function SpeciesPage({ data }: { data: Data }) {
         <Intro data={data} />
         <Highlights data={data} />
         <DayPlan data={data} />
+        <GuideAndReviews data={data} />
         <Included data={data} />
         <Faqs data={data} />
         <Related data={data} />
@@ -97,7 +99,7 @@ function SpeciesHero({ data }: { data: Data }) {
         )}
 
         <h1 className="font-display text-4xl uppercase tracking-wider text-white [text-shadow:0_2px_20px_rgba(0,0,0,0.5)] sm:text-5xl md:text-6xl">
-          {data.name}
+          {data.h1 ?? data.name}
         </h1>
 
         <div className="mt-3 flex items-center justify-center gap-3">
@@ -153,6 +155,16 @@ function Intro({ data }: { data: Data }) {
                 {para}
               </p>
             ))}
+
+            {data.guideArticle && (
+              <a
+                href={data.guideArticle.href}
+                className="group mt-7 inline-flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.16em] text-accent"
+              >
+                {data.guideArticle.label}
+                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+              </a>
+            )}
           </div>
 
           {/* Quick facts: the details someone comparing guides scans for before
@@ -234,9 +246,11 @@ function DayPlan({ data }: { data: Data }) {
           Ramp To Cooler
         </h2>
 
-        <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
+        {/* A real <ol>: the steps are a sequence, and the list semantics are
+            what search engines read for step-style snippets. */}
+        <ol className="mt-16 grid list-none grid-cols-1 gap-8 p-0 md:grid-cols-3">
           {data.dayPlan.map((s) => (
-            <article
+            <li
               key={s.step}
               className="flex flex-col rounded-2xl border border-ink/10 bg-white p-8 md:p-6 lg:p-8"
             >
@@ -249,7 +263,72 @@ function DayPlan({ data }: { data: Data }) {
               <p className="mt-4 text-[15px] leading-relaxed text-ink/70">
                 {s.body}
               </p>
-            </article>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  )
+}
+
+/**
+ * Who is running the boat, plus what past guests said. Every line is existing
+ * site copy: the captain facts mirror MeetCaptainSection and the quotes are
+ * the verbatim CURATED_REVIEWS, so nothing here is new or unverified. It is
+ * on each species page because people comparing guides look for the person
+ * and the proof before they book.
+ */
+function GuideAndReviews({ data }: { data: Data }) {
+  const quotes = CURATED_REVIEWS.slice(0, 2)
+  return (
+    <section className="theme-transition pop bg-cream pb-24 md:pb-28">
+      <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-12 px-6 md:px-10 lg:grid-cols-2 lg:gap-20">
+        <div>
+          <Eyebrow label="Your Guide" tone="dark" />
+          <h2 className="mt-6 font-display text-[clamp(2.2rem,4.2vw,3.4rem)] uppercase leading-[0.9] text-ink">
+            Fish {data.name} With Captain Ryan
+          </h2>
+          <p className="mt-7 text-[17px] leading-relaxed text-ink/70">
+            With over 40 years of fishing experience across Oregon&apos;s
+            waterways, Captain Ryan brings that experience to every trip. He is
+            a certified U.S. Coast Guard captain, first aid and CPR trained, and
+            safety always comes first.
+          </p>
+          <ul className="mt-7 flex flex-wrap gap-3">
+            {['USCG Captain', 'First Aid + CPR', '40+ Years On Oregon Water'].map((b) => (
+              <li
+                key={b}
+                className="rounded-full border border-ink/15 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink/70"
+              >
+                {b}
+              </li>
+            ))}
+          </ul>
+          <a
+            href="/about"
+            className="group mt-8 inline-flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.16em] text-accent"
+          >
+            More About Captain Ryan
+            <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+          </a>
+        </div>
+
+        <div className="flex flex-col gap-5">
+          <h3 className="font-display text-xl uppercase leading-none text-ink">
+            What Guests Say
+          </h3>
+          {quotes.map((r) => (
+            <figure
+              key={r.author}
+              className="rounded-2xl border border-ink/10 bg-white p-7"
+            >
+              <blockquote className="text-[15.5px] leading-relaxed text-ink/75">
+                &ldquo;{r.quote}&rdquo;
+              </blockquote>
+              <figcaption className="mt-4 text-[12px] font-semibold uppercase tracking-[0.18em] text-ink/50">
+                {r.author} · {'★'.repeat(r.rating)}
+              </figcaption>
+            </figure>
           ))}
         </div>
       </div>

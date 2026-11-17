@@ -27,7 +27,7 @@ export const Route = createFileRoute('/gallery')({
       {
         name: 'description',
         content:
-          'Photos and clips from the boat: kids landing their first king, families limiting out together, solo anglers with chinook, coho, steelhead and sturgeon on Oregon rivers.',
+          'Photos from the boat: kids landing their first king, families limiting out, and anglers with chinook, coho, steelhead and sturgeon on Oregon rivers.',
       },
     ],
     links: [
