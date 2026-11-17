@@ -805,6 +805,134 @@ export const ARTICLES: Article[] = [
       { type: 'cta', label: 'Book a guided crab trip', href: '/contact' },
     ],
   },
+  {
+    slug: 'fishing-guide-near-me-oregon',
+    title: 'Searching for a Fishing Guide Near Portland, Oregon? Your Next Adventure Starts Here',
+    seoTitle: 'Fishing Guide Near Portland, Oregon',
+    excerpt:
+      'Searching for a fishing guide near Portland, Oregon? Explore salmon, steelhead, sturgeon, shad and Dungeness crab trips with Catching Chrome.',
+    category: 'Trip Prep',
+    date: '2026-11-18',
+    readMins: 5,
+    image: '/articles/fishing-guide-near-me-oregon/cover.webp',
+    imageAlt:
+      'Illustration of a guide boat on a calm Oregon river at sunrise with mountains and autumn trees, and a Portland area map pin',
+    body: [
+      {
+        type: 'p',
+        text: `Before sunrise the river is quiet and the first light reflects off the water. Your gear is ready, the boat is waiting, and the day's fishing is about to begin. A good trip takes local knowledge: an understanding of the seasonal runs and which waters are worth exploring.`,
+      },
+      {
+        type: 'p',
+        text: `For anglers in Portland and nearby Oregon communities, Catching Chrome Guide Service offers guided fishing trips across well-known Pacific Northwest waterways. Based in Gladstone, Oregon, Captain Ryan brings more than 40 years of fishing experience to every trip. Whether you want to chase salmon, try sturgeon or steelhead for the first time, you do not need to be an expert to get started.`,
+      },
+      { type: 'h2', text: 'Where Can You Fish Near Portland?' },
+      {
+        type: 'p',
+        text: `Catching Chrome guides trips on the Columbia, Willamette and Deschutes rivers, as well as Oregon's coastal tributaries. Each offers a different experience.`,
+      },
+      {
+        type: 'ul',
+        items: [
+          `Columbia River: known for salmon, including Chinook, and sturgeon. It suits anglers who want a powerful fish.`,
+          `Willamette River: a Portland-area river with seasonal fishing, including salmon.`,
+          `Deschutes River: a different river experience beyond the larger Columbia and Willamette systems. Ask Captain Ryan whether it suits your dates and target species.`,
+          `Oregon coastal tributaries: popular for winter steelhead.`,
+        ],
+      },
+      {
+        type: 'p',
+        text: `Not sure where to go? A local guide can help you pick a destination for your preferred season and catch.`,
+      },
+      { type: 'h2', text: 'What Can You Catch? A Seasonal Fishing Guide' },
+      {
+        type: 'p',
+        text: `Spring and fall Chinook offer seasonal salmon fishing. Winter steelhead are known for hard-running fish, while sturgeon are a different kind of challenge. American shad bring light-tackle action, and Dungeness crab trips offer a coastal day beyond rod and reel. These are Catching Chrome's general trip windows, not guaranteed fishing or retention openings.`,
+      },
+      {
+        type: 'img',
+        src: '/articles/fishing-guide-near-me-oregon/seasons.webp',
+        alt: 'Catching Chrome general trip windows by month: winter steelhead December to April, spring Chinook mid March to mid June, sturgeon May to July, American shad mid May to mid June, fall Chinook August to October, and Dungeness crab by availability',
+        width: 1800,
+        height: 940,
+        graphic: true,
+      },
+      {
+        type: 'p',
+        text: `Actual opportunities depend on the river, location, regulations, weather and conditions, so check the trip pages for [fall Chinook](/fall-chinook), [winter steelhead](/winter-steelhead), [sturgeon](/sturgeon), [spring Chinook](/spring-chinook), [American shad](/american-shad) and [Dungeness crab](/dungeness-crab), and confirm with Captain Ryan before your trip.`,
+      },
+      { type: 'h2', text: "Never Been Fishing Before? You're Still Welcome" },
+      {
+        type: 'p',
+        text: `You do not need years of experience. Whether you are a seasoned angler, a first-timer or planning a family outing, a guide can help you get comfortable. Captain Ryan has more than 40 years of fishing experience and is a USCG-licensed captain trained in first aid and CPR. He can help you understand the equipment and learn the basics on the trip.`,
+      },
+      { type: 'h2', text: "What's Included, and What Should You Bring?" },
+      {
+        type: 'p',
+        text: `Catching Chrome provides rods, reels, tackle and bait, along with cleaning and bagging of your catch. Bring:`,
+      },
+      {
+        type: 'ul',
+        items: [
+          `Your required Oregon fishing license and any tags that apply.`,
+          `Comfortable, weather-appropriate clothing.`,
+          `Food, snacks and drinks.`,
+        ],
+      },
+      {
+        type: 'p',
+        text: `Confirm licensing and extra recommendations with Captain Ryan before departure. Our [what to bring checklist](/articles/what-to-bring-guided-fishing-trip-oregon) covers the rest.`,
+      },
+      { type: 'h2', text: 'How Much Does a Guided Fishing Trip Cost?' },
+      {
+        type: 'ul',
+        items: [
+          `Salmon, half day: $150 per person`,
+          `Salmon, full day: $250 per person`,
+          `Steelhead: $250 per person`,
+          `Sturgeon: $250 per person`,
+          `Dungeness crab: from $150 per person`,
+          `American shad: call for pricing`,
+        ],
+      },
+      {
+        type: 'p',
+        text: `A $50 per person deposit secures your booking, with the balance due on the day of the trip. Cancel 14 or more days in advance for a full refund or to reschedule. Within 14 days the deposit is forfeited. If the captain cancels for weather, river safety or unforeseen events, you receive a full refund or a reschedule. Check the latest rates on the [pricing page](/pricing) before booking.`,
+      },
+      { type: 'h2', text: 'Why Choose a Local Fishing Guide?' },
+      {
+        type: 'p',
+        text: `Fishing alone can be rewarding, but unfamiliar water means planning around seasons, locations, gear and river conditions. With Catching Chrome you get Captain Ryan's decades of experience, the gear and bait handled, and help choosing a destination and target species. Trips suit beginners and experienced anglers alike.`,
+      },
+      { type: 'h2', text: 'Ready to Plan Your Oregon Fishing Trip?' },
+      {
+        type: 'p',
+        text: `Before you get in touch, think about what you would like to catch, your preferred dates and your group size. Tell Captain Ryan if anyone is new to fishing so you can talk through suitable trips and destinations. Weather and river safety come first, and the captain decides whether conditions suit the planned trip.`,
+      },
+      {
+        type: 'p',
+        text: `Call Captain Ryan at (503) 936-9090 or use the [contact form](/contact). You can also browse every trip on the [excursions page](/excursions).`,
+      },
+      {
+        type: 'faq',
+        items: [
+          {
+            q: 'Where is Catching Chrome based?',
+            a: 'Catching Chrome Guide Service is based in Gladstone, Oregon, and guides trips on the Columbia, Willamette and Deschutes rivers and Oregon coastal tributaries.',
+          },
+          {
+            q: 'Do I need fishing experience for a guided trip?',
+            a: 'No. Captain Ryan has more than 40 years of fishing experience and can help beginners learn the equipment and basics during the trip.',
+          },
+          {
+            q: 'What does a guided trip include?',
+            a: 'Rods, reels, tackle, bait and safety gear, plus cleaning and bagging of your catch. Bring your Oregon fishing license and tags, weather-appropriate clothing, and food and drinks.',
+          },
+        ],
+      },
+      { type: 'cta', label: 'Explore guided fishing trips', href: '/excursions' },
+    ],
+  },
 ]
 
 export function getArticle(slug: string): Article | undefined {
