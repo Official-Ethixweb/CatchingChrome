@@ -631,6 +631,105 @@ export const ARTICLES: Article[] = [
       { type: 'cta', label: 'Book a fall Chinook trip', href: '/contact' },
     ],
   },
+  {
+    slug: 'what-to-bring-guided-fishing-trip-oregon',
+    title: 'What to Bring on a Guided Fishing Trip in Oregon: A Practical Checklist',
+    excerpt:
+      'Wondering what to bring on a guided fishing trip in Oregon? Use this checklist for layers, footwear, food and paperwork, plus what Catching Chrome already provides.',
+    category: 'Trip Prep',
+    date: '2026-11-17',
+    readMins: 4,
+    image: '/articles/what-to-bring-guided-fishing-trip-oregon/cover.webp',
+    imageAlt:
+      'Illustration of a guide boat on a calm Oregon river at sunrise, with pine trees, autumn color and mountains in the background',
+    body: [
+      {
+        type: 'p',
+        text: `Oregon mornings on the water can be cool and damp, even when the afternoon forecast looks sunny. The good news is that you do not need to bring a full fishing setup. Catching Chrome supplies the rods, reels, tackle, bait, and safety gear. Pack the personal essentials that keep you comfortable and ready for the day.`,
+      },
+      {
+        type: 'p',
+        text: `Here is what to bring on a guided fishing trip in Oregon, plus what your guide provides and what to confirm before leaving home.`,
+      },
+      { type: 'h2', text: 'What Catching Chrome Provides' },
+      {
+        type: 'p',
+        text: `Catching Chrome provides rods, reels, tackle, bait, and safety gear. Your catch is cleaned and bagged after the trip, so leave fish-processing tools at home.`,
+      },
+      {
+        type: 'p',
+        text: `Want to bring a favorite rod? Check with Captain Ryan first. The right setup depends on the fishery and the boat.`,
+      },
+      { type: 'h2', text: 'What to Bring on a Guided Fishing Trip in Oregon' },
+      {
+        type: 'p',
+        text: `Use this checklist as a starting point. Your exact setup depends on the weather, location, and target species.`,
+      },
+      {
+        type: 'ul',
+        items: [
+          `Fishing license and required tags. Every angler needs the correct Oregon fishing license for the water being fished, plus any tags or endorsements that apply to the trip. What applies depends on the water, the species, and your age, so ask Captain Ryan and check ODFW before you buy.`,
+          `Comfortable layers. Start with a base layer, add a warm midlayer such as fleece, and bring an outer layer that blocks wind. Layers are easier to adjust than one heavy coat, especially when temperatures change through the day.`,
+          `Rain protection. Bring a waterproof jacket even when the forecast looks promising. Waterproof pants can be useful during colder, wetter trips. A damp morning can feel much colder when you are sitting in a moving boat.`,
+          `Warm accessories. A beanie or other warm hat, gloves, and an extra pair of socks take up little space and can make a cold trip more comfortable.`,
+          `Non-slip, closed-toe footwear. Boat decks, docks, and launch ramps can be wet. Choose shoes or boots with dependable traction. Leave flip-flops and smooth-soled shoes at home.`,
+          `Sun protection. Pack polarized sunglasses, a brimmed hat, sunscreen, and lip balm. Sunglasses help reduce glare on the water, while sunscreen protects exposed skin even on cool or cloudy days.`,
+          `Food and water. Bring enough drinking water and easy-to-eat food for the length of your outing. Sandwiches, fruit, trail mix, and granola bars are simple options that travel well.`,
+          `Personal essentials. Carry any medication you may need, a charged phone, and a small dry bag for your keys, wallet, and other valuables. Keep loose items secured rather than leaving them where they can slide around.`,
+        ],
+      },
+      {
+        type: 'img',
+        src: '/articles/what-to-bring-guided-fishing-trip-oregon/pack-checklist.webp',
+        alt: 'Packing checklist: you bring a fishing license and tags, layers and a rain jacket, non-slip closed-toe shoes, sun protection, and food, water and a cooler. Catching Chrome provides rods and reels, tackle and bait, safety gear, and cleaning and bagging of your catch',
+        width: 1800,
+        height: 940,
+        graphic: true,
+      },
+      { type: 'h2', text: 'Dress for the River and the Forecast' },
+      {
+        type: 'p',
+        text: `Conditions vary by waterway and season. A winter steelhead trip on a coastal tributary may call for warm, waterproof layers, while a warm-weather shad outing may require lighter clothing and extra sun protection. Check the forecast for your actual meeting location.`,
+      },
+      {
+        type: 'p',
+        text: `Avoid relying on cotton as your only warm layer, because it can stay damp when wet. Wool and synthetic fabrics are often more practical base or midlayers. Pack an extra warm layer, even if you leave it in the vehicle.`,
+      },
+      {
+        type: 'p',
+        text: `Catching Chrome offers trips for salmon, steelhead, sturgeon, and American shad, as well as Dungeness crab outings. Availability varies, so confirm your target fishery with the guide before planning around a particular season.`,
+      },
+      { type: 'h2', text: 'Bring a Cooler for the Ride Home' },
+      {
+        type: 'p',
+        text: `Bring a cooler with ice if you plan to take your catch home. Catching Chrome cleans and bags the fish, but you will need to keep it cold during the drive. Ask Captain Ryan where to leave the cooler, and do not assume there is room for a large one aboard.`,
+      },
+      { type: 'h2', text: 'First Fishing Trip or Bringing Children?' },
+      {
+        type: 'p',
+        text: `You do not need fishing experience or your own equipment. Captain Ryan is patient with beginners, and Catching Chrome describes its shad trips as a great fit for kids and first-time anglers. Share children's ages when booking, and pack familiar snacks, water, an extra layer, and a change of clothes.`,
+      },
+      {
+        type: 'p',
+        text: `Tell the guide in advance about mobility needs or other considerations. Anyone concerned about motion sickness should plan ahead and ask a healthcare professional about suitable options.`,
+      },
+      { type: 'h2', text: 'Confirm These Details Before Launch Day' },
+      {
+        type: 'p',
+        text: `Before launch day, confirm the meeting point, arrival time, trip length, target fishery, and weather. Ask which license, tags, and endorsements each person needs, and whether Captain Ryan recommends anything extra. Keep your license accessible, charge your phone, and mention any special requirements in your group.`,
+      },
+      { type: 'h2', text: 'Pack the Essentials and Leave the Fishing Gear to Your Guide' },
+      {
+        type: 'p',
+        text: `Bring your license, weather-ready layers, rain protection, grippy footwear, food, water, sun protection, and personal essentials. Leave the rods, reels, tackle, bait, and safety gear to Catching Chrome.`,
+      },
+      {
+        type: 'p',
+        text: `Planning a salmon, steelhead, sturgeon, or shad trip? Call Captain Ryan at (503) 936-9090 or use the [contact page](/contact) to confirm dates and what to pack. See [pricing](/pricing) for every trip, and the [fall Chinook guide](/articles/oregon-fall-chinook-salmon-fishing-guide) for what a day on the Columbia looks like. Sort out the details before launch day, then step aboard ready for the water.`,
+      },
+      { type: 'cta', label: 'Book a guided fishing trip', href: '/contact' },
+    ],
+  },
 ]
 
 export function getArticle(slug: string): Article | undefined {
