@@ -730,6 +730,66 @@ export const ARTICLES: Article[] = [
       { type: 'cta', label: 'Book a guided fishing trip', href: '/contact' },
     ],
   },
+  {
+    slug: 'dungeness-crab-charter-good-for-kids',
+    title: 'Is an Oregon Dungeness Crab Fishing Charter Good for Kids?',
+    excerpt:
+      'Thinking about a family trip? Here is what an Oregon Dungeness crab fishing charter with Catching Chrome involves, how it works with kids, and what to sort out before you go.',
+    category: 'Crabbing',
+    date: '2026-11-17',
+    readMins: 4,
+    image: '/articles/dungeness-crab-charter-good-for-kids/cover.webp',
+    imageAlt:
+      'Illustration of a crab boat on calm water at dusk with a crab pot hanging from its davit, next to an orange Dungeness crab emblem',
+    body: [
+      {
+        type: 'p',
+        text: `An Oregon Dungeness crab fishing charter might be the easiest yes in family fishing. There is no quiet waiting for a bite and no delicate casting to get right, just pots coming up heavy and everyone finding out what is inside. Here is what a day with Catching Chrome Guide Service looks like, and whether it works for younger kids.`,
+      },
+      { type: 'h2', text: 'What an Oregon Dungeness Crab Fishing Charter Involves' },
+      {
+        type: 'p',
+        text: `Catching Chrome crab trips start from $150 per person, with a $50 per person deposit to hold your date. Pots, bait, rods, reels, tackle and gloves are included, along with safety gear and a licensed, insured captain. Your catch is cleaned and bagged before you head home, and Captain Ryan coaches everyone on board, so nobody needs to have crabbed before.`,
+      },
+      { type: 'h2', text: 'Is It Good for Kids?' },
+      {
+        type: 'p',
+        text: `Catching Chrome lists its crab trips as best for families and groups. Setting and pulling pots is a job the whole boat shares, so nobody sits watching, and that keeps kids engaged in a way slow-bite salmon or steelhead fishing does not always manage.`,
+      },
+      {
+        type: 'p',
+        text: `When you book, share the ages of everyone coming along so the day can be planned around them. It is worth answering honestly rather than rounding up.`,
+      },
+      {
+        type: 'img',
+        src: '/articles/dungeness-crab-charter-good-for-kids/crab-day.webp',
+        alt: 'How a crab day works: pots go down, they soak, everyone pulls them up, then the guide helps sort and measure. Under 12 need no shellfish license, ages 12 to 17 use a youth license that includes shellfish, and adults buy a shellfish license from ODFW',
+        width: 1800,
+        height: 940,
+        graphic: true,
+      },
+      { type: 'h2', text: 'What You Need Before You Go' },
+      {
+        type: 'p',
+        text: `Crabbing needs an [Oregon shellfish license](https://myodfw.com/fishing/licensing-info), not an angling license. Anyone 12 or older needs one, and kids under 12 do not. Anglers ages 12 to 17 can use a youth license, which includes shellfish. Check ODFW for current prices before you buy.`,
+      },
+      {
+        type: 'p',
+        text: `Beyond the license, bring a cooler for the ride home, warm layers, a waterproof outer layer and non-slip footwear, since boat decks get wet fast. Our [what to bring checklist](/articles/what-to-bring-guided-fishing-trip-oregon) covers the rest.`,
+      },
+      { type: 'h2', text: "When Oregon's Crab Season Runs" },
+      {
+        type: 'p',
+        text: `Crab rules and closures change during the year, so do not plan around the calendar alone. Call to confirm dates before booking. For the current season status, see [Oregon Dungeness Crab Season: What's Open Right Now](/articles/oregon-dungeness-crab-season).`,
+      },
+      { type: 'h2', text: 'Booking a Family Crab Trip with Catching Chrome' },
+      {
+        type: 'p',
+        text: `Call (503) 936-9090 to check open crabbing dates, and share the ages of everyone joining so Captain Ryan can plan the day around your group. Read the [Dungeness crab trip page](/dungeness-crab) for the full rundown, or check [pricing for every trip](/pricing) if you are deciding between crab and something else.`,
+      },
+      { type: 'cta', label: 'Book a guided crab trip', href: '/contact' },
+    ],
+  },
 ]
 
 export function getArticle(slug: string): Article | undefined {
