@@ -933,6 +933,140 @@ export const ARTICLES: Article[] = [
       { type: 'cta', label: 'Explore guided fishing trips', href: '/excursions' },
     ],
   },
+  {
+    slug: 'spring-vs-fall-chinook-oregon',
+    title: 'Spring vs. Fall Chinook: Which Oregon Salmon Trip to Book',
+    seoTitle: 'Spring vs Fall Chinook in Oregon: Which to Book',
+    excerpt:
+      'Deciding between an Oregon spring Chinook and fall Chinook trip? Here is how the runs, rivers and fishing really differ, so you can book the right one.',
+    category: 'Salmon',
+    date: '2026-11-19',
+    readMins: 6,
+    image: '/articles/spring-vs-fall-chinook-oregon/cover.webp',
+    imageAlt:
+      'Catching Chrome Guide Service hero graphic headed Spring vs Fall Chinook, showing Captain Ryan holding a bright chrome Chinook salmon on his boat on an Oregon river',
+    body: [
+      {
+        type: 'p',
+        text: `Picking between a spring Chinook and a fall Chinook trip in Oregon usually comes down to one question: do you want the better-eating fish or the bigger fight? Both trips run through Catching Chrome Guide Service, both cost the same, and both put you on real Chinook salmon. What changes is the season, the rivers, and what kind of day you are signing up for.`,
+      },
+      {
+        type: 'p',
+        text: `Here is how the two trips actually compare, so you can book the one that matches what you are after instead of guessing.`,
+      },
+      { type: 'h2', text: 'When Each Run Actually Happens' },
+      {
+        type: 'p',
+        text: `Catching Chrome runs spring Chinook trips from mid March through mid June, with April and May as the peak weeks. Fall Chinook trips run August through October, with the strongest fishing from late August through October and September dates booking up first. Run size and peak timing shift from year to year with water temperature and flow, so call Captain Ryan for a current read before you lock in a date.`,
+      },
+      {
+        type: 'img',
+        src: '/articles/spring-vs-fall-chinook-oregon/season-calendar.webp',
+        alt: 'Calendar chart comparing Oregon spring Chinook trips from mid March to mid June with fall Chinook trips from August to October, peak weeks marked',
+        width: 1504,
+        height: 812,
+        graphic: true,
+      },
+      { type: 'h2', text: 'Where Each Trip Is Fished' },
+      {
+        type: 'p',
+        text: `Spring Chinook trips fish the inland valley rivers: the Willamette, Clackamas, Sandy, McKenzie and Rogue. Captain Ryan picks whichever river is timing best against your dates rather than fishing the same water every trip.`,
+      },
+      {
+        type: 'p',
+        text: `Fall Chinook opens up more water. It is a Columbia River trip plus several coastal rivers, including the Rogue, Umpqua, Wilson, Trask, Nestucca and Nehalem, so a fall trip has more flexibility on where it can run. That extra water, on top of the longer three month season, is part of why fall has more open dates than spring.`,
+      },
+      {
+        type: 'img',
+        src: '/articles/spring-vs-fall-chinook-oregon/rivers-map.webp',
+        alt: 'Schematic map of Oregon showing spring Chinook on the inland valley rivers and fall Chinook on the Columbia and coastal rivers, with the Rogue fished on both',
+        width: 1316,
+        height: 901,
+        graphic: true,
+      },
+      { type: 'h2', text: 'Spring Chinook vs Fall Chinook: Fight, Size and Flavor' },
+      {
+        type: 'p',
+        text: `Fall Chinook are the biggest Chinook you will hook all year. [NOAA Fisheries](https://www.fisheries.noaa.gov/species/chinook-salmon) notes that Chinook are the largest Pacific salmon species, which is why they are nicknamed king salmon, and the fall run brings the heaviest, hardest-fighting fish Captain Ryan targets all season.`,
+      },
+      {
+        type: 'p',
+        text: `Spring Chinook are a different kind of prize. They enter fresh water early and hold for months before spawning, carrying fat reserves that fall-run fish do not carry to the same degree. Jimmy Watts, a Columbia River recreational fishery biologist for ODFW, told [MyODFW](https://myodfw.com/articles/columbia-spring-chinook-game) that these fish are highly prized for the table because of those fat reserves, which is why spring Chinook has a reputation as the best-eating salmon in the state.`,
+      },
+      {
+        type: 'p',
+        text: `That quality comes at a cost. Spring Chinook are generally harder to catch than fall fish. There are fewer of them in the river at any given time and they tend to be more selective, so days can be slower and an experienced guide matters more.`,
+      },
+      {
+        type: 'img',
+        src: '/articles/spring-vs-fall-chinook-oregon/flavor-or-fight.webp',
+        alt: 'Side by side comparison of spring Chinook as the best eating salmon and fall Chinook as the biggest fish of the year, with season and river details',
+        width: 1400,
+        height: 852,
+        graphic: true,
+      },
+      { type: 'h2', text: 'Price, Gear and Licenses Stay the Same' },
+      {
+        type: 'p',
+        text: `Both trips cost the same: $250 per person for a full day and $150 per person for a half day, with a $50 per person deposit to hold the date and the balance due on the day. Technique shifts with the water: trolling and anchor fishing on the inland rivers in spring, and trolling, back-bouncing or anchor fishing on the Columbia and coastal rivers in fall, depending on the river and tide. Either way, your catch is cleaned, filleted and bagged before you head home.`,
+      },
+      {
+        type: 'p',
+        text: `Every angler needs a valid [Oregon fishing license](https://myodfw.com/articles/how-buy-fishing-license). Depending on where you fish and whether you keep a salmon, ODFW may also require a [Columbia River Basin Endorsement](https://myodfw.com/articles/who-needs-columbia-river-basin-endorsement) and a [Combined Angling Tag](https://myodfw.com/combined-angling-tag-instructions-and-location-codes). Rules change from year to year, so check ODFW or ask Captain Ryan before your trip.`,
+      },
+      {
+        type: 'p',
+        text: `Gear is the same on both trips too. Rods, reels, tackle, bait and safety gear are all provided, so you only need to show up ready to fish. Catching Chrome runs a 22-foot River Wild sled that seats up to four anglers and an 18-foot Clackacraft drift boat with walk-around seating for three, and Captain Ryan chooses whichever one fits the river you book.`,
+      },
+      {
+        type: 'img',
+        src: '/articles/spring-vs-fall-chinook-oregon/same-either-way.webp',
+        alt: 'What is included on both Chinook trips: rods, reels, tackle and bait, safety gear, catch cleaning, and the 22 foot sled and 18 foot drift boat',
+        width: 1800,
+        height: 944,
+        graphic: true,
+      },
+      {
+        type: 'quote',
+        text: `One of the best guides in Oregon just so happens to be one of my very good friends. (keep_upwithJen, five stars)`,
+      },
+      { type: 'h2', text: 'Which Trip Should You Book?' },
+      {
+        type: 'ul',
+        items: [
+          `Book spring Chinook if you want the best-eating salmon in the state and do not mind a slower, more technical day for it.`,
+          `Book fall Chinook if you want the biggest fish of the year, more open dates and more rivers to choose from.`,
+          `New to Chinook? Fall is usually the easier trip to plan around a first try.`,
+        ],
+      },
+      {
+        type: 'p',
+        text: `Call Captain Ryan at (503) 936-9090 to check open dates for either run. Read the full rundown on the [spring Chinook page](/spring-chinook) or the [fall Chinook page](/fall-chinook), or see [pricing for every trip](/pricing) if you are still deciding between salmon and something else.`,
+      },
+      {
+        type: 'faq',
+        items: [
+          {
+            q: 'Is spring Chinook harder to catch than fall Chinook?',
+            a: 'Generally yes. Fewer, more selective fish make for slower days, which is part of why an experienced guide matters more on a spring trip.',
+          },
+          {
+            q: 'Why do people say spring Chinook tastes better?',
+            a: 'They hold in fresh water for months before spawning and carry fat reserves that fall-run fish do not carry to the same degree, which is what gives the meat its reputation.',
+          },
+          {
+            q: 'Does a fall Chinook trip cost more than a spring trip?',
+            a: 'No. Both run the same rates: $250 per person for a full day, $150 for a half day, and a $50 per person deposit.',
+          },
+          {
+            q: 'Which trip should I book if I have never fished for Chinook before?',
+            a: 'Fall gives you more open dates and more rivers, plus the biggest fish of the year, which makes it the easier trip to plan around a first try. Spring is worth booking once you want the better table fish and do not mind a slower day.',
+          },
+        ],
+      },
+      { type: 'cta', label: 'Book a Chinook trip with Ryan', href: '/contact' },
+    ],
+  },
 ]
 
 export function getArticle(slug: string): Article | undefined {
