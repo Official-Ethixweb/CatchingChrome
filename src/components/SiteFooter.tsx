@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { PhoneIcon } from './icons'
 import { SOCIALS } from '~/lib/socials'
+import { PoweredBy } from './PoweredBy'
 
 const QUICK_LINKS = [
   { label: 'About Us', to: '/about' },
@@ -125,6 +126,11 @@ export function SiteFooter() {
         >
           Privacy Policy
         </Link>
+      </div>
+
+      {/* Studio signature */}
+      <div className="flex justify-center border-t border-cream/[0.06] py-5">
+        <PoweredBy />
       </div>
     </footer>
   )
